@@ -1,0 +1,31 @@
+//
+//  PrefixHeader.pch
+//  Buddha
+//
+//  Created by Archer_LJ on 14/11/30.
+//  Copyright (c) 2014年 Archer_LJ. All rights reserved.
+//
+
+#ifndef Buddha_PrefixHeader_pch
+#define Buddha_PrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "UIFont+PFontCategory.h"
+
+#import "WeiboSDK.h"
+
+//com.sina.weibo.SNWeiboSDKDemo
+#define kAppKey                                     @"1228824258"
+#define kRedirectURI                                @"http://42.121.14.108/buddha/sinaweibo/callback.php"
+#define kAppSecret                                  @"38bfdcd8571e0f1d0a97da437bf3d5c8"
+
+// weixin
+#define kWXAPP_ID                                   @"wx2308555ca50aab0f"
+#define kWXAPP_SECRET                               @"22df7cb9923311d97a950345452e6da4"
+
+// qq
+#define kQQAppKey                                   @"1103552902"
+#define kQQAppSecret                                @"DOZGq3GOSGOqv83n"
+
+#endif

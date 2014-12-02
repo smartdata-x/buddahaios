@@ -89,7 +89,9 @@
         userlogindata.loginType = MIGLOGINTYPE_TENCENTQQ;
         
         [UserLoginInfoManager GetInstance].curLoginUser = userlogindata;
-        [UserLoginInfoManager GetInstance].isLogin = YES;
+        
+        // 调用接口获取用户信息
+        [tencentOAuth getUserInfo];
     }
     else {
         
@@ -100,6 +102,8 @@
 - (void)getUserInfoResponse:(APIResponse *)response {
     
     
+    
+    // TODO:第三方登陆成功, 向服务器发送登陆状态信息
 }
 
 @end

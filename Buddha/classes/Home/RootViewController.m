@@ -12,11 +12,9 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "AFNetworkReachabilityManager.h"
 #import "WeiboSDK.h"
-#import "SinaWeiboManager.h"
-#import "TencentWeixinManager.h"
-#import "TencentQQManager.h"
 #import "DatabaseManager.h"
-#include "UserLoginInfoManager.h"
+#import "UserLoginInfoManager.h"
+#import "LoginManager.h"
 
 @implementation RootViewController
 
@@ -28,6 +26,7 @@
         
         [self initCommonData];
         [self initTopNavBar];
+        
         _curShowViewTag = ROOTVIEWTAG_FEATURE;
         _mFirstLoad = YES;
         _mLoadAd = NO;
@@ -174,13 +173,16 @@
     [[TencentQQManager GetInstance] doRegister];
     
     // 检查上次登录状态
-    [UserLoginInfoManager GetInstance].isLogin = NO;
     if ([[DatabaseManager GetInstance] getLastLoginOrNot] != 0) {
         
         // 上次已登录，从本地数据库获取登录信息
         UserLoginData *logindata = [[DatabaseManager GetInstance] getLastUserLoginData];
         [UserLoginInfoManager GetInstance].curLoginUser = logindata;
         [UserLoginInfoManager GetInstance].isLogin = YES;
+    }
+    else {
+        
+        [UserLoginInfoManager GetInstance].isLogin = NO;
     }
     
     // 初始化百度地图
@@ -411,15 +413,15 @@
         
         if (0 == index) {
             
-            [[SinaWeiboManager GetInstance] doLoginRequest];
+            [[LoginManager GetInstance] doSinaWeiboLogin];
         }
         else if (1 == index) {
             
-            [[TencentWeixinManager GetInstance] doLoginRequest];
+            [[LoginManager GetInstance] doTencentWeixinLogin];
         }
         else if (2 == index) {
             
-            [[TencentQQManager GetInstance] doLoginRequest];
+            [[LoginManager GetInstance] doTencentQQLogin];
         }
     }
 }

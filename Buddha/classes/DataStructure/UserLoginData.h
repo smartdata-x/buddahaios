@@ -11,14 +11,17 @@
 
 @interface UserLoginData : NSObject
 
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *password;
-@property (nonatomic, retain) NSString *userid;
-@property (nonatomic, retain) NSString *accesstoken;
-@property (nonatomic, retain) NSString *devicetoken;
-@property (nonatomic ,retain) NSDate *expireDate;
+@property (nonatomic, retain) NSString *username; // 用户名
+@property (nonatomic, retain) NSString *password; // 密码
+@property (nonatomic, retain) NSString *userid; // mig的用户id
+@property (nonatomic, retain) NSString *accesstoken; // 第三方token
+@property (nonatomic, retain) NSString *devicetoken; // 设备token
+@property (nonatomic ,retain) NSDate *expireDate; // 过期时间
 @property (nonatomic, retain) NSString *szExpireDate;
-@property (nonatomic, retain) NSString *loginType;
-@property (nonatomic, retain) NSString *openid;
+@property (nonatomic, retain) NSString *loginType; // 第三方登录类型
+@property (nonatomic, retain) NSString *openid; //
+@property (nonatomic, retain) NSString *thirdUserId; // 第三方的用户id
+@property (nonatomic, retain) NSString *headerUrl; // 第三方的头像地址
+@property (nonatomic, retain) NSString *gender; // 第三方性别
 
 @end

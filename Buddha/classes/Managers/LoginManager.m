@@ -10,12 +10,62 @@
 
 @implementation LoginManager
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
++ (LoginManager *)GetInstance {
+    
+    static LoginManager *instance = nil;
+    
+    @synchronized(self) {
+        
+        if (nil == instance) {
+            
+            instance = [[LoginManager alloc] init];
+        }
+    }
+    
+    return instance;
 }
-*/
+
+- (void)doSinaWeiboLogin {
+    
+    [[SinaWeiboManager GetInstance] doLoginRequest];
+}
+
+- (void)doTencentWeixinLogin {
+    
+    [[TencentWeixinManager GetInstance] doLoginRequest];
+}
+
+- (void)doTencentQQLogin {
+    
+    [[TencentQQManager GetInstance] doLoginRequest];
+}
+
+- (void)doLogOut {
+    
+    [[DatabaseManager GetInstance] insertLoginOrNot:DATABASE_LOGOUT];
+}
+
+- (void)LoginFromThirdPartSuccess:(NSNotification *)notification {
+    
+    
+}
+
+- (void)LoginFromThirdPartFailed:(NSNotification *)notification {
+    
+    
+}
+
+- (void)LoginSuccess:(NSNotification *)notification {
+    
+    // 登录成功，保存当前登录信息到数据库，并设置用户已登录状态
+    [UserLoginInfoManager GetInstance].isLogin = YES;
+    [[DatabaseManager GetInstance] insertUserLoginData:[UserLoginInfoManager GetInstance].curLoginUser];
+    [[DatabaseManager GetInstance] insertLoginOrNot:DATABASE_LOGIN];
+}
+
+- (void)LoginFailed:(NSNotification *)notification {
+    
+    
+}
 
 @end

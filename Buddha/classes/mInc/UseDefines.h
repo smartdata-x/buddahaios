@@ -23,6 +23,12 @@
 #define MIGLOGINTYPE_TENCENTWEIXIN                  @"3"
 #define MIGLOGINTYPE_TENCENTQQ                      @"4"
 
+#define DATABASE_LOGIN                              1
+#define DATABASE_LOGOUT                             0
+
+#define MIGGENDER_MALE                              @"1"
+#define MIGGENDER_FEMALE                            @"0"
+
 // 屏幕高宽
 #define mainScreenFrame [[UIScreen mainScreen] bounds]
 #define mainScreenWidth mainScreenFrame.size.width

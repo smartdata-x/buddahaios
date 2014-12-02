@@ -10,7 +10,7 @@
 #include "Stdinc.h"
 #import "WeiboSDK.h"
 
-@interface SinaWeiboManager : NSObject<WeiboSDKDelegate>
+@interface SinaWeiboManager : NSObject<WeiboSDKDelegate, WBHttpRequestDelegate>
 
 + (SinaWeiboManager *)GetInstance;
 

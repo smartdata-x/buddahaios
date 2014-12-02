@@ -59,19 +59,63 @@
 
 - (void)insertUserLoginData:(UserLoginData *)userlogindata {
     
+    // "create table if not exists USERLOGINDATA (username text not null, password text, userid text, accesstoken text, logintype text, logintime integer)
+    
+    NSString *username = userlogindata.username;
     NSString *encodePassword = [PCommonUtil encodeAesAndBase64StrFromStr:userlogindata.password];
+    NSString *userid = userlogindata.userid;
+    NSString *logintype = userlogindata.loginType;
+    NSString *accesstoken = userlogindata.accesstoken;
     NSDate *nowDate = [NSDate date];
     long loginTime = [nowDate timeIntervalSince1970];
     
-    NSString *sql = @"insert into USERLOGINDATA (username, password, userid, accesstoken, logintime) values (?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into USERLOGINDATA (password, userid, accesstoken, logintype, logintime, username) values (?, ?, ?, ?, ?, ?)";
     
     [_db open];
     
+    NSString *checksql = [NSString stringWithFormat:@"selelct username from USERLOGINDATA where username = '%@' ", username];
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        sql = @"update USERLOGINDATA set password = ?, userid = ?, accesstoken = ?, logintype = ?, logintime = ? where username = ?";
+        break;
+    }
+    
+    [_db executeUpdate:sql, encodePassword, userid, accesstoken, logintype, loginTime, username];
     
     [_db close];
 }
 
+- (UserLoginData *)getLastUserLoginData {
+    
+    UserLoginData *userdata = nil;
+    
+    NSString *sql = @"select username, password, userid, accesstoken, logintype from USERLOGINDATA order by logintime desc";
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        userdata = [[UserLoginData alloc] init];
+        userdata.userid = [rs stringForColumn:@"userid"];
+        userdata.username = [rs stringForColumn:@"username"];
+        userdata.password = [rs stringForColumn:@"password"];
+        userdata.accesstoken = [rs stringForColumn:@"accesstoken"];
+        userdata.loginType = [rs stringForColumn:@"logintype"];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return userdata;
+}
+
 - (void)insertLoginOrNot:(int)isLogin {
+    
+    // "create table if not exists USERLASTLOGIN (loginstate text)
     
     NSString *sql = @"insert into USERLASTLOGIN (loginstate) values (?)";
     NSString *checksql = @"select * from USERLASTLOGIN";

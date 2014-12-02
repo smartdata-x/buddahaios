@@ -8,7 +8,6 @@
 
 #import "SinaWeiboManager.h"
 #import "UserLoginInfoManager.h"
-#import "DatabaseManager.h"
 
 @implementation SinaWeiboManager
 
@@ -66,24 +65,74 @@
     
     if ([response isKindOfClass:WBAuthorizeResponse.class]) {
         
-        NSString *userid = [(WBAuthorizeResponse *)response userID];
-        NSString *accesstoken = [(WBAuthorizeResponse *)response accessToken];
-        
-        UserLoginData *logindata = [[UserLoginData alloc] init];
-        logindata.userid = userid;
-        logindata.accesstoken = accesstoken;
-        logindata.loginType = MIGLOGINTYPE_SINAWEIBO;
-        
-        // 保存当前登录信息，并设置用户已登录状态
-        [UserLoginInfoManager GetInstance].curLoginUser = logindata;
-        [UserLoginInfoManager GetInstance].isLogin = YES;
-        [[DatabaseManager GetInstance] insertUserLoginData:logindata];
+        // 授权成功
+        if (response.statusCode == WeiboSDKResponseStatusCodeSuccess) {
+            
+            NSString *userid = [(WBAuthorizeResponse *)response userID];
+            NSString *accesstoken = [(WBAuthorizeResponse *)response accessToken];
+            
+            UserLoginData *logindata = [[UserLoginData alloc] init];
+            logindata.thirdUserId = userid;
+            logindata.accesstoken = accesstoken;
+            logindata.loginType = MIGLOGINTYPE_SINAWEIBO;
+            
+            MIGDEBUG_PRINT(@"新浪 userid:%@, accesstoken:%@", userid, accesstoken);
+            
+            [UserLoginInfoManager GetInstance].curLoginUser = logindata;
+            
+            // 新浪微博授权成功, 获取用户信息
+            [self getUserInfo];
+        }
     }
 }
 
 - (void)didReceiveWeiboRequest:(WBBaseRequest *)request {
     
     
+}
+
+- (void)getUserInfo {
+    
+    NSString *weibouserid = [UserLoginInfoManager GetInstance].curLoginUser.thirdUserId;
+    NSString *accesstoken = [UserLoginInfoManager GetInstance].curLoginUser.accesstoken;
+    
+    MIGDEBUG_PRINT(@"新浪获取用户信息 userid=%@, accesstoken=%@", weibouserid, accesstoken);
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:weibouserid forKey:@"uid"];
+    
+    [WBHttpRequest requestWithAccessToken:accesstoken url:@"https://api.weibo.com/2/users/show.json" httpMethod:@"GET" params:dic delegate:self withTag:@"userinfo"];
+}
+
+- (void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result {
+    
+    NSDictionary *dicResult = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+    
+    int error = [[dicResult objectForKey:@"error_code"] intValue];
+    
+    if (error == 0) {
+        
+        MIGDEBUG_PRINT(@"新浪网络请求成功");
+        
+        NSString *username = [dicResult objectForKey:@"screen_name"];
+        NSString *headerurl = [dicResult objectForKey:@"profile_image_url"];
+        NSString *gender = [[dicResult objectForKey:@"gender"] isEqualToString:@"m"] ? @"1" : @"0";
+        
+        [UserLoginInfoManager GetInstance].curLoginUser.username = username;
+        [UserLoginInfoManager GetInstance].curLoginUser.headerUrl = headerurl;
+        [UserLoginInfoManager GetInstance].curLoginUser.gender = gender;
+        
+        // TODO: 调用本地的登录策略
+    }
+    else {
+        
+        MIGDEBUG_PRINT(@"新浪网络请求返回失败，错误代码 %d", error);
+    }
+}
+
+- (void)request:(WBHttpRequest *)request didFailWithError:(NSError *)error {
+    
+    MIGDEBUG_PRINT(@"新浪网络请求失败");
 }
 
 @end

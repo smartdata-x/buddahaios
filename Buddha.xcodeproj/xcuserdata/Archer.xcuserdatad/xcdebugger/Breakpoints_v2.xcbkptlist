@@ -89,13 +89,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Buddha/classes/Managers/SinaWeiboManager.m"
-            timestampString = "439226306.77213"
+            filePath = "Buddha/classes/Managers/LoginManager.m"
+            timestampString = "439399508.44082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-request:didFinishLoadingWithResult:"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-LoginFromThirdPartSuccess:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Buddha/classes/MyCenter/LoginViewController.m"
+            timestampString = "439399519.29162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-doLoginSuccess"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

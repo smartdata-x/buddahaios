@@ -8,6 +8,7 @@
 
 #import "AskNetDataApi.h"
 #import "MyLocationManager.h"
+#import "UserLoginInfoManager.h"
 
 @implementation AskNetDataApi
 
@@ -27,6 +28,7 @@
     
     NSString *httpQuickLogin = [NSString stringWithFormat:@"%@quicklogin.fcgi", MAIN_HTTP];
     NSString *httpBDBindPush = [NSString stringWithFormat:@"%@bdbindpush.fcgi", MAIN_HTTP];
+    NSString *httpThirdLogin = [NSString stringWithFormat:@"%@thirdlogin.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -37,6 +39,9 @@
                          KEY_NET_SUCCESS:MigNetNameBDBindPushSuccess,
                          KEY_NET_FAILED:MigNetNameQuickLoginFailed},
                        
+                       @{KEY_NET_ADDRESS:httpThirdLogin,
+                         KEY_NET_SUCCESS:MigNetNameThirdLoginSuccess,
+                         KEY_NET_FAILED:MigNetNameThirdLoginFailed},
                        ];
 }
 
@@ -163,6 +168,25 @@
     NSString *postData = [NSString stringWithFormat:@"imei=%@&machine=%@&latitude=%@&longitude=%@", @"", @"2", latitude, longitude];
     
     [self doPostData:MIGAPI_QUICKLOGIN postdata:postData];
+}
+
+- (void)doThirdLogin {
+    
+    NSString *machine = @"2";
+    NSString *nickname = [UserLoginInfoManager GetInstance].curLoginUser.username;
+    NSString *source = [UserLoginInfoManager GetInstance].curLoginUser.loginType;
+    NSString *accesstoken = [UserLoginInfoManager GetInstance].curLoginUser.accesstoken;
+    NSString *imei = @"";
+    NSString *sex = @"";
+    NSString *birthday = @"";
+    NSString *location = @"";
+    NSString *head = [UserLoginInfoManager GetInstance].curLoginUser.headerUrl;
+    NSString *latitude = [[MyLocationManager GetInstance] getLatitude];
+    NSString *longitude = [[MyLocationManager GetInstance] getLongitude];
+    
+    NSString *postData = [NSString stringWithFormat:@"machine=%@&nickname=%@&source=%@&session=%@&imei=%@&sex=%@&birthday=%@&location=%@&head=%@&latitude=%@&longitude=%@", machine, nickname, source, accesstoken, imei, sex, birthday, location, head, latitude, longitude];
+    
+    [self doPostData:MIGAPI_THIRDLOGIN postdata:postData];
 }
 
 @end

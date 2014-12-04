@@ -15,4 +15,7 @@
     NSMutableArray *tableInfoArray;
 }
 
+- (void)doLoginSuccess;
+- (void)doLoginFailed;
+
 @end

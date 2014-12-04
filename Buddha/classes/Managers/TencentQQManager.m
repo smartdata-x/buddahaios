@@ -107,7 +107,9 @@
     
     
     
-    // TODO:第三方登陆成功, 向服务器发送登陆状态信息
+    // 第三方登陆成功, 向服务器发送登陆状态信息
+    AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+    [askApi doThirdLogin];
 }
 
 @end

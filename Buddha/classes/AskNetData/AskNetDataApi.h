@@ -27,10 +27,15 @@
 #define MigNetNameBDBindPushSuccess                     @"MigNetNameBDBindPushSuccess"
 #define MigNetNameBDBindPushFailed                      @"MigNetNameBDBindPushFailed"
 
+// Third part Login
+#define MigNetNameThirdLoginSuccess                     @"MigNetNameThirdLoginSuccess"
+#define MigNetNameThirdLoginFailed                      @"MigNetNameThirdLoginFailed"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
     MIGAPI_BDBINDPUSH,
+    MIGAPI_THIRDLOGIN,
 };
 
 @interface AskNetDataApi : NSObject
@@ -41,5 +46,6 @@ enum {
 - (void)doGetData:(NSInteger)index tail:(NSString *)appendTail;
 
 - (void)doQuickLogin;
+- (void)doThirdLogin;
 
 @end

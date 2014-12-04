@@ -19,10 +19,19 @@
         if (nil == instance) {
             
             instance = [[LoginManager alloc] init];
+            
+            [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(LoginFromThirdPartSuccess:) name:MigNetNameThirdLoginSuccess object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(LoginFromThirdPartFailed:) name:MigNetNameThirdLoginFailed object:nil];
         }
     }
     
     return instance;
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameThirdLoginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameThirdLoginFailed object:nil];
 }
 
 - (void)registerLogins {
@@ -54,25 +63,17 @@
 
 - (void)LoginFromThirdPartSuccess:(NSNotification *)notification {
     
-    
-}
-
-- (void)LoginFromThirdPartFailed:(NSNotification *)notification {
-    
-    
-}
-
-- (void)LoginSuccess:(NSNotification *)notification {
-    
     // 登录成功，保存当前登录信息到数据库，并设置用户已登录状态
     [UserLoginInfoManager GetInstance].isLogin = YES;
     [[DatabaseManager GetInstance] insertUserLoginData:[UserLoginInfoManager GetInstance].curLoginUser];
     [[DatabaseManager GetInstance] insertLoginOrNot:DATABASE_LOGIN];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MigLocalNameLoginSuccess object:nil userInfo:nil];
 }
 
-- (void)LoginFailed:(NSNotification *)notification {
+- (void)LoginFromThirdPartFailed:(NSNotification *)notification {
     
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MigLocalNameLoginFailed object:nil userInfo:nil];
 }
 
 @end

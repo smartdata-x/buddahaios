@@ -35,7 +35,4 @@
 - (void)LoginFromThirdPartSuccess:(NSNotification *)notification;
 - (void)LoginFromThirdPartFailed:(NSNotification *)notification;
 
-- (void)LoginSuccess:(NSNotification *)notification;
-- (void)LoginFailed:(NSNotification *)notification;
-
 @end

@@ -149,7 +149,7 @@
     // 获取到广告信息并发送给RootView
     NSDictionary *ad = [result objectForKey:@"advert"];
     NSDictionary *sendResult = [[NSDictionary alloc] initWithObjectsAndKeys:ad, @"result", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MigNetNameGetAdSuccess object:nil userInfo:sendResult];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MigLocalNameGetAdSuccess object:nil userInfo:sendResult];
 }
 
 - (void)quickLoginFailed:(NSNotification *)notification {

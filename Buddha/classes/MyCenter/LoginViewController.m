@@ -23,9 +23,18 @@
     if (self) {
         
         self.titleText = @"登录";
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doLoginSuccess) name:MigLocalNameLoginSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doLoginFailed) name:MigLocalNameLoginFailed object:nil];
     }
     
     return self;
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameLoginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameLoginFailed object:nil];
 }
 
 - (void)viewDidLoad {
@@ -72,6 +81,16 @@
     }
     
     [self.view addSubview:loginMenuTableView];
+}
+
+- (void)doLoginSuccess {
+    
+    [self doBack:nil];
+}
+
+- (void)doLoginFailed {
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_FAILED];
 }
 
 // UITableView Delegate
@@ -128,6 +147,8 @@
         default:
             break;
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -33,8 +33,8 @@
         _mFirstLoad = YES;
         _mLoadAd = NO;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAdvertiseSuccess:) name:MigNetNameGetAdSuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAdvertiseFailed:) name:MigNetNameGetAdFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAdvertiseSuccess:) name:MigLocalNameGetAdSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAdvertiseFailed:) name:MigLocalNameGetAdFailed object:nil];
     }
     
     return self;
@@ -42,8 +42,8 @@
 
 - (void)dealloc {
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetAdSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetAdFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameGetAdSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameGetAdFailed object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

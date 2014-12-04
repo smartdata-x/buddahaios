@@ -122,7 +122,9 @@
         [UserLoginInfoManager GetInstance].curLoginUser.headerUrl = headerurl;
         [UserLoginInfoManager GetInstance].curLoginUser.gender = gender;
         
-        // TODO: 调用本地的登录策略
+        // 调用本地的登录策略
+        AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+        [askApi doThirdLogin];
     }
     else {
         

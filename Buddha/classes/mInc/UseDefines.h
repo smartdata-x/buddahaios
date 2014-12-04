@@ -18,10 +18,10 @@
 
 // 登陆类型
 #define MIGLOGINTYPE_NONE                           @"0"
-#define MIGLOGINTYPE_LOCAL                          @"1"
-#define MIGLOGINTYPE_SINAWEIBO                      @"2"
-#define MIGLOGINTYPE_TENCENTWEIXIN                  @"3"
-#define MIGLOGINTYPE_TENCENTQQ                      @"4"
+#define MIGLOGINTYPE_LOCAL                          @"0"
+#define MIGLOGINTYPE_SINAWEIBO                      @"1"
+#define MIGLOGINTYPE_TENCENTWEIXIN                  @"2"
+#define MIGLOGINTYPE_TENCENTQQ                      @"3"
 
 #define DATABASE_LOGIN                              1
 #define DATABASE_LOGOUT                             0
@@ -68,6 +68,9 @@
 #define LAST_LOGOUT                                 0
 #define LAST_LOGIN                                  1
 
+// 字符串打印消息
+#define MIGTIP_LOGIN_FAILED                         @"对不起, 登录失败了"
+
 // 字典匹配关键字
 #define KEY_NORMAL                                  @"KeyNormal"
 #define KEY_HILIGHT                                 @"KeyHilight"
@@ -103,8 +106,10 @@
 #define IMG_LOGIN_WEIXIN                            @"weixin_ico.png"
 
 // 内部通信消息
-#define MigNetNameGetAdSuccess                      @"MigNetNameGetAdSuccess"
-#define MigNetNameGetAdFailed                       @"MigNetNameGetAdFailed"
+#define MigLocalNameGetAdSuccess                    @"MigLocalNameGetAdSuccess"
+#define MigLocalNameGetAdFailed                     @"MigLocalNameGetAdFailed"
+#define MigLocalNameLoginSuccess                    @"MigLocalNameLoginSuccess"
+#define MigLocalNameLoginFailed                     @"MigLocalNameLoginFailed"
 
 // 新浪微博
 //#define kAppKey                                     @"2045436852"

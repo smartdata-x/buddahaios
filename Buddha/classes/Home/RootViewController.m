@@ -15,6 +15,8 @@
 #import "DatabaseManager.h"
 #import "UserLoginInfoManager.h"
 #import "LoginManager.h"
+#import "LoginViewController.h"
+#import "MyLocationManager.h"
 
 @implementation RootViewController
 
@@ -141,7 +143,7 @@
 // 重载导航条
 - (void)initTopNavBar {
     
-    float navHeight = 44.0;
+    float navHeight = NAV_BAR_HEIGHT;
     
     // 左按钮
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, (navHeight - 24) / 2.0, 100, 24)];
@@ -168,9 +170,10 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     // 注册新浪微博, 微信, QQ
-    [[SinaWeiboManager GetInstance] doRegister];
-    [[TencentWeixinManager GetInstance] doRegister];
-    [[TencentQQManager GetInstance] doRegister];
+    [[LoginManager GetInstance] registerLogins];
+    
+    // 更新地理位置
+    [[MyLocationManager GetInstance] updateLocation];
     
     // 检查上次登录状态
     if ([[DatabaseManager GetInstance] getLastLoginOrNot] != 0) {
@@ -413,15 +416,17 @@
         
         if (0 == index) {
             
-            [[LoginManager GetInstance] doSinaWeiboLogin];
+            if (![UserLoginInfoManager GetInstance].isLogin) {
+                
+                LoginViewController *loginviewcontroller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                [self.navigationController pushViewController:loginviewcontroller animated:YES];
+            }
         }
         else if (1 == index) {
             
-            [[LoginManager GetInstance] doTencentWeixinLogin];
         }
         else if (2 == index) {
             
-            [[LoginManager GetInstance] doTencentQQLogin];
         }
     }
 }

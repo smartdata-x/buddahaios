@@ -25,6 +25,13 @@
     return instance;
 }
 
+- (void)registerLogins {
+    
+    [[SinaWeiboManager GetInstance] doRegister];
+    [[TencentWeixinManager GetInstance] doRegister];
+    [[TencentQQManager GetInstance] doRegister];
+}
+
 - (void)doSinaWeiboLogin {
     
     [[SinaWeiboManager GetInstance] doLoginRequest];

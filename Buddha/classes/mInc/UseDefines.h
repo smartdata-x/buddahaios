@@ -51,6 +51,7 @@
 
 // 大小定义
 #define SCREEN_SCALAR                               2.0
+#define NAV_BAR_HEIGHT                              44.0
 
 #define TOP_MENU_BUTTON_WIDTH                       64
 #define TOP_MENU_HEIGHT                             (72 / SCREEN_SCALAR)
@@ -62,6 +63,7 @@
 #define BOTTOM_AD_HEIGHT                            (50 / SCREEN_SCALAR)
 
 #define DEFAULT_DISTANCE_RADIUS                     1000
+#define DEFAULT_DISTANCE_FILTER                     2
 
 #define LAST_LOGOUT                                 0
 #define LAST_LOGIN                                  1
@@ -79,6 +81,7 @@
 #define KEY_NET_ADDRESS                             @"KeyNetAddress"
 #define KEY_NET_SUCCESS                             @"KeyNetSuccess"
 #define KEY_NET_FAILED                              @"KeyNetFailed"
+#define KEY_IMAGE                                   @"KeyImage"
 
 // 图片字符串
 #define IMG_HOME_BANNER                             @"banner.jpg"
@@ -93,6 +96,11 @@
 #define IMG_HOME_SEARCH                             @"home_search.png"
 #define IMG_HOME_MESSAGE                            @"home_message.png"
 #define IMG_PAGE_LOGO                               @"page_logo.png"
+#define IMG_MYCENTER_BACK                           @"mycenter_back.png"
+#define IMG_LOGIN_LOGO                              @"login_logo.png"
+#define IMG_LOGIN_QQ                                @"qq_ico.png"
+#define IMG_LOGIN_WEIBO                             @"weibo_ico.png"
+#define IMG_LOGIN_WEIXIN                            @"weixin_ico.png"
 
 // 内部通信消息
 #define MigNetNameGetAdSuccess                      @"MigNetNameGetAdSuccess"

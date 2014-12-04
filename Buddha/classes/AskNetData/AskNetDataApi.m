@@ -7,6 +7,7 @@
 //
 
 #import "AskNetDataApi.h"
+#import "MyLocationManager.h"
 
 @implementation AskNetDataApi
 
@@ -156,7 +157,10 @@
 
 - (void)doQuickLogin {
     
-    NSString *postData = [NSString stringWithFormat:@"imei=%@&machine=%@&latitude=%@&longitude=%@", @"", @"", @"", @""];
+    NSString *latitude = [[MyLocationManager GetInstance] getLatitude];
+    NSString *longitude = [[MyLocationManager GetInstance] getLongitude];
+    
+    NSString *postData = [NSString stringWithFormat:@"imei=%@&machine=%@&latitude=%@&longitude=%@", @"", @"2", latitude, longitude];
     
     [self doPostData:MIGAPI_QUICKLOGIN postdata:postData];
 }

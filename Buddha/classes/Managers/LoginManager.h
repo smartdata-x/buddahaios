@@ -25,6 +25,8 @@
 
 + (LoginManager *)GetInstance;
 
+- (void)registerLogins;
+
 - (void)doSinaWeiboLogin;
 - (void)doTencentWeixinLogin;
 - (void)doTencentQQLogin;

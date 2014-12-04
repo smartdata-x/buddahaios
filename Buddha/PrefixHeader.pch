@@ -25,7 +25,7 @@
 #define kWXAPP_SECRET                               @"22df7cb9923311d97a950345452e6da4"
 
 // qq
-#define kQQAppKey                                   @"1103552902"
+#define kQQAppKey                                   @"1103552902"//@"1103552902"
 #define kQQAppSecret                                @"DOZGq3GOSGOqv83n"
 
 #endif

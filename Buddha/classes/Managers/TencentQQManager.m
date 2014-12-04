@@ -70,7 +70,11 @@
                     nil];
 #endif
     
-    permissions = [NSArray arrayWithObjects:@"get_user_info", @"get_simple_userinfo", @"add_t", nil];
+    permissions = [NSArray arrayWithObjects:
+                   kOPEN_PERMISSION_GET_USER_INFO,
+                   kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                   kOPEN_PERMISSION_GET_INFO,
+                   nil];
 
     [tencentOAuth authorize:permissions inSafari:NO];
 }

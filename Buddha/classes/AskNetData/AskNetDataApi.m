@@ -26,9 +26,10 @@
 
 - (void)initDataTable {
     
-    NSString *httpQuickLogin = [NSString stringWithFormat:@"%@quicklogin.fcgi", MAIN_HTTP];
-    NSString *httpBDBindPush = [NSString stringWithFormat:@"%@bdbindpush.fcgi", MAIN_HTTP];
-    NSString *httpThirdLogin = [NSString stringWithFormat:@"%@thirdlogin.fcgi", MAIN_HTTP];
+    NSString *httpQuickLogin = [NSString stringWithFormat:@"%@/user/1/quicklogin.fcgi", MAIN_HTTP];
+    NSString *httpBDBindPush = [NSString stringWithFormat:@"%@/user/1/bdbindpush.fcgi", MAIN_HTTP];
+    NSString *httpThirdLogin = [NSString stringWithFormat:@"%@/user/1/thirdlogin.fcgi", MAIN_HTTP];
+    NSString *httpGetRecom = [NSString stringWithFormat:@"%@/find/1/findrecom.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -42,6 +43,10 @@
                        @{KEY_NET_ADDRESS:httpThirdLogin,
                          KEY_NET_SUCCESS:MigNetNameThirdLoginSuccess,
                          KEY_NET_FAILED:MigNetNameThirdLoginFailed},
+                       
+                       @{KEY_NET_ADDRESS:httpGetRecom,
+                         KEY_NET_FAILED:MigNetNameGetRecomFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetRecomSuccess},
                        ];
 }
 
@@ -164,8 +169,9 @@
     
     NSString *latitude = [[MyLocationManager GetInstance] getLatitude];
     NSString *longitude = [[MyLocationManager GetInstance] getLongitude];
+    NSString *imei = [UserLoginInfoManager GetInstance].openUDID;
     
-    NSString *postData = [NSString stringWithFormat:@"imei=%@&machine=%@&latitude=%@&longitude=%@", @"", @"2", latitude, longitude];
+    NSString *postData = [NSString stringWithFormat:@"imei=%@&machine=%@&latitude=%@&longitude=%@", imei, @"2", latitude, longitude];
     
     [self doPostData:MIGAPI_QUICKLOGIN postdata:postData];
 }
@@ -175,18 +181,55 @@
     NSString *machine = @"2";
     NSString *nickname = [UserLoginInfoManager GetInstance].curLoginUser.username;
     NSString *source = [UserLoginInfoManager GetInstance].curLoginUser.loginType;
-    NSString *accesstoken = [UserLoginInfoManager GetInstance].curLoginUser.accesstoken;
-    NSString *imei = @"";
-    NSString *sex = @"";
-    NSString *birthday = @"";
-    NSString *location = @"";
+    NSString *session = [UserLoginInfoManager GetInstance].curLoginUser.thirdIDStr;
+    NSString *imei = [UserLoginInfoManager GetInstance].openUDID;
+    NSString *sex = [UserLoginInfoManager GetInstance].curLoginUser.gender;
+    NSString *birthday = [UserLoginInfoManager GetInstance].curLoginUser.birthday;
+    NSString *location = [UserLoginInfoManager GetInstance].curLoginUser.address;
     NSString *head = [UserLoginInfoManager GetInstance].curLoginUser.headerUrl;
     NSString *latitude = [[MyLocationManager GetInstance] getLatitude];
     NSString *longitude = [[MyLocationManager GetInstance] getLongitude];
     
-    NSString *postData = [NSString stringWithFormat:@"machine=%@&nickname=%@&source=%@&session=%@&imei=%@&sex=%@&birthday=%@&location=%@&head=%@&latitude=%@&longitude=%@", machine, nickname, source, accesstoken, imei, sex, birthday, location, head, latitude, longitude];
+    // 如下几个字符需要转码
+    NSString *urlcodeNickname = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)nickname, nil, nil, kCFStringEncodingUTF8));
+    NSString *urlcodeLocation = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)location, nil, nil, kCFStringEncodingUTF8));
+    NSString *urlcodeHeadUrl = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)head, nil, nil, kCFStringEncodingUTF8));
+    
+    NSMutableString *postData = [[NSMutableString alloc] initWithFormat:@"machine=%@&nickname=%@&source=%@&session=%@&sex=%@&head=%@&latitude=%@&longitude=%@", machine, urlcodeNickname, source, session, sex, urlcodeHeadUrl, latitude, longitude];
+    
+    if (!MIG_IS_EMPTY_STRING(birthday)) {
+        
+        NSString *postBirth = [NSString stringWithFormat:@"&birthday=%@", birthday];
+        [postData appendString:postBirth];
+    }
+    
+    if (!MIG_IS_EMPTY_STRING(location)) {
+        
+        NSString *postLocation = [NSString stringWithFormat:@"&location=%@", urlcodeLocation];
+        [postData appendString:postLocation];
+    }
+    
+    // 如果用户之前有快速登录过，则传imei值
+    if ([UserLoginInfoManager GetInstance].isQuickLogin) {
+        
+        NSString *postImei = [NSString stringWithFormat:@"&imei=%@", imei];
+        [postData appendString:postImei];
+    }
     
     [self doPostData:MIGAPI_THIRDLOGIN postdata:postData];
+}
+
+- (void)doGetRecom {
+    
+    if ([UserLoginInfoManager GetInstance].isLogin ||
+        [UserLoginInfoManager GetInstance].isQuickLogin) {
+        
+        NSString *uid = [UserLoginInfoManager GetInstance].curLoginUser.userid;
+        NSString *token = [UserLoginInfoManager GetInstance].curLoginUser.token;
+        
+        NSString *postData = [NSString stringWithFormat:@"uid=%@&token=%@", uid, token];
+        [self doPostData:MIGAPI_GETRECOM postdata:postData];
+    }
 }
 
 @end

@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "OpenUrlManager.h"
+#import "MyLocationManager.h"
+#import "AFNetworking.h"
+#import "LoginManager.h"
+#import "DatabaseManager.h"
 
 @interface AppDelegate ()
 
@@ -29,6 +33,9 @@
             // 程序通过远程推送消息启动
         }
     }
+    
+    // 开始启动界面之前，先初始化需要的全局数据
+    [self initCommonData];
     
     self.window = [[UIWindow alloc] initWithFrame:mainScreenFrame];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -78,6 +85,70 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     
     return [[OpenUrlManager GetInstance] handleOpenURL:url];
+}
+
+// 初始化全局数据
+- (void)initCommonData {
+    
+    // 更新地理位置, 地理位置最先更新，确保能够最快的获取到地理坐标
+    [[MyLocationManager GetInstance] updateLocation];
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    // 注册新浪微博, 微信, QQ
+    [[LoginManager GetInstance] registerLogins];
+    
+    // 检查上次登录状态
+    int lastLoginState = [[DatabaseManager GetInstance] getLastLoginOrNot];
+    if (lastLoginState == DATABASE_LOGOUT) {
+        
+        // 上次没有登录
+        [UserLoginInfoManager GetInstance].isLogin = NO;
+        [UserLoginInfoManager GetInstance].isQuickLogin = NO;
+    }
+    else if (lastLoginState == DATABASE_LOGIN || lastLoginState == DATABASE_QUICKLOGIN) {
+        
+        // 上次已登录，从本地数据库获取登录信息
+        UserLoginData *logindata = [[DatabaseManager GetInstance] getLastUserLoginData];
+        
+        if (logindata != nil) {
+            
+            [UserLoginInfoManager GetInstance].curLoginUser = logindata;
+            [UserLoginInfoManager GetInstance].isLogin = (lastLoginState == DATABASE_LOGIN);
+            [UserLoginInfoManager GetInstance].isQuickLogin = (lastLoginState == DATABASE_QUICKLOGIN);
+        }
+        else {
+            
+            [[DatabaseManager GetInstance] insertLoginOrNot:DATABASE_LOGOUT];
+            [UserLoginInfoManager GetInstance].isLogin = NO;
+            [UserLoginInfoManager GetInstance].isQuickLogin = NO;
+        }
+    }
+    
+#if 0
+    AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    [reachabilityManager startMonitoring];
+    
+    [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                MIGDEBUG_PRINT(@"connect by wifi, can work");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                MIGDEBUG_PRINT(@"connect by 3G");
+                break;
+                
+            case AFNetworkReachabilityStatusUnknown:
+            default:
+                MIGDEBUG_PRINT(@"not by wifi, disable work");
+                break;
+        }
+        
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    }];
+#endif
 }
 
 @end

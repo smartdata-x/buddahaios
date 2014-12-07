@@ -12,6 +12,7 @@
 #import "TencentQQManager.h"
 #import "UserLoginInfoManager.h"
 #import "DatabaseManager.h"
+#import "AskNetDataApi.h"
 
 /*
  登录过程
@@ -32,7 +33,12 @@
 - (void)doTencentQQLogin;
 - (void)doLogOut;
 
+- (void)doQuickLogin;
+
 - (void)LoginFromThirdPartSuccess:(NSNotification *)notification;
 - (void)LoginFromThirdPartFailed:(NSNotification *)notification;
+
+- (void)quickLoginSuccess:(NSNotification *)notification;
+- (void)quickLoginFailed:(NSNotification *)notification;
 
 @end

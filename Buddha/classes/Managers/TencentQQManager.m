@@ -43,7 +43,6 @@
 
 - (void)doLoginRequest {
     
-#if 0
     permissions = [NSArray arrayWithObjects:
                     kOPEN_PERMISSION_GET_USER_INFO,
                     kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
@@ -68,13 +67,14 @@
                     kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
                     kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
                     nil];
-#endif
     
+#if 0
     permissions = [NSArray arrayWithObjects:
                    kOPEN_PERMISSION_GET_USER_INFO,
                    kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
                    kOPEN_PERMISSION_GET_INFO,
                    nil];
+#endif
 
     [tencentOAuth authorize:permissions inSafari:NO];
 }
@@ -88,7 +88,7 @@
         
         UserLoginData *userlogindata = [[UserLoginData alloc] init];
         userlogindata.openid = tencentOAuth.openId;
-        userlogindata.accesstoken = tencentOAuth.accessToken;
+        userlogindata.thirdtoken = tencentOAuth.accessToken;
         userlogindata.expireDate = tencentOAuth.expirationDate;
         userlogindata.loginType = MIGLOGINTYPE_TENCENTQQ;
         
@@ -105,11 +105,26 @@
 
 - (void)getUserInfoResponse:(APIResponse *)response {
     
-    
-    
-    // 第三方登陆成功, 向服务器发送登陆状态信息
-    AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
-    [askApi doThirdLogin];
+    if (response.retCode == URLREQUEST_SUCCEED) {
+        
+        NSString *username = [response.jsonResponse objectForKey:@"nickname"];
+        NSString *headerurl = [response.jsonResponse objectForKey:@"figureurl"];
+        NSString *gender = [[response.jsonResponse objectForKey:@"gender"] isEqualToString:@"男"] ? @"1" : @"0";
+        NSString *birthday = [response.jsonResponse objectForKey:@""];
+        NSString *address = [response.jsonResponse objectForKey:@"city"];
+        NSString *struid = [UserLoginInfoManager GetInstance].curLoginUser.openid;
+        
+        [UserLoginInfoManager GetInstance].curLoginUser.username = username;
+        [UserLoginInfoManager GetInstance].curLoginUser.headerUrl = headerurl;
+        [UserLoginInfoManager GetInstance].curLoginUser.gender = gender;
+        [UserLoginInfoManager GetInstance].curLoginUser.birthday = birthday;
+        [UserLoginInfoManager GetInstance].curLoginUser.address = address;
+        [UserLoginInfoManager GetInstance].curLoginUser.thirdIDStr = struid;
+        
+        // 第三方登陆成功, 向服务器发送登陆状态信息
+        AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+        [askApi doThirdLogin];
+    }
 }
 
 @end

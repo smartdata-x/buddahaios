@@ -83,8 +83,23 @@
     [self.view addSubview:loginMenuTableView];
 }
 
+- (void)doBack:(id)sender {
+    
+    // 如果用户登录或者采用快速登录, 登录成功后才能返回
+    if ([UserLoginInfoManager GetInstance].isLogin ||
+        [UserLoginInfoManager GetInstance].isQuickLogin) {
+        
+        [super doBack:sender];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_NOTLOGIN];
+    }
+}
+
 - (void)doLoginSuccess {
     
+    [SVProgressHUD showSuccessWithStatus:MIGTIP_LOGIN_SUCCESS];
     [self doBack:nil];
 }
 
@@ -134,6 +149,7 @@
     switch (row) {
         case 0:
             [[LoginManager GetInstance] doTencentQQLogin];
+            //[[LoginManager GetInstance] doQuickLogin];
             break;
             
         case 1:

@@ -26,7 +26,6 @@
     
     if (self != nil) {
         
-        [self initCommonData];
         [self initTopNavBar];
         
         _curShowViewTag = ROOTVIEWTAG_FEATURE;
@@ -78,6 +77,14 @@
 }
 
 - (void)doUpdateView:(NSInteger)viewTag {
+    
+    // 如果用户没有登录，则跳转到登录界面
+    if (![UserLoginInfoManager GetInstance].isLogin &&
+        ![UserLoginInfoManager GetInstance].isQuickLogin) {
+        
+        LoginViewController *loginviewcontroller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        [self.navigationController pushViewController:loginviewcontroller animated:YES];
+    }
     
     // remove
     UIView *oldShowView = [self.view viewWithTag:ROOTVIEWTAG_NULL];
@@ -162,64 +169,6 @@
     [rightButton setBackgroundImage:[UIImage imageNamed:IMG_HOME_MESSAGE] forState:UIControlStateSelected];
     [rightButton setTitle:@"" forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-}
-
-// 初始化全局数据
-- (void)initCommonData {
-
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
-    // 注册新浪微博, 微信, QQ
-    [[LoginManager GetInstance] registerLogins];
-    
-    // 更新地理位置
-    [[MyLocationManager GetInstance] updateLocation];
-    
-    // 检查上次登录状态
-    if ([[DatabaseManager GetInstance] getLastLoginOrNot] != 0) {
-        
-        // 上次已登录，从本地数据库获取登录信息
-        UserLoginData *logindata = [[DatabaseManager GetInstance] getLastUserLoginData];
-        [UserLoginInfoManager GetInstance].curLoginUser = logindata;
-        [UserLoginInfoManager GetInstance].isLogin = YES;
-    }
-    else {
-        
-        [UserLoginInfoManager GetInstance].isLogin = NO;
-    }
-    
-    // 初始化百度地图
-    mBDMapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [mBDMapManager start:@"96IS38XTSvyMSLgpPbV0FjKq" generalDelegate:self];
-    if (!ret) {
-        
-        MIGDEBUG_PRINT(@"百度地图启动成功");
-    }
-    
-#if 0
-    AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
-    [reachabilityManager startMonitoring];
-    
-    [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        
-        switch (status) {
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                MIGDEBUG_PRINT(@"connect by wifi, can work");
-                break;
-                
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-                MIGDEBUG_PRINT(@"connect by 3G");
-                break;
-                
-            case AFNetworkReachabilityStatusUnknown:
-            default:
-                MIGDEBUG_PRINT(@"not by wifi, disable work");
-                break;
-        }
-        
-        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    }];
-#endif
 }
 
 - (void)initMainView {
@@ -401,58 +350,35 @@
         return;
     }
     
+    // 顶部菜单
     if (type == HORIZONTALMENU_TYPE_BUTTON) {
         
-        // 顶部菜单
         MIGDEBUG_PRINT(@"top Menu of %d index clicked", index);
         
         _curShowViewTag = index;
         [self doUpdateView:_curShowViewTag];
     }
+    // 底部菜单
     else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL) {
         
-        // 底部菜单
         MIGDEBUG_PRINT(@"bottom Menu of %d index clicked", index);
         
         if (0 == index) {
             
-            if (![UserLoginInfoManager GetInstance].isLogin) {
-                
+        }
+        else if (1 == index) {
+            
+            // test comment
+            //if (![UserLoginInfoManager GetInstance].isLogin) {
+            
+            {
                 LoginViewController *loginviewcontroller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
                 [self.navigationController pushViewController:loginviewcontroller animated:YES];
             }
         }
-        else if (1 == index) {
-            
-        }
         else if (2 == index) {
             
         }
-    }
-}
-
-// BMKGeneral Delegate
--(void)onGetNetworkState:(int)iError
-{
-    if (iError == 0)
-    {
-        NSLog(@"网络连接正常");
-    }
-    else
-    {
-        NSLog(@"网络错误:%d",iError);
-    }
-}
-
--(void)onGetPermissionState:(int)iError
-{
-    if (iError == 0)
-    {
-        NSLog(@"授权成功");
-    }
-    else
-    {
-        NSLog(@"授权失败:%d",iError);
     }
 }
 

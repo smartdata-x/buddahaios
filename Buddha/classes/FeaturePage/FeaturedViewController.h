@@ -42,7 +42,7 @@ enum {
 - (void)reloadTableViewDataSource;
 - (void)forceRefreshData;
 
-- (void)quickLoginSuccess:(NSNotification *)notification;
-- (void)quickLoginFailed:(NSNotification *)notification;
+- (void)getRecomFailed:(NSNotification *)notification;
+- (void)getRecomSuccess:(NSNotification *)notification;
 
 @end

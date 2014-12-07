@@ -29,7 +29,7 @@
 - (void)doRegister {
     
     [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:kAppKey];
+    [WeiboSDK registerApp:kWeiboAppKey];
 }
 
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -47,11 +47,12 @@
     if ([UserLoginInfoManager GetInstance].isLogin) {
         
         // 已经登陆了，不需要再发送登录请求
-        return;
+        MIGDEBUG_PRINT(@"已经登录");
+        //return;
     }
     
     WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-    request.redirectURI = kRedirectURI;
+    request.redirectURI = kWeiboRedirectURI;
     request.scope = @"all";
     request.userInfo = @{@"SSO_From": @"SendMessageToWeiboViewController",
                          @"Other_Info_1": [NSNumber numberWithInt:123],
@@ -73,7 +74,7 @@
             
             UserLoginData *logindata = [[UserLoginData alloc] init];
             logindata.thirdUserId = userid;
-            logindata.accesstoken = accesstoken;
+            logindata.thirdtoken = accesstoken;
             logindata.loginType = MIGLOGINTYPE_SINAWEIBO;
             
             MIGDEBUG_PRINT(@"新浪 userid:%@, accesstoken:%@", userid, accesstoken);
@@ -94,7 +95,7 @@
 - (void)getUserInfo {
     
     NSString *weibouserid = [UserLoginInfoManager GetInstance].curLoginUser.thirdUserId;
-    NSString *accesstoken = [UserLoginInfoManager GetInstance].curLoginUser.accesstoken;
+    NSString *accesstoken = [UserLoginInfoManager GetInstance].curLoginUser.thirdtoken;
     
     MIGDEBUG_PRINT(@"新浪获取用户信息 userid=%@, accesstoken=%@", weibouserid, accesstoken);
     
@@ -117,10 +118,16 @@
         NSString *username = [dicResult objectForKey:@"screen_name"];
         NSString *headerurl = [dicResult objectForKey:@"profile_image_url"];
         NSString *gender = [[dicResult objectForKey:@"gender"] isEqualToString:@"m"] ? @"1" : @"0";
+        NSString *birthday = @"";
+        NSString *address = [dicResult objectForKey:@"location"];
+        NSString *struid = [dicResult objectForKey:@"idstr"];
         
         [UserLoginInfoManager GetInstance].curLoginUser.username = username;
         [UserLoginInfoManager GetInstance].curLoginUser.headerUrl = headerurl;
         [UserLoginInfoManager GetInstance].curLoginUser.gender = gender;
+        [UserLoginInfoManager GetInstance].curLoginUser.birthday = birthday;
+        [UserLoginInfoManager GetInstance].curLoginUser.address = address;
+        [UserLoginInfoManager GetInstance].curLoginUser.thirdIDStr = struid;
         
         // 调用本地的登录策略
         AskNetDataApi *askApi = [[AskNetDataApi alloc] init];

@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "Stdinc.h"
+#import "OpenUDID.h"
 
 @interface UserLoginInfoManager : NSObject
 
 + (UserLoginInfoManager *)GetInstance;
 
-@property (nonatomic, assign) BOOL isLogin;
+@property (nonatomic, assign) BOOL isLogin; // 用户是否登录
+@property (nonatomic, assign) BOOL isQuickLogin; // 用户是否快速登录
 @property (nonatomic, retain) UserLoginData *curLoginUser;
+@property (nonatomic, retain) NSString *openUDID;
 
 @end

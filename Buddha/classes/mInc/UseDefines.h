@@ -23,8 +23,9 @@
 #define MIGLOGINTYPE_TENCENTWEIXIN                  @"2"
 #define MIGLOGINTYPE_TENCENTQQ                      @"3"
 
-#define DATABASE_LOGIN                              1
 #define DATABASE_LOGOUT                             0
+#define DATABASE_LOGIN                              1
+#define DATABASE_QUICKLOGIN                         2
 
 #define MIGGENDER_MALE                              @"1"
 #define MIGGENDER_FEMALE                            @"0"
@@ -49,6 +50,9 @@
 #define IS_IOS7                                     SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
 #define IS_IOS8                                     SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")
 
+// 宏函数
+#define MIG_IS_EMPTY_STRING(x)                      ((x) == nil || [x isEqualToString:@""])
+
 // 大小定义
 #define SCREEN_SCALAR                               2.0
 #define NAV_BAR_HEIGHT                              44.0
@@ -69,7 +73,9 @@
 #define LAST_LOGIN                                  1
 
 // 字符串打印消息
+#define MIGTIP_LOGIN_SUCCESS                        @"登录成功"
 #define MIGTIP_LOGIN_FAILED                         @"对不起, 登录失败了"
+#define MIGTIP_LOGIN_NOTLOGIN                       @"对不起，您还未登录"
 
 // 字典匹配关键字
 #define KEY_NORMAL                                  @"KeyNormal"

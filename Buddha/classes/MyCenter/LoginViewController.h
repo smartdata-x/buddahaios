@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CenterBaseViewController.h"
+#import "AskNetDataApi.h"
 
 @interface LoginViewController : CenterBaseViewController<UITableViewDataSource, UITableViewDelegate>
 {
@@ -17,5 +18,7 @@
 
 - (void)doLoginSuccess;
 - (void)doLoginFailed;
+
+- (void)doBack:(id)sender;
 
 @end

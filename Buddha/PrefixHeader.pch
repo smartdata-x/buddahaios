@@ -16,9 +16,12 @@
 #import "WeiboSDK.h"
 
 //com.sina.weibo.SNWeiboSDKDemo
-#define kAppKey                                     @"1228824258"
-#define kRedirectURI                                @"http://42.121.14.108/buddha/sinaweibo/callback.php"
-#define kAppSecret                                  @"38bfdcd8571e0f1d0a97da437bf3d5c8"
+//#define kAppKey                                     @"1228824258"
+//#define kRedirectURI                                @"http://42.121.14.108/buddha/sinaweibo/callback.php"
+//#define kAppSecret                                  @"38bfdcd8571e0f1d0a97da437bf3d5c8"
+#define kWeiboAppKey                                @"2902122792"
+#define kWeiboAppSecret                             @"0a311470f93f1591ed589f9c2fcc02b7"
+#define kWeiboRedirectURI                           @"http://42.121.14.108/buddha/sinaweibo/callback.php"
 
 // weixin
 #define kWXAPP_ID                                   @"wx2308555ca50aab0f"

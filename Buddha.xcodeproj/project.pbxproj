@@ -14,6 +14,13 @@
 		CB8458BE1A309B470020283E /* qq_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8458BA1A309B470020283E /* qq_ico.png */; };
 		CB8458BF1A309B470020283E /* weibo_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8458BB1A309B470020283E /* weibo_ico.png */; };
 		CB8458C01A309B470020283E /* weixin_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8458BC1A309B470020283E /* weixin_ico.png */; };
+		CB9469771A33FA7E00337164 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB94696A1A33FA7E00337164 /* libBPush.a */; };
+		CB9469781A33FA7E00337164 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CB94696D1A33FA7E00337164 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB9469791A33FA7E00337164 /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9469701A33FA7E00337164 /* BPushClass.m */; };
+		CB94697A1A33FA7E00337164 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9469721A33FA7E00337164 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB94697B1A33FA7E00337164 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9469741A33FA7E00337164 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB94697C1A33FA7E00337164 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9469761A33FA7E00337164 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB9469801A33FAC100337164 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CB94697F1A33FAC100337164 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB96994F1A2F2B81009C35F8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB96994E1A2F2B81009C35F8 /* LoginViewController.m */; };
 		CB9699551A2F417E009C35F8 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9699541A2F417E009C35F8 /* TencentOpenAPI.framework */; };
 		CB9699571A2F419E009C35F8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB9699561A2F419E009C35F8 /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -144,6 +151,21 @@
 		CB8458BA1A309B470020283E /* qq_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_ico.png; sourceTree = "<group>"; };
 		CB8458BB1A309B470020283E /* weibo_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_ico.png; sourceTree = "<group>"; };
 		CB8458BC1A309B470020283E /* weixin_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixin_ico.png; sourceTree = "<group>"; };
+		CB9469691A33FA7E00337164 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		CB94696A1A33FA7E00337164 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		CB94696C1A33FA7E00337164 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		CB94696D1A33FA7E00337164 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		CB94696E1A33FA7E00337164 /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
+		CB94696F1A33FA7E00337164 /* BPushClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushClass.h; sourceTree = "<group>"; };
+		CB9469701A33FA7E00337164 /* BPushClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushClass.m; sourceTree = "<group>"; };
+		CB9469711A33FA7E00337164 /* GzipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipCompressor.h; sourceTree = "<group>"; };
+		CB9469721A33FA7E00337164 /* GzipCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipCompressor.m; sourceTree = "<group>"; };
+		CB9469731A33FA7E00337164 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		CB9469741A33FA7E00337164 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		CB9469751A33FA7E00337164 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CB9469761A33FA7E00337164 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		CB94697E1A33FAC100337164 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		CB94697F1A33FAC100337164 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		CB96994D1A2F2B81009C35F8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CB96994E1A2F2B81009C35F8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CB9699541A2F417E009C35F8 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = Buddha/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
@@ -435,6 +457,7 @@
 				CBEC688F1A1B891F007B2A00 /* CoreImage.framework in Frameworks */,
 				CBEC68901A1B891F007B2A00 /* CoreText.framework in Frameworks */,
 				CBEC69411A24C3F6007B2A00 /* libbaidumapapi.a in Frameworks */,
+				CB9469771A33FA7E00337164 /* libBPush.a in Frameworks */,
 				CBEC68911A1B891F007B2A00 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +465,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB9469681A33FA7E00337164 /* BPush */ = {
+			isa = PBXGroup;
+			children = (
+				CB9469691A33FA7E00337164 /* BPush.h */,
+				CB94696A1A33FA7E00337164 /* libBPush.a */,
+				CB94696B1A33FA7E00337164 /* opensource */,
+			);
+			path = BPush;
+			sourceTree = "<group>";
+		};
+		CB94696B1A33FA7E00337164 /* opensource */ = {
+			isa = PBXGroup;
+			children = (
+				CB94696C1A33FA7E00337164 /* Base64.h */,
+				CB94696D1A33FA7E00337164 /* Base64.m */,
+				CB94696E1A33FA7E00337164 /* Base64Defines.h */,
+				CB94696F1A33FA7E00337164 /* BPushClass.h */,
+				CB9469701A33FA7E00337164 /* BPushClass.m */,
+				CB9469711A33FA7E00337164 /* GzipCompressor.h */,
+				CB9469721A33FA7E00337164 /* GzipCompressor.m */,
+				CB9469731A33FA7E00337164 /* OpenUDID.h */,
+				CB9469741A33FA7E00337164 /* OpenUDID.m */,
+				CB9469751A33FA7E00337164 /* Reachability.h */,
+				CB9469761A33FA7E00337164 /* Reachability.m */,
+			);
+			path = opensource;
+			sourceTree = "<group>";
+		};
+		CB94697D1A33FAC100337164 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				CB94697E1A33FAC100337164 /* JSONKit.h */,
+				CB94697F1A33FAC100337164 /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
 		CB96994C1A2F2B63009C35F8 /* MyCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +597,8 @@
 		CBEC683A1A1A4A80007B2A00 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				CB94697D1A33FAC100337164 /* JSONKit */,
+				CB9469681A33FA7E00337164 /* BPush */,
 				CB96994C1A2F2B63009C35F8 /* MyCenter */,
 				CBB6ED221A2B3BB4005B0CF3 /* QQSDK */,
 				CBEC69F31A2AE075007B2A00 /* SVProgressHUD */,
@@ -1108,6 +1170,7 @@
 				CBB6ED5C1A2B61B8005B0CF3 /* FeaturedActivitiesCell.m in Sources */,
 				CBEC68781A1B822B007B2A00 /* PCustomTabBarViewController.m in Sources */,
 				CBEC696D1A2602A8007B2A00 /* UIImageView+AFNetworking.m in Sources */,
+				CB9469791A33FA7E00337164 /* BPushClass.m in Sources */,
 				CBEC68741A1B822B007B2A00 /* PCustomNavigationBarView.m in Sources */,
 				CBEC696A1A2602A8007B2A00 /* AFPropertyListRequestOperation.m in Sources */,
 				CBEC68851A1B841B007B2A00 /* UIImage+BlurredFrame.m in Sources */,
@@ -1122,6 +1185,7 @@
 				CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */,
 				CBB6ED5E1A2B61B8005B0CF3 /* FeaturedBooksCell.m in Sources */,
 				CBB6ED211A2B3434005B0CF3 /* TencentQQManager.m in Sources */,
+				CB94697B1A33FA7E00337164 /* OpenUDID.m in Sources */,
 				CBEC696C1A2602A8007B2A00 /* AFXMLRequestOperation.m in Sources */,
 				CBEC69A61A28AA50007B2A00 /* AskNetDataApi.m in Sources */,
 				CBEC698E1A260B36007B2A00 /* DatabaseManager.m in Sources */,
@@ -1153,13 +1217,17 @@
 				CBEC685D1A1A4A81007B2A00 /* EGOImageLoadConnection.m in Sources */,
 				CBEC69FB1A2AE5A3007B2A00 /* UIFont+PFontCategory.m in Sources */,
 				CBEC68171A1A44E4007B2A00 /* main.m in Sources */,
+				CB94697A1A33FA7E00337164 /* GzipCompressor.m in Sources */,
 				CB96996B1A308834009C35F8 /* MyLocationManager.m in Sources */,
 				CBEC69B81A28EE8D007B2A00 /* FMDatabaseQueue.m in Sources */,
 				CBEC69681A2602A8007B2A00 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				CBEC68871A1B841B007B2A00 /* UIImage+ImageEffects.m in Sources */,
 				CBEC69661A2602A8007B2A00 /* AFImageRequestOperation.m in Sources */,
 				CBEC68771A1B822B007B2A00 /* PCustomTabBarView.m in Sources */,
+				CB9469801A33FAC100337164 /* JSONKit.m in Sources */,
+				CB94697C1A33FA7E00337164 /* Reachability.m in Sources */,
 				CBEC69651A2602A8007B2A00 /* AFHTTPRequestOperation.m in Sources */,
+				CB9469781A33FA7E00337164 /* Base64.m in Sources */,
 				CB96995C1A2F4C12009C35F8 /* CenterBaseViewController.m in Sources */,
 				CBEC685B1A1A4A81007B2A00 /* EGOCache.m in Sources */,
 				CBEC69D01A29DDA3007B2A00 /* NSData+AES256.m in Sources */,
@@ -1292,6 +1360,7 @@
 					"$(PROJECT_DIR)/Buddha/classes/BaiduMap",
 					"$(PROJECT_DIR)/Buddha/classes/libWeiboSDK",
 					"$(PROJECT_DIR)/Buddha/classes/WeixinSDK",
+					"$(PROJECT_DIR)/Buddha/classes/BPush",
 				);
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1320,6 +1389,7 @@
 					"$(PROJECT_DIR)/Buddha/classes/BaiduMap",
 					"$(PROJECT_DIR)/Buddha/classes/libWeiboSDK",
 					"$(PROJECT_DIR)/Buddha/classes/WeixinSDK",
+					"$(PROJECT_DIR)/Buddha/classes/BPush",
 				);
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_NAME = "$(TARGET_NAME)";

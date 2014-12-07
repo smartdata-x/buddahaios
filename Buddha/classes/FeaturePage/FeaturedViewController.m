@@ -21,8 +21,8 @@
     
     if (self) {
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quickLoginSuccess:) name:MigNetNameQuickLoginSuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quickLoginFailed:) name:MigNetNameQuickLoginFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRecomFailed:) name:MigNetNameGetRecomFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRecomSuccess:) name:MigNetNameGetRecomSuccess object:nil];
     }
     
     return self;
@@ -40,8 +40,8 @@
 
 - (void)dealloc {
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameQuickLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameQuickLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetRecomFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetRecomSuccess object:nil];
 }
 
 - (void)viewDidLoad {
@@ -91,8 +91,8 @@
     
     [self.view addSubview:_contentTableView];
     
-    // 请求数据
-    [self.askApi doQuickLogin];
+    // 请求首页数据
+    [self.askApi doGetRecom];
     self.mFirstLoad = NO;
 }
 
@@ -120,7 +120,12 @@
     [_tableInfoArray addObjectsFromArray:infoArray];
 }
 
-- (void)quickLoginSuccess:(NSNotification *)notification {
+- (void)getRecomFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取首页数据失败");
+}
+
+- (void)getRecomSuccess:(NSNotification *)notification {
     
     NSDictionary *userinfo = [notification userInfo];
     NSDictionary *result = [userinfo objectForKey:@"result"];
@@ -145,18 +150,6 @@
     }
     
     [self reloadTableViewDataSource];
-    
-    // 获取到广告信息并发送给RootView
-    NSDictionary *ad = [result objectForKey:@"advert"];
-    NSDictionary *sendResult = [[NSDictionary alloc] initWithObjectsAndKeys:ad, @"result", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MigLocalNameGetAdSuccess object:nil userInfo:sendResult];
-}
-
-- (void)quickLoginFailed:(NSNotification *)notification {
-    
-    MIGDEBUG_PRINT(@"quick login failed");
-    
-    //[[NSNotificationCenter defaultCenter] postNotificationName:MigNetNameGetAdFailed object:nil userInfo:nil];
 }
 
 // UITableViewDataSource delegate
@@ -230,7 +223,6 @@
             cell.lblDetail.numberOfLines = 5;
             cell.lblDetail.text = newsSummary;
             
-            cell.avatarImg.placeholderImage = [UIImage imageNamed:IMG_HOME_BANNER];
             cell.avatarImg.imageURL = [NSURL URLWithString:newsPic];
         }
         

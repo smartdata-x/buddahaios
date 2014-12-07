@@ -29,6 +29,18 @@
     
     [super viewDidLoad];
     
+    
+    // 初始化百度地图
+    if (mBDMapManager == nil) {
+        
+        mBDMapManager = [[BMKMapManager alloc] init];
+        BOOL ret = [mBDMapManager start:@"96IS38XTSvyMSLgpPbV0FjKq" generalDelegate:self];
+        if (!ret) {
+            
+            MIGDEBUG_PRINT(@"百度地图启动成功");
+        }
+    }
+    
     mMapView = [[BMKMapView alloc] initWithFrame:self.mFrame];
     mMapView.mapType = BMKMapTypeStandard;
     mMapView.zoomLevel = 16;
@@ -79,19 +91,12 @@
 -(void)mapview:(BMKMapView *)mapView onLongClick:(CLLocationCoordinate2D)coordinate {
     
     MIGDEBUG_PRINT(@"长按");
-    
-    // test
-    [self beginSearch:nil];
 }
 
 // 地图双击手势
 - (void)mapview:(BMKMapView *)mapView onDoubleClick:(CLLocationCoordinate2D)coordinate {
     
     MIGDEBUG_PRINT(@"双击");
-    
-    // test
-    [self startLocation:nil];
-    [self startFollowing:nil];
 }
 
 
@@ -293,6 +298,31 @@
     }
 }
 
+
+// BMKGeneral Delegate
+-(void)onGetNetworkState:(int)iError
+{
+    if (iError == 0)
+    {
+        NSLog(@"网络连接正常");
+    }
+    else
+    {
+        NSLog(@"网络错误:%d",iError);
+    }
+}
+
+-(void)onGetPermissionState:(int)iError
+{
+    if (iError == 0)
+    {
+        NSLog(@"授权成功");
+    }
+    else
+    {
+        NSLog(@"授权失败:%d",iError);
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

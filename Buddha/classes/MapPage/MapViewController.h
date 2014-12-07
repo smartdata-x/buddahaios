@@ -10,8 +10,9 @@
 #import "BaseViewController.h"
 #import "BMapKit.h"
 
-@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKPoiSearchDelegate>
+@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKPoiSearchDelegate, BMKGeneralDelegate>
 {
+    BMKMapManager *mBDMapManager;
     BMKLocationService *mLocationService;
     BMKMapView *mMapView;
     BMKPoiSearch *mPoiSearch;

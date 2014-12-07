@@ -19,6 +19,12 @@
         if (nil == instance) {
             
             instance = [[UserLoginInfoManager alloc] init];
+            
+            if (instance.openUDID == nil) {
+                
+                instance.openUDID = [OpenUDID value];
+                MIGDEBUG_PRINT(@"Get udid is: %@", instance.openUDID);
+            }
         }
     }
     

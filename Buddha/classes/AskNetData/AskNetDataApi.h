@@ -13,9 +13,9 @@
 #import "AFJSONRequestOperation.h"
 
 #ifdef DEBUG
-#define MAIN_HTTP                                       @"http://112.124.49.59/cgi-bin/buddha/user/1/"
+#define MAIN_HTTP                                       @"http://112.124.49.59/cgi-bin/buddha"
 #else
-#define MAIN_HTTP                                       @"http://112.124.49.59/cgi-bin/buddha/user/1/"
+#define MAIN_HTTP                                       @"http://112.124.49.59/cgi-bin/buddha"
 #endif
 
 // 此处定义用于本地与网络间的通信。先定义消息，再将index添加于enum，最后在dataTable中添加Key
@@ -31,11 +31,16 @@
 #define MigNetNameThirdLoginSuccess                     @"MigNetNameThirdLoginSuccess"
 #define MigNetNameThirdLoginFailed                      @"MigNetNameThirdLoginFailed"
 
+// 获取首页内容
+#define MigNetNameGetRecomFailed                        @"MigNetNameGetRecomFailed"
+#define MigNetNameGetRecomSuccess                       @"MigNetNameGetRecomSuccess"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
     MIGAPI_BDBINDPUSH,
     MIGAPI_THIRDLOGIN,
+    MIGAPI_GETRECOM,
 };
 
 @interface AskNetDataApi : NSObject
@@ -47,5 +52,6 @@ enum {
 
 - (void)doQuickLogin;
 - (void)doThirdLogin;
+- (void)doGetRecom;
 
 @end

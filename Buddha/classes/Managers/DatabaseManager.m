@@ -40,8 +40,18 @@
         // 创建数据库
         [_db open];
         
+#if 0
+        // test
+        // 删除USERLOGINDATA
+        BOOL isOK = [_db executeUpdate:@"drop table USERLOGINDATA"];
+        if (!isOK) {
+            
+            MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
+        }
+#endif
+        
         // 用户账户信息
-        [_db executeUpdate:@"create table if not exists USERLOGINDATA (username text not null, password text, userid text, accesstoken text, logintype text, logintime integer)"];
+        [_db executeUpdate:@"create table if not exists USERLOGINDATA (userid text, accesstoken text, address text, birthday text, username text, password text, thirdtoken text, thirdid text, openid text, logintype text, headurl text, logintime integer)"];
         
         // 用户登录状态
         [_db executeUpdate:@"create table if not exists USERLASTLOGIN (loginstate text)"];
@@ -59,30 +69,45 @@
 
 - (void)insertUserLoginData:(UserLoginData *)userlogindata {
     
-    // "create table if not exists USERLOGINDATA (username text not null, password text, userid text, accesstoken text, logintype text, logintime integer)
+    // userid text, token text, address text, birthday text, username text, password text, thirdtoken text, thirdid text, openid text, logintype text, headurl text, logintime integer
     
+    NSString *userid = userlogindata.userid;
+    NSString *token = userlogindata.token;
+    NSString *address = userlogindata.address;
+    NSString *birthday = userlogindata.birthday;
     NSString *username = userlogindata.username;
     NSString *encodePassword = [PCommonUtil encodeAesAndBase64StrFromStr:userlogindata.password];
-    NSString *userid = userlogindata.userid;
+    NSString *thirdtoken = userlogindata.thirdtoken;
+    NSString *thirdid = userlogindata.thirdIDStr;
+    NSString *openid = userlogindata.openid;
     NSString *logintype = userlogindata.loginType;
-    NSString *accesstoken = userlogindata.accesstoken;
+    NSString *headurl = userlogindata.headerUrl;
     NSDate *nowDate = [NSDate date];
     long loginTime = [nowDate timeIntervalSince1970];
+    NSNumber *numLoginTime = [NSNumber numberWithLong:loginTime];
     
-    NSString *sql = @"insert into USERLOGINDATA (password, userid, accesstoken, logintype, logintime, username) values (?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into USERLOGINDATA (userid, accesstoken, address, birthday, password, thirdtoken, thirdid, openid, logintype, headurl, logintime, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    MIGDEBUG_PRINT(@"userid = %@, accesstoken = %@, address = %@, birthday = %@, password = %@, thirdtoken = %@, thirdid = %@, openid = %@, logintype = %@, headurl = %@, logintime = %@ where username = %@", userid, token, address, birthday, encodePassword, thirdtoken, thirdid, openid, logintype, headurl, numLoginTime, username);
     
     [_db open];
     
-    NSString *checksql = [NSString stringWithFormat:@"selelct username from USERLOGINDATA where username = '%@' ", username];
+    NSString *checksql = [NSString stringWithFormat:@"select username from USERLOGINDATA where username = '%@' ", username];
     
     FMResultSet *rs = [_db executeQuery:checksql];
     while ([rs next]) {
         
-        sql = @"update USERLOGINDATA set password = ?, userid = ?, accesstoken = ?, logintype = ?, logintime = ? where username = ?";
+        sql = @"update USERLOGINDATA set userid = ?, accesstoken = ?, address = ?, birthday = ?, password = ?, thirdtoken = ?, thirdid = ?, openid = ?, logintype = ?, headurl = ?, logintime = ? where username = ?";
         break;
     }
     
-    [_db executeUpdate:sql, encodePassword, userid, accesstoken, logintype, loginTime, username];
+    BOOL isOK = [_db executeUpdate:sql, userid, token, address, birthday, encodePassword, thirdtoken, thirdid, openid, logintype, headurl, numLoginTime, username];
+    
+    if (!isOK) {
+        
+        MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
+        MIGDEBUG_PRINT(@"数据库记录用户信息失败");
+    }
     
     [_db close];
 }
@@ -99,11 +124,18 @@
     while ([rs next]) {
         
         userdata = [[UserLoginData alloc] init];
+        
         userdata.userid = [rs stringForColumn:@"userid"];
+        userdata.token = [rs stringForColumn:@"accesstoken"];
+        userdata.address = [rs stringForColumn:@"address"];
+        userdata.birthday = [rs stringForColumn:@"birthday"];
         userdata.username = [rs stringForColumn:@"username"];
         userdata.password = [rs stringForColumn:@"password"];
-        userdata.accesstoken = [rs stringForColumn:@"accesstoken"];
+        userdata.thirdtoken = [rs stringForColumn:@"thirdtoken"];
+        userdata.thirdIDStr = [rs stringForColumn:@"thirdid"];
+        userdata.openid = [rs stringForColumn:@"openid"];
         userdata.loginType = [rs stringForColumn:@"logintype"];
+        userdata.headerUrl = [rs stringForColumn:@"headurl"];
         
         break;
     }
@@ -132,7 +164,7 @@
     
     if ([_db executeUpdate:sql, state]) {
         
-        MIGDEBUG_PRINT(@"记录用户登录信息 成功");
+        MIGDEBUG_PRINT(@"数据库记录用户登录信息 成功");
     }
     
     [_db close];

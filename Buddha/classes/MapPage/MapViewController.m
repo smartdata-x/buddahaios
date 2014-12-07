@@ -20,6 +20,7 @@
     
     if (self) {
         
+        searchRadius = DEFAULT_DISTANCE_RADIUS;
     }
     
     return self;
@@ -41,6 +42,8 @@
         }
     }
     
+    CLLocationCoordinate2D curLocation = [[MyLocationManager GetInstance] getLocation];
+    
     mMapView = [[BMKMapView alloc] initWithFrame:self.mFrame];
     mMapView.mapType = BMKMapTypeStandard;
     mMapView.zoomLevel = 16;
@@ -48,11 +51,17 @@
     mMapView.scrollEnabled = YES;
     mMapView.showsUserLocation = YES;
     mMapView.isSelectedAnnotationViewFront = YES;
+    mMapView.centerCoordinate = curLocation;
+    mMapView.userTrackingMode = BMKUserTrackingModeFollow;
     mMapView.delegate = self;
     [self.view addSubview:mMapView];
     
     mLocationService = [[BMKLocationService alloc] init];
     mPoiSearch = [[BMKPoiSearch alloc] init];
+    
+    // test 定位到本地
+    //[self startLocation:nil];
+    //[self startFollowing:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,7 +79,6 @@
     mLocationService.delegate = nil;
     mPoiSearch.delegate = nil;
 }
-
 
 /*
  ******************* 地图操作 *******************
@@ -91,6 +99,9 @@
 -(void)mapview:(BMKMapView *)mapView onLongClick:(CLLocationCoordinate2D)coordinate {
     
     MIGDEBUG_PRINT(@"长按");
+    
+    // test
+    [self beginSearchNearby:nil Radius:searchRadius Keyword:@"寺庙"];
 }
 
 // 地图双击手势
@@ -165,6 +176,11 @@
     MIGDEBUG_PRINT(@"%s", __FUNCTION__);
     
     [mMapView updateLocationData:userLocation];
+    
+    if (userLocation) {
+        
+        [[MyLocationManager GetInstance] updateLocationByLocation:userLocation.location.coordinate];
+    }
 }
 
 - (void)didStopLocatingUser {
@@ -180,7 +196,42 @@
 /*
  ******************* 地图搜寻 *******************
  */
-- (void)beginSearch:(id)sender {
+
+- (IBAction)enlargeRadius:(id)sender {
+    
+    searchRadius += 1000;
+}
+
+- (IBAction)reduceRadius:(id)sender {
+    
+    if (searchRadius < 2000) {
+        
+        searchRadius -= 1000;
+    }
+}
+
+- (IBAction)beginSearchNearby:(id)sender Radius:(float)radius Keyword:(NSString *)keyword{
+    
+    CLLocationCoordinate2D location = [[MyLocationManager GetInstance] getLocation];
+    
+    BMKNearbySearchOption *nearbySearchOption = [[BMKNearbySearchOption alloc] init];
+    nearbySearchOption.radius = radius;
+    nearbySearchOption.location = location;
+    nearbySearchOption.pageCapacity = 30;
+    nearbySearchOption.keyword = keyword;
+    
+    BOOL flag = [mPoiSearch poiSearchNearBy:nearbySearchOption];
+    if (flag) {
+        
+        MIGDEBUG_PRINT(@"周边搜索发送成功");
+    }
+    else {
+        
+        MIGDEBUG_PRINT(@"周边搜索发送失败");
+    }
+}
+
+- (IBAction)beginSearch:(id)sender {
     
     mCurPage = 0;
     BMKCitySearchOption *citySearchOption = [[BMKCitySearchOption alloc]init];
@@ -284,7 +335,7 @@
             if(i == 0)
             {
                 //将第一个点的坐标移到屏幕中央
-                mMapView.centerCoordinate = poi.pt;
+                //mMapView.centerCoordinate = poi.pt;
             }
         }
     }

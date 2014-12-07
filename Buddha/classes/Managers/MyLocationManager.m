@@ -47,9 +47,15 @@
     }
 }
 
-- (CGPoint)getLocation {
+- (void)updateLocationByLocation:(CLLocationCoordinate2D)curLocation {
     
-    return CGPointMake(mLatitude, mLongitude);
+    mLatitude = curLocation.latitude;
+    mLongitude = curLocation.longitude;
+}
+
+- (CLLocationCoordinate2D)getLocation {
+    
+    return CLLocationCoordinate2DMake(mLatitude, mLongitude);
 }
 
 - (NSString *)getLatitude {

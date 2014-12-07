@@ -12,8 +12,8 @@
 
 @interface MyLocationManager : NSObject<CLLocationManagerDelegate>
 {
-    CGFloat mLongitude;
-    CGFloat mLatitude;
+    double mLongitude;
+    double mLatitude;
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -22,7 +22,9 @@
 + (MyLocationManager *)GetInstance;
 
 - (void)updateLocation;
-- (CGPoint)getLocation;
+- (void)updateLocationByLocation:(CLLocationCoordinate2D)curLocation;
+
+- (CLLocationCoordinate2D)getLocation;
 - (NSString *)getLatitude;
 - (NSString *)getLongitude;
 

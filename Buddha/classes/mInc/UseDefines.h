@@ -66,7 +66,7 @@
 #define NAVIGATION_HEIGHT                           64
 #define BOTTOM_AD_HEIGHT                            (50 / SCREEN_SCALAR)
 
-#define DEFAULT_DISTANCE_RADIUS                     1000
+#define DEFAULT_DISTANCE_RADIUS                     10000
 #define DEFAULT_DISTANCE_FILTER                     2
 
 #define LAST_LOGOUT                                 0

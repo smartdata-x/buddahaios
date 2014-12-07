@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "BMapKit.h"
+#import "MyLocationManager.h"
 
 @interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKPoiSearchDelegate, BMKGeneralDelegate>
 {
@@ -19,6 +20,9 @@
     
     // 搜索相关变量
     int mCurPage;
+    
+    // 距离搜索半径
+    float searchRadius;
 }
 
 - (IBAction)startLocation:(id)sender;
@@ -26,7 +30,11 @@
 - (IBAction)startFollowing:(id)sender;
 - (IBAction)startFollowHeading:(id)sender;
 
+- (IBAction)beginSearchNearby:(id)sender Radius:(float)radius Keyword:(NSString *)keyword;
 - (IBAction)beginSearch:(id)sender;
 - (IBAction)showNextResultPage:(id)sender;
+
+- (IBAction)enlargeRadius:(id)sender;
+- (IBAction)reduceRadius:(id)sender;
 
 @end

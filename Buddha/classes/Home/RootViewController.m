@@ -87,13 +87,13 @@
     }
     
     // remove
-    UIView *oldShowView = [self.view viewWithTag:ROOTVIEWTAG_NULL];
+    UIView *oldShowView = [self.view viewWithTag:ROOTVIEWTAG_CURRENT];
     [oldShowView removeFromSuperview];
     
     // show
     UIViewController *controller = [self getControllerByTag:_curShowViewTag];
     UIView *newShowView = controller.view;
-    newShowView.tag = ROOTVIEWTAG_NULL;
+    newShowView.tag = ROOTVIEWTAG_CURRENT;
     newShowView.frame = CGRectMake(0, 0, mainScreenWidth, mainScreenHeight);
     [self.view insertSubview:newShowView atIndex:0];
 }
@@ -106,6 +106,9 @@
     switch (tag) {
         case ROOTVIEWTAG_FEATURE:
         {
+            // 显示底部菜单
+            [_mBottomMenu setHidden:NO];
+            
             if (controller) {
                 
                 FeaturedViewController *feature = (FeaturedViewController *)controller;
@@ -124,6 +127,9 @@
             
         case ROOTVIEWTAG_MAP:
         {
+            // 隐藏底部菜单
+            [_mBottomMenu setHidden:YES];
+            
             if (controller) {
                 
                 MapViewController *map = (MapViewController *)controller;
@@ -132,7 +138,13 @@
             else {
                 
                 MapViewController *map = [[MapViewController alloc] init];
-                map.mFrame = mContentFrame;
+                map.topViewController = self;
+                
+                // 扩大高度
+                CGRect tmpRect = mContentFrame;
+                tmpRect.size.height += BOTTOM_MENU_BUTTON_HEIGHT;
+                map.mFrame = tmpRect;
+                
                 [map viewWillAppear:YES];
                 [_dicViewControllerCache setObject:map forKey:numIndex];
                 controller = map;
@@ -353,7 +365,7 @@
     // 顶部菜单
     if (type == HORIZONTALMENU_TYPE_BUTTON) {
         
-        MIGDEBUG_PRINT(@"top Menu of %d index clicked", index);
+        MIGDEBUG_PRINT(@"top Menu of %ld index clicked", (long)index);
         
         _curShowViewTag = index;
         [self doUpdateView:_curShowViewTag];
@@ -361,7 +373,7 @@
     // 底部菜单
     else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL) {
         
-        MIGDEBUG_PRINT(@"bottom Menu of %d index clicked", index);
+        MIGDEBUG_PRINT(@"bottom Menu of %ld index clicked", (long)index);
         
         if (0 == index) {
             

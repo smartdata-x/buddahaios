@@ -10,31 +10,50 @@
 #import "BaseViewController.h"
 #import "BMapKit.h"
 #import "MyLocationManager.h"
+#import "MapPoiSearchController.h"
+#import "MapRouteSearchController.h"
+#import "HorizontalMenu.h"
+#import "MapBuildMenuView.h"
 
-@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKPoiSearchDelegate, BMKGeneralDelegate>
+@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKGeneralDelegate, HorizontalMenuDelegate>
 {
     BMKMapManager *mBDMapManager;
     BMKLocationService *mLocationService;
     BMKMapView *mMapView;
-    BMKPoiSearch *mPoiSearch;
     
-    // 搜索相关变量
-    int mCurPage;
+    MapPoiSearchController *mPoiSearchControl; // 搜索
+    MapRouteSearchController *mRouteSearchControl; // 路径规划
     
-    // 距离搜索半径
-    float searchRadius;
+    // 底部周边菜单栏
+    HorizontalMenu *mNearbyMenu;
+    
+    // 底部路线菜单，返回菜单和导航菜单
+    HorizontalMenu *mRouteMenu;
+    UIButton *mBtnBack;
+    UIButton *mBtnGogoNav;
+    
+    // 推荐和附近建筑菜单
+    MapBuildMenuView *mBuildMenu;
 }
+
+
+@property (nonatomic, assign) BOOL isMainEntry; // 是否为地图的主入口, 主入口显示底部周边菜单，非主入口则显示底部路线菜单和导航菜单
 
 - (IBAction)startLocation:(id)sender;
 - (IBAction)stopLocation:(id)sender;
 - (IBAction)startFollowing:(id)sender;
 - (IBAction)startFollowHeading:(id)sender;
 
-- (IBAction)beginSearchNearby:(id)sender Radius:(float)radius Keyword:(NSString *)keyword;
-- (IBAction)beginSearch:(id)sender;
-- (IBAction)showNextResultPage:(id)sender;
+- (void)initNearbyBottomMenu;
+- (void)initRouteBottomMenu;
+- (void)updateBottomMenu;
 
-- (IBAction)enlargeRadius:(id)sender;
-- (IBAction)reduceRadius:(id)sender;
+- (void)initBuildMenu;
+- (void)showBuildMenu:(BOOL)animate;
+- (void)hideBuildMenu:(BOOL)animate;
+
+- (void)doGotoMapFeatureView;
+- (void)doBackToMainEntry;
+- (void)doGotoAppleNav;
 
 @end

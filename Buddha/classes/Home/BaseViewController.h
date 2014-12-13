@@ -17,4 +17,6 @@
 @property (nonatomic, assign) CGRect mFrame;
 @property (nonatomic, assign) BOOL mFirstLoad;
 
+@property (nonatomic, assign) UIViewController *topViewController; // rootview指针, 用于继承此类的view跳转
+
 @end

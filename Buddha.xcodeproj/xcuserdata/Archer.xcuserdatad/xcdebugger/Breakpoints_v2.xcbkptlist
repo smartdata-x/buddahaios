@@ -169,13 +169,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Buddha/classes/MapPage/MapViewController.m"
-            timestampString = "439656150.223805"
+            filePath = "Buddha/classes/MapPage/MapSearchController.m"
+            timestampString = "439905409.09817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
-            landmarkName = "-mapView:viewForAnnotation:"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-onGetPoiResult:result:errorCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -13,6 +13,7 @@
 #import "MapViewController.h"
 #import "HorizontalMenu.h"
 
+// 每个继承类的标志
 enum {
     
     ROOTVIEWTAG_FEATURE = 0,
@@ -24,7 +25,7 @@ enum {
     
     ROOTVIEWTAG_LOGOUT = 50,
     
-    ROOTVIEWTAG_NULL = 100,
+    ROOTVIEWTAG_CURRENT = 100,
 };
 
 @interface RootViewController : UIViewController<CustomNavViewDelegate, BMKGeneralDelegate, HorizontalMenuDelegate>
@@ -37,10 +38,10 @@ enum {
 @property (nonatomic, retain) HorizontalMenu *mTopMenu;
 @property (nonatomic, retain) HorizontalMenu *mBottomMenu;
 @property (nonatomic, retain) EGOImageButton *mBottomAd;
-@property (nonatomic, retain) NSMutableDictionary *dicViewControllerCache;
-@property (nonatomic, assign) NSInteger curShowViewTag;
 @property (nonatomic, assign) BOOL mFirstLoad;
 @property (nonatomic, assign) BOOL mLoadAd;
+@property (nonatomic, retain) NSMutableDictionary *dicViewControllerCache;
+@property (nonatomic, assign) NSInteger curShowViewTag;
 
 - (void)getAdvertiseSuccess:(NSNotification *)notification;
 - (void)getAdvertiseFailed:(NSNotification *)notification;

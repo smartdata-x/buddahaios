@@ -20,7 +20,7 @@
     
     if (self) {
         
-        searchRadius = DEFAULT_DISTANCE_RADIUS;
+        _isMainEntry = YES;
     }
     
     return self;
@@ -54,10 +54,23 @@
     mMapView.centerCoordinate = curLocation;
     mMapView.userTrackingMode = BMKUserTrackingModeFollow;
     mMapView.delegate = self;
+    
+    // test
+    BMKPointAnnotation *item = [[BMKPointAnnotation alloc] init];
+    item.coordinate = CLLocationCoordinate2DMake(30.303038, 120.152917);
+    item.title = @"死鸭子";
+    item.subtitle = @"死鸭子";
+    [mMapView addAnnotation:item];
+    
     [self.view addSubview:mMapView];
+    [self initNearbyBottomMenu];
+    [self initRouteBottomMenu];
+    [self initBuildMenu];
+    [self updateBottomMenu];
     
     mLocationService = [[BMKLocationService alloc] init];
-    mPoiSearch = [[BMKPoiSearch alloc] init];
+    mPoiSearchControl = [[MapPoiSearchController alloc] initWithBMKMapView:mMapView];
+    mRouteSearchControl = [[MapRouteSearchController alloc] initWithBMKMapView:mMapView];
     
     // test 定位到本地
     //[self startLocation:nil];
@@ -69,7 +82,6 @@
     [mMapView viewWillAppear];
     mMapView.delegate = self;
     mLocationService.delegate = self;
-    mPoiSearch.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -77,7 +89,183 @@
     [mMapView viewWillDisappear];
     mMapView.delegate = nil;
     mLocationService.delegate = nil;
-    mPoiSearch.delegate = nil;
+}
+
+- (void)initBuildMenu {
+    
+    if (mBuildMenu == nil) {
+        
+        mBuildMenu = [[MapBuildMenuView alloc] initWithFrame:self.mFrame];
+    }
+    
+    mBuildMenu.mTopMapView = self;
+    // 默认情况下隐藏
+    [mBuildMenu setHidden:YES];
+    [self.view addSubview:mBuildMenu];
+}
+
+- (void)showBuildMenu:(BOOL)animate {
+    
+    [mBuildMenu setHidden:NO];
+    [self.view bringSubviewToFront:mBuildMenu];
+    
+    if (animate) {
+        
+        CATransition *trans = [CATransition animation];
+        [trans setDuration:0.5];
+        trans.type = kCATransitionPush;
+        trans.subtype = kCATransitionFromTop;
+        [trans setFillMode:kCAFillModeBoth];
+        [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+        [self.view.layer addAnimation:trans forKey:kCATransition];
+    }
+}
+
+- (void)hideBuildMenu:(BOOL)animate {
+    
+    [mBuildMenu setHidden:YES];
+    
+    if (animate) {
+        
+        CATransition *trans = [CATransition animation];
+        [trans setDuration:0.5];
+        trans.type = kCATransitionPush;
+        trans.subtype = kCATransitionFromBottom;
+        [trans setFillMode:kCAFillModeBoth];
+        [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+        [self.view.layer addAnimation:trans forKey:kCATransition];
+    }
+}
+
+- (void)initNearbyBottomMenu {
+    
+    NSArray *bottomItemArray = @[@{KEY_NORMAL:@"around_ico.png",
+                                   KEY_HILIGHT:@"around_ico.png",
+                                   KEY_TITLE:@"周边",
+                                   KEY_TITLE_WIDTH:[NSNumber numberWithFloat:100.0]
+                                   },
+                                 ];
+    
+    if (mNearbyMenu == nil) {
+        
+        mNearbyMenu = [[HorizontalMenu alloc] initWithFrame:CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT) ButtonItems:bottomItemArray ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT];
+    }
+    mNearbyMenu.delegate = self;
+    [self.view addSubview:mNearbyMenu];
+}
+
+- (void)initRouteBottomMenu {
+    
+    NSArray *bottomItemArray = @[@{KEY_NORMAL:@"bus_ico.png",
+                                   KEY_HILIGHT:@"bus_ico.png",
+                                   KEY_TITLE:@"公交",
+                                   KEY_TITLE_WIDTH:[NSNumber numberWithFloat:100.0]},
+                                 
+                                 @{KEY_NORMAL:@"car_ico.png",
+                                   KEY_HILIGHT:@"car_ico.png",
+                                   KEY_TITLE:@"驾车",
+                                   KEY_TITLE_WIDTH:[NSNumber numberWithFloat:100.0]},
+                                 
+                                 @{KEY_NORMAL:@"walk_ico.png",
+                                   KEY_HILIGHT:@"walk_ico.png",
+                                   KEY_TITLE:@"步行",
+                                   KEY_TITLE_WIDTH:[NSNumber numberWithFloat:100.0]},
+                                 ];
+    
+    if (mRouteMenu == nil) {
+        
+        mRouteMenu = [[HorizontalMenu alloc] initWithFrame:CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT) ButtonItems:bottomItemArray ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT];
+    }
+    mRouteMenu.delegate = self;
+    [self.view addSubview:mRouteMenu];
+    
+    // 返回按钮
+    float backX = self.mFrame.origin.x + 22 / SCREEN_SCALAR;
+    float backY = self.mFrame.origin.y + 48 / SCREEN_SCALAR;
+    float backWidth = 94 / SCREEN_SCALAR;
+    float backHeight = 87 / SCREEN_SCALAR;
+    
+    if (mBtnBack == nil) {
+        
+        mBtnBack = [[UIButton alloc] initWithFrame:CGRectMake(backX, backY, backWidth, backHeight)];
+    }
+    [mBtnBack setBackgroundColor:[UIColor clearColor]];
+    [mBtnBack setBackgroundImage:[UIImage imageNamed:@"map_back.png"] forState:UIControlStateNormal];
+    [mBtnBack addTarget:self action:@selector(doBackToMainEntry) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:mBtnBack];
+    
+    // 导航按钮
+    float navWidth = 233 / SCREEN_SCALAR;
+    float navHeight = 87 / SCREEN_SCALAR;
+    float navX = self.mFrame.origin.x + self.mFrame.size.width - 22 / SCREEN_SCALAR - navWidth;
+    float navY = self.mFrame.origin.y + 48 / SCREEN_SCALAR;
+    if (mBtnGogoNav == nil) {
+        
+        mBtnGogoNav = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    mBtnGogoNav.frame = CGRectMake(navX, navY, navWidth, navHeight);
+    [mBtnGogoNav setBackgroundColor:[UIColor clearColor]];
+    [mBtnGogoNav setBackgroundImage:[UIImage imageNamed:@"another_ico.png"] forState:UIControlStateNormal];
+    [mBtnGogoNav setTitle:@"其他地图导航" forState:UIControlStateNormal];
+    mBtnGogoNav.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [mBtnGogoNav setTitleColor:[UIColor colorWithRed:1.0 green:136/255.0 blue:71/255.0 alpha:1.0] forState:UIControlStateNormal];
+    mBtnGogoNav.titleLabel.font = [UIFont fontOfApp:26 / SCREEN_SCALAR];
+    [mBtnGogoNav addTarget:self action:@selector(doGotoAppleNav) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:mBtnGogoNav];
+}
+
+- (void)updateBottomMenu {
+    
+    if (mNearbyMenu == nil ||
+        mRouteMenu == nil ||
+        mBtnBack == nil ||
+        mBtnGogoNav == nil) {
+        
+        return;
+    }
+    
+    if (_isMainEntry) {
+        
+        [mNearbyMenu setHidden:NO];
+        [mRouteMenu setHidden:YES];
+        [mBtnBack setHidden:YES];
+        [mBtnGogoNav setHidden:YES];
+    }
+    else {
+        
+        [mNearbyMenu setHidden:YES];
+        [mRouteMenu setHidden:NO];
+        [mBtnBack setHidden:NO];
+        [mBtnGogoNav setHidden:NO];
+    }
+}
+
+- (void)doBackToMainEntry {
+    
+    _isMainEntry = YES;
+    [self updateBottomMenu];
+}
+
+- (void)doGotoMapFeatureView {
+    
+    [self showBuildMenu:YES];
+}
+
+- (void)doGotoAppleNav {
+    
+    
+}
+
+// HorizontalMenuDelegate
+- (void)didHorizontalMenuClickedButttonAtIndex:(NSInteger)index Type:(NSInteger)type {
+    
+    if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT) {
+        
+        if (index == 0) {
+            
+            [self doGotoMapFeatureView];
+        }
+    }
 }
 
 /*
@@ -101,13 +289,15 @@
     MIGDEBUG_PRINT(@"长按");
     
     // test
-    [self beginSearchNearby:nil Radius:searchRadius Keyword:@"寺庙"];
+    [mPoiSearchControl doSearchNearBy:@"餐馆"];
+    //[mRouteSearchControl doSearchTest];
 }
 
 // 地图双击手势
 - (void)mapview:(BMKMapView *)mapView onDoubleClick:(CLLocationCoordinate2D)coordinate {
     
     MIGDEBUG_PRINT(@"双击");
+    [mRouteSearchControl doSearchTest];
 }
 
 
@@ -193,91 +383,7 @@
     MIGDEBUG_PRINT(@"定位失败");
 }
 
-/*
- ******************* 地图搜寻 *******************
- */
-
-- (IBAction)enlargeRadius:(id)sender {
-    
-    searchRadius += 1000;
-}
-
-- (IBAction)reduceRadius:(id)sender {
-    
-    if (searchRadius < 2000) {
-        
-        searchRadius -= 1000;
-    }
-}
-
-- (IBAction)beginSearchNearby:(id)sender Radius:(float)radius Keyword:(NSString *)keyword{
-    
-    CLLocationCoordinate2D location = [[MyLocationManager GetInstance] getLocation];
-    
-    BMKNearbySearchOption *nearbySearchOption = [[BMKNearbySearchOption alloc] init];
-    nearbySearchOption.radius = radius;
-    nearbySearchOption.location = location;
-    nearbySearchOption.pageCapacity = 30;
-    nearbySearchOption.keyword = keyword;
-    
-    BOOL flag = [mPoiSearch poiSearchNearBy:nearbySearchOption];
-    if (flag) {
-        
-        MIGDEBUG_PRINT(@"周边搜索发送成功");
-    }
-    else {
-        
-        MIGDEBUG_PRINT(@"周边搜索发送失败");
-    }
-}
-
-- (IBAction)beginSearch:(id)sender {
-    
-    mCurPage = 0;
-    BMKCitySearchOption *citySearchOption = [[BMKCitySearchOption alloc]init];
-    citySearchOption.pageIndex = mCurPage;
-    citySearchOption.pageCapacity = 40;
-    citySearchOption.city= @"北京";
-    citySearchOption.keyword = @"餐厅";
-    
-    BOOL flag = [mPoiSearch poiSearchInCity:citySearchOption];
-    if(flag)
-    {
-        //_nextPageButton.enabled = true;
-        MIGDEBUG_PRINT(@"城市内检索发送成功");
-    }
-    else
-    {
-        //_nextPageButton.enabled = false;
-        MIGDEBUG_PRINT(@"城市内检索发送失败");
-    }
-}
-
-
-- (IBAction)showNextResultPage:(id)sender {
-    
-    mCurPage++;
-    
-    //城市内检索，请求发送成功返回YES，请求发送失败返回NO
-    BMKCitySearchOption *citySearchOption = [[BMKCitySearchOption alloc]init];
-    citySearchOption.pageIndex = mCurPage;
-    citySearchOption.pageCapacity = 40;
-    citySearchOption.city= @"北京";
-    citySearchOption.keyword = @"餐厅";
-    
-    BOOL flag = [mPoiSearch poiSearchInCity:citySearchOption];
-    if(flag)
-    {
-        //_nextPageButton.enabled = true;
-        MIGDEBUG_PRINT(@"城市内检索发送成功");
-    }
-    else
-    {
-        //_nextPageButton.enabled = false;
-        MIGDEBUG_PRINT(@"城市内检索发送失败");
-    }
-}
-
+// BMKMapViewDelegate
 - (BMKAnnotationView *)mapView:(BMKMapView *)view viewForAnnotation:(id<BMKAnnotation>)annotation {
     
     // 生成重用标示identifier
@@ -310,6 +416,10 @@
     
     [mMapView bringSubviewToFront:view];
     [mMapView setNeedsDisplay];
+    
+    BMKPointAnnotation *point = view.annotation;
+    CLLocationCoordinate2D culoc = point.coordinate;
+    MIGDEBUG_PRINT(@"选中的坐标位置为: %f, %f", culoc.latitude, culoc.longitude);
 }
 
 - (void)mapView:(BMKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
@@ -317,38 +427,19 @@
     MIGDEBUG_PRINT(@"%s", __FUNCTION__);
 }
 
-- (void)onGetPoiResult:(BMKPoiSearch *)searcher result:(BMKPoiResult *)result errorCode:(BMKSearchErrorCode)error {
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id<BMKOverlay>)overlay {
     
-    // 清楚屏幕中所有的annotation
-    NSArray* array = [NSArray arrayWithArray:mMapView.annotations];
-    [mMapView removeAnnotations:array];
+    if ([overlay isKindOfClass:[BMKPolyline class]]) {
+        
+        BMKPolylineView *polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
+        polylineView.fillColor = [[UIColor cyanColor] colorWithAlphaComponent:1];
+        polylineView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.7];
+        polylineView.lineWidth = 3.0;
+        return polylineView;
+    }
     
-    if (error == BMK_SEARCH_NO_ERROR) {
-        
-        for (int i = 0; i < result.poiInfoList.count; i++) {
-            BMKPoiInfo* poi = [result.poiInfoList objectAtIndex:i];
-            BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
-            item.coordinate = poi.pt;
-            item.title = poi.name;
-            [mMapView addAnnotation:item];
-            
-            if(i == 0)
-            {
-                //将第一个点的坐标移到屏幕中央
-                //mMapView.centerCoordinate = poi.pt;
-            }
-        }
-    }
-    else if (error == BMK_SEARCH_AMBIGUOUS_ROURE_ADDR){
-        
-        MIGDEBUG_PRINT(@"起始点有歧义");
-    }
-    else {
-        
-        // 各种情况的判断。。。
-    }
+    return nil;
 }
-
 
 // BMKGeneral Delegate
 -(void)onGetNetworkState:(int)iError

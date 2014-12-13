@@ -35,17 +35,44 @@
 #define MigNetNameGetRecomFailed                        @"MigNetNameGetRecomFailed"
 #define MigNetNameGetRecomSuccess                       @"MigNetNameGetRecomSuccess"
 
+// 获取最空闲accesskey
+#define MigNetNameGetAKFailed                           @"MigNetNameGetAKFailed"
+#define MigNetNameGetAKSuccess                          @"MigNetNameGetAKSuccess"
+
+// 获取周围建筑信息
+#define MigNetNameGetNearBuildFailed                    @"MigNetNameGetNearBuildFailed"
+#define MigNetNameGetNearBuildSuccess                   @"MigNetNameGetNearBuildSuccess"
+
+// 获取推荐建筑信息
+#define MigNetNameGetRecomBuildFailed                   @"MigNetNameGetRecomBuildFailed"
+#define MigNetNameGetRecomBuildSuccess                  @"MigNetNameGetRecomBuildSuccess"
+
+// 根据类别搜索
+#define MigNetNameSearchTypeBuildFailed                 @"MigNetNameSearchTypeBuildFailed"
+#define MigNetNameSearchTypeBuildSuccess                @"MigNetNameSearchTypeBuildSuccess"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
     MIGAPI_BDBINDPUSH,
     MIGAPI_THIRDLOGIN,
     MIGAPI_GETRECOM,
+    MIGAPI_GETAK,
+    MIGAPI_GETNEARBUILD,
+    MIGAPI_GETRECOMBUILD,
+    MIGAPI_SEARCHTYPEBUILD,
 };
 
 @interface AskNetDataApi : NSObject
+{
+    NSString *mUid;
+    NSString *mToken;
+}
 
 @property (nonatomic, retain) NSArray *dataTable;
+
+- (BOOL)isUserLogin;
+- (void)updateUidandToken;
 
 - (void)doPostData:(NSInteger)index postdata:(NSString *)postData;
 - (void)doGetData:(NSInteger)index tail:(NSString *)appendTail;
@@ -53,5 +80,9 @@ enum {
 - (void)doQuickLogin;
 - (void)doThirdLogin;
 - (void)doGetRecom;
+- (void)doGetAK;
+- (void)doGetNearBuild;
+- (void)doGetRecomBuild;
+- (void)doSearchTypeBuild;
 
 @end

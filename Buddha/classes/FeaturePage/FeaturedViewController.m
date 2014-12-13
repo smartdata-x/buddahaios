@@ -291,6 +291,13 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // TODO: 响应事件
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     // 使HeaderView不黏在顶部

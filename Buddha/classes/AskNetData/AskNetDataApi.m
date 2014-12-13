@@ -24,12 +24,34 @@
     return self;
 }
 
+- (BOOL)isUserLogin {
+    
+    BOOL isLogin = ([UserLoginInfoManager GetInstance].isLogin || [UserLoginInfoManager GetInstance].isQuickLogin);
+    
+    if (isLogin) {
+        
+        [self updateUidandToken];
+    }
+    
+    return isLogin;
+}
+
+- (void)updateUidandToken {
+    
+    mUid = [UserLoginInfoManager GetInstance].curLoginUser.userid;
+    mToken = [UserLoginInfoManager GetInstance].curLoginUser.token;
+}
+
 - (void)initDataTable {
     
     NSString *httpQuickLogin = [NSString stringWithFormat:@"%@/user/1/quicklogin.fcgi", MAIN_HTTP];
     NSString *httpBDBindPush = [NSString stringWithFormat:@"%@/user/1/bdbindpush.fcgi", MAIN_HTTP];
     NSString *httpThirdLogin = [NSString stringWithFormat:@"%@/user/1/thirdlogin.fcgi", MAIN_HTTP];
     NSString *httpGetRecom = [NSString stringWithFormat:@"%@/find/1/findrecom.fcgi", MAIN_HTTP];
+    NSString *httpGetAK = [NSString stringWithFormat:@"%@/map/1/getak.fcgi", MAIN_HTTP];
+    NSString *httpGetNearBuild = [NSString stringWithFormat:@"%@/map/1/nearbuild.fcgi", MAIN_HTTP];
+    NSString *httpGetRecomBuild = [NSString stringWithFormat:@"%@/map/1/recombuild.fcgi", MAIN_HTTP];
+    NSString *httpSearchTypeBuild = [NSString stringWithFormat:@"%@/map/1/searchtypebuild.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -47,6 +69,22 @@
                        @{KEY_NET_ADDRESS:httpGetRecom,
                          KEY_NET_FAILED:MigNetNameGetRecomFailed,
                          KEY_NET_SUCCESS:MigNetNameGetRecomSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetAK,
+                         KEY_NET_FAILED:MigNetNameGetAKFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetAKSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetNearBuild,
+                         KEY_NET_FAILED:MigNetNameGetNearBuildFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetNearBuildSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetRecomBuild,
+                         KEY_NET_FAILED:MigNetNameGetRecomBuildFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetRecomBuildSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpSearchTypeBuild,
+                         KEY_NET_FAILED:MigNetNameSearchTypeBuildFailed,
+                         KEY_NET_SUCCESS:MigNetNameSearchTypeBuildSuccess},
                        ];
 }
 
@@ -229,6 +267,41 @@
         
         NSString *postData = [NSString stringWithFormat:@"uid=%@&token=%@", uid, token];
         [self doPostData:MIGAPI_GETRECOM postdata:postData];
+    }
+}
+
+- (void)doGetAK {
+    
+    
+}
+
+- (void)doGetNearBuild {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETNEARBUILD tail:getData];
+    }
+}
+
+- (void)doGetRecomBuild {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETRECOMBUILD tail:getData];
+    }
+}
+
+- (void)doSearchTypeBuild {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_SEARCHTYPEBUILD tail:getData];
     }
 }
 

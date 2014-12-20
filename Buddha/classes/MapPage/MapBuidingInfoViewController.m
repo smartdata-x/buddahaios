@@ -124,7 +124,7 @@
 - (void)getSummary {
     
     AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
-    [askApi doGetSummary:_buildID];
+    [askApi doGetSummary:mBuildingInfo.buildId];
 }
 
 - (void)getSummaryFailed:(NSNotification *)notification {

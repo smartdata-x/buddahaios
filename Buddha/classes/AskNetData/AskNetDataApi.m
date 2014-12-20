@@ -304,7 +304,7 @@
     
     if ([self isUserLogin]) {
         
-        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@type=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude], type];
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@&btype=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude], type];
         
         [self doGetData:MIGAPI_SEARCHTYPEBUILD tail:getData];
     }

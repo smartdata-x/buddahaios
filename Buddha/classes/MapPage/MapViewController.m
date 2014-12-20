@@ -22,6 +22,11 @@
         
         _isMainEntry = YES;
         
+        if (mBuildingInfo == nil) {
+            
+            mBuildingInfo = [[NSMutableArray alloc] init];
+        }
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearbyBuildingFailed:) name:MigNetNameGetNearBuildFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearbyBuildingSuccess:) name:MigNetNameGetNearBuildSuccess object:nil];
     }
@@ -74,9 +79,11 @@
     _mPoiSearchControl = [[MapPoiSearchController alloc] initWithBMKMapView:mMapView];
     _mRouteSearchControl = [[MapRouteSearchController alloc] initWithBMKMapView:mMapView];
     
+#if !MIG_DEBUG_TEST
     // 定位到本地
     [self startLocation:nil];
     [self startFollowing:nil];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -251,6 +258,7 @@
     
     _isMainEntry = YES;
     [self updateBottomMenu];
+    [self updateShowNearby];
 }
 
 - (void)doGotoMapFeatureView {
@@ -276,12 +284,32 @@
     NSDictionary *result = [userinfo objectForKey:@"result"];
     NSDictionary *nearBuild = [result objectForKey:@"nearbuild"];
     
+    // 清空现有数据
+    [mBuildingInfo removeAllObjects];
+    
     for (NSDictionary *dic in nearBuild) {
         
         migsBuildingInfo *buildinfo = [migsBuildingInfo setupBuildingInfoFromDictionary:dic];
         [mBuildingInfo addObject:buildinfo];
+    }
+    
+    [self updateShowNearby];
+}
+
+- (void)updateShowNearby {
+    
+    // 清除屏幕上的点
+    NSArray* array = [NSArray arrayWithArray:mMapView.annotations];
+    [mMapView removeAnnotations:array];
+    array = [NSArray arrayWithArray:mMapView.overlays];
+    [mMapView removeOverlays:array];
+    
+    int count = [mBuildingInfo count];
+    
+    for (int i=0; i<count; i++) {
         
-        // 添加地图上的点
+        migsBuildingInfo *buildinfo = [mBuildingInfo objectAtIndex:i];
+        
         BMKPointAnnotation *item = [[BMKPointAnnotation alloc] init];
         item.coordinate = CLLocationCoordinate2DMake(buildinfo.fLatitude, buildinfo.fLongitude);
         item.title = buildinfo.name;

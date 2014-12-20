@@ -67,14 +67,6 @@
                     kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
                     kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
                     nil];
-    
-#if 0
-    permissions = [NSArray arrayWithObjects:
-                   kOPEN_PERMISSION_GET_USER_INFO,
-                   kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                   kOPEN_PERMISSION_GET_INFO,
-                   nil];
-#endif
 
     [tencentOAuth authorize:permissions inSafari:NO];
 }

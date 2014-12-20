@@ -1536,8 +1536,11 @@
 					"$(PROJECT_DIR)/Buddha/classes/WeixinSDK",
 					"$(PROJECT_DIR)/Buddha/classes/BPush",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1565,8 +1568,11 @@
 					"$(PROJECT_DIR)/Buddha/classes/WeixinSDK",
 					"$(PROJECT_DIR)/Buddha/classes/BPush",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

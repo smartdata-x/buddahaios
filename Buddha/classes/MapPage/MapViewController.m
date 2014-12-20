@@ -74,9 +74,9 @@
     _mPoiSearchControl = [[MapPoiSearchController alloc] initWithBMKMapView:mMapView];
     _mRouteSearchControl = [[MapRouteSearchController alloc] initWithBMKMapView:mMapView];
     
-    // test 定位到本地
-    //[self startLocation:nil];
-    //[self startFollowing:nil];
+    // 定位到本地
+    [self startLocation:nil];
+    [self startFollowing:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

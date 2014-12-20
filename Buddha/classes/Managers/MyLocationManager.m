@@ -49,8 +49,13 @@
 
 - (void)updateLocationByLocation:(CLLocationCoordinate2D)curLocation {
     
+#if MIG_DEBUG_TEST
+    mLatitude = 30.257028579711914;
+    mLongitude = 120.20285034179688;
+#else
     mLatitude = curLocation.latitude;
     mLongitude = curLocation.longitude;
+#endif
 }
 
 - (CLLocationCoordinate2D)getLocation {
@@ -75,6 +80,11 @@
     mLongitude = location.coordinate.longitude;
     mLatitude = location.coordinate.latitude;
     _isUpdated = YES;
+    
+#if MIG_DEBUG_TEST
+    mLatitude = 30.257028579711914;
+    mLongitude = 120.20285034179688;
+#endif
     
     [_locationManager stopUpdatingLocation];
 }

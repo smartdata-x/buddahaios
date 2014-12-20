@@ -73,10 +73,15 @@
 #define LAST_LOGOUT                                 0
 #define LAST_LOGIN                                  1
 
+#define MIG_COLOR_111111                            [UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]
+#define MIG_COLOR_808080                            [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0]
+
+
 // 字符串打印消息
 #define MIGTIP_LOGIN_SUCCESS                        @"登录成功"
 #define MIGTIP_LOGIN_FAILED                         @"对不起, 登录失败了"
 #define MIGTIP_LOGIN_NOTLOGIN                       @"对不起，您还未登录"
+#define MIGTIP_GETBUILDING_FAILED                   @"获取推荐建筑失败了"
 
 // 字典匹配关键字
 #define KEY_NORMAL                                  @"KeyNormal"
@@ -92,25 +97,6 @@
 #define KEY_NET_SUCCESS                             @"KeyNetSuccess"
 #define KEY_NET_FAILED                              @"KeyNetFailed"
 #define KEY_IMAGE                                   @"KeyImage"
-
-// 图片字符串
-#define IMG_HOME_BANNER                             @"banner.jpg"
-#define IMG_HOME_NORMAL_BG                          @"menu_normal.png"
-#define IMG_HOME_HILIGHT_BG                         @"menu_select.png"
-#define IMG_FOUND_FO                                @"found_fo.png"
-#define IMG_FOUND_FO_ON                             @"found_fo_on.png"
-#define IMG_MY_FO                                   @"my_fo.png"
-#define IMG_MY_FO_ON                                @"my_fo_on.png"
-#define IMG_USER_CENTER                             @"user_center.png"
-#define IMG_USER_CENTER_ON                          @"user_center_on.png"
-#define IMG_HOME_SEARCH                             @"home_search.png"
-#define IMG_HOME_MESSAGE                            @"home_message.png"
-#define IMG_PAGE_LOGO                               @"page_logo.png"
-#define IMG_MYCENTER_BACK                           @"mycenter_back.png"
-#define IMG_LOGIN_LOGO                              @"login_logo.png"
-#define IMG_LOGIN_QQ                                @"qq_ico.png"
-#define IMG_LOGIN_WEIBO                             @"weibo_ico.png"
-#define IMG_LOGIN_WEIXIN                            @"weixin_ico.png"
 
 // 内部通信消息
 #define MigLocalNameGetAdSuccess                    @"MigLocalNameGetAdSuccess"

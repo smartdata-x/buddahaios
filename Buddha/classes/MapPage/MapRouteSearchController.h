@@ -10,6 +10,13 @@
 #import "BMapKit.h"
 #import "MyLocationManager.h"
 
+enum {
+    
+    MIG_MAP_ROUTETYPE_BUS = 0,
+    MIG_MAP_ROUTETYPE_CAR,
+    MIG_MAP_ROUTETYPE_WALK,
+};
+
 @interface RouteAnnotation : BMKPointAnnotation
 {
     int _type; ///<0:起点 1：终点 2：公交 3：地铁 4:驾乘 5:途经点
@@ -25,12 +32,19 @@
     BMKMapView *mTopMapView; // 上层赋值
     
     BMKRouteSearch *mRouteSearch;
+    
+    NSInteger mLastSearchType; // 0:公交 1:汽车 2:步行
+    CLLocationCoordinate2D mLastStartLoc;
+    CLLocationCoordinate2D mLastEndLoc;
 }
 
 - (id)initWithBMKMapView:(BMKMapView *)mapView;
 
-- (void)doSearchTest;
+- (void)doRouteSearchByBusWithLastLocation;
+- (void)doRouteSearchByCarWithLastLocation;
+- (void)doRouteSearchByWalkWithLastLocation;
 
+- (void)doRouteSearchByLastType:(CLLocationCoordinate2D)locStart LocationEnd:(CLLocationCoordinate2D)locEnd;
 - (void)doRouteSearchByWalkingLocation:(CLLocationCoordinate2D)locStart LocationEnd:(CLLocationCoordinate2D)locEnd;
 - (void)doRouteSearchByBusLocation:(CLLocationCoordinate2D)locStart LocationEnd:(CLLocationCoordinate2D)locEnd;
 - (void)doRouteSearchByCarLocation:(CLLocationCoordinate2D)locStart LocationEnd:(CLLocationCoordinate2D)locEnd;

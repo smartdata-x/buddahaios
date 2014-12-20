@@ -12,11 +12,13 @@
 // 自定义
 #include "Options.h"
 #include "UseDefines.h"
+#import "resourcefiles.h"
 #include "UserData.h"
 #include "AskNetData/AskNetDataApi.h"
 #import "UserLoginData.h"
 #import "SVProgressHUD.h"
 #import "UIFont+PFontCategory.h"
+#import "Utilities.h"
 
 // 第三方工具
 #import "EGOImageView.h"

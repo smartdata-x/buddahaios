@@ -149,6 +149,10 @@
                 [_dicViewControllerCache setObject:map forKey:numIndex];
                 controller = map;
             }
+            
+            // 请求附近建筑信息
+            AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+            [askApi doGetNearBuild];
         }
             break;
             
@@ -235,7 +239,10 @@
     // 初始化顶部菜单
     if (_mTopMenu == nil) {
         
-        _mTopMenu = [[HorizontalMenu alloc] initWithFrame:CGRectMake(0, ystart, self.view.frame.size.width, TOP_MENU_HEIGHT) ButtonItems:topButtonItemArray ButtonType:HORIZONTALMENU_TYPE_BUTTON];
+        CGRect menuFrame = CGRectMake(0, ystart, self.view.frame.size.width, TOP_MENU_HEIGHT);
+        CGSize btnImaSize = CGSizeMake(0, 0);
+        
+        _mTopMenu = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:topButtonItemArray buttonSize:btnImaSize ButtonType:HORIZONTALMENU_TYPE_BUTTON];
         _mTopMenu.delegate = self;
     }
     ystart += TOP_MENU_HEIGHT;
@@ -252,7 +259,10 @@
     // 初始化底部菜单
     if (_mBottomMenu == nil) {
         
-        _mBottomMenu = [[HorizontalMenu alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - bottomHeight, self.view.frame.size.width, BOTTOM_MENU_BUTTON_HEIGHT) ButtonItems:bottomItemArray ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL];
+        CGRect menuFrame = CGRectMake(0, self.view.frame.size.height - bottomHeight, self.view.frame.size.width, BOTTOM_MENU_BUTTON_HEIGHT);
+        CGSize btnImgSize = CGSizeMake(42 / SCREEN_SCALAR, 44 / SCREEN_SCALAR);
+        
+        _mBottomMenu = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:bottomItemArray buttonSize:btnImgSize ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN];
         _mBottomMenu.delegate = self;
     }
     
@@ -371,7 +381,7 @@
         [self doUpdateView:_curShowViewTag];
     }
     // 底部菜单
-    else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL) {
+    else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN) {
         
         MIGDEBUG_PRINT(@"bottom Menu of %ld index clicked", (long)index);
         

@@ -9,5 +9,9 @@
 #ifndef Monas_Options_h
 #define Monas_Options_h
 
+// 所有测试代码必须包含在此宏内
+#ifndef MIG_DEBUG_TEST
+#define MIG_DEBUG_TEST               1
+#endif
 
 #endif

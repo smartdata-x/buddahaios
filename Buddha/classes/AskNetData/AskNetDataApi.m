@@ -49,9 +49,10 @@
     NSString *httpThirdLogin = [NSString stringWithFormat:@"%@/user/1/thirdlogin.fcgi", MAIN_HTTP];
     NSString *httpGetRecom = [NSString stringWithFormat:@"%@/find/1/findrecom.fcgi", MAIN_HTTP];
     NSString *httpGetAK = [NSString stringWithFormat:@"%@/map/1/getak.fcgi", MAIN_HTTP];
-    NSString *httpGetNearBuild = [NSString stringWithFormat:@"%@/map/1/nearbuild.fcgi", MAIN_HTTP];
-    NSString *httpGetRecomBuild = [NSString stringWithFormat:@"%@/map/1/recombuild.fcgi", MAIN_HTTP];
-    NSString *httpSearchTypeBuild = [NSString stringWithFormat:@"%@/map/1/searchtypebuild.fcgi", MAIN_HTTP];
+    NSString *httpGetNearBuild = [NSString stringWithFormat:@"%@/build/1/nearbuild.fcgi", MAIN_HTTP];
+    NSString *httpGetRecomBuild = [NSString stringWithFormat:@"%@/find/1/building.fcgi", MAIN_HTTP];
+    NSString *httpSearchTypeBuild = [NSString stringWithFormat:@"%@/build/1/searchtype.fcgi", MAIN_HTTP];
+    NSString *httpGetSummary = [NSString stringWithFormat:@"%@/build/1/summary.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -85,6 +86,10 @@
                        @{KEY_NET_ADDRESS:httpSearchTypeBuild,
                          KEY_NET_FAILED:MigNetNameSearchTypeBuildFailed,
                          KEY_NET_SUCCESS:MigNetNameSearchTypeBuildSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetSummary,
+                         KEY_NET_FAILED:MigNetNameGetSummaryFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetSummarySuccess},
                        ];
 }
 
@@ -295,13 +300,23 @@
     }
 }
 
-- (void)doSearchTypeBuild {
+- (void)doSearchTypeBuild:(NSString *)type {
     
     if ([self isUserLogin]) {
         
-        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@type=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude], type];
         
         [self doGetData:MIGAPI_SEARCHTYPEBUILD tail:getData];
+    }
+}
+
+- (void)doGetSummary:(NSString *)buildid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&bid=%@&latitude=%@&longitude=%@", mUid, mToken, buildid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETSUMMARY tail:getData];
     }
 }
 

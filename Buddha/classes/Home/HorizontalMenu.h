@@ -11,9 +11,10 @@
 
 enum {
     
-    HORIZONTALMENU_TYPE_BUTTON = 0,
-    HORIZONTALMENU_TYPE_BUTTON_LABEL,
-    HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT,
+    HORIZONTALMENU_TYPE_BUTTON = 0, // 只有按钮
+    HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN, // 按钮下面附带一个标题
+    HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT, // 按钮右边有个标题
+    HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT, // 按钮左边有个标题
     MAX_HORIZONTALMENU_TYPE
 };
 
@@ -37,7 +38,7 @@ enum {
 @property (nonatomic, assign) id <HorizontalMenuDelegate> delegate;
 
 // 初始化菜单
-- (id)initWithFrame:(CGRect)frame ButtonItems:(NSArray *)itemArray ButtonType:(NSInteger)type;
+- (id)initWithFrame:(CGRect)frame ButtonItems:(NSArray *)itemArray buttonSize:(CGSize)btnSize ButtonType:(NSInteger)type;
 
 // 选中某个按钮
 - (void)clickButtonAtIndex:(NSInteger)index;

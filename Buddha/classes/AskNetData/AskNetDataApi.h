@@ -51,6 +51,10 @@
 #define MigNetNameSearchTypeBuildFailed                 @"MigNetNameSearchTypeBuildFailed"
 #define MigNetNameSearchTypeBuildSuccess                @"MigNetNameSearchTypeBuildSuccess"
 
+// 获取详情
+#define MigNetNameGetSummaryFailed                      @"MigNetNameGetSummaryFailed"
+#define MigNetNameGetSummarySuccess                     @"MigNetNameGetSummarySuccess"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
@@ -61,6 +65,7 @@ enum {
     MIGAPI_GETNEARBUILD,
     MIGAPI_GETRECOMBUILD,
     MIGAPI_SEARCHTYPEBUILD,
+    MIGAPI_GETSUMMARY,
 };
 
 @interface AskNetDataApi : NSObject
@@ -83,6 +88,7 @@ enum {
 - (void)doGetAK;
 - (void)doGetNearBuild;
 - (void)doGetRecomBuild;
-- (void)doSearchTypeBuild;
+- (void)doSearchTypeBuild:(NSString *)type;
+- (void)doGetSummary:(NSString *)buildid;
 
 @end

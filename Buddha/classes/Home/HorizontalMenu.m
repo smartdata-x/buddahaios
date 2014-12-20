@@ -10,7 +10,7 @@
 
 @implementation HorizontalMenu
 
-- (id)initWithFrame:(CGRect)frame ButtonItems:(NSArray *)itemArray ButtonType:(NSInteger)type {
+- (id)initWithFrame:(CGRect)frame ButtonItems:(NSArray *)itemArray buttonSize:(CGSize)btnSize ButtonType:(NSInteger)type {
     
     self = [super initWithFrame:frame];
     
@@ -38,13 +38,17 @@
             
             [self createMenuItemsWithButton:itemArray];
         }
-        else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL) {
+        else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN) {
             
-            [self createMenuItemsWithButtonAndLabel:itemArray];
+            [self createMenuItemsWithButtonAndDownLabel:itemArray imgSize:btnSize];
+        }
+        else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT) {
+            
+            [self createMenuItemsWithButtonAndRightLabel:itemArray imgSize:btnSize];
         }
         else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT) {
             
-            [self createMenuItemsWithButtonAndLeftLabel:itemArray];
+            [self createMenuItemsWithButtonAndLeftLabel:itemArray imgSize:btnSize];
         }
     }
     
@@ -96,15 +100,14 @@
     menuType = HORIZONTALMENU_TYPE_BUTTON;
 }
 
-- (void)createMenuItemsWithButtonAndLabel:(NSArray *)itemsArray {
+- (void)createMenuItemsWithButtonAndDownLabel:(NSArray *)itemsArray imgSize:(CGSize)imgsize {
     
     // 初始化位置变量
     int i = 0;
     int itemcount = [itemsArray count];
     float badgeWidth = 30 / SCREEN_SCALAR;
-    float menuStart = 0.0;
-    float imgWidth = 42 / SCREEN_SCALAR;
-    float imgHeight = 44 / SCREEN_SCALAR;
+    float imgWidth = imgsize.width;
+    float imgHeight = imgsize.height;
     float lblHeight = 30 / SCREEN_SCALAR;
     float usefulWidth = self.frame.size.width - badgeWidth * 2;
     float vSeperate = 10 / SCREEN_SCALAR;
@@ -162,22 +165,21 @@
     // 保存菜单总长度
     mMenuTotalWidth = usefulWidth;
     
-    menuType = HORIZONTALMENU_TYPE_BUTTON_LABEL;
+    menuType = HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN;
 }
 
-- (void)createMenuItemsWithButtonAndLeftLabel:(NSArray *)itemsArray {
+- (void)createMenuItemsWithButtonAndRightLabel:(NSArray *)itemsArray imgSize:(CGSize)imgsize {
     
     // 初始化位置变量
     int i = 0;
     int itemcount = [itemsArray count];
     float badgeWidth = 30 / SCREEN_SCALAR;
-    float imgWidth = 34 / SCREEN_SCALAR;
-    float imgHeight = 44 / SCREEN_SCALAR;
+    float imgWidth = imgsize.width;
+    float imgHeight = imgsize.height;
     float lblWidth = 60 / SCREEN_SCALAR;
     float lblHeight = 30 / SCREEN_SCALAR;
     float usefulWidth = self.frame.size.width - badgeWidth * 2;
     float hSeperate = 24 / SCREEN_SCALAR;
-    float ystart = 4.0;
     float itemWidth = usefulWidth / itemcount;
     
     for (NSDictionary *dic in itemsArray) {
@@ -235,8 +237,81 @@
     
     // 保存菜单总长度
     mMenuTotalWidth = usefulWidth;
-    menuType = HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT;
+    menuType = HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT;
 }
+
+- (void)createMenuItemsWithButtonAndLeftLabel:(NSArray *)itemsArray imgSize:(CGSize)imgsize {
+    
+    // 初始化位置变量
+    int i = 0;
+    int itemcount = [itemsArray count];
+    float badgeWidth = 30 / SCREEN_SCALAR;
+    float imgWidth = imgsize.width;
+    float imgHeight = imgsize.height;
+    float lblWidth = 60 / SCREEN_SCALAR;
+    float lblHeight = 30 / SCREEN_SCALAR;
+    float usefulWidth = self.frame.size.width - badgeWidth * 2;
+    float hSeperate = 0;
+    float itemWidth = usefulWidth / itemcount;
+    
+    for (NSDictionary *dic in itemsArray) {
+        
+        // 当前菜单的基础位置
+        float curXStart = badgeWidth + i * itemWidth;
+        float imgXstart = curXStart + (itemWidth - imgWidth - lblWidth - hSeperate) / 2.0;
+        float imgYstart = self.frame.size.height / 2 - imgHeight / 2;
+        
+        NSString *szNormalImg = [dic objectForKey:KEY_NORMAL];
+        NSString *szHilightImg = [dic objectForKey:KEY_HILIGHT];
+        NSString *szTitle = [dic objectForKey:KEY_TITLE];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundImage:[UIImage imageNamed:szNormalImg] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:szHilightImg] forState:UIControlStateSelected];
+        [button setTitle:szTitle forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+        
+        [button setTag:i];
+        [button addTarget:self action:@selector(menuButtonClicked:Type:) forControlEvents:UIControlEventTouchUpInside];
+        [button setFrame:CGRectMake(imgXstart, imgYstart, imgWidth, imgHeight)];
+        
+        float lblXStart = imgXstart + imgWidth + hSeperate;
+        float lblYStart = self.frame.size.height / 2 - lblHeight / 2;
+        UILabel *lblDesc = [[UILabel alloc] initWithFrame:CGRectMake(lblXStart, lblYStart, lblWidth, lblHeight)];
+        lblDesc.text = szTitle;
+        lblDesc.font = [UIFont fontOfApp:30.0 / SCREEN_SCALAR];
+        lblDesc.textColor = [UIColor grayColor];
+        lblDesc.textAlignment = NSTextAlignmentCenter;
+        [lblDesc setTag:i];
+        [lblDesc setUserInteractionEnabled:YES];
+        
+        [mMenuScrollView addSubview:button];
+        [mButtonArray addObject:button];
+        [mMenuScrollView addSubview:lblDesc];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handTap:)];
+        [lblDesc addGestureRecognizer:tap];
+        
+        i++;
+        
+        // 保存button资源
+        NSMutableDictionary *newDic = [dic mutableCopy];
+        [newDic setObject:[NSNumber numberWithFloat:curXStart] forKey:KEY_TOTAL_WIDTH];
+        [mItemInfoArray addObject:newDic];
+    }
+    
+    [mMenuScrollView setContentSize:CGSizeMake(usefulWidth, self.frame.size.height)];
+    [self addSubview:mMenuScrollView];
+    
+    // 白色背景
+    [self setBackgroundColor:[UIColor whiteColor]];
+    
+    // 保存菜单总长度
+    mMenuTotalWidth = usefulWidth;
+    menuType = HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT;
+}
+
 
 /* 
  ************** 其他辅助功能 **************

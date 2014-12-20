@@ -26,32 +26,25 @@
         mTopMapView = mapView;
         mRouteSearch = [[BMKRouteSearch alloc] init];
         mRouteSearch.delegate = self;
+        mLastSearchType = MIG_MAP_ROUTETYPE_WALK;
     }
     
     return self;
 }
 
-- (void)doSearchTest {
+- (void)doRouteSearchByLastType:(CLLocationCoordinate2D)locStart LocationEnd:(CLLocationCoordinate2D)locEnd {
     
-    BMKPlanNode *start = [[BMKPlanNode alloc] init];
-    start.pt = [[MyLocationManager GetInstance] getLocation];
-    
-    CLLocationCoordinate2D curloc = CLLocationCoordinate2DMake(30.625746, 104.055281);
-    BMKPlanNode *end = [[BMKPlanNode alloc] init];
-    end.pt = curloc;
-    
-    BMKWalkingRoutePlanOption *walkingRouteSearchOption = [[BMKWalkingRoutePlanOption alloc]init];
-    walkingRouteSearchOption.from = start;
-    walkingRouteSearchOption.to = end;
-    BOOL flag = [mRouteSearch walkingSearch:walkingRouteSearchOption];
-    
-    if(flag)
-    {
-        NSLog(@"walk检索发送成功");
+    if (mLastSearchType == MIG_MAP_ROUTETYPE_BUS) {
+        
+        [self doRouteSearchByBusLocation:locStart LocationEnd:locEnd];
     }
-    else
-    {
-        NSLog(@"walk检索发送失败");
+    else if (mLastSearchType == MIG_MAP_ROUTETYPE_CAR) {
+        
+        [self doRouteSearchByCarLocation:locStart LocationEnd:locEnd];
+    }
+    else if (mLastSearchType == MIG_MAP_ROUTETYPE_WALK) {
+        
+        [self doRouteSearchByWalkingLocation:locStart LocationEnd:locEnd];
     }
 }
 
@@ -70,11 +63,14 @@
     BOOL flag = [mRouteSearch walkingSearch:walkingRouteSearchOption];
     if(flag)
     {
-        NSLog(@"步行检索发送成功");
+        MIGDEBUG_PRINT(@"步行检索发送成功");
+        mLastSearchType = MIG_MAP_ROUTETYPE_WALK;
+        mLastStartLoc = locStart;
+        mLastEndLoc = locEnd;
     }
     else
     {
-        NSLog(@"步行检索发送失败");
+        MIGDEBUG_PRINT(@"步行检索发送失败");
     }
 }
 
@@ -93,11 +89,14 @@
     BOOL flag = [mRouteSearch transitSearch:busRouteSearchOption];
     if(flag)
     {
-        NSLog(@"公交检索发送成功");
+        MIGDEBUG_PRINT(@"公交检索发送成功");
+        mLastSearchType = MIG_MAP_ROUTETYPE_BUS;
+        mLastStartLoc = locStart;
+        mLastEndLoc = locEnd;
     }
     else
     {
-        NSLog(@"公交检索发送失败");
+        MIGDEBUG_PRINT(@"公交检索发送失败");
     }
 }
 
@@ -116,12 +115,30 @@
     BOOL flag = [mRouteSearch drivingSearch:carRouteSearchOption];
     if(flag)
     {
-        NSLog(@"驾车检索发送成功");
+        MIGDEBUG_PRINT(@"驾车检索发送成功");
+        mLastSearchType = MIG_MAP_ROUTETYPE_CAR;
+        mLastStartLoc = locStart;
+        mLastEndLoc = locEnd;
     }
     else
     {
-        NSLog(@"驾车检索发送失败");
+        MIGDEBUG_PRINT(@"驾车检索发送失败");
     }
+}
+
+- (void)doRouteSearchByBusWithLastLocation {
+    
+    [self doRouteSearchByBusLocation:mLastStartLoc LocationEnd:mLastEndLoc];
+}
+
+- (void)doRouteSearchByCarWithLastLocation {
+    
+    [self doRouteSearchByCarLocation:mLastStartLoc LocationEnd:mLastEndLoc];
+}
+
+- (void)doRouteSearchByWalkWithLastLocation {
+    
+    [self doRouteSearchByWalkingLocation:mLastStartLoc LocationEnd:mLastEndLoc];
 }
 
 // delete公用函数

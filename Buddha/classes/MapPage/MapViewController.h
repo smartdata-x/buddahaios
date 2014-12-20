@@ -14,15 +14,13 @@
 #import "MapRouteSearchController.h"
 #import "HorizontalMenu.h"
 #import "MapBuildMenuView.h"
+#import "MapFeatureTableViewCell.h"
 
 @interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKGeneralDelegate, HorizontalMenuDelegate>
 {
     BMKMapManager *mBDMapManager;
     BMKLocationService *mLocationService;
     BMKMapView *mMapView;
-    
-    MapPoiSearchController *mPoiSearchControl; // 搜索
-    MapRouteSearchController *mRouteSearchControl; // 路径规划
     
     // 底部周边菜单栏
     HorizontalMenu *mNearbyMenu;
@@ -34,10 +32,19 @@
     
     // 推荐和附近建筑菜单
     MapBuildMenuView *mBuildMenu;
+    
+    // 周围建筑信息
+    NSMutableArray *mBuildingInfo;
+    
+    // 用于添加点
+    NSString *mCurrentAnnotationType;
 }
 
 
 @property (nonatomic, assign) BOOL isMainEntry; // 是否为地图的主入口, 主入口显示底部周边菜单，非主入口则显示底部路线菜单和导航菜单
+
+@property (nonatomic, retain) MapPoiSearchController *mPoiSearchControl; // 搜索
+@property (nonatomic, retain) MapRouteSearchController *mRouteSearchControl; // 路径规划
 
 - (IBAction)startLocation:(id)sender;
 - (IBAction)stopLocation:(id)sender;
@@ -52,8 +59,11 @@
 - (void)showBuildMenu:(BOOL)animate;
 - (void)hideBuildMenu:(BOOL)animate;
 
-- (void)doGotoMapFeatureView;
+- (void)doGotoMapFeatureView; // 搜索建筑和推荐建筑页面
 - (void)doBackToMainEntry;
 - (void)doGotoAppleNav;
+
+- (void)getNearbyBuildingFailed:(NSNotification *)notification;
+- (void)getNearbyBuildingSuccess:(NSNotification *)notification;
 
 @end

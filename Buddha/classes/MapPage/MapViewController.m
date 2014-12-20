@@ -21,9 +21,18 @@
     if (self) {
         
         _isMainEntry = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearbyBuildingFailed:) name:MigNetNameGetNearBuildFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearbyBuildingSuccess:) name:MigNetNameGetNearBuildSuccess object:nil];
     }
     
     return self;
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetNearBuildFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetNearBuildSuccess object:nil];
 }
 
 - (void)viewDidLoad {
@@ -55,13 +64,6 @@
     mMapView.userTrackingMode = BMKUserTrackingModeFollow;
     mMapView.delegate = self;
     
-    // test
-    BMKPointAnnotation *item = [[BMKPointAnnotation alloc] init];
-    item.coordinate = CLLocationCoordinate2DMake(30.303038, 120.152917);
-    item.title = @"死鸭子";
-    item.subtitle = @"死鸭子";
-    [mMapView addAnnotation:item];
-    
     [self.view addSubview:mMapView];
     [self initNearbyBottomMenu];
     [self initRouteBottomMenu];
@@ -69,8 +71,8 @@
     [self updateBottomMenu];
     
     mLocationService = [[BMKLocationService alloc] init];
-    mPoiSearchControl = [[MapPoiSearchController alloc] initWithBMKMapView:mMapView];
-    mRouteSearchControl = [[MapRouteSearchController alloc] initWithBMKMapView:mMapView];
+    _mPoiSearchControl = [[MapPoiSearchController alloc] initWithBMKMapView:mMapView];
+    _mRouteSearchControl = [[MapRouteSearchController alloc] initWithBMKMapView:mMapView];
     
     // test 定位到本地
     //[self startLocation:nil];
@@ -96,9 +98,10 @@
     if (mBuildMenu == nil) {
         
         mBuildMenu = [[MapBuildMenuView alloc] initWithFrame:self.mFrame];
+        mBuildMenu.mTopViewController = self.topViewController;
     }
     
-    mBuildMenu.mTopMapView = self;
+    mBuildMenu.mParentMapView = self;
     // 默认情况下隐藏
     [mBuildMenu setHidden:YES];
     [self.view addSubview:mBuildMenu];
@@ -148,7 +151,9 @@
     
     if (mNearbyMenu == nil) {
         
-        mNearbyMenu = [[HorizontalMenu alloc] initWithFrame:CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT) ButtonItems:bottomItemArray ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT];
+        CGRect menuFrame = CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT);
+        CGSize imgSize = CGSizeMake(34 / SCREEN_SCALAR, 44 / SCREEN_SCALAR);
+        mNearbyMenu = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:bottomItemArray buttonSize:imgSize ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT];
     }
     mNearbyMenu.delegate = self;
     [self.view addSubview:mNearbyMenu];
@@ -174,7 +179,9 @@
     
     if (mRouteMenu == nil) {
         
-        mRouteMenu = [[HorizontalMenu alloc] initWithFrame:CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT) ButtonItems:bottomItemArray ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT];
+        CGRect menuFrame = CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT);
+        CGSize imgSize = CGSizeMake(49 / SCREEN_SCALAR, 46 / SCREEN_SCALAR);
+        mRouteMenu = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:bottomItemArray buttonSize:imgSize ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT];
     }
     mRouteMenu.delegate = self;
     [self.view addSubview:mRouteMenu];
@@ -256,14 +263,61 @@
     
 }
 
+- (void)getNearbyBuildingFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取周围建筑失败");
+}
+
+- (void)getNearbyBuildingSuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取周围建筑成功 %@", notification);
+    
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    NSDictionary *nearBuild = [result objectForKey:@"nearbuild"];
+    
+    for (NSDictionary *dic in nearBuild) {
+        
+        migsBuildingInfo *buildinfo = [migsBuildingInfo setupBuildingInfoFromDictionary:dic];
+        [mBuildingInfo addObject:buildinfo];
+        
+        // 添加地图上的点
+        BMKPointAnnotation *item = [[BMKPointAnnotation alloc] init];
+        item.coordinate = CLLocationCoordinate2DMake(buildinfo.fLatitude, buildinfo.fLongitude);
+        item.title = buildinfo.name;
+        mCurrentAnnotationType = buildinfo.buildType;
+        [mMapView addAnnotation:item];
+    }
+}
+
 // HorizontalMenuDelegate
 - (void)didHorizontalMenuClickedButttonAtIndex:(NSInteger)index Type:(NSInteger)type {
     
-    if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_LEFT) {
+    if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT) {
         
-        if (index == 0) {
+        if (_isMainEntry) {
             
-            [self doGotoMapFeatureView];
+            if (index == 0) {
+                
+                // 请求推荐建筑信息，并显示页面
+                [self.askApi doGetRecomBuild];
+                [self doGotoMapFeatureView];
+            }
+        }
+        else {
+            
+            if (index == 0) {
+                
+                [_mRouteSearchControl doRouteSearchByBusWithLastLocation];
+            }
+            else if (index == 1) {
+                
+                [_mRouteSearchControl doRouteSearchByCarWithLastLocation];
+            }
+            else if (index == 2) {
+                
+                [_mRouteSearchControl doRouteSearchByWalkWithLastLocation];
+            }
         }
     }
 }
@@ -287,17 +341,12 @@
 -(void)mapview:(BMKMapView *)mapView onLongClick:(CLLocationCoordinate2D)coordinate {
     
     MIGDEBUG_PRINT(@"长按");
-    
-    // test
-    [mPoiSearchControl doSearchNearBy:@"餐馆"];
-    //[mRouteSearchControl doSearchTest];
 }
 
 // 地图双击手势
 - (void)mapview:(BMKMapView *)mapView onDoubleClick:(CLLocationCoordinate2D)coordinate {
     
     MIGDEBUG_PRINT(@"双击");
-    [mRouteSearchControl doSearchTest];
 }
 
 
@@ -387,7 +436,7 @@
 - (BMKAnnotationView *)mapView:(BMKMapView *)view viewForAnnotation:(id<BMKAnnotation>)annotation {
     
     // 生成重用标示identifier
-    NSString *AnnotationViewID = @"xidanMark";
+    NSString *AnnotationViewID = @"miglab";
     
     // 检查是否有重用的缓存
     BMKAnnotationView* annotationView = [view dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
@@ -396,9 +445,37 @@
     if (annotationView == nil) {
         
         annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-        ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+        
+        if ([mCurrentAnnotationType isEqualToString:@"1"]) {
+            
+            // 寺庙
+            annotationView.image = [UIImage imageNamed:IMG_MAPID_TEMPLE];
+        }
+        else if ([mCurrentAnnotationType isEqualToString:@"2"]) {
+            
+            annotationView.image = [UIImage imageNamed:IMG_MAPID_BOOK];
+        }
+        else if ([mCurrentAnnotationType isEqualToString:@"3"]) {
+            
+            annotationView.image = [UIImage imageNamed:IMG_MAPID_FOOD];
+        }
+        else if ([mCurrentAnnotationType isEqualToString:@"4"]) {
+            
+            annotationView.image = [UIImage imageNamed:IMG_MAPID_FOJU];
+        }
+        else if ([mCurrentAnnotationType isEqualToString:@"5"]) {
+            
+            annotationView.image = [UIImage imageNamed:IMG_MAPID_CLOTHES];
+        }
+        else {
+            
+            ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+        }
         // 设置重天上掉下的效果(annotation)
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
+        
+        // 重置图标类型
+        mCurrentAnnotationType = @"";
     }
     
     // 设置位置

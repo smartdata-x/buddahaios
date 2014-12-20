@@ -9,6 +9,8 @@
 #import "MapBuildMenuView.h"
 #import "MapFeatureTableViewCell.h"
 #import "MapViewController.h"
+#import "MapBuidingInfoViewController.h"
+#import "MapSearchResultViewController.h"
 
 @implementation MapBuildMenuView
 
@@ -18,17 +20,33 @@
     
     if (self) {
         
+        // 消息
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBuildingFailed:) name:MigNetNameGetRecomBuildFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBuildingSuccess:) name:MigNetNameGetRecomBuildSuccess object:nil];
+        
         [self initBuildInfo];
         [self initTableInfo];
         
-        // test
-        [self datatest];
-        
         // 背景设为不透明白色
         [self setBackgroundColor:[UIColor whiteColor]];
+        
+#if MIG_DEBUG_TEST
+        migsBuildingInfo *build = [[migsBuildingInfo alloc] init];
+        build.name = @"afjkdsafdsa";
+        build.address = @"fafadsaf";
+        build.distance = @"gfsdg";
+        [mBuildTableInfo addObject:build];
+        [self reloadTableData];
+#endif
     }
     
     return self;
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetRecomBuildFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetRecomBuildSuccess object:nil];
 }
 
 - (void)initBuildInfo {
@@ -77,9 +95,8 @@
         
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(tmpX, tmpY, iconsize, iconsize)];
         [button setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
-        // TODO: 添加响应事件
-        // test
-        [button addTarget:self action:@selector(doBack) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = i;
+        [button addTarget:self action:@selector(doSearchAction:) forControlEvents:UIControlEventTouchUpInside];
         
         tmpY += iconsize + lableYSeperate;
         UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(tmpX, tmpY, iconsize, lableheight)];
@@ -99,19 +116,9 @@
 - (void)initTableInfo {
     
     // 初始化数据
-    if (mInfoImage == nil) {
+    if (mBuildTableInfo == nil) {
         
-        mInfoImage = [[NSMutableArray alloc] init];
-    }
-    
-    if (mInfoTitle == nil) {
-        
-        mInfoTitle = [[NSMutableArray alloc] init];
-    }
-    
-    if (mInfoDetail == nil) {
-        
-        mInfoDetail = [[NSMutableArray alloc] init];
+        mBuildTableInfo = [[NSMutableArray alloc] init];
     }
     
     // 初始化列表表头
@@ -147,31 +154,55 @@
     [mFeatureTableView reloadData];
 }
 
-// test
-- (void)datatest {
-    
-    NSArray *img = [[NSArray alloc] initWithObjects:@"book.png", @"book.png", @"book.png", nil];
-    [mInfoImage addObjectsFromArray:img];
-    
-    NSArray *title = [[NSArray alloc] initWithObjects:@"hehe", @"haha", @"xixi", nil];
-    [mInfoTitle addObjectsFromArray:title];
-    
-    NSArray *detail = [[NSArray alloc] initWithObjects:@"this", @"that", @"there", nil];
-    [mInfoDetail addObjectsFromArray:detail];
-    
-    NSArray *dis = [[NSArray alloc] initWithObjects:@"1.0km", @"4.2km", @"2.5km", nil];
-    [mInfoDistance addObjectsFromArray:dis];
-    
-    [self reloadTableData];
-}
-
 - (void)doBack {
     
     // 调用顶视图的隐藏, 并设置为路线菜单
-    MapViewController *mapview = (MapViewController *)self.mTopMapView;
+    MapViewController *mapview = (MapViewController *)self.mParentMapView;
     mapview.isMainEntry = NO;
     [mapview updateBottomMenu];
     [mapview hideBuildMenu:YES];
+}
+
+- (void)doSearch:(NSString *)type {
+    
+    AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+    [askApi doSearchTypeBuild:type];
+}
+
+- (IBAction)doSearchAction:(id)sender {
+    
+    UIButton *button = (UIButton *)sender;
+    NSString *type = [NSString stringWithFormat:@"%d", button.tag + 1]; // tag从0开始的，而type从1开始
+    [self doSearch:type];
+    
+    // 跳转到搜索界面
+    MapSearchResultViewController *searchView = [[MapSearchResultViewController alloc] init];
+    searchView.mParentMapView = self.mParentMapView;
+    [_mTopViewController.navigationController pushViewController:searchView animated:YES];
+}
+
+// 消息处理
+- (void)getBuildingFailed:(NSNotification *)notification {
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_GETBUILDING_FAILED];
+}
+
+- (void)getBuildingSuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取推荐建筑成功 %@", notification);
+    
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    NSDictionary *nearbuild = [result objectForKey:@"nearbuild"];
+    
+    for (NSDictionary *dic in nearbuild) {
+        
+        migsBuildingInfo *buildinfo = [migsBuildingInfo setupBuildingInfoFromDictionary:dic];
+        
+        [mBuildTableInfo addObject:buildinfo];
+    }
+    
+    [self reloadTableData];
 }
 
 // UITableViewDelegate
@@ -182,7 +213,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;
+    return [mBuildTableInfo count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -204,34 +235,13 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         
-        NSString *imageName = [mInfoImage objectAtIndex:curRow];
-        NSString *title = [mInfoTitle objectAtIndex:curRow];
-        NSString *detail = [mInfoDetail objectAtIndex:curRow];
-        NSString *distance = [mInfoDistance objectAtIndex:curRow];
+        if ([mBuildTableInfo count] <= 0) {
+            
+            return cell;
+        }
         
-        // 图片
-        //cell.avatarImg.imageURL = [NSURL URLWithString:imageName];
-        cell.avatarImg.placeholderImage = [UIImage imageNamed:imageName];
-        
-        // 标题
-        float titlecolor = 0.067;
-        cell.lblTitle.text = title;
-        cell.lblTitle.textAlignment = NSTextAlignmentLeft;
-        cell.lblTitle.textColor = [UIColor colorWithRed:titlecolor green:titlecolor blue:titlecolor alpha:1.0];
-        cell.lblTitle.font = [UIFont fontOfApp:30.0 / SCREEN_SCALAR];
-        
-        // 细节
-        float detailcolor = 0.5;
-        cell.lblDetail.text = detail;
-        cell.lblDetail.textAlignment = NSTextAlignmentLeft;
-        cell.lblDetail.textColor = [UIColor colorWithRed:detailcolor green:detailcolor blue:detailcolor alpha:1.0];
-        cell.lblDetail.font = [UIFont fontOfApp:24.0 / SCREEN_SCALAR];
-        
-        // 距离
-        cell.lblDistance.text = distance;
-        cell.lblDistance.textAlignment = NSTextAlignmentRight;
-        cell.lblDistance.textColor = [UIColor colorWithRed:detailcolor green:detailcolor blue:detailcolor alpha:1.0];
-        cell.lblDistance.font = [UIFont fontOfApp:24.0 / SCREEN_SCALAR];
+        migsBuildingInfo *buildinfo = [mBuildTableInfo objectAtIndex:curRow];
+        [cell initCellWithData:buildinfo];
     }
     
     return cell;
@@ -239,7 +249,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // TODO: 响应事件
+    int row = indexPath.row;
+    int count = [mBuildTableInfo count];
+    
+    if (count > 0 && row < count) {
+        
+        migsBuildingInfo *buildinfo = [mBuildTableInfo objectAtIndex:row];
+        
+        // 跳转到建筑详情
+        MapBuidingInfoViewController *buildView = [[MapBuidingInfoViewController alloc] init];
+        [buildView initialize:buildinfo];
+        buildView.mParentMapView = self.mParentMapView;
+        
+        [_mTopViewController.navigationController pushViewController:buildView animated:YES];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

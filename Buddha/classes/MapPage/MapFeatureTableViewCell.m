@@ -69,23 +69,21 @@
     _avatarImg.imageURL = [NSURL URLWithString:imageName];
     
     // 标题
-    float titlecolor = 0.067;
     _lblTitle.text = title;
     _lblTitle.textAlignment = NSTextAlignmentLeft;
-    _lblTitle.textColor = [UIColor colorWithRed:titlecolor green:titlecolor blue:titlecolor alpha:1.0];
+    _lblTitle.textColor = MIG_COLOR_111111;
     _lblTitle.font = [UIFont fontOfApp:30.0 / SCREEN_SCALAR];
     
     // 细节
-    float detailcolor = 0.5;
     _lblDetail.text = detail;
     _lblDetail.textAlignment = NSTextAlignmentLeft;
-    _lblDetail.textColor = [UIColor colorWithRed:detailcolor green:detailcolor blue:detailcolor alpha:1.0];
+    _lblDetail.textColor = MIG_COLOR_808080;
     _lblDetail.font = [UIFont fontOfApp:24.0 / SCREEN_SCALAR];
     
     // 距离
     _lblDistance.text = distance;
     _lblDistance.textAlignment = NSTextAlignmentRight;
-    _lblDistance.textColor = [UIColor colorWithRed:detailcolor green:detailcolor blue:detailcolor alpha:1.0];
+    _lblDistance.textColor = MIG_COLOR_808080;
     _lblDistance.font = [UIFont fontOfApp:24.0 / SCREEN_SCALAR];
 }
 

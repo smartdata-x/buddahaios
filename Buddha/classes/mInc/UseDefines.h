@@ -75,7 +75,10 @@
 
 #define MIG_COLOR_111111                            [UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]
 #define MIG_COLOR_808080                            [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0]
-
+#define MIG_COLOR_53645E                            [UIColor colorWithRed:83.0/255.0 green:100.0/255.0 blue:94.0/255.0 alpha:1.0]
+#define MIG_COLOR_F6F6F6                            [UIColor colorWithRed:246.0/255.0 green:246.0/255.0 blue:246.0/255.0 alpha:1.0]
+#define MIG_COLOR_FBFBFB                            [UIColor colorWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0]
+#define MIG_COLOR_333333                            [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]
 
 // 字符串打印消息
 #define MIGTIP_LOGIN_SUCCESS                        @"登录成功"

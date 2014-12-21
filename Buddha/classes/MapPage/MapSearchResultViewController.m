@@ -43,6 +43,7 @@
     [self initNav];
     [self initTopMenu];
     [self initTableView];
+    [self initMiniMenu];
     
 #if MIG_DEBUG_TEST
     [self testdata];
@@ -107,6 +108,19 @@
     [self.view addSubview:mBuildTableView];
 }
 
+- (void)initMiniMenu {
+    
+    if (mNearbyMenu == nil) {
+        
+        mNearbyMenu = [[TwoPageMenuVIew alloc] init];
+        mNearbyMenu.frame = CGRectMake(0, 0, self.view.frame.size.width, 558 / SCREEN_SCALAR);
+        _isNearbyMenuShow = YES;
+    }
+    
+    //[mNearbyMenu setHidden:YES];
+    [self.view addSubview:mNearbyMenu];
+}
+
 - (void)reloadData {
     
     [mBuildTableView reloadData];
@@ -148,6 +162,18 @@
     }
     
     [self reloadData];
+}
+
+// HorizontalMenuDelegate
+- (void)didHorizontalMenuClickedButttonAtIndex:(NSInteger)index Type:(NSInteger)type {
+    
+    if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT) {
+        
+        if (index == 0) {
+            
+            [mNearbyMenu setHidden:NO];
+        }
+    }
 }
 
 // UITableViewDelegate

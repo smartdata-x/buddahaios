@@ -84,6 +84,11 @@
 		CBD3342F1A45B34E0026AD71 /* MapIconInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3342D1A45B34E0026AD71 /* MapIconInfoTableViewCell.xib */; };
 		CBD334331A45C1210026AD71 /* MapDetailInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334311A45C1200026AD71 /* MapDetailInfoTableViewCell.m */; };
 		CBD334341A45C1210026AD71 /* MapDetailInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD334321A45C1200026AD71 /* MapDetailInfoTableViewCell.xib */; };
+		CBD334371A46B5BD0026AD71 /* TwoPageMenuVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334361A46B5BD0026AD71 /* TwoPageMenuVIew.m */; };
+		CBD3343B1A46B7620026AD71 /* LeftMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334391A46B7620026AD71 /* LeftMenuTableViewCell.m */; };
+		CBD3343C1A46B7620026AD71 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3343A1A46B7620026AD71 /* LeftMenuTableViewCell.xib */; };
+		CBD334401A46B77A0026AD71 /* RightMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3343E1A46B77A0026AD71 /* RightMenuTableViewCell.m */; };
+		CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */; };
 		CBEC68171A1A44E4007B2A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68161A1A44E4007B2A00 /* main.m */; };
 		CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68191A1A44E4007B2A00 /* AppDelegate.mm */; };
 		CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEC681E1A1A44E4007B2A00 /* Main.storyboard */; };
@@ -286,6 +291,14 @@
 		CBD334301A45C1200026AD71 /* MapDetailInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDetailInfoTableViewCell.h; sourceTree = "<group>"; };
 		CBD334311A45C1200026AD71 /* MapDetailInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDetailInfoTableViewCell.m; sourceTree = "<group>"; };
 		CBD334321A45C1200026AD71 /* MapDetailInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDetailInfoTableViewCell.xib; sourceTree = "<group>"; };
+		CBD334351A46B5BD0026AD71 /* TwoPageMenuVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoPageMenuVIew.h; sourceTree = "<group>"; };
+		CBD334361A46B5BD0026AD71 /* TwoPageMenuVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoPageMenuVIew.m; sourceTree = "<group>"; };
+		CBD334381A46B7620026AD71 /* LeftMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTableViewCell.h; sourceTree = "<group>"; };
+		CBD334391A46B7620026AD71 /* LeftMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTableViewCell.m; sourceTree = "<group>"; };
+		CBD3343A1A46B7620026AD71 /* LeftMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuTableViewCell.xib; sourceTree = "<group>"; };
+		CBD3343D1A46B77A0026AD71 /* RightMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuTableViewCell.h; sourceTree = "<group>"; };
+		CBD3343E1A46B77A0026AD71 /* RightMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuTableViewCell.m; sourceTree = "<group>"; };
+		CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightMenuTableViewCell.xib; sourceTree = "<group>"; };
 		CBEC68111A1A44E4007B2A00 /* Buddha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buddha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBEC68151A1A44E4007B2A00 /* Buddha-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Buddha-Info.plist"; sourceTree = "<group>"; };
 		CBEC68161A1A44E4007B2A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1074,20 +1087,28 @@
 				CB20DDAE1A38792C003410FA /* MapPoiSearchController.m */,
 				CB20DDB01A39CC3C003410FA /* MapRouteSearchController.h */,
 				CB20DDB11A39CC3C003410FA /* MapRouteSearchController.mm */,
-				CB20DDCD1A3B2A66003410FA /* MapFeatureTableViewCell.h */,
-				CB20DDCE1A3B2A66003410FA /* MapFeatureTableViewCell.m */,
-				CB20DDCF1A3B2A66003410FA /* MapFeatureTableViewCell.xib */,
 				CBD333F81A41B0290026AD71 /* MapBuidingInfoViewController.h */,
 				CBD333F91A41B0290026AD71 /* MapBuidingInfoViewController.m */,
 				CBD3341A1A44BC120026AD71 /* MapSearchResultViewController.h */,
 				CBD3341B1A44BC120026AD71 /* MapSearchResultViewController.m */,
 				CBD3341F1A44C1F70026AD71 /* MapSearchResultViewController.xib */,
+				CB20DDCD1A3B2A66003410FA /* MapFeatureTableViewCell.h */,
+				CB20DDCE1A3B2A66003410FA /* MapFeatureTableViewCell.m */,
+				CB20DDCF1A3B2A66003410FA /* MapFeatureTableViewCell.xib */,
 				CBD3342B1A45B34E0026AD71 /* MapIconInfoTableViewCell.h */,
 				CBD3342C1A45B34E0026AD71 /* MapIconInfoTableViewCell.m */,
 				CBD3342D1A45B34E0026AD71 /* MapIconInfoTableViewCell.xib */,
 				CBD334301A45C1200026AD71 /* MapDetailInfoTableViewCell.h */,
 				CBD334311A45C1200026AD71 /* MapDetailInfoTableViewCell.m */,
 				CBD334321A45C1200026AD71 /* MapDetailInfoTableViewCell.xib */,
+				CBD334351A46B5BD0026AD71 /* TwoPageMenuVIew.h */,
+				CBD334361A46B5BD0026AD71 /* TwoPageMenuVIew.m */,
+				CBD334381A46B7620026AD71 /* LeftMenuTableViewCell.h */,
+				CBD334391A46B7620026AD71 /* LeftMenuTableViewCell.m */,
+				CBD3343A1A46B7620026AD71 /* LeftMenuTableViewCell.xib */,
+				CBD3343D1A46B77A0026AD71 /* RightMenuTableViewCell.h */,
+				CBD3343E1A46B77A0026AD71 /* RightMenuTableViewCell.m */,
+				CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */,
 			);
 			path = MapPage;
 			sourceTree = "<group>";
@@ -1270,6 +1291,7 @@
 				CBD334271A45A8390026AD71 /* clothes_id.png in Resources */,
 				CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */,
 				CBD334261A45A8390026AD71 /* book_id.png in Resources */,
+				CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */,
 				CBD334021A41BDDA0026AD71 /* disc_line.png in Resources */,
 				CBEC68E21A2202F0007B2A00 /* home_message.png in Resources */,
 				CB20DDCB1A3B20BB003410FA /* temple.png in Resources */,
@@ -1306,6 +1328,7 @@
 				CB20DDCA1A3B20BB003410FA /* map_back.png in Resources */,
 				CBD334071A41BDF00026AD71 /* phone_ico.png in Resources */,
 				CBEC68251A1A44E4007B2A00 /* LaunchScreen.xib in Resources */,
+				CBD3343C1A46B7620026AD71 /* LeftMenuTableViewCell.xib in Resources */,
 				CBB6ED611A2B61B8005B0CF3 /* FeaturedNewsCell.xib in Resources */,
 				CBD333FF1A41BDBD0026AD71 /* allow_choose.png in Resources */,
 				CBEC69F71A2AE075007B2A00 /* SVProgressHUD.bundle in Resources */,
@@ -1350,6 +1373,7 @@
 				CBB6ED5E1A2B61B8005B0CF3 /* FeaturedBooksCell.m in Sources */,
 				CBB6ED211A2B3434005B0CF3 /* TencentQQManager.m in Sources */,
 				CB94697B1A33FA7E00337164 /* OpenUDID.m in Sources */,
+				CBD3343B1A46B7620026AD71 /* LeftMenuTableViewCell.m in Sources */,
 				CBEC696C1A2602A8007B2A00 /* AFXMLRequestOperation.m in Sources */,
 				CBEC69A61A28AA50007B2A00 /* AskNetDataApi.m in Sources */,
 				CBEC698E1A260B36007B2A00 /* DatabaseManager.m in Sources */,
@@ -1402,7 +1426,9 @@
 				CBEC69651A2602A8007B2A00 /* AFHTTPRequestOperation.m in Sources */,
 				CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */,
 				CB9469781A33FA7E00337164 /* Base64.m in Sources */,
+				CBD334401A46B77A0026AD71 /* RightMenuTableViewCell.m in Sources */,
 				CB96995C1A2F4C12009C35F8 /* CenterBaseViewController.m in Sources */,
+				CBD334371A46B5BD0026AD71 /* TwoPageMenuVIew.m in Sources */,
 				CBEC685B1A1A4A81007B2A00 /* EGOCache.m in Sources */,
 				CBEC69D01A29DDA3007B2A00 /* NSData+AES256.m in Sources */,
 				CBEC69CC1A29DD88007B2A00 /* GTMBase64.m in Sources */,

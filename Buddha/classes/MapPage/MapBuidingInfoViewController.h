@@ -26,8 +26,8 @@
 
 
 - (void)initialize:(migsBuildingInfo *)buildinfo;
-- (void)initNav;
 
+- (void)initNav;
 - (void)doSearchInMapView;
 - (void)reloadData;
 

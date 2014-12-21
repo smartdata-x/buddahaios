@@ -31,7 +31,7 @@
     [super viewDidLoad];
     
     // 修改导航栏的背景色
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:83.0/255.0 green:100.0/255.0 blue:94.0/255.0 alpha:1.0]];
+    [self.navigationController.navigationBar setBarTintColor:MIG_COLOR_53645E];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     // 导航栏的标题栏

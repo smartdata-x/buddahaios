@@ -33,10 +33,10 @@
 
 - (void)initNavigationView {
     
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:83.0/255.0 green:100.0/255.0 blue:94.0/255.0 alpha:1.0]];
+    [self.navigationController.navigationBar setBarTintColor:MIG_COLOR_53645E];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // 返回按钮
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 14, 17)];

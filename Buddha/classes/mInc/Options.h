@@ -11,7 +11,7 @@
 
 // 所有测试代码必须包含在此宏内
 #ifndef MIG_DEBUG_TEST
-#define MIG_DEBUG_TEST               0
+#define MIG_DEBUG_TEST               1
 #endif
 
 #endif

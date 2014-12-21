@@ -26,7 +26,7 @@
         mTopMapView = mapView;
         mRouteSearch = [[BMKRouteSearch alloc] init];
         mRouteSearch.delegate = self;
-        mLastSearchType = MIG_MAP_ROUTETYPE_WALK;
+        _mLastSearchType = MIG_MAP_ROUTETYPE_WALK;
     }
     
     return self;
@@ -34,15 +34,15 @@
 
 - (void)doRouteSearchByLastType:(CLLocationCoordinate2D)locStart LocationEnd:(CLLocationCoordinate2D)locEnd {
     
-    if (mLastSearchType == MIG_MAP_ROUTETYPE_BUS) {
+    if (_mLastSearchType == MIG_MAP_ROUTETYPE_BUS) {
         
         [self doRouteSearchByBusLocation:locStart LocationEnd:locEnd];
     }
-    else if (mLastSearchType == MIG_MAP_ROUTETYPE_CAR) {
+    else if (_mLastSearchType == MIG_MAP_ROUTETYPE_CAR) {
         
         [self doRouteSearchByCarLocation:locStart LocationEnd:locEnd];
     }
-    else if (mLastSearchType == MIG_MAP_ROUTETYPE_WALK) {
+    else if (_mLastSearchType == MIG_MAP_ROUTETYPE_WALK) {
         
         [self doRouteSearchByWalkingLocation:locStart LocationEnd:locEnd];
     }
@@ -64,9 +64,9 @@
     if(flag)
     {
         MIGDEBUG_PRINT(@"步行检索发送成功");
-        mLastSearchType = MIG_MAP_ROUTETYPE_WALK;
-        mLastStartLoc = locStart;
-        mLastEndLoc = locEnd;
+        _mLastSearchType = MIG_MAP_ROUTETYPE_WALK;
+        _mLastStartLoc = locStart;
+        _mLastEndLoc = locEnd;
     }
     else
     {
@@ -90,9 +90,9 @@
     if(flag)
     {
         MIGDEBUG_PRINT(@"公交检索发送成功");
-        mLastSearchType = MIG_MAP_ROUTETYPE_BUS;
-        mLastStartLoc = locStart;
-        mLastEndLoc = locEnd;
+        _mLastSearchType = MIG_MAP_ROUTETYPE_BUS;
+        _mLastStartLoc = locStart;
+        _mLastEndLoc = locEnd;
     }
     else
     {
@@ -116,9 +116,9 @@
     if(flag)
     {
         MIGDEBUG_PRINT(@"驾车检索发送成功");
-        mLastSearchType = MIG_MAP_ROUTETYPE_CAR;
-        mLastStartLoc = locStart;
-        mLastEndLoc = locEnd;
+        _mLastSearchType = MIG_MAP_ROUTETYPE_CAR;
+        _mLastStartLoc = locStart;
+        _mLastEndLoc = locEnd;
     }
     else
     {
@@ -128,17 +128,17 @@
 
 - (void)doRouteSearchByBusWithLastLocation {
     
-    [self doRouteSearchByBusLocation:mLastStartLoc LocationEnd:mLastEndLoc];
+    [self doRouteSearchByBusLocation:_mLastStartLoc LocationEnd:_mLastEndLoc];
 }
 
 - (void)doRouteSearchByCarWithLastLocation {
     
-    [self doRouteSearchByCarLocation:mLastStartLoc LocationEnd:mLastEndLoc];
+    [self doRouteSearchByCarLocation:_mLastStartLoc LocationEnd:_mLastEndLoc];
 }
 
 - (void)doRouteSearchByWalkWithLastLocation {
     
-    [self doRouteSearchByWalkingLocation:mLastStartLoc LocationEnd:mLastEndLoc];
+    [self doRouteSearchByWalkingLocation:_mLastStartLoc LocationEnd:_mLastEndLoc];
 }
 
 // delete公用函数

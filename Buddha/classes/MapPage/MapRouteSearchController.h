@@ -32,11 +32,11 @@ enum {
     BMKMapView *mTopMapView; // 上层赋值
     
     BMKRouteSearch *mRouteSearch;
-    
-    NSInteger mLastSearchType; // 0:公交 1:汽车 2:步行
-    CLLocationCoordinate2D mLastStartLoc;
-    CLLocationCoordinate2D mLastEndLoc;
 }
+
+@property (nonatomic, assign) NSInteger mLastSearchType; // 0:公交 1:汽车 2:步行
+@property (nonatomic, assign) CLLocationCoordinate2D mLastStartLoc;
+@property (nonatomic, assign) CLLocationCoordinate2D mLastEndLoc;
 
 - (id)initWithBMKMapView:(BMKMapView *)mapView;
 

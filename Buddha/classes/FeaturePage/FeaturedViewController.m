@@ -178,7 +178,7 @@
     [lblTitle setBackgroundColor:[UIColor clearColor]];
     
     UIView *headerView = [[UIView alloc] init];
-    [headerView setBackgroundColor:[UIColor colorWithRed:(246.0 / 255.0) green:(246.0 / 255.0) blue:(246.0 / 255.0) alpha:1.0]];
+    [headerView setBackgroundColor:MIG_COLOR_F6F6F6];
     
     [headerView addSubview:lblTitle];
     

@@ -104,6 +104,9 @@
     CLLocationCoordinate2D startLoc = [[MyLocationManager GetInstance] getLocation];
     CLLocationCoordinate2D endLoc = CLLocationCoordinate2DMake(mBuildingInfo.fLatitude, mBuildingInfo.fLongitude);
     
+    // 存储本页的建筑详情
+    mapview.mLastBuildingInfo = mBuildingInfo;
+    
     // 主动调用地图显示
     [mapview viewWillAppear:YES];
     

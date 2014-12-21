@@ -7,6 +7,8 @@
 //
 
 #import "MapViewController.h"
+#import <MapKit/MapKit.h>
+#import "MapBuidingInfoViewController.h"
 
 @interface MapViewController ()
 
@@ -205,7 +207,7 @@
     }
     [mBtnBack setBackgroundColor:[UIColor clearColor]];
     [mBtnBack setBackgroundImage:[UIImage imageNamed:@"map_back.png"] forState:UIControlStateNormal];
-    [mBtnBack addTarget:self action:@selector(doBackToMainEntry) forControlEvents:UIControlEventTouchUpInside];
+    [mBtnBack addTarget:self action:@selector(doBackToBuildingInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:mBtnBack];
     
     // 导航按钮
@@ -261,6 +263,17 @@
     [self updateShowNearby];
 }
 
+- (void)doBackToBuildingInfo {
+    
+    // 跳转到建筑详情页面
+    //[self doBackToMainEntry];
+    
+    MapBuidingInfoViewController *mapInfo = [[MapBuidingInfoViewController alloc] init];
+    [mapInfo initialize:_mLastBuildingInfo];
+    
+    [self.topViewController.navigationController pushViewController:mapInfo animated:YES];
+}
+
 - (void)doGotoMapFeatureView {
     
     [self showBuildMenu:YES];
@@ -268,7 +281,16 @@
 
 - (void)doGotoAppleNav {
     
+    MIGDEBUG_PRINT(@"进入苹果的导航系统");
+    CLLocationCoordinate2D to = _mRouteSearchControl.mLastEndLoc;
+    CLLocationCoordinate2D from = [[MyLocationManager GetInstance] getLocation];
     
+    //MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    MKMapItem *currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:from addressDictionary:nil]];
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:to addressDictionary:nil]];
+    toLocation.name = _mLastBuildingInfo.name;
+    
+    [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:currentLocation, toLocation, nil] launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeDriving, [NSNumber numberWithBool:YES], nil] forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
 }
 
 - (void)getNearbyBuildingFailed:(NSNotification *)notification {

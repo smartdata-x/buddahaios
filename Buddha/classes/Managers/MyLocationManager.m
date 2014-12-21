@@ -60,7 +60,11 @@
 
 - (CLLocationCoordinate2D)getLocation {
     
+#if MIG_DEBUG_TEST
+    return CLLocationCoordinate2DMake(30.257028579711914, 120.20285034179688);
+#else
     return CLLocationCoordinate2DMake(mLatitude, mLongitude);
+#endif
 }
 
 - (NSString *)getLatitude {

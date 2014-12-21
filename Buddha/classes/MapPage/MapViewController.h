@@ -46,6 +46,8 @@
 @property (nonatomic, retain) MapPoiSearchController *mPoiSearchControl; // 搜索
 @property (nonatomic, retain) MapRouteSearchController *mRouteSearchControl; // 路径规划
 
+@property (nonatomic, retain) migsBuildingInfo *mLastBuildingInfo;
+
 - (IBAction)startLocation:(id)sender;
 - (IBAction)stopLocation:(id)sender;
 - (IBAction)startFollowing:(id)sender;
@@ -63,6 +65,8 @@
 
 - (void)doGotoMapFeatureView; // 搜索建筑和推荐建筑页面
 - (void)doBackToMainEntry;
+- (void)doBackToBuildingInfo;
+
 - (void)doGotoAppleNav;
 
 - (void)getNearbyBuildingFailed:(NSNotification *)notification;

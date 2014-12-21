@@ -132,7 +132,7 @@
         [lblHeader setBackgroundColor:[UIColor clearColor]];
         
         titleView = [[UIView alloc] initWithFrame:CGRectMake(0, mTableStartY, self.frame.size.width, SECTION_TITLE_HEIGHT)];
-        [titleView setBackgroundColor:[UIColor colorWithRed:(246.0 / 255.0) green:(246.0 / 255.0) blue:(246.0 / 255.0) alpha:1.0]];
+        [titleView setBackgroundColor:MIG_COLOR_F6F6F6];
         [titleView addSubview:lblHeader];
     }
     

@@ -47,7 +47,7 @@
     NSString *httpQuickLogin = [NSString stringWithFormat:@"%@/user/1/quicklogin.fcgi", MAIN_HTTP];
     NSString *httpBDBindPush = [NSString stringWithFormat:@"%@/user/1/bdbindpush.fcgi", MAIN_HTTP];
     NSString *httpThirdLogin = [NSString stringWithFormat:@"%@/user/1/thirdlogin.fcgi", MAIN_HTTP];
-    NSString *httpGetRecom = [NSString stringWithFormat:@"%@/find/1/findrecom.fcgi", MAIN_HTTP];
+    NSString *httpGetRecom = [NSString stringWithFormat:@"%@/find/1/broad.fcgi", MAIN_HTTP];
     NSString *httpGetAK = [NSString stringWithFormat:@"%@/map/1/getak.fcgi", MAIN_HTTP];
     NSString *httpGetNearBuild = [NSString stringWithFormat:@"%@/build/1/nearbuild.fcgi", MAIN_HTTP];
     NSString *httpGetRecomBuild = [NSString stringWithFormat:@"%@/find/1/building.fcgi", MAIN_HTTP];

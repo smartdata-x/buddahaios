@@ -42,8 +42,7 @@
     [super viewDidLoad];
     
     // 改变背景色
-    float color = 251.0 / 255.0;
-    [self.view setBackgroundColor:[UIColor colorWithRed:color green:color blue:color alpha:1.0]];
+    [self.view setBackgroundColor:MIG_COLOR_FBFBFB];
     
     // logo
     float ystart = mMainFrame.origin.y + 52.0 / SCREEN_SCALAR;
@@ -121,7 +120,6 @@
     NSString *imgName = [dicInfo objectForKey:KEY_IMAGE];
     NSString *title = [dicInfo objectForKey:KEY_TITLE];
     NSString *cellIdentifier = @"LoginTableViewCell";
-    float color = 51.0 / 255.0;
     
     LoginTableViewCell *cell = (LoginTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
@@ -133,7 +131,7 @@
         
         cell.lblTitle.text = title;
         cell.lblTitle.font = [UIFont fontOfApp:30.0 / SCREEN_SCALAR];
-        cell.lblTitle.textColor = [UIColor colorWithRed:color green:color blue:color alpha:1.0];
+        cell.lblTitle.textColor = MIG_COLOR_333333;
         cell.lblTitle.textAlignment = NSTextAlignmentLeft;
         
         cell.logoImgView.image = [UIImage imageNamed:imgName];

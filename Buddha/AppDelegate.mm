@@ -43,7 +43,7 @@
     RootViewController *rootView = [[RootViewController alloc] init];
     _navController = [[UINavigationController alloc] initWithRootViewController:rootView];
     
-    [_navController.navigationBar setBarTintColor:[UIColor colorWithRed:83.0/255.0 green:100.0/255.0 blue:94.0/255.0 alpha:1.0]];
+    [_navController.navigationBar setBarTintColor:MIG_COLOR_53645E];
     _navController.navigationBar.barStyle = UIBarStyleBlack;
     
     self.window.rootViewController = _navController;

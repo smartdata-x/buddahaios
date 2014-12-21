@@ -55,6 +55,8 @@
 - (void)initRouteBottomMenu;
 - (void)updateBottomMenu;
 
+- (void)updateShowNearby;
+
 - (void)initBuildMenu;
 - (void)showBuildMenu:(BOOL)animate;
 - (void)hideBuildMenu:(BOOL)animate;

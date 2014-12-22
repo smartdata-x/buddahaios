@@ -190,9 +190,10 @@
         
         CGRect menuFrame = CGRectMake(0, self.mFrame.origin.y + self.mFrame.size.height - BOTTOM_MENU_BUTTON_HEIGHT, self.mFrame.size.width, BOTTOM_MENU_BUTTON_HEIGHT);
         CGSize imgSize = CGSizeMake(49 / SCREEN_SCALAR, 46 / SCREEN_SCALAR);
-        mRouteMenu = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:bottomItemArray buttonSize:imgSize ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_RIGHT];
+        mRouteMenu = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:bottomItemArray buttonSize:imgSize ButtonType:HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN];
     }
     mRouteMenu.delegate = self;
+    [mRouteMenu setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:mRouteMenu];
     
     // 返回按钮
@@ -279,14 +280,28 @@
     [self showBuildMenu:YES];
 }
 
+- (CLLocationCoordinate2D)BD09ToGCJ02:(CLLocationCoordinate2D)bdLoc {
+    
+    double PI = 3.1415926;
+    double x = bdLoc.longitude - 0.0065;
+    double y = bdLoc.latitude - 0.006;
+    double z = sqrt(x*x + y*y) - 0.00002 * sin(y*PI);
+    double theta = atan2(y, x) - 0.000003 * cos(x*PI);
+    
+    return CLLocationCoordinate2DMake(z*cos(theta), z*sin(theta));
+}
+
 - (void)doGotoAppleNav {
     
     MIGDEBUG_PRINT(@"进入苹果的导航系统");
-    CLLocationCoordinate2D to = _mRouteSearchControl.mLastEndLoc;
+    CLLocationCoordinate2D BDto = _mRouteSearchControl.mLastEndLoc;
+    CLLocationCoordinate2D to = [self BD09ToGCJ02:BDto];
+#if MIG_DEBUG_TEST
     CLLocationCoordinate2D from = [[MyLocationManager GetInstance] getLocation];
-    
-    //MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
     MKMapItem *currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:from addressDictionary:nil]];
+#else
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+#endif
     MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:to addressDictionary:nil]];
     toLocation.name = _mLastBuildingInfo.name;
     
@@ -354,7 +369,10 @@
                 [self doGotoMapFeatureView];
             }
         }
-        else {
+    }
+    else if (type == HORIZONTALMENU_TYPE_BUTTON_LABEL_DOWN) {
+        
+        if (!_isMainEntry) {
             
             if (index == 0) {
                 
@@ -566,6 +584,34 @@
     }
     
     return nil;
+}
+
+- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view {
+    
+    MIGDEBUG_PRINT(@"点击气泡");
+    
+    // 获取建筑详情
+    migsBuildingInfo *curBuilding;
+    NSString *curName = [view.annotation title];
+    for (migsBuildingInfo *buildinfo in mBuildingInfo) {
+        
+        if ([curName isEqualToString:buildinfo.name]) {
+            
+            curBuilding = buildinfo;
+            break;
+        }
+    }
+    
+    if (curBuilding == nil) {
+        
+        return;
+    }
+    
+    // 调用建筑详情页面
+    MapBuidingInfoViewController *buildView = [[MapBuidingInfoViewController alloc] init];
+    [buildView initialize:curBuilding];
+    buildView.mParentMapView = self;
+    [self.topViewController.navigationController pushViewController:buildView animated:YES];
 }
 
 // BMKGeneral Delegate

@@ -44,7 +44,7 @@
     
     // 左返回键
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(24, 0, 25.0 / SCREEN_SCALAR, 44.0 / SCREEN_SCALAR)];
-    [backButton setBackgroundImage:[UIImage imageNamed:IMG_MYCENTER_BACK] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:IMG_BACK_ARROW] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     

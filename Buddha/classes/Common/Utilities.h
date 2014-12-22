@@ -12,5 +12,6 @@
 @interface Utilities : NSObject
 
 + (NSInteger)heightForString:(NSString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame;
++ (NSString *)distanceFromFloat:(float)distance;
 
 @end

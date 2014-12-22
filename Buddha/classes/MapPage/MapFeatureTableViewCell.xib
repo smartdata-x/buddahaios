@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XA2-7K-4pk">
-                        <rect key="frame" x="256" y="16" width="56" height="21"/>
+                        <rect key="frame" x="251" y="17" width="61" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                 <outlet property="lblDistance" destination="XA2-7K-4pk" id="lBd-Pz-9tu"/>
                 <outlet property="lblTitle" destination="73E-7J-yZM" id="Lf4-5q-m0T"/>
             </connections>
-            <point key="canvasLocation" x="262" y="424.5"/>
+            <point key="canvasLocation" x="262" y="423.5"/>
         </tableViewCell>
     </objects>
 </document>

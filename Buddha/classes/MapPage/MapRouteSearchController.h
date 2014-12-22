@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BMapKit.h"
 #import "MyLocationManager.h"
+#import "MapFeatureTableViewCell.h"
 
 enum {
     
@@ -37,6 +38,7 @@ enum {
 @property (nonatomic, assign) NSInteger mLastSearchType; // 0:公交 1:汽车 2:步行
 @property (nonatomic, assign) CLLocationCoordinate2D mLastStartLoc;
 @property (nonatomic, assign) CLLocationCoordinate2D mLastEndLoc;
+@property (nonatomic, retain) migsBuildingInfo *mLastBuildingInfo;
 
 - (id)initWithBMKMapView:(BMKMapView *)mapView;
 

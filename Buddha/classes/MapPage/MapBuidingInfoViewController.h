@@ -35,4 +35,7 @@
 - (void)getSummaryFailed:(NSNotification *)notification;
 - (void)getSummarySuccess:(NSNotification *)notification;
 
+- (void)doFav;
+- (void)doShare;
+
 @end

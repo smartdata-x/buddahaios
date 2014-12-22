@@ -63,7 +63,7 @@
     NSString *imageName = buildingInfo.headUrl;
     NSString *title = buildingInfo.name;
     NSString *detail = buildingInfo.address;
-    NSString *distance = buildingInfo.distance;
+    float distance = buildingInfo.fDistance;
     
     // 图片
     _avatarImg.imageURL = [NSURL URLWithString:imageName];
@@ -81,7 +81,7 @@
     _lblDetail.font = [UIFont fontOfApp:24.0 / SCREEN_SCALAR];
     
     // 距离
-    _lblDistance.text = distance;
+    _lblDistance.text = [Utilities distanceFromFloat:distance];
     _lblDistance.textAlignment = NSTextAlignmentRight;
     _lblDistance.textColor = MIG_COLOR_808080;
     _lblDistance.font = [UIFont fontOfApp:24.0 / SCREEN_SCALAR];

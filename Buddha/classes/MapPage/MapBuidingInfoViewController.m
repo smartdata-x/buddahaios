@@ -51,22 +51,28 @@
 
 - (void)initNav {
     
-#if 0
-    // 导航键
+    // 导航键,分享
     CGRect viewFrame = CGRectMake(0, 0, 140, NAV_BAR_HEIGHT);
     UIView *viewWrapper = [[UIView alloc] initWithFrame:viewFrame];
     
-    CGRect iconFrame = CGRectMake(120, 0, 34/SCREEN_SCALAR, 44/SCREEN_SCALAR);
-    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:IMG_LOGIN_QQ]];
+    CGRect iconFrame = CGRectMake(160, 12, 42/SCREEN_SCALAR, 43/SCREEN_SCALAR);
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:IMG_SHARE_ICO]];
     iconView.frame = iconFrame;
     [viewWrapper addSubview:iconView];
     
-    // 添加事件
+    // 添加分享事件
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doSearchInMapView)];
     [viewWrapper addGestureRecognizer:gesture];
     
     self.navigationItem.titleView = viewWrapper;
-#endif
+    
+    // 喜爱按钮
+    UIButton *btnRight = [[UIButton alloc] initWithFrame:CGRectMake(44, 0, 42/SCREEN_SCALAR, 43/SCREEN_SCALAR)];
+    [btnRight setBackgroundImage:[UIImage imageNamed:IMG_FAV_ICO] forState:UIControlStateNormal];
+    [btnRight addTarget:self action:@selector(doFav) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item0 = [[UIBarButtonItem alloc] initWithCustomView:btnRight];
+    self.navigationItem.rightBarButtonItem = item0;
 }
 
 - (void)initView {
@@ -98,6 +104,16 @@
     [mMainTableView reloadData];
 }
 
+- (void)doFav {
+    
+    
+}
+
+- (void)doShare {
+    
+    
+}
+
 - (void)doSearchInMapView {
     
     MapViewController *mapview = (MapViewController *)self.mParentMapView;
@@ -106,6 +122,7 @@
     
     // 存储本页的建筑详情
     mapview.mLastBuildingInfo = mBuildingInfo;
+    mapview.mRouteSearchControl.mLastBuildingInfo = mBuildingInfo;
     
     // 主动调用地图显示
     [mapview viewWillAppear:YES];

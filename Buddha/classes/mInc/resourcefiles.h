@@ -23,7 +23,7 @@
 #define IMG_HOME_SEARCH                             @"home_search.png"
 #define IMG_HOME_MESSAGE                            @"home_message.png"
 #define IMG_PAGE_LOGO                               @"page_logo.png"
-#define IMG_MYCENTER_BACK                           @"mycenter_back.png"
+#define IMG_BACK_ARROW                              @"mycenter_back.png"
 #define IMG_LOGIN_LOGO                              @"login_logo.png"
 #define IMG_LOGIN_QQ                                @"qq_ico.png"
 #define IMG_LOGIN_WEIBO                             @"weibo_ico.png"
@@ -33,11 +33,12 @@
 #define IMG_ALLOW_UP                                @"allow_up.png"
 #define IMG_DISC_LINE                               @"disc_line.png"
 #define IMG_NEXT_ARROW                              @"next_ico.png"
-#define IMG_BACK_ARROW                              @"next_ico.png"
 #define IMG_MAPID_TEMPLE                            @"simiao_id.png"
 #define IMG_MAPID_CLOTHES                           @"clothes_id.png"
 #define IMG_MAPID_FOJU                              @"fozhu_id.png"
 #define IMG_MAPID_FOOD                              @"food_id.png"
 #define IMG_MAPID_BOOK                              @"book_id.png"
+#define IMG_FAV_ICO                                 @"fav.png"
+#define IMG_SHARE_ICO                               @"share.png"
 
 #endif

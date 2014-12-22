@@ -39,7 +39,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // 返回按钮
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 14, 17)];
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25/SCREEN_SCALAR, 44/SCREEN_SCALAR)];
     [leftButton setBackgroundImage:[UIImage imageNamed:IMG_BACK_ARROW] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];

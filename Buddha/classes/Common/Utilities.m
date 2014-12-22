@@ -19,4 +19,21 @@
     return labelSize.height;
 }
 
++ (NSString *)distanceFromFloat:(float)distance {
+    
+    NSString *ret = nil;
+    
+    if (distance < 1000.0) {
+        
+        ret = [NSString stringWithFormat:@"%.1fM", distance];
+    }
+    else if (distance > 1000.0) {
+        
+        float tmpDistance = distance / 1000.0;
+        ret = [NSString stringWithFormat:@"%.1fKM", tmpDistance];
+    }
+    
+    return ret;
+}
+
 @end

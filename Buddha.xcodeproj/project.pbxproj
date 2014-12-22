@@ -89,6 +89,8 @@
 		CBD3343C1A46B7620026AD71 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3343A1A46B7620026AD71 /* LeftMenuTableViewCell.xib */; };
 		CBD334401A46B77A0026AD71 /* RightMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3343E1A46B77A0026AD71 /* RightMenuTableViewCell.m */; };
 		CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */; };
+		CBD334441A4841C90026AD71 /* fav.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334421A4841C90026AD71 /* fav.png */; };
+		CBD334451A4841C90026AD71 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334431A4841C90026AD71 /* share.png */; };
 		CBEC68171A1A44E4007B2A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68161A1A44E4007B2A00 /* main.m */; };
 		CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68191A1A44E4007B2A00 /* AppDelegate.mm */; };
 		CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEC681E1A1A44E4007B2A00 /* Main.storyboard */; };
@@ -299,6 +301,8 @@
 		CBD3343D1A46B77A0026AD71 /* RightMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuTableViewCell.h; sourceTree = "<group>"; };
 		CBD3343E1A46B77A0026AD71 /* RightMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuTableViewCell.m; sourceTree = "<group>"; };
 		CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightMenuTableViewCell.xib; sourceTree = "<group>"; };
+		CBD334421A4841C90026AD71 /* fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fav.png; sourceTree = "<group>"; };
+		CBD334431A4841C90026AD71 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		CBEC68111A1A44E4007B2A00 /* Buddha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buddha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBEC68151A1A44E4007B2A00 /* Buddha-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Buddha-Info.plist"; sourceTree = "<group>"; };
 		CBEC68161A1A44E4007B2A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -564,6 +568,8 @@
 		CB20DDB61A3B20BB003410FA /* map */ = {
 			isa = PBXGroup;
 			children = (
+				CBD334421A4841C90026AD71 /* fav.png */,
+				CBD334431A4841C90026AD71 /* share.png */,
 				CBD334211A45A8390026AD71 /* book_id.png */,
 				CBD334221A45A8390026AD71 /* clothes_id.png */,
 				CBD334231A45A8390026AD71 /* food_id.png */,
@@ -1300,6 +1306,7 @@
 				CB9699641A2F523B009C35F8 /* logo.png in Resources */,
 				C7E0C1F81A2C6EFF002683DE /* Default1024.png in Resources */,
 				CBD334291A45A8390026AD71 /* fozhu_id.png in Resources */,
+				CBD334451A4841C90026AD71 /* share.png in Resources */,
 				CBEC68E31A2202F0007B2A00 /* home_search.png in Resources */,
 				CB8458BF1A309B470020283E /* weibo_ico.png in Resources */,
 				CB20DDC31A3B20BB003410FA /* around_ico.png in Resources */,
@@ -1335,6 +1342,7 @@
 				CB9699671A2F523B009C35F8 /* logo_@2x.png in Resources */,
 				CBEC68CD1A20E810007B2A00 /* found_fo_on.png in Resources */,
 				CB9699651A2F523B009C35F8 /* logo_1024.png in Resources */,
+				CBD334441A4841C90026AD71 /* fav.png in Resources */,
 				CBD3342A1A45A8390026AD71 /* simiao_id.png in Resources */,
 				CBD334061A41BDF00026AD71 /* next_ico.png in Resources */,
 				CBEC68EB1A24B008007B2A00 /* menu_normal.png in Resources */,

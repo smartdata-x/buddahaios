@@ -67,6 +67,7 @@
 - (void)doBackToMainEntry;
 - (void)doBackToBuildingInfo;
 
+- (CLLocationCoordinate2D)BD09ToGCJ02:(CLLocationCoordinate2D)bdLoc;
 - (void)doGotoAppleNav;
 
 - (void)getNearbyBuildingFailed:(NSNotification *)notification;

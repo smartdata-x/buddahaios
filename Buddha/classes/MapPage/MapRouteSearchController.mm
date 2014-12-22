@@ -85,6 +85,7 @@
     BMKTransitRoutePlanOption *busRouteSearchOption = [[BMKTransitRoutePlanOption alloc]init];
     busRouteSearchOption.from = start;
     busRouteSearchOption.to = end;
+    busRouteSearchOption.city = _mLastBuildingInfo.city;
     
     BOOL flag = [mRouteSearch transitSearch:busRouteSearchOption];
     if(flag)
@@ -244,9 +245,8 @@
             //添加annotation节点
             RouteAnnotation* item = [[RouteAnnotation alloc]init];
             item.coordinate = transitStep.entrace.location;
-            //item.title = transitStep.entraceInstruction;
-            //item.degree = transitStep.direction * 30;
-            item.type = 4;
+            item.title = transitStep.instruction;
+            item.type = 3;
             [mTopMapView addAnnotation:item];
             //轨迹点总数累计
             planPointCounts += transitStep.pointsCount;
@@ -318,6 +318,18 @@
             [mTopMapView addAnnotation:item];
             //轨迹点总数累计
             planPointCounts += transitStep.pointsCount;
+        }
+        
+        if (plan.wayPoints) {
+            
+            for (BMKPlanNode* tempNode in plan.wayPoints) {
+                RouteAnnotation* item = [[RouteAnnotation alloc]init];
+                item = [[RouteAnnotation alloc]init];
+                item.coordinate = tempNode.pt;
+                item.type = 5;
+                item.title = tempNode.name;
+                [mTopMapView addAnnotation:item];
+            }
         }
         
         //轨迹点

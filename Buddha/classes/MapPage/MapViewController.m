@@ -273,11 +273,44 @@
     [mapInfo initialize:_mLastBuildingInfo];
     
     [self.topViewController.navigationController pushViewController:mapInfo animated:YES];
+    
+    // 进入详情之后,如果当前是路线界面，改为主界面
+    if (!_isMainEntry) {
+        
+        _isMainEntry = YES;
+        [self updateIsMainEntry];
+    }
 }
 
 - (void)doGotoMapFeatureView {
     
     [self showBuildMenu:YES];
+}
+
+- (void)doGotoBuildingInfo:(NSString *)name {
+    
+    // 获取建筑详情
+    migsBuildingInfo *curBuilding;
+    NSString *curName = name;
+    for (migsBuildingInfo *buildinfo in mBuildingInfo) {
+        
+        if ([curName isEqualToString:buildinfo.name]) {
+            
+            curBuilding = buildinfo;
+            break;
+        }
+    }
+    
+    if (curBuilding == nil) {
+        
+        return;
+    }
+    
+    // 调用建筑详情页面
+    MapBuidingInfoViewController *buildView = [[MapBuidingInfoViewController alloc] init];
+    [buildView initialize:curBuilding];
+    buildView.mParentMapView = self;
+    [self.topViewController.navigationController pushViewController:buildView animated:YES];
 }
 
 - (CLLocationCoordinate2D)BD09ToGCJ02:(CLLocationCoordinate2D)bdLoc {
@@ -331,6 +364,16 @@
     }
     
     [self updateShowNearby];
+}
+
+- (void)updateIsMainEntry {
+    
+    [self updateBottomMenu];
+    
+    if (_isMainEntry) {
+        
+        [self updateShowNearby];
+    }
 }
 
 - (void)updateShowNearby {
@@ -590,28 +633,8 @@
     
     MIGDEBUG_PRINT(@"点击气泡");
     
-    // 获取建筑详情
-    migsBuildingInfo *curBuilding;
-    NSString *curName = [view.annotation title];
-    for (migsBuildingInfo *buildinfo in mBuildingInfo) {
-        
-        if ([curName isEqualToString:buildinfo.name]) {
-            
-            curBuilding = buildinfo;
-            break;
-        }
-    }
-    
-    if (curBuilding == nil) {
-        
-        return;
-    }
-    
-    // 调用建筑详情页面
-    MapBuidingInfoViewController *buildView = [[MapBuidingInfoViewController alloc] init];
-    [buildView initialize:curBuilding];
-    buildView.mParentMapView = self;
-    [self.topViewController.navigationController pushViewController:buildView animated:YES];
+    NSString *name = [view.annotation title];
+    [self doGotoBuildingInfo:name];
 }
 
 // BMKGeneral Delegate

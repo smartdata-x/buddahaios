@@ -55,8 +55,9 @@
 
 - (void)initNearbyBottomMenu;
 - (void)initRouteBottomMenu;
-- (void)updateBottomMenu;
 
+- (void)updateIsMainEntry; // 目前需要更新updateBottomMenu和updateShowNeary
+- (void)updateBottomMenu;
 - (void)updateShowNearby;
 
 - (void)initBuildMenu;
@@ -64,6 +65,7 @@
 - (void)hideBuildMenu:(BOOL)animate;
 
 - (void)doGotoMapFeatureView; // 搜索建筑和推荐建筑页面
+- (void)doGotoBuildingInfo:(NSString *)name; // 建筑详情
 - (void)doBackToMainEntry;
 - (void)doBackToBuildingInfo;
 

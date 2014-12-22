@@ -48,6 +48,9 @@
 #if MIG_DEBUG_TEST
     [self testdata];
 #endif
+    
+    // 目前TableView的响应有问题，将TableView放到最前面
+    [self.view bringSubviewToFront:mBuildTableView];
 }
 
 - (void)initNav {
@@ -102,7 +105,7 @@
         mBuildTableView = [[UITableView alloc] initWithFrame:tableFrame];
     }
     
-    [mBuildTableView setBackgroundColor:[UIColor clearColor]];
+    [mBuildTableView setBackgroundColor:[UIColor whiteColor]];
     mBuildTableView.delegate = self;
     mBuildTableView.dataSource = self;
     [self.view addSubview:mBuildTableView];

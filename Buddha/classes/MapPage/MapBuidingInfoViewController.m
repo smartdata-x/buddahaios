@@ -141,6 +141,14 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)doCallPhoneNumber {
+    
+    NSMutableString *phone = [[NSMutableString alloc] initWithFormat:@"tel:%@", mPhone];
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:phone]]];
+    [self.view addSubview:callWebview];
+}
+
 - (void)getSummary {
     
     AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
@@ -311,6 +319,10 @@
         if (row == 1) {
             
             [self doSearchInMapView];
+        }
+        else if (row == 2) {
+            
+            [self doCallPhoneNumber];
         }
     }
     

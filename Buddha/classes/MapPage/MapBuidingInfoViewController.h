@@ -28,8 +28,10 @@
 - (void)initialize:(migsBuildingInfo *)buildinfo;
 
 - (void)initNav;
-- (void)doSearchInMapView;
 - (void)reloadData;
+
+- (void)doSearchInMapView;
+- (void)doCallPhoneNumber;
 
 - (void)getSummary;
 - (void)getSummaryFailed:(NSNotification *)notification;

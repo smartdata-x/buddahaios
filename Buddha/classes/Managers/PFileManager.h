@@ -17,4 +17,10 @@
 // 计算文件夹总大小
 - (long long)getFileSizeForDir:(NSString *)dir;
 
+// Document目录下，文件是否存在
+- (BOOL)isFileExistInDocument:(NSString *)filename;
+
+// Document目录的文件路径
+- (NSString *)getFullPathFromDocument:(NSString *)filename;
+
 @end

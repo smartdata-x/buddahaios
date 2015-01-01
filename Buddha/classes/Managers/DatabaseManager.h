@@ -12,6 +12,7 @@
 #import "FMDatabase.h"
 #import "UserLoginData.h"
 #import "PCommonUtil.h"
+#import "BookDetailViewController.h"
 
 @interface DatabaseManager : PFileManager
 
@@ -26,5 +27,9 @@
 // 记录是否登陆
 - (void)insertLoginOrNot:(int)isLogin;
 - (int)getLastLoginOrNot;
+
+// 记录书架信息
+- (void)insertBookInfo:(migsBookDetailInformation *)bookinfo;
+- (NSArray *)getAllBookInfo;
 
 @end

@@ -51,9 +51,21 @@
 #define MigNetNameSearchTypeBuildFailed                 @"MigNetNameSearchTypeBuildFailed"
 #define MigNetNameSearchTypeBuildSuccess                @"MigNetNameSearchTypeBuildSuccess"
 
-// 获取详情
+// 获取(建筑)详情
 #define MigNetNameGetSummaryFailed                      @"MigNetNameGetSummaryFailed"
 #define MigNetNameGetSummarySuccess                     @"MigNetNameGetSummarySuccess"
+
+// 获取书籍详细介绍
+#define MigNetNameGetBookSummaryFailed                  @"MigNetNameGetBookSummaryFailed"
+#define MigNetNameGetBookSummarySuccess                 @"MigNetNameGetBookSummarySuccess"
+
+// 获取书城首页信息
+#define MigNetNameGetBookFailed                         @"MigNetNameGetBookFailed"
+#define MigNetNameGetBookSuccess                        @"MigNetNameGetBookSuccess"
+
+// 根据类别获取书籍
+#define MigNetNameSearchBookTypeFailed                  @"MigNetNameSearchBookTypeFailed"
+#define MigNetNameSearchBookTypeSuccess                 @"MigNetNameSearchBookTypeSuccess"
 
 enum {
     
@@ -66,6 +78,9 @@ enum {
     MIGAPI_GETRECOMBUILD,
     MIGAPI_SEARCHTYPEBUILD,
     MIGAPI_GETSUMMARY,
+    MIGAPI_GETBOOKSUMMARY,
+    MIGAPI_GETBOOK,
+    MIGAPI_SEARCHBOOKTYPE,
 };
 
 @interface AskNetDataApi : NSObject
@@ -90,5 +105,8 @@ enum {
 - (void)doGetRecomBuild;
 - (void)doSearchTypeBuild:(NSString *)type;
 - (void)doGetSummary:(NSString *)buildid;
+- (void)doGetBookSummary:(NSString *)bookid;
+- (void)doGetBook;
+- (void)doSearchBookType:(NSString *)type;
 
 @end

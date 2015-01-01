@@ -135,6 +135,12 @@
     newsSummary = [news objectForKey:@"summary"];
     newsPic = [news objectForKey:@"pic"];
     
+    // 获取成功，删除已有数据
+    [booksName removeAllObjects];
+    [booksPic removeAllObjects];
+    [activityPic removeAllObjects];
+    [activityTitle removeAllObjects];
+    
     NSArray *books = [result objectForKey:@"books"];
     for (NSDictionary *dicBook in books) {
         

@@ -73,4 +73,27 @@
     return size;
 }
 
+- (BOOL)isFileExistInDocument:(NSString *)filename {
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    NSString *directoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *filePath = [directoryPath stringByAppendingPathComponent:filename];
+    
+    if ([fm fileExistsAtPath:filePath]) {
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (NSString *)getFullPathFromDocument:(NSString *)filename {
+    
+    NSString *directoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *filePath = [directoryPath stringByAppendingPathComponent:filename];
+    
+    return filePath;
+}
+
 @end

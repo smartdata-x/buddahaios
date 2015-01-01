@@ -53,6 +53,9 @@
     NSString *httpGetRecomBuild = [NSString stringWithFormat:@"%@/find/1/building.fcgi", MAIN_HTTP];
     NSString *httpSearchTypeBuild = [NSString stringWithFormat:@"%@/build/1/searchtype.fcgi", MAIN_HTTP];
     NSString *httpGetSummary = [NSString stringWithFormat:@"%@/build/1/summary.fcgi", MAIN_HTTP];
+    NSString *httpGetBookSummary = [NSString stringWithFormat:@"%@/book/1/booksummary.fcgi", MAIN_HTTP];
+    NSString *httpGetBook = [NSString stringWithFormat:@"%@/find/1/book.fcgi", MAIN_HTTP];
+    NSString *httpSearchBookType = [NSString stringWithFormat:@"%@/book/1/searchtype.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -90,6 +93,18 @@
                        @{KEY_NET_ADDRESS:httpGetSummary,
                          KEY_NET_FAILED:MigNetNameGetSummaryFailed,
                          KEY_NET_SUCCESS:MigNetNameGetSummarySuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetBookSummary,
+                         KEY_NET_FAILED:MigNetNameGetBookSummaryFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetBookSummarySuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetBook,
+                         KEY_NET_FAILED:MigNetNameGetBookFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetBookSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpSearchBookType,
+                         KEY_NET_FAILED:MigNetNameSearchBookTypeFailed,
+                         KEY_NET_SUCCESS:MigNetNameSearchBookTypeSuccess},
                        ];
 }
 
@@ -317,6 +332,36 @@
         NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&bid=%@&latitude=%@&longitude=%@", mUid, mToken, buildid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
         
         [self doGetData:MIGAPI_GETSUMMARY tail:getData];
+    }
+}
+
+- (void)doGetBookSummary:(NSString *)bookid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&bookid=%@&latitude=%@&longitude=%@", mUid, mToken, bookid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETBOOKSUMMARY tail:getData];
+    }
+}
+
+- (void)doGetBook {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETBOOK tail:getData];
+    }
+}
+
+- (void)doSearchBookType:(NSString *)type {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&btype=%@&latitude=%@&longitude=%@", mUid, mToken, type, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_SEARCHBOOKTYPE tail:getData];
     }
 }
 

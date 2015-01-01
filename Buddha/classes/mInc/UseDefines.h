@@ -66,10 +66,6 @@
 #define NAVIGATION_HEIGHT                           64
 #define BOTTOM_AD_HEIGHT                            (50 / SCREEN_SCALAR)
 
-#define DEFAULT_DISTANCE_RADIUS                     10000
-#define MAX_DISTANCE_RADIUS                         1000000000
-#define DEFAULT_DISTANCE_FILTER                     2
-
 #define LAST_LOGOUT                                 0
 #define LAST_LOGIN                                  1
 
@@ -80,11 +76,22 @@
 #define MIG_COLOR_FBFBFB                            [UIColor colorWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0]
 #define MIG_COLOR_333333                            [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]
 
+// 地图
+#define DEFAULT_DISTANCE_RADIUS                     10000
+#define MAX_DISTANCE_RADIUS                         1000000000
+#define DEFAULT_DISTANCE_FILTER                     2
+
+// 书店
+#define MIG_BOOKS_PER_ROW                           3
+#define MIG_BOOKCELL_HEIGHT                         147.0
+#define MIG_BOOK_DIR                                @"/books/"
+
 // 字符串打印消息
 #define MIGTIP_LOGIN_SUCCESS                        @"登录成功"
 #define MIGTIP_LOGIN_FAILED                         @"对不起, 登录失败了"
 #define MIGTIP_LOGIN_NOTLOGIN                       @"对不起，您还未登录"
 #define MIGTIP_GETBUILDING_FAILED                   @"获取推荐建筑失败了"
+#define MIGTIP_CANCEL                               @"取消"
 
 // 字典匹配关键字
 #define KEY_NORMAL                                  @"KeyNormal"
@@ -106,6 +113,8 @@
 #define MigLocalNameGetAdFailed                     @"MigLocalNameGetAdFailed"
 #define MigLocalNameLoginSuccess                    @"MigLocalNameLoginSuccess"
 #define MigLocalNameLoginFailed                     @"MigLocalNameLoginFailed"
+#define MigLocalNameDownloadFileFailed              @"MigLocalNameDownloadFileFailed"
+#define MigLocalNameDownloadFileSuccess             @"MigLocalNameDownloadFileSuccess"
 
 // 新浪微博
 //#define kAppKey                                     @"2045436852"

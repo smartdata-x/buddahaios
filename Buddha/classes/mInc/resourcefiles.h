@@ -40,5 +40,20 @@
 #define IMG_MAPID_BOOK                              @"book_id.png"
 #define IMG_FAV_ICO                                 @"fav.png"
 #define IMG_SHARE_ICO                               @"share.png"
+#define IMG_ROUND_RECTANGLE                         @"another_ico.png"
+
+// book
+#define IMG_BOOK_FOJING                             @"fojing.png"
+#define IMG_BOOK_FOLUN                              @"folun.png"
+#define IMG_BOOK_FOLV                               @"folv.png"
+#define IMG_BOOK_FOZHU                              @"jindaifozhu.png"
+#define IMG_BOOK_SHELF                              @"shelf.png"
+#define IMG_BOOK_SELECT_BG                          @"title_line.png"
+#define IMG_BOOK_BOOKMARK                           @"bookmark.png"
+#define IMG_BOOK_SHARE                              @"share_book.png"
+#define IMG_SHARE_WEIXIN                            @"weixin_icon.png"
+#define IMG_SHARE_QQZONE                            @"qqspace_icon.png"
+#define IMG_SHARE_WEIBO                             @"weibo_icon.png"
+#define IMG_COLOR_BG_FBFBFB                         @"fbfbfb_bg.png"
 
 #endif

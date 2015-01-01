@@ -12,7 +12,7 @@
 
 + (NSInteger)heightForString:(NSString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame {
     
-    CGSize size = CGSizeMake(frame.size.width, 2000);
+    CGSize size = CGSizeMake(frame.size.width, MAXFLOAT);
     NSDictionary *attribute = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
     CGSize labelSize = [srcstr boundingRectWithSize:size options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:attribute context:nil].size;
     

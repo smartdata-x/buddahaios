@@ -50,6 +50,7 @@
 		CB96996B1A308834009C35F8 /* MyLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB96996A1A308834009C35F8 /* MyLocationManager.m */; };
 		CB96996F1A3095F9009C35F8 /* LoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB96996D1A3095F9009C35F8 /* LoginTableViewCell.m */; };
 		CB9699701A3095F9009C35F8 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB96996E1A3095F9009C35F8 /* LoginTableViewCell.xib */; };
+		CB9D3F4A1A5579DE00FC2C7D /* fbfbfb_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9D3F491A5579DE00FC2C7D /* fbfbfb_bg.png */; };
 		CBB6ED1E1A2B3170005B0CF3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB6ED1D1A2B3170005B0CF3 /* ImageIO.framework */; };
 		CBB6ED211A2B3434005B0CF3 /* TencentQQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB6ED201A2B3434005B0CF3 /* TencentQQManager.m */; };
 		CBB6ED281A2B3C0A005B0CF3 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB6ED271A2B3C0A005B0CF3 /* libiconv.dylib */; };
@@ -91,6 +92,32 @@
 		CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */; };
 		CBD334441A4841C90026AD71 /* fav.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334421A4841C90026AD71 /* fav.png */; };
 		CBD334451A4841C90026AD71 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334431A4841C90026AD71 /* share.png */; };
+		CBD334491A499CA00026AD71 /* BookShellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334481A499CA00026AD71 /* BookShellViewController.m */; };
+		CBD3344C1A499D000026AD71 /* BookImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3344B1A499D000026AD71 /* BookImageView.m */; };
+		CBD3344F1A499D990026AD71 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3344E1A499D990026AD71 /* ReadingViewController.m */; };
+		CBD334521A4C3B730026AD71 /* PFileDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334511A4C3B730026AD71 /* PFileDownLoadManager.m */; };
+		CBD334551A4DB5FC0026AD71 /* BookStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334541A4DB5FC0026AD71 /* BookStoreViewController.m */; };
+		CBD3345B1A4DB82C0026AD71 /* fojing.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334571A4DB82C0026AD71 /* fojing.png */; };
+		CBD3345C1A4DB82C0026AD71 /* folun.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334581A4DB82C0026AD71 /* folun.png */; };
+		CBD3345D1A4DB82C0026AD71 /* folv.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334591A4DB82C0026AD71 /* folv.png */; };
+		CBD3345E1A4DB82C0026AD71 /* jindaifozhu.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD3345A1A4DB82C0026AD71 /* jindaifozhu.png */; };
+		CBD334621A4DBA080026AD71 /* BookInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334601A4DBA080026AD71 /* BookInfoTableViewCell.m */; };
+		CBD334631A4DBA080026AD71 /* BookInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD334611A4DBA080026AD71 /* BookInfoTableViewCell.xib */; };
+		CBD334671A4DBD450026AD71 /* BookIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334651A4DBD450026AD71 /* BookIntroduceTableViewCell.m */; };
+		CBD334681A4DBD450026AD71 /* BookIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD334661A4DBD450026AD71 /* BookIntroduceTableViewCell.xib */; };
+		CBD3346A1A4EF4720026AD71 /* shelf.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334691A4EF4720026AD71 /* shelf.png */; };
+		CBD3346D1A4F0CFD0026AD71 /* BookCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3346C1A4F0CFD0026AD71 /* BookCategoryViewController.m */; };
+		CBD334701A4F0DBD0026AD71 /* GeneralSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3346F1A4F0DBD0026AD71 /* GeneralSearchView.m */; };
+		CBD334721A4F11E30026AD71 /* title_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334711A4F11E30026AD71 /* title_line.png */; };
+		CBD334761A4FBF090026AD71 /* BookCategoryInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334741A4FBF090026AD71 /* BookCategoryInfoTableViewCell.m */; };
+		CBD334771A4FBF090026AD71 /* BookCategoryInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD334751A4FBF090026AD71 /* BookCategoryInfoTableViewCell.xib */; };
+		CBD3347A1A4FD9820026AD71 /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334791A4FD9820026AD71 /* BookDetailViewController.m */; };
+		CBD3347D1A4FE0DD0026AD71 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD3347B1A4FE0DD0026AD71 /* bookmark.png */; };
+		CBD3347E1A4FE0DD0026AD71 /* share_book.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD3347C1A4FE0DD0026AD71 /* share_book.png */; };
+		CBD334821A4FECCD0026AD71 /* qqspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD3347F1A4FECCD0026AD71 /* qqspace_icon.png */; };
+		CBD334831A4FECCD0026AD71 /* weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334801A4FECCD0026AD71 /* weibo_icon.png */; };
+		CBD334841A4FECCD0026AD71 /* weixin_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334811A4FECCD0026AD71 /* weixin_icon.png */; };
+		CBD334871A4FECFA0026AD71 /* GeneralShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334861A4FECFA0026AD71 /* GeneralShareView.m */; };
 		CBEC68171A1A44E4007B2A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68161A1A44E4007B2A00 /* main.m */; };
 		CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68191A1A44E4007B2A00 /* AppDelegate.mm */; };
 		CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEC681E1A1A44E4007B2A00 /* Main.storyboard */; };
@@ -129,7 +156,6 @@
 		CBEC68E21A2202F0007B2A00 /* home_message.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68DF1A2202F0007B2A00 /* home_message.png */; };
 		CBEC68E31A2202F0007B2A00 /* home_search.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68E01A2202F0007B2A00 /* home_search.png */; };
 		CBEC68E41A2202F0007B2A00 /* page_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68E11A2202F0007B2A00 /* page_logo.png */; };
-		CBEC68E61A220ADE007B2A00 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68E51A220ADE007B2A00 /* test.png */; };
 		CBEC68E81A2360C5007B2A00 /* banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68E71A2360C5007B2A00 /* banner.jpg */; };
 		CBEC68EB1A24B008007B2A00 /* menu_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68E91A24B008007B2A00 /* menu_normal.png */; };
 		CBEC68EC1A24B008007B2A00 /* menu_select.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEC68EA1A24B008007B2A00 /* menu_select.png */; };
@@ -246,6 +272,7 @@
 		CB96996C1A3095F9009C35F8 /* LoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCell.h; sourceTree = "<group>"; };
 		CB96996D1A3095F9009C35F8 /* LoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCell.m; sourceTree = "<group>"; };
 		CB96996E1A3095F9009C35F8 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTableViewCell.xib; sourceTree = "<group>"; };
+		CB9D3F491A5579DE00FC2C7D /* fbfbfb_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbfbfb_bg.png; sourceTree = "<group>"; };
 		CBB6ED1D1A2B3170005B0CF3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CBB6ED1F1A2B3434005B0CF3 /* TencentQQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentQQManager.h; sourceTree = "<group>"; };
 		CBB6ED201A2B3434005B0CF3 /* TencentQQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentQQManager.m; sourceTree = "<group>"; };
@@ -303,6 +330,44 @@
 		CBD3343F1A46B77A0026AD71 /* RightMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightMenuTableViewCell.xib; sourceTree = "<group>"; };
 		CBD334421A4841C90026AD71 /* fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fav.png; sourceTree = "<group>"; };
 		CBD334431A4841C90026AD71 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		CBD334471A499CA00026AD71 /* BookShellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookShellViewController.h; sourceTree = "<group>"; };
+		CBD334481A499CA00026AD71 /* BookShellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookShellViewController.m; sourceTree = "<group>"; };
+		CBD3344A1A499D000026AD71 /* BookImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookImageView.h; sourceTree = "<group>"; };
+		CBD3344B1A499D000026AD71 /* BookImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookImageView.m; sourceTree = "<group>"; };
+		CBD3344D1A499D990026AD71 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
+		CBD3344E1A499D990026AD71 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
+		CBD334501A4C3B730026AD71 /* PFileDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileDownLoadManager.h; sourceTree = "<group>"; };
+		CBD334511A4C3B730026AD71 /* PFileDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFileDownLoadManager.m; sourceTree = "<group>"; };
+		CBD334531A4DB5FC0026AD71 /* BookStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookStoreViewController.h; sourceTree = "<group>"; };
+		CBD334541A4DB5FC0026AD71 /* BookStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookStoreViewController.m; sourceTree = "<group>"; };
+		CBD334571A4DB82C0026AD71 /* fojing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fojing.png; sourceTree = "<group>"; };
+		CBD334581A4DB82C0026AD71 /* folun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folun.png; sourceTree = "<group>"; };
+		CBD334591A4DB82C0026AD71 /* folv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folv.png; sourceTree = "<group>"; };
+		CBD3345A1A4DB82C0026AD71 /* jindaifozhu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jindaifozhu.png; sourceTree = "<group>"; };
+		CBD3345F1A4DBA080026AD71 /* BookInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoTableViewCell.h; sourceTree = "<group>"; };
+		CBD334601A4DBA080026AD71 /* BookInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoTableViewCell.m; sourceTree = "<group>"; };
+		CBD334611A4DBA080026AD71 /* BookInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookInfoTableViewCell.xib; sourceTree = "<group>"; };
+		CBD334641A4DBD450026AD71 /* BookIntroduceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookIntroduceTableViewCell.h; sourceTree = "<group>"; };
+		CBD334651A4DBD450026AD71 /* BookIntroduceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookIntroduceTableViewCell.m; sourceTree = "<group>"; };
+		CBD334661A4DBD450026AD71 /* BookIntroduceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		CBD334691A4EF4720026AD71 /* shelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf.png; sourceTree = "<group>"; };
+		CBD3346B1A4F0CFD0026AD71 /* BookCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategoryViewController.h; sourceTree = "<group>"; };
+		CBD3346C1A4F0CFD0026AD71 /* BookCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategoryViewController.m; sourceTree = "<group>"; };
+		CBD3346E1A4F0DBD0026AD71 /* GeneralSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralSearchView.h; sourceTree = "<group>"; };
+		CBD3346F1A4F0DBD0026AD71 /* GeneralSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralSearchView.m; sourceTree = "<group>"; };
+		CBD334711A4F11E30026AD71 /* title_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_line.png; sourceTree = "<group>"; };
+		CBD334731A4FBF090026AD71 /* BookCategoryInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategoryInfoTableViewCell.h; sourceTree = "<group>"; };
+		CBD334741A4FBF090026AD71 /* BookCategoryInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategoryInfoTableViewCell.m; sourceTree = "<group>"; };
+		CBD334751A4FBF090026AD71 /* BookCategoryInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookCategoryInfoTableViewCell.xib; sourceTree = "<group>"; };
+		CBD334781A4FD9820026AD71 /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
+		CBD334791A4FD9820026AD71 /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		CBD3347B1A4FE0DD0026AD71 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
+		CBD3347C1A4FE0DD0026AD71 /* share_book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_book.png; sourceTree = "<group>"; };
+		CBD3347F1A4FECCD0026AD71 /* qqspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qqspace_icon.png; sourceTree = "<group>"; };
+		CBD334801A4FECCD0026AD71 /* weibo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_icon.png; sourceTree = "<group>"; };
+		CBD334811A4FECCD0026AD71 /* weixin_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixin_icon.png; sourceTree = "<group>"; };
+		CBD334851A4FECFA0026AD71 /* GeneralShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralShareView.h; sourceTree = "<group>"; };
+		CBD334861A4FECFA0026AD71 /* GeneralShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralShareView.m; sourceTree = "<group>"; };
 		CBEC68111A1A44E4007B2A00 /* Buddha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buddha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBEC68151A1A44E4007B2A00 /* Buddha-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Buddha-Info.plist"; sourceTree = "<group>"; };
 		CBEC68161A1A44E4007B2A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -363,7 +428,6 @@
 		CBEC68DF1A2202F0007B2A00 /* home_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_message.png; sourceTree = "<group>"; };
 		CBEC68E01A2202F0007B2A00 /* home_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_search.png; sourceTree = "<group>"; };
 		CBEC68E11A2202F0007B2A00 /* page_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_logo.png; sourceTree = "<group>"; };
-		CBEC68E51A220ADE007B2A00 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		CBEC68E71A2360C5007B2A00 /* banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner.jpg; sourceTree = "<group>"; };
 		CBEC68E91A24B008007B2A00 /* menu_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_normal.png; sourceTree = "<group>"; };
 		CBEC68EA1A24B008007B2A00 /* menu_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_select.png; sourceTree = "<group>"; };
@@ -677,6 +741,53 @@
 			path = QQSDK;
 			sourceTree = "<group>";
 		};
+		CBD334461A499BF70026AD71 /* BookPage */ = {
+			isa = PBXGroup;
+			children = (
+				CBD334531A4DB5FC0026AD71 /* BookStoreViewController.h */,
+				CBD334541A4DB5FC0026AD71 /* BookStoreViewController.m */,
+				CBD334471A499CA00026AD71 /* BookShellViewController.h */,
+				CBD334481A499CA00026AD71 /* BookShellViewController.m */,
+				CBD3344A1A499D000026AD71 /* BookImageView.h */,
+				CBD3344B1A499D000026AD71 /* BookImageView.m */,
+				CBD3344D1A499D990026AD71 /* ReadingViewController.h */,
+				CBD3344E1A499D990026AD71 /* ReadingViewController.m */,
+				CBD3345F1A4DBA080026AD71 /* BookInfoTableViewCell.h */,
+				CBD334601A4DBA080026AD71 /* BookInfoTableViewCell.m */,
+				CBD334611A4DBA080026AD71 /* BookInfoTableViewCell.xib */,
+				CBD334641A4DBD450026AD71 /* BookIntroduceTableViewCell.h */,
+				CBD334651A4DBD450026AD71 /* BookIntroduceTableViewCell.m */,
+				CBD334661A4DBD450026AD71 /* BookIntroduceTableViewCell.xib */,
+				CBD3346B1A4F0CFD0026AD71 /* BookCategoryViewController.h */,
+				CBD3346C1A4F0CFD0026AD71 /* BookCategoryViewController.m */,
+				CBD334731A4FBF090026AD71 /* BookCategoryInfoTableViewCell.h */,
+				CBD334741A4FBF090026AD71 /* BookCategoryInfoTableViewCell.m */,
+				CBD334751A4FBF090026AD71 /* BookCategoryInfoTableViewCell.xib */,
+				CBD334781A4FD9820026AD71 /* BookDetailViewController.h */,
+				CBD334791A4FD9820026AD71 /* BookDetailViewController.m */,
+			);
+			path = BookPage;
+			sourceTree = "<group>";
+		};
+		CBD334561A4DB82C0026AD71 /* book */ = {
+			isa = PBXGroup;
+			children = (
+				CB9D3F491A5579DE00FC2C7D /* fbfbfb_bg.png */,
+				CBD3347F1A4FECCD0026AD71 /* qqspace_icon.png */,
+				CBD334801A4FECCD0026AD71 /* weibo_icon.png */,
+				CBD334811A4FECCD0026AD71 /* weixin_icon.png */,
+				CBD3347B1A4FE0DD0026AD71 /* bookmark.png */,
+				CBD3347C1A4FE0DD0026AD71 /* share_book.png */,
+				CBD334711A4F11E30026AD71 /* title_line.png */,
+				CBD334691A4EF4720026AD71 /* shelf.png */,
+				CBD334571A4DB82C0026AD71 /* fojing.png */,
+				CBD334581A4DB82C0026AD71 /* folun.png */,
+				CBD334591A4DB82C0026AD71 /* folv.png */,
+				CBD3345A1A4DB82C0026AD71 /* jindaifozhu.png */,
+			);
+			path = book;
+			sourceTree = "<group>";
+		};
 		CBEC68081A1A44E4007B2A00 = {
 			isa = PBXGroup;
 			children = (
@@ -739,6 +850,7 @@
 				CBEC69C81A29DD88007B2A00 /* CTMBase64 */,
 				CBEC69A71A28EE8D007B2A00 /* FMDatabase */,
 				CBEC69A31A28A9FD007B2A00 /* AskNetData */,
+				CBD334461A499BF70026AD71 /* BookPage */,
 				CBEC699C1A2753C6007B2A00 /* FeaturePage */,
 				CBEC699B1A275372007B2A00 /* MapPage */,
 				CBEC69851A260AF8007B2A00 /* Managers */,
@@ -841,6 +953,10 @@
 				CBEC69961A2618D1007B2A00 /* BaseViewController.m */,
 				CBD333F21A41ADAD0026AD71 /* BaseNavViewController.h */,
 				CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */,
+				CBD3346E1A4F0DBD0026AD71 /* GeneralSearchView.h */,
+				CBD3346F1A4F0DBD0026AD71 /* GeneralSearchView.m */,
+				CBD334851A4FECFA0026AD71 /* GeneralShareView.h */,
+				CBD334861A4FECFA0026AD71 /* GeneralShareView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -858,10 +974,10 @@
 		CBEC68611A1A4A86007B2A00 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CBD334561A4DB82C0026AD71 /* book */,
 				CB20DDB61A3B20BB003410FA /* map */,
 				CB96995D1A2F523B009C35F8 /* icon */,
 				CB9699621A2F523B009C35F8 /* mycenter */,
-				CBEC68E51A220ADE007B2A00 /* test.png */,
 				CBEC689A1A2090B5007B2A00 /* home */,
 			);
 			name = images;
@@ -1078,6 +1194,8 @@
 				CBB6ED201A2B3434005B0CF3 /* TencentQQManager.m */,
 				CB9699691A308834009C35F8 /* MyLocationManager.h */,
 				CB96996A1A308834009C35F8 /* MyLocationManager.m */,
+				CBD334501A4C3B730026AD71 /* PFileDownLoadManager.h */,
+				CBD334511A4C3B730026AD71 /* PFileDownLoadManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1282,20 +1400,27 @@
 			files = (
 				CB20DDC61A3B20BB003410FA /* car_ico.png in Resources */,
 				CBEC69421A24C3F6007B2A00 /* mapapi.bundle in Resources */,
+				CBD334681A4DBD450026AD71 /* BookIntroduceTableViewCell.xib in Resources */,
 				CBEC68B91A20CEE8007B2A00 /* book_1.jpg in Resources */,
 				C7E0C1F61A2C6EFF002683DE /* Default.png in Resources */,
+				CB9D3F4A1A5579DE00FC2C7D /* fbfbfb_bg.png in Resources */,
 				CB20DDC21A3B20BB003410FA /* another_ico.png in Resources */,
 				CBEC68C71A20E808007B2A00 /* my_fo_on.png in Resources */,
-				CBEC68E61A220ADE007B2A00 /* test.png in Resources */,
 				CBD3342F1A45B34E0026AD71 /* MapIconInfoTableViewCell.xib in Resources */,
 				CBB6ED5F1A2B61B8005B0CF3 /* FeaturedBooksCell.xib in Resources */,
+				CBD3346A1A4EF4720026AD71 /* shelf.png in Resources */,
 				CBD334201A44C1F70026AD71 /* MapSearchResultViewController.xib in Resources */,
+				CBD3345B1A4DB82C0026AD71 /* fojing.png in Resources */,
+				CBD3345C1A4DB82C0026AD71 /* folun.png in Resources */,
+				CBD334771A4FBF090026AD71 /* BookCategoryInfoTableViewCell.xib in Resources */,
 				CBEC69EF1A2ADF1B007B2A00 /* read_me.txt in Resources */,
 				CB20DDD11A3B2A66003410FA /* MapFeatureTableViewCell.xib in Resources */,
 				CBEC68C81A20E808007B2A00 /* my_fo.png in Resources */,
+				CBD3347E1A4FE0DD0026AD71 /* share_book.png in Resources */,
 				CB8458BD1A309B470020283E /* login_logo.png in Resources */,
 				CBD334271A45A8390026AD71 /* clothes_id.png in Resources */,
 				CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */,
+				CBD334821A4FECCD0026AD71 /* qqspace_icon.png in Resources */,
 				CBD334261A45A8390026AD71 /* book_id.png in Resources */,
 				CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */,
 				CBD334021A41BDDA0026AD71 /* disc_line.png in Resources */,
@@ -1306,14 +1431,17 @@
 				CB9699641A2F523B009C35F8 /* logo.png in Resources */,
 				C7E0C1F81A2C6EFF002683DE /* Default1024.png in Resources */,
 				CBD334291A45A8390026AD71 /* fozhu_id.png in Resources */,
+				CBD3345E1A4DB82C0026AD71 /* jindaifozhu.png in Resources */,
 				CBD334451A4841C90026AD71 /* share.png in Resources */,
 				CBEC68E31A2202F0007B2A00 /* home_search.png in Resources */,
 				CB8458BF1A309B470020283E /* weibo_ico.png in Resources */,
+				CBD334841A4FECCD0026AD71 /* weixin_icon.png in Resources */,
 				CB20DDC31A3B20BB003410FA /* around_ico.png in Resources */,
 				CBD334081A41BDF00026AD71 /* place_ico.png in Resources */,
 				CB8458C01A309B470020283E /* weixin_ico.png in Resources */,
 				CB9699681A2F523B009C35F8 /* mycenter_back.png in Resources */,
 				CBEC68CA1A20E808007B2A00 /* user_center.png in Resources */,
+				CBD3345D1A4DB82C0026AD71 /* folv.png in Resources */,
 				CB20DDC51A3B20BB003410FA /* bus_ico.png in Resources */,
 				CB9699661A2F523B009C35F8 /* logo_120.png in Resources */,
 				CB20DDC91A3B20BB003410FA /* food.png in Resources */,
@@ -1324,11 +1452,13 @@
 				CBEC68BA1A20CEE8007B2A00 /* book_2.jpg in Resources */,
 				CBD334281A45A8390026AD71 /* food_id.png in Resources */,
 				CBB6ED4C1A2B58C7005B0CF3 /* MSYH.ttf in Resources */,
+				CBD334631A4DBA080026AD71 /* BookInfoTableViewCell.xib in Resources */,
 				CB20DDCC1A3B20BB003410FA /* walk_ico.png in Resources */,
 				CBD334001A41BDBD0026AD71 /* allow_up.png in Resources */,
 				CB8458BE1A309B470020283E /* qq_ico.png in Resources */,
 				CBEC68EC1A24B008007B2A00 /* menu_select.png in Resources */,
 				CB20DDC81A3B20BB003410FA /* fojv.png in Resources */,
+				CBD3347D1A4FE0DD0026AD71 /* bookmark.png in Resources */,
 				CB20DDC41A3B20BB003410FA /* book.png in Resources */,
 				CBEC68E41A2202F0007B2A00 /* page_logo.png in Resources */,
 				CBEC68CE1A20E810007B2A00 /* found_fo.png in Resources */,
@@ -1344,11 +1474,13 @@
 				CB9699651A2F523B009C35F8 /* logo_1024.png in Resources */,
 				CBD334441A4841C90026AD71 /* fav.png in Resources */,
 				CBD3342A1A45A8390026AD71 /* simiao_id.png in Resources */,
+				CBD334831A4FECCD0026AD71 /* weibo_icon.png in Resources */,
 				CBD334061A41BDF00026AD71 /* next_ico.png in Resources */,
 				CBEC68EB1A24B008007B2A00 /* menu_normal.png in Resources */,
 				CB9699571A2F419E009C35F8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				CB9699701A3095F9009C35F8 /* LoginTableViewCell.xib in Resources */,
 				CBEC68221A1A44E4007B2A00 /* Images.xcassets in Resources */,
+				CBD334721A4F11E30026AD71 /* title_line.png in Resources */,
 				CBEC69DE1A2A2184007B2A00 /* WeiboSDK.bundle in Resources */,
 				CB20DDC71A3B20BB003410FA /* clothes.png in Resources */,
 			);
@@ -1365,22 +1497,27 @@
 				CBB6ED5C1A2B61B8005B0CF3 /* FeaturedActivitiesCell.m in Sources */,
 				CBEC68781A1B822B007B2A00 /* PCustomTabBarViewController.m in Sources */,
 				CBEC696D1A2602A8007B2A00 /* UIImageView+AFNetworking.m in Sources */,
+				CBD334521A4C3B730026AD71 /* PFileDownLoadManager.m in Sources */,
 				CB9469791A33FA7E00337164 /* BPushClass.m in Sources */,
 				CBEC68741A1B822B007B2A00 /* PCustomNavigationBarView.m in Sources */,
 				CBEC696A1A2602A8007B2A00 /* AFPropertyListRequestOperation.m in Sources */,
 				CBEC68851A1B841B007B2A00 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC685F1A1A4A81007B2A00 /* EGOImageView.m in Sources */,
+				CBD3344F1A499D990026AD71 /* ReadingViewController.m in Sources */,
 				CBEC68761A1B822B007B2A00 /* PCustomTabBarItemView.m in Sources */,
 				CBEC69B61A28EE8D007B2A00 /* FMDatabaseAdditions.m in Sources */,
 				CBEC69641A2602A8007B2A00 /* AFHTTPClient.m in Sources */,
 				CBEC69E41A2A24C5007B2A00 /* OpenUrlManager.m in Sources */,
 				CBEC69B51A28EE8D007B2A00 /* FMDatabase.m in Sources */,
+				CBD334621A4DBA080026AD71 /* BookInfoTableViewCell.m in Sources */,
 				CBEC69B91A28EE8D007B2A00 /* FMResultSet.m in Sources */,
 				CBEC685E1A1A4A81007B2A00 /* EGOImageLoader.m in Sources */,
 				CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */,
 				CBB6ED5E1A2B61B8005B0CF3 /* FeaturedBooksCell.m in Sources */,
 				CBB6ED211A2B3434005B0CF3 /* TencentQQManager.m in Sources */,
 				CB94697B1A33FA7E00337164 /* OpenUDID.m in Sources */,
+				CBD3346D1A4F0CFD0026AD71 /* BookCategoryViewController.m in Sources */,
+				CBD334671A4DBD450026AD71 /* BookIntroduceTableViewCell.m in Sources */,
 				CBD3343B1A46B7620026AD71 /* LeftMenuTableViewCell.m in Sources */,
 				CBEC696C1A2602A8007B2A00 /* AFXMLRequestOperation.m in Sources */,
 				CBEC69A61A28AA50007B2A00 /* AskNetDataApi.m in Sources */,
@@ -1392,6 +1529,7 @@
 				CBEC69671A2602A8007B2A00 /* AFJSONRequestOperation.m in Sources */,
 				CBEC685A1A1A4A81007B2A00 /* UserData.m in Sources */,
 				CBEC685C1A1A4A81007B2A00 /* EGOImageButton.m in Sources */,
+				CBD334701A4F0DBD0026AD71 /* GeneralSearchView.m in Sources */,
 				CBEC69BE1A28F1B9007B2A00 /* PFileManager.m in Sources */,
 				CBB6ED521A2B6132005B0CF3 /* HorizontalMenu.m in Sources */,
 				CBEC69B41A28EE8D007B2A00 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
@@ -1406,16 +1544,21 @@
 				CBD3340E1A4461F50026AD71 /* Utilities.m in Sources */,
 				CBEC69971A2618D1007B2A00 /* BaseViewController.m in Sources */,
 				CBB6ED511A2B6132005B0CF3 /* CustomNavView.m in Sources */,
+				CBD334551A4DB5FC0026AD71 /* BookStoreViewController.m in Sources */,
 				CBEC69691A2602A8007B2A00 /* AFNetworkReachabilityManager.m in Sources */,
 				CBEC69C41A29CFA6007B2A00 /* UserLoginData.m in Sources */,
 				CB20DDD41A3CA156003410FA /* MapBuildMenuView.m in Sources */,
 				CBEC69E71A2A2B85007B2A00 /* UserLoginInfoManager.m in Sources */,
 				CBB6ED601A2B61B8005B0CF3 /* FeaturedNewsCell.m in Sources */,
 				CBEC698A1A260AF8007B2A00 /* LoginManager.m in Sources */,
+				CBD334761A4FBF090026AD71 /* BookCategoryInfoTableViewCell.m in Sources */,
 				CBEC696B1A2602A8007B2A00 /* AFURLConnectionOperation.m in Sources */,
 				CBEC68751A1B822B007B2A00 /* PCustomPageControl.m in Sources */,
+				CBD334871A4FECFA0026AD71 /* GeneralShareView.m in Sources */,
+				CBD3344C1A499D000026AD71 /* BookImageView.m in Sources */,
 				CBEC68951A1F943F007B2A00 /* RootViewController.m in Sources */,
 				CBEC69A21A275446007B2A00 /* MapViewController.m in Sources */,
+				CBD334491A499CA00026AD71 /* BookShellViewController.m in Sources */,
 				CBEC685D1A1A4A81007B2A00 /* EGOImageLoadConnection.m in Sources */,
 				CBEC69FB1A2AE5A3007B2A00 /* UIFont+PFontCategory.m in Sources */,
 				CBEC68171A1A44E4007B2A00 /* main.m in Sources */,
@@ -1433,6 +1576,7 @@
 				CB20DDD01A3B2A66003410FA /* MapFeatureTableViewCell.m in Sources */,
 				CBEC69651A2602A8007B2A00 /* AFHTTPRequestOperation.m in Sources */,
 				CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */,
+				CBD3347A1A4FD9820026AD71 /* BookDetailViewController.m in Sources */,
 				CB9469781A33FA7E00337164 /* Base64.m in Sources */,
 				CBD334401A46B77A0026AD71 /* RightMenuTableViewCell.m in Sources */,
 				CB96995C1A2F4C12009C35F8 /* CenterBaseViewController.m in Sources */,

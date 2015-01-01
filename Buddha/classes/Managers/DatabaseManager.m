@@ -40,14 +40,16 @@
         // 创建数据库
         [_db open];
         
+#if MIG_DEBUG_TEST
 #if 0
         // test
         // 删除USERLOGINDATA
-        BOOL isOK = [_db executeUpdate:@"drop table USERLOGINDATA"];
+        BOOL isOK = [_db executeUpdate:@"drop table BOOKSHELFINFO"];
         if (!isOK) {
             
             MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
         }
+#endif
 #endif
         
         // 用户账户信息
@@ -55,6 +57,9 @@
         
         // 用户登录状态
         [_db executeUpdate:@"create table if not exists USERLASTLOGIN (loginstate text)"];
+        
+        // 个人书架信息
+        [_db executeUpdate:@"create table if not exists BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text)"];
         
         [_db close];
     }
@@ -187,6 +192,76 @@
     [_db close];
     
     return state;
+}
+
+- (void)insertBookInfo:(migsBookDetailInformation *)bookinfo {
+    
+    // BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text)
+    
+    NSString *name = bookinfo.bookname;
+    NSString *bookid = bookinfo.bookid;
+    NSString *type = bookinfo.booktype;
+    NSString *imageurl = bookinfo.imgURL;
+    NSString *freeurl = bookinfo.freeContentUrl;
+    NSString *fullurl = bookinfo.fullContentUrl;
+    
+    NSString *sql = @"insert into BOOKSHELFINFO (id, type, imageurl, freeurl, fullurl, name) values (?, ?, ?, ?, ?, ?)";
+    NSString *checksql = [NSString stringWithFormat:@"select name from BOOKSHELFINFO where name = '%@' ", name];
+    
+    MIGDEBUG_PRINT(@"name=%@, id=%@, type=%@, url=%@, free:%@, full:%@", name, bookid, type, imageurl, freeurl, fullurl);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        sql = @"update BOOKSHELFINFO set id = ?, type = ?, imageurl = ?, freeurl = ?, fullurl = ? where name = ?";
+        break;
+    }
+    
+    if ([_db executeUpdate:sql, bookid, type, imageurl, freeurl, fullurl, name]) {
+        
+        MIGDEBUG_PRINT(@"数据库记录书架信息 成功");
+    }
+    else {
+        
+        MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
+    }
+    
+    [_db close];
+}
+
+- (NSArray *)getAllBookInfo {
+    
+    NSMutableArray *retArray = [[NSMutableArray alloc] init];
+    
+    NSString *sql = @"select * from BOOKSHELFINFO";
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        migsBookDetailInformation *detailinfo = [[migsBookDetailInformation alloc] init];
+        
+        NSString *name = [rs stringForColumn:@"name"];
+        NSString *bookid = [rs stringForColumn:@"id"];
+        NSString *type = [rs stringForColumn:@"type"];
+        NSString *imageurl = [rs stringForColumn:@"imageurl"];
+        NSString *freeurl = [rs stringForColumn:@"freeurl"];
+        NSString *fullurl = [rs stringForColumn:@"fullurl"];
+        
+        detailinfo.bookname = name;
+        detailinfo.bookid = bookid;
+        detailinfo.booktype = type;
+        detailinfo.imgURL = imageurl;
+        detailinfo.freeContentUrl = freeurl;
+        detailinfo.fullContentUrl = fullurl;
+        
+        [retArray addObject:detailinfo];
+    }
+    
+    return retArray;
 }
 
 @end

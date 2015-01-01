@@ -17,6 +17,7 @@
 #import "LoginManager.h"
 #import "LoginViewController.h"
 #import "MyLocationManager.h"
+#import "PFileDownLoadManager.h"
 
 @implementation RootViewController
 
@@ -105,55 +106,82 @@
     
     switch (tag) {
         case ROOTVIEWTAG_FEATURE:
-        {
-            // 显示底部菜单
-            [_mBottomMenu setHidden:NO];
-            
-            if (controller) {
+            {
+                // 显示底部菜单
+                [_mBottomMenu setHidden:NO];
                 
-                FeaturedViewController *feature = (FeaturedViewController *)controller;
-                [feature viewWillAppear:YES];
+                if (controller) {
+                    
+                    FeaturedViewController *feature = (FeaturedViewController *)controller;
+                    [feature viewWillAppear:YES];
+                }
+                else {
+                    
+                    FeaturedViewController *feature = [[FeaturedViewController alloc] init];
+                    feature.topViewController = self;
+                    feature.mFrame = mContentFrame;
+                    [feature viewWillAppear:YES];
+                    [_dicViewControllerCache setObject:feature forKey:numIndex];
+                    controller = feature;
+                }
             }
-            else {
-                
-                FeaturedViewController *feature = [[FeaturedViewController alloc] init];
-                feature.mFrame = mContentFrame;
-                [feature viewWillAppear:YES];
-                [_dicViewControllerCache setObject:feature forKey:numIndex];
-                controller = feature;
-            }
-        }
             break;
             
         case ROOTVIEWTAG_MAP:
-        {
-            // 隐藏底部菜单
-            [_mBottomMenu setHidden:YES];
-            
-            if (controller) {
+            {
+                // 隐藏底部菜单
+                [_mBottomMenu setHidden:YES];
                 
-                MapViewController *map = (MapViewController *)controller;
-                [map viewWillAppear:YES];
+                if (controller) {
+                    
+                    MapViewController *map = (MapViewController *)controller;
+                    [map viewWillAppear:YES];
+                }
+                else {
+                    
+                    MapViewController *map = [[MapViewController alloc] init];
+                    map.topViewController = self;
+                    
+                    // 扩大高度
+                    CGRect tmpRect = mContentFrame;
+                    tmpRect.size.height += BOTTOM_MENU_BUTTON_HEIGHT;
+                    map.mFrame = tmpRect;
+                    
+                    [map viewWillAppear:YES];
+                    [_dicViewControllerCache setObject:map forKey:numIndex];
+                    controller = map;
+                }
+                
+                // 请求附近建筑信息
+                AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+                [askApi doGetNearBuild];
             }
-            else {
-                
-                MapViewController *map = [[MapViewController alloc] init];
-                map.topViewController = self;
-                
-                // 扩大高度
-                CGRect tmpRect = mContentFrame;
-                tmpRect.size.height += BOTTOM_MENU_BUTTON_HEIGHT;
-                map.mFrame = tmpRect;
-                
-                [map viewWillAppear:YES];
-                [_dicViewControllerCache setObject:map forKey:numIndex];
-                controller = map;
-            }
+            break;
             
-            // 请求附近建筑信息
-            AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
-            [askApi doGetNearBuild];
-        }
+        case ROOTVIEWTAG_LIBRARY:
+            {
+                // 显示底部菜单
+                [_mBottomMenu setHidden:NO];
+                
+                if (controller) {
+                    
+                    BookStoreViewController *book = (BookStoreViewController *)controller;
+                    [book viewWillAppear:YES];
+                }
+                else {
+                    
+                    BookStoreViewController *book = [[BookStoreViewController alloc] init];
+                    book.topViewController = self;
+                    book.mFrame = mContentFrame;
+                    [book viewWillAppear:YES];
+                    [_dicViewControllerCache setObject:book forKey:numIndex];
+                    controller = book;
+                }
+                
+                // 请求书城信息
+                AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+                [askApi doGetBook];
+            }
             break;
             
         default:
@@ -205,7 +233,7 @@
                                       },
                                     @{KEY_NORMAL:IMG_HOME_NORMAL_BG,
                                       KEY_HILIGHT:IMG_HOME_HILIGHT_BG,
-                                      KEY_TITLE:@"书库",
+                                      KEY_TITLE:@"藏经阁",
                                       KEY_TITLE_WIDTH:[NSNumber numberWithFloat:titleWidth]
                                       },
                                     @{KEY_NORMAL:IMG_HOME_NORMAL_BG,

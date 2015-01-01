@@ -11,6 +11,7 @@
 #import "CustomNavView.h"
 #import "FeaturedViewController.h"
 #import "MapViewController.h"
+#import "BookStoreViewController.h"
 #import "HorizontalMenu.h"
 
 // 每个继承类的标志

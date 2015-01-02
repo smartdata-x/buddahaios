@@ -67,6 +67,18 @@
 #define MigNetNameSearchBookTypeFailed                  @"MigNetNameSearchBookTypeFailed"
 #define MigNetNameSearchBookTypeSuccess                 @"MigNetNameSearchBookTypeSuccess"
 
+// 获取书籍章节内容
+#define MigNetNameGetChapterListFailed                  @"MigNetNameGetChapterListFailed"
+#define MigNetNameGetChapterListSuccess                 @"MigNetNameGetChapterListSuccess"
+
+// 获取书籍token
+#define MigNetNameGetBookTokenFailed                    @"MigNetNameGetBookTokenFailed"
+#define MigNetNameGetBookTokenSuccess                   @"MigNetNameGetBookTokenSuccess"
+
+// 获取书单
+#define MigNetNameGetBookListFailed                     @"MigNetNameGetBookListFailed"
+#define MigNetNameGetBookListSuccess                    @"MigNetNameGetBookListSuccess"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
@@ -81,6 +93,9 @@ enum {
     MIGAPI_GETBOOKSUMMARY,
     MIGAPI_GETBOOK,
     MIGAPI_SEARCHBOOKTYPE,
+    MIGAPI_GETCHAPTERLIST,
+    MIGAPI_GETBOOKTOKEN,
+    MIGAPI_GETBOOKLIST,
 };
 
 @interface AskNetDataApi : NSObject
@@ -108,5 +123,8 @@ enum {
 - (void)doGetBookSummary:(NSString *)bookid;
 - (void)doGetBook;
 - (void)doSearchBookType:(NSString *)type;
+- (void)doGetChapterList:(NSString *)booktoken BookID:(NSString *)bookid;
+- (void)doGetBookToken:(NSString *)bookid;
+- (void)doGetBookList;
 
 @end

@@ -182,10 +182,10 @@
     
 }
 
-- (void)doGotoReadingView:(NSString *)filename FileURL:(NSString *)fileurl {
+- (void)doGotoReadingView:(NSString *)bookname BookID:(NSString *)bookid BookToken:(NSString *)booktoken {
     
     ReadingViewController *readingView = [[ReadingViewController alloc] init];
-    [readingView initialize:filename fileurl:fileurl];
+    [readingView initialize:bookname BookId:bookid BookToken:booktoken];
     [self.navigationController pushViewController:readingView animated:YES];
 }
 
@@ -196,7 +196,7 @@
     MIGDEBUG_PRINT(@"第%d本书被点击", index);
     migsBookDetailInformation *detailinfo = [_mBookData objectAtIndex:index];
     
-    [self doGotoReadingView:detailinfo.bookname FileURL:detailinfo.fullContentUrl];
+    [self doGotoReadingView:detailinfo.bookname BookID:detailinfo.bookid BookToken:detailinfo.booktoken];
 }
 
 - (void)didReceiveMemoryWarning {

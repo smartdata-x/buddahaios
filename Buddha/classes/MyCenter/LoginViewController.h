@@ -21,4 +21,8 @@
 
 - (void)doBack:(id)sender;
 
+- (void)doGetBookList;
+- (void)doGetBookListFailed:(NSNotification *)notification;
+- (void)doGetBookListSuccess:(NSNotification *)notification;
+
 @end

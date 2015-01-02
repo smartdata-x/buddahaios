@@ -14,4 +14,10 @@
 + (NSInteger)heightForString:(NSString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame;
 + (NSString *)distanceFromFloat:(float)distance;
 
+// 动画
++ (void)curlUp:(UIView *)view;
++ (void)curlDown:(UIView *)view;
++ (void)curlLeft:(UIView *)view;
++ (void)curlRight:(UIView *)view;
+
 @end

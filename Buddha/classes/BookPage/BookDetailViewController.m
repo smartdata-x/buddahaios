@@ -65,6 +65,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookSummaryFailed:) name:MigNetNameGetBookSummaryFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookSummarySuccess:) name:MigNetNameGetBookSummarySuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookTokenFailed:) name:MigNetNameGetBookTokenFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookTokenSuccess:) name:MigNetNameGetBookTokenSuccess object:nil];
     }
     
     return self;
@@ -74,6 +76,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetBookSummaryFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetBookSummarySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetBookTokenFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetBookTokenSuccess object:nil];
 }
 
 - (void)initialize:(migsBookIntroduce *)bookIntro {
@@ -400,11 +404,39 @@
     [self.navigationController pushViewController:shelfView animated:YES];
 }
 
-- (void)doGotoReadingView:(NSString *)filename FileURL:(NSString *)fileurl{
+- (void)doGotoReadingView:(NSString *)bookname BookID:(NSString *)bookid BookToken:(NSString *)booktoken{
     
     ReadingViewController *readingView = [[ReadingViewController alloc] init];
-    [readingView initialize:filename fileurl:fileurl];
+    [readingView initialize:bookname BookId:bookid BookToken:booktoken];
     [self.navigationController pushViewController:readingView animated:YES];
+}
+
+- (void)doGetBookToken:(NSString *)bookid {
+    
+    AskNetDataApi *api = [[AskNetDataApi alloc] init];
+    [api doGetBookToken:bookid];
+}
+
+- (void)doGetBookTokenFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取书籍token失败");
+}
+
+- (void)doGetBookTokenSuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取书籍token成功");
+    
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    NSString *booktoken = [result objectForKey:@"book_token"];
+    
+    _bookDetailInfo.booktoken = booktoken;
+    
+    // 添加到书架
+    [[DatabaseManager GetInstance] insertBookInfo:_bookDetailInfo];
+    
+    // 跳转到书架
+    [self doGotoBookShell:nil isSaveToShelf:NO];
 }
 
 // HorizontalMenuDelegate
@@ -415,12 +447,12 @@
         if (index == MIG_BOOK_DETAIL_FREEREAD) {
             
             // 这里进入的是免费阅读版本
-            NSString *freefilename = [NSString stringWithFormat:@"%@_free.txt", _bookDetailInfo.bookname];
-            [self doGotoReadingView:freefilename FileURL:_bookDetailInfo.freeContentUrl];
+            [self doGotoReadingView:_bookDetailInfo.bookname BookID:_bookDetailInfo.bookid BookToken:_bookDetailInfo.booktoken];
         }
         else if (index == MIG_BOOK_DETAIL_SAVETOSHELF) {
             
-            [self doGotoBookShell:nil isSaveToShelf:YES];
+            // 申请添加到书架
+            [self doGetBookToken:_bookDetailInfo.bookid];
         }
     }
 }

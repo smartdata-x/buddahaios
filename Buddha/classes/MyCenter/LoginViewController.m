@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "LoginTableViewCell.h"
 #import "LoginManager.h"
+#import "BookDetailViewController.h"
 
 @interface LoginViewController ()
 
@@ -26,6 +27,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doLoginSuccess) name:MigLocalNameLoginSuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doLoginFailed) name:MigLocalNameLoginFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookListFailed:) name:MigNetNameGetBookListFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookListSuccess:) name:MigNetNameGetBookListSuccess object:nil];
     }
     
     return self;
@@ -35,6 +38,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameLoginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetBookListFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetBookListSuccess object:nil];
 }
 
 - (void)viewDidLoad {
@@ -98,13 +103,63 @@
 
 - (void)doLoginSuccess {
     
+    // 登陆成功, 更新一次书单
+    [self doGetBookList];
+    
     [SVProgressHUD showSuccessWithStatus:MIGTIP_LOGIN_SUCCESS];
-    [self doBack:nil];
 }
 
 - (void)doLoginFailed {
     
     [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_FAILED];
+}
+
+- (void)doGetBookList {
+    
+    AskNetDataApi *api = [[AskNetDataApi alloc] init];
+    [api doGetBookList];
+}
+
+- (void)doGetBookListFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取书单失败");
+    
+    // 无论成功与否都需要返回
+    [self doBack:nil];
+}
+
+- (void)doGetBookListSuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取书单成功");
+    // 清除原有书单信息
+    [[DatabaseManager GetInstance] removeAllBooks];
+    
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    NSDictionary *list = [result objectForKey:@"list"];
+    
+    for (NSDictionary *dic in list) {
+        
+        int nbookid = [[dic objectForKey:@"id"] intValue];
+        int ntype = [[dic objectForKey:@"type"] intValue];
+        NSString *bookid = [NSString stringWithFormat:@"%d", nbookid];
+        NSString *booktype = [NSString stringWithFormat:@"%d", ntype];
+        NSString *bookname = [dic objectForKey:@"name"];
+        NSString *bookurl = [dic objectForKey:@"pic"];
+        NSString *booktoken = [dic objectForKey:@"booktoken"];
+        
+        migsBookDetailInformation *detail = [[migsBookDetailInformation alloc] init];
+        detail.bookname = bookname;
+        detail.bookid = bookid;
+        detail.booktype = booktype;
+        detail.booktoken = booktoken;
+        detail.imgURL = bookurl;
+        
+        [[DatabaseManager GetInstance] insertBookInfo:detail];
+    }
+    
+    // 无论成功与否都需要返回
+    [self doBack:nil];
 }
 
 // UITableView Delegate

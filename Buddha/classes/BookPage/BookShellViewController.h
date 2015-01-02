@@ -34,6 +34,6 @@
 - (void)initBookShellInfo;
 
 - (void)doGotoBookStore;
-- (void)doGotoReadingView:(NSString *)filename FileURL:(NSString *)fileurl;
+- (void)doGotoReadingView:(NSString *)bookname BookID:(NSString *)bookid BookToken:(NSString *)booktoken;
 
 @end

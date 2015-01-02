@@ -29,6 +29,7 @@
 - (int)getLastLoginOrNot;
 
 // 记录书架信息
+- (void)removeAllBooks;
 - (void)insertBookInfo:(migsBookDetailInformation *)bookinfo;
 - (NSArray *)getAllBookInfo;
 

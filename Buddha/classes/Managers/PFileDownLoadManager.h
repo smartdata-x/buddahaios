@@ -20,7 +20,8 @@
 @property (nonatomic, retain) NSURLConnection *cnnt;
 
 @property (nonatomic, retain) NSString *filename;
+@property (nonatomic, retain) NSString *subdir;
 
-- (void)downloadFromURL:(NSString *)szurl to:(NSString *)fileName;
+- (void)downloadFromURL:(NSString *)szurl to:(NSString *)fileName indir:(NSString *)subdir;
 
 @end

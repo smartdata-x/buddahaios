@@ -23,4 +23,8 @@
 // Document目录的文件路径
 - (NSString *)getFullPathFromDocument:(NSString *)filename;
 
+// Document/book文件路径
+- (BOOL)isFileExistInBookDir:(NSString *)filename;
+- (NSString *)getFullPathFromBookDir:(NSString *)filename;
+
 @end

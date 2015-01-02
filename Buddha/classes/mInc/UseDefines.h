@@ -75,6 +75,7 @@
 #define MIG_COLOR_F6F6F6                            [UIColor colorWithRed:246.0/255.0 green:246.0/255.0 blue:246.0/255.0 alpha:1.0]
 #define MIG_COLOR_FBFBFB                            [UIColor colorWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0]
 #define MIG_COLOR_333333                            [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]
+#define MIG_COLOR_D4D4D4                            [UIColor colorWithRed:212.0/255.0 green:212.0/255.0 blue:212.0/255.0 alpha:1.0]
 
 // 地图
 #define DEFAULT_DISTANCE_RADIUS                     10000
@@ -92,6 +93,8 @@
 #define MIGTIP_LOGIN_NOTLOGIN                       @"对不起，您还未登录"
 #define MIGTIP_GETBUILDING_FAILED                   @"获取推荐建筑失败了"
 #define MIGTIP_CANCEL                               @"取消"
+#define MIGTIP_BOOKEND                              @"已经到书的最后一页了"
+#define MIGTIP_CHAPTEREND                           @"本章结束"
 
 // 字典匹配关键字
 #define KEY_NORMAL                                  @"KeyNormal"

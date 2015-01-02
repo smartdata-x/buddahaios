@@ -59,7 +59,7 @@
         [_db executeUpdate:@"create table if not exists USERLASTLOGIN (loginstate text)"];
         
         // 个人书架信息
-        [_db executeUpdate:@"create table if not exists BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text)"];
+        [_db executeUpdate:@"create table if not exists BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text, token text)"];
         
         [_db close];
     }
@@ -196,7 +196,7 @@
 
 - (void)insertBookInfo:(migsBookDetailInformation *)bookinfo {
     
-    // BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text)
+    // BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text, token text)
     
     NSString *name = bookinfo.bookname;
     NSString *bookid = bookinfo.bookid;
@@ -204,22 +204,23 @@
     NSString *imageurl = bookinfo.imgURL;
     NSString *freeurl = bookinfo.freeContentUrl;
     NSString *fullurl = bookinfo.fullContentUrl;
+    NSString *token = bookinfo.booktoken;
     
-    NSString *sql = @"insert into BOOKSHELFINFO (id, type, imageurl, freeurl, fullurl, name) values (?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into BOOKSHELFINFO (id, type, imageurl, freeurl, fullurl, token, name) values (?, ?, ?, ?, ?, ?, ?)";
     NSString *checksql = [NSString stringWithFormat:@"select name from BOOKSHELFINFO where name = '%@' ", name];
     
-    MIGDEBUG_PRINT(@"name=%@, id=%@, type=%@, url=%@, free:%@, full:%@", name, bookid, type, imageurl, freeurl, fullurl);
+    MIGDEBUG_PRINT(@"name=%@, id=%@, type=%@, url=%@, free:%@, full:%@ token:%@", name, bookid, type, imageurl, freeurl, fullurl, token);
     
     [_db open];
     
     FMResultSet *rs = [_db executeQuery:checksql];
     while ([rs next]) {
         
-        sql = @"update BOOKSHELFINFO set id = ?, type = ?, imageurl = ?, freeurl = ?, fullurl = ? where name = ?";
+        sql = @"update BOOKSHELFINFO set id = ?, type = ?, imageurl = ?, freeurl = ?, fullurl = ?, token = ? where name = ?";
         break;
     }
     
-    if ([_db executeUpdate:sql, bookid, type, imageurl, freeurl, fullurl, name]) {
+    if ([_db executeUpdate:sql, bookid, type, imageurl, freeurl, fullurl, token, name]) {
         
         MIGDEBUG_PRINT(@"数据库记录书架信息 成功");
     }
@@ -250,6 +251,7 @@
         NSString *imageurl = [rs stringForColumn:@"imageurl"];
         NSString *freeurl = [rs stringForColumn:@"freeurl"];
         NSString *fullurl = [rs stringForColumn:@"fullurl"];
+        NSString *token = [rs stringForColumn:@"token"];
         
         detailinfo.bookname = name;
         detailinfo.bookid = bookid;
@@ -257,11 +259,25 @@
         detailinfo.imgURL = imageurl;
         detailinfo.freeContentUrl = freeurl;
         detailinfo.fullContentUrl = fullurl;
+        detailinfo.booktoken = token;
         
         [retArray addObject:detailinfo];
     }
     
     return retArray;
+}
+
+- (void)removeAllBooks {
+    
+    BOOL isOK = [_db executeUpdate:@"drop table BOOKSHELFINFO"];
+    if (!isOK) {
+        
+        MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
+        return;
+    }
+    
+    // 个人书架信息
+    [_db executeUpdate:@"create table if not exists BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text, token text)"];
 }
 
 @end

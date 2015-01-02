@@ -7,9 +7,31 @@
 //
 
 #import "ReadingViewController.h"
-#import "PFileManager.h"
 #import "PFileDownLoadManager.h"
 #import "BookDetailViewController.h"
+
+@implementation migsChapterInfo
+
++ (migsChapterInfo *)setupChapterinfoByDictionay:(NSDictionary *)dic {
+    
+    migsChapterInfo *ret = [[migsChapterInfo alloc] init];
+    
+    int nbookid = [[dic objectForKey:@"bookid"] intValue];
+    int nchapterid = [[dic objectForKey:@"id"] intValue];
+    NSString *bookid = [NSString stringWithFormat:@"%d", nbookid];
+    NSString *chapterid = [NSString stringWithFormat:@"%d", nchapterid];
+    NSString *chaptername = [dic objectForKey:@"name"];
+    NSString *chapterurl = [dic objectForKey:@"url"];
+    
+    ret.bookid = bookid;
+    ret.chapterid = chapterid;
+    ret.chaptername = chaptername;
+    ret.chapterurl = chapterurl;
+    
+    return ret;
+}
+
+@end
 
 @implementation ReadingViewController
 
@@ -19,37 +41,52 @@
     
     if (self) {
         
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChapterListFailed:) name:MigNetNameGetChapterListFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChapterListSuccess:) name:MigNetNameGetChapterListSuccess object:nil];
     }
     
     return self;
 }
 
-- (void)initialize:(NSString *)filename fileurl:(NSString *)fileURL{
+- (void)dealloc {
     
-    _fileName = filename;
-    _fileURL = fileURL;
-    isFullScreen = YES;
-    
-    // 检查文件是否存在，如果存在则继续，不存在就下载
-    PFileManager *pfm = [[PFileManager alloc] init];
-    if ([pfm isFileExistInDocument:_fileName]) {
-        
-        [self initView:self.view.frame];
-    }
-    else {
-        
-        [self doDownloadBook];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetChapterListFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetChapterListSuccess object:nil];
 }
 
-- (void)doDownloadBook {
+- (void)initialize:(NSString *)bookname BookId:(NSString *)bookid BookToken:(NSString *)booktoken{
+    
+    isFullScreen = YES;
+    curChapter = 0;
+    curPage = 0;
+    
+    mBookname = bookname;
+    mBookid = bookid;
+    mBooktoken = booktoken;
+    
+    viewFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    if (_pfm == nil) {
+        
+        _pfm = [[PFileManager alloc] init];
+    }
+    
+    if (_chapterArray == nil) {
+        
+        _chapterArray = [[NSMutableArray alloc] init];
+    }
+    
+    // 开始获取章节内容
+    [self getChapterList:booktoken ID:mBookid];
+}
+
+- (void)doDownloadBook:(NSString *)url ToFile:(NSString *)tofile {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doDownloadBookFailed) name:MigLocalNameDownloadFileFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doDownloadBookSuccess) name:MigLocalNameDownloadFileSuccess object:nil];
     
     PFileDownLoadManager *downloader = [[PFileDownLoadManager alloc] init];
-    [downloader downloadFromURL:_fileURL to:_fileName];
+    [downloader downloadFromURL:url to:tofile indir:@"book"];
 }
 
 - (void)doDownloadBookFailed {
@@ -63,7 +100,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameDownloadFileFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameDownloadFileSuccess object:nil];
     
-    [self initView:self.view.frame];
+    // 下载成功, 获取内容
+    [self getFileContent:curChapterFilename];
+    
+    [self initView:viewFrame];
 }
 
 - (void)viewDidLoad {
@@ -73,107 +113,23 @@
     if (viewWrapper == nil) {
         
         viewWrapper = [[UIView alloc] initWithFrame:self.view.frame];
-        [viewWrapper setBackgroundColor:[UIColor clearColor]];
+        [viewWrapper setBackgroundColor:MIG_COLOR_D4D4D4];
     }
     [self.view addSubview:viewWrapper];
     
-    [self initView:self.view.frame];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    [self initView:viewFrame];
     
-    [self setIsFullScreen];
-}
-
-- (void)getFileContent {
+    // 左翻页
+    UISwipeGestureRecognizer *nextGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doNextPage:)];
+    nextGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    nextGesture.delegate = self;
+    [self.view addGestureRecognizer:nextGesture];
     
-    PFileManager *pfm = [[PFileManager alloc] init];
-    NSString *fullpath = [pfm getFullPathFromDocument:_fileName];
-    
-    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    NSData *strdata = [NSData dataWithContentsOfFile:fullpath];
-    
-    MIGDEBUG_PRINT(@"文件路径:%@", fullpath);
-    
-    _mainContent = [[NSString alloc] initWithData:strdata encoding:encode];
-    // MIGDEBUG_PRINT(@"文件内容:%@", _mainContent);
-}
-
-- (void)initView:(CGRect)frame {
-    
-    if (_fileName == nil) {
-        
-        return;
-    }
-    
-    // 获取文件内容
-    PFileManager *pfm = [[PFileManager alloc] init];
-    if ([pfm isFileExistInDocument:_fileName]) {
-        
-        [self getFileContent];
-    }
-    else {
-        
-        return;
-    }
-    
-#if MIG_DEBUG_TEST
-#if 0
-    _mainContent = @"1<Title>三体</Title>\n2\n3<Author>刘慈欣</Author>\n4\n5\n6\n7\n8\n9<Chapter>第一部</Chapter>\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19<Content>\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70</Content>\n";
-#endif
-#endif
-    
-    // 创建属性化显示字符串
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:_mainContent];
-    NSUInteger length = [_mainContent length];
-    
-    // 内容
-    UIFont *baseFont = [UIFont fontOfApp:26 / SCREEN_SCALAR];
-    [attrString addAttribute:NSFontAttributeName value:baseFont range:NSMakeRange(0, length)];
-    // 作者
-    UIFont *autherFont = [UIFont fontOfApp:50 / SCREEN_SCALAR];
-    [attrString addAttribute:NSFontAttributeName value:autherFont range:NSMakeRange(0, length)];
-    // 题目
-    UIFont *titleFont = [UIFont fontOfApp:40 / SCREEN_SCALAR];
-    [attrString addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(0, length)];
-    // 章节
-    UIFont *chapterFont = [UIFont fontOfApp:30 / SCREEN_SCALAR];
-    [attrString addAttribute:NSFontAttributeName value:chapterFont range:NSMakeRange(0, length)];
-    
-    UIFont *textfont = [UIFont fontOfApp:26 / SCREEN_SCALAR];
-    CGRect maxRect = CGRectMake(0, 0, frame.size.width, MAXFLOAT);
-    float textheight = [Utilities heightForString:_mainContent Font:textfont Frame:maxRect];
-    
-    _pageHeight = frame.size.height + contentoffset;
-    _allPage = ceilf(textheight / _pageHeight + 0.5) + 1;
-    _curPage = 0;
-    
-    if (_textView == nil) {
-        
-        CGRect textFrame = frame;
-        _textView = [[UITextView alloc] initWithFrame:textFrame];
-    }
-    _textView.text = _mainContent;
-    _textView.font = textfont;
-    _textView.textColor = MIG_COLOR_111111;
-    _textView.editable = NO;
-    [_textView setUserInteractionEnabled:NO];
-    [_textView setContentOffset:CGPointMake(0, 0)];
-    [_textView setBackgroundColor:[UIColor whiteColor]];
-    _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    [viewWrapper addSubview:_textView];
-    
-    // 上翻页
-    UISwipeGestureRecognizer *downToUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doNextPage:)];
-    downToUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    downToUpGesture.delegate = self;
-    [self.view addGestureRecognizer:downToUpGesture];
-    
-    // 下翻页
-    UISwipeGestureRecognizer *upToDownGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doPreviousPage:)];
-    upToDownGesture.direction = UISwipeGestureRecognizerDirectionDown;
-    upToDownGesture.delegate = self;
-    [self.view addGestureRecognizer:upToDownGesture];
+    // 右翻页
+    UISwipeGestureRecognizer *prevGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doPreviousPage:)];
+    prevGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    prevGesture.delegate = self;
+    [self.view addGestureRecognizer:prevGesture];
     
     // 点击
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
@@ -181,53 +137,227 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)doNextPage:(UISwipeGestureRecognizer *)swipGesture {
+- (void)viewDidAppear:(BOOL)animated {
     
-    // 设置textview的显示区域
-    if (_curPage >= _allPage - 1) {
+    [self setIsFullScreen];
+}
+
+- (void)getFileContent:(NSString *)filename {
+    
+    NSString *fullpath = [_pfm getFullPathFromBookDir:filename];
+    
+    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSData *strdata = [NSData dataWithContentsOfFile:fullpath];
+    
+    MIGDEBUG_PRINT(@"文件路径:%@", fullpath);
+    
+    curContent = [[NSString alloc] initWithData:strdata encoding:encode];
+}
+
+- (void)doGotoNextChapter:(BOOL)forceDownload {
+    
+    if (curChapter >= allChapter - 1) {
         
-        // 最后一页
+        // 最后一章
+        [SVProgressHUD showErrorWithStatus:MIGTIP_BOOKEND];
+        MIGDEBUG_PRINT(@"最后一章");
         return;
     }
     
-    _curPage++;
+    curChapter++;
+    migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
+    curChapterFilename = [NSString stringWithFormat:@"%@_%d.txt", mBookname, curChapter];
+    [SVProgressHUD showSuccessWithStatus:chapterinfo.chaptername];
+    
+    if (!forceDownload && [_pfm isFileExistInBookDir:curChapterFilename]) {
+        
+        [self getFileContent:curChapterFilename];
+        [self initView:viewFrame];
+    }
+    else {
+        
+        migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
+        [self doDownloadBook:chapterinfo.chapterurl ToFile:curChapterFilename];
+    }
+    
+    curPage = -1;
+    [self doNextPage:nil];
+}
+
+- (void)doGotoPreviousChapter {
+    
+    if (curChapter == 0) {
+        
+        MIGDEBUG_PRINT(@"第一章");
+        return;
+    }
+    
+    curChapter--;
+    curChapterFilename = [NSString stringWithFormat:@"%@_%d.txt", mBookname, curChapter];
+    
+    // 上一章一定存在，直接载入
+    [self getFileContent:curChapterFilename];
+    [self initView:viewFrame];
+    
+    //[Utilities curlRight:self.view];
+    
+    curPage = allPage;
+    [self doPreviousPage:nil];
+}
+
+- (void)initView:(CGRect)frame {
+    
+    if (MIG_IS_EMPTY_STRING(curContent)) {
+        
+        // 没有内容则返回
+        return;
+    }
+    
+#if MIG_DEBUG_TEST
+#if 0
+    curContent = @"1<Title>三体</Title>\n2\n3<Author>刘慈欣</Author>\n4\n5\n6\n7\n8\n9<Chapter>第一部</Chapter>\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19<Content>\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70</Content>\n";
+#endif
+#endif
+
+    UIFont *textfont = [UIFont fontOfApp:26 / SCREEN_SCALAR];
+    CGRect maxRect = CGRectMake(0, 0, frame.size.width, MAXFLOAT);
+    float textheight = [Utilities heightForString:curContent Font:textfont Frame:maxRect];
+    
+    pageHeight = frame.size.height;
+    allPage = ceilf(textheight / pageHeight + 0.5);
+    
+    if (_textView == nil) {
+        
+        CGRect textFrame = CGRectMake(0, 21, frame.size.width, frame.size.height - 21);
+        _textView = [[UITextView alloc] initWithFrame:textFrame];
+        [viewWrapper addSubview:_textView];
+        _textView.font = textfont;
+        _textView.textColor = MIG_COLOR_111111;
+        _textView.editable = NO;
+        [_textView setUserInteractionEnabled:NO];
+        [_textView setContentOffset:CGPointMake(0, 0)];
+        [_textView setBackgroundColor:[UIColor clearColor]];
+        _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _textView.autoresizingMask = UIViewAutoresizingNone;
+    }
+    
+    _textView.text = curContent;
+    
+    [self initTopView:viewFrame];
+}
+
+- (void)initTopView:(CGRect)frame {
+    
+    if (_chapterArray == nil) {
+        
+        return;
+    }
+    float ystart = 0;
+    
+    float lblheight = 21;
+    migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
+    
+    CGRect nameframe = CGRectMake(20, ystart, frame.size.width / 3, lblheight);
+    CGRect chapterframe = CGRectMake( frame.size.width - frame.size.width / 3 - 20, ystart, frame.size.width / 3, lblheight);
+    
+    if (_lblBookName == nil) {
+        
+        _lblBookName = [[UILabel alloc] initWithFrame:nameframe];
+        [_lblBookName setFont:[UIFont fontOfApp:20 / SCREEN_SCALAR]];
+        [_lblBookName setTextColor:MIG_COLOR_111111];
+        [_lblBookName setTextAlignment:NSTextAlignmentLeft];
+        [viewWrapper addSubview:_lblBookName];
+    }
+    [_lblBookName setFrame:nameframe];
+    [_lblBookName setText:mBookname];
+    
+    if (_lblChapterName == nil) {
+        
+        _lblChapterName = [[UILabel alloc] initWithFrame:chapterframe];
+        [_lblChapterName setFont:[UIFont fontOfApp:20 / SCREEN_SCALAR]];
+        [_lblChapterName setTextColor:MIG_COLOR_111111];
+        [_lblChapterName setTextAlignment:NSTextAlignmentRight];
+        [viewWrapper addSubview:_lblChapterName];
+    }
+    [_lblChapterName setFrame:chapterframe];
+    [_lblChapterName setText:chapterinfo.chaptername];
+}
+
+- (void)doNextPage:(UISwipeGestureRecognizer *)swipGesture {
+    
+    // 设置textview的显示区域
+    if (curPage >= allPage - 1) {
+        
+        // 本章最后一页，载入下一章
+        [SVProgressHUD showSuccessWithStatus:MIGTIP_CHAPTEREND];
+        [self doGotoNextChapter:NO];
+        return;
+    }
+    
+    curPage++;
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
-    CGPoint offset = CGPointMake(0, contentoffset + _curPage * _pageHeight);
+    CGPoint offset = CGPointMake(0, curPage * pageHeight);
     [_textView setContentOffset:offset animated:YES];
     [UIView commitAnimations];
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.6];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
-    [UIView commitAnimations];
+    [Utilities curlLeft:self.view];
 }
 
 - (void)doPreviousPage:(UISwipeGestureRecognizer *)swipGesture {
     
-    if (_curPage == 0) {
+    if (curPage == 0) {
         
-        // 第一页
+        // 第一页, 载入上一章
+        [self doGotoPreviousChapter];
         return;
     }
     
-    _curPage--;
+    curPage--;
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
-    CGPoint offset = CGPointMake(0, contentoffset + _curPage * _pageHeight);
-    if (_curPage == 0) {
-        
-        //offset = CGPointMake(0, -NAVIGATION_HEIGHT);
-    }
+    CGPoint offset = CGPointMake(0, curPage * pageHeight);
     [_textView setContentOffset:offset animated:YES];
     [UIView commitAnimations];
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.6];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.view cache:YES];
-    [UIView commitAnimations];
+    [Utilities curlRight:self.view];
+}
+
+- (void)getChapterList:(NSString *)booktoken ID:(NSString *)bookid {
+    
+    AskNetDataApi *api = [[AskNetDataApi alloc] init];
+    
+    [api doGetChapterList:booktoken BookID:bookid];
+}
+
+- (void)getChapterListFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取章节信息失败");
+}
+
+- (void)getChapterListSuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取章节信息成功");
+    
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    NSDictionary *list = [result objectForKey:@"list"];
+    
+    for (NSDictionary *dic in list) {
+        
+        migsChapterInfo *chapterinfo = [migsChapterInfo setupChapterinfoByDictionay:dic];
+        [_chapterArray addObject:chapterinfo];
+    }
+    
+    // 加载完成，开始第一章
+    if ([_chapterArray count] > 0) {
+        
+        curChapter = -1;
+        allChapter = [_chapterArray count];
+        [self doGotoNextChapter:NO];
+    }
 }
 
 - (void)doTap:(UITapGestureRecognizer *)tapGesture {
@@ -239,17 +369,7 @@
 
 - (void)setIsFullScreen {
     
-    if (isFullScreen) {
-        
-        contentoffset = 0;
-    }
-    else {
-        
-        contentoffset = -NAVIGATION_HEIGHT;
-    }
-    _pageHeight = self.view.frame.size.height + contentoffset;
-    
-    self.navigationController.navigationBarHidden = isFullScreen;
+    [self.navigationController setNavigationBarHidden:isFullScreen animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:isFullScreen withAnimation:YES];
 }
 

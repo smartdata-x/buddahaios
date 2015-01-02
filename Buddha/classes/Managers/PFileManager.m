@@ -96,4 +96,33 @@
     return filePath;
 }
 
+- (BOOL)isFileExistInBookDir:(NSString *)filename {
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *fullpath = [self getFullPathFromBookDir:filename];
+    
+    if ([fm fileExistsAtPath:fullpath]) {
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (NSString *)getFullPathFromBookDir:(NSString *)filename {
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *bookpath = [documentPath stringByAppendingPathComponent:@"book"];
+    
+    if (![fm fileExistsAtPath:bookpath isDirectory:NULL]) {
+        
+        [self createPath:bookpath];
+    }
+    
+    NSString *fullpath = [bookpath stringByAppendingPathComponent:filename];
+    
+    return fullpath;
+}
+
 @end

@@ -10,7 +10,7 @@
 
 @implementation PFileDownLoadManager
 
-- (void)downloadFromURL:(NSString *)szurl to:(NSString *)fileName {
+- (void)downloadFromURL:(NSString *)szurl to:(NSString *)fileName indir:(NSString *)subdir{
     
     if (self.isDownloading) {
         
@@ -22,6 +22,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     self.cnnt = [NSURLConnection connectionWithRequest:request delegate:self];
     self.filename = fileName;
+    self.subdir = subdir;
     
     self.isDownloading = YES;
 }
@@ -36,7 +37,8 @@
     
     // 创建文件存放路径
     NSString *cache = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *filePath = [cache stringByAppendingPathComponent:self.filename];
+    NSString *subdir = [cache stringByAppendingPathComponent:self.subdir];
+    NSString *filePath = [subdir stringByAppendingPathComponent:self.filename];
     
     // 创建一个空的文件
     NSFileManager *mgr = [NSFileManager defaultManager];

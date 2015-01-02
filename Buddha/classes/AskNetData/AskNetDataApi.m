@@ -56,6 +56,9 @@
     NSString *httpGetBookSummary = [NSString stringWithFormat:@"%@/book/1/booksummary.fcgi", MAIN_HTTP];
     NSString *httpGetBook = [NSString stringWithFormat:@"%@/find/1/book.fcgi", MAIN_HTTP];
     NSString *httpSearchBookType = [NSString stringWithFormat:@"%@/book/1/searchtype.fcgi", MAIN_HTTP];
+    NSString *httpGetChapterList = [NSString stringWithFormat:@"%@/book/1/chapterlist.fcgi", MAIN_HTTP];
+    NSString *httpGetBookToken = [NSString stringWithFormat:@"%@/book/1/wantgetbook.fcgi", MAIN_HTTP];
+    NSString *httpGetBookList = [NSString stringWithFormat:@"%@/book/1/booklist.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -105,6 +108,18 @@
                        @{KEY_NET_ADDRESS:httpSearchBookType,
                          KEY_NET_FAILED:MigNetNameSearchBookTypeFailed,
                          KEY_NET_SUCCESS:MigNetNameSearchBookTypeSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetChapterList,
+                         KEY_NET_FAILED:MigNetNameGetChapterListFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetChapterListSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetBookToken,
+                         KEY_NET_FAILED:MigNetNameGetBookTokenFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetBookTokenSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetBookList,
+                         KEY_NET_FAILED:MigNetNameGetBookListFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetBookListSuccess},
                        ];
 }
 
@@ -362,6 +377,36 @@
         NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&btype=%@&latitude=%@&longitude=%@", mUid, mToken, type, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
         
         [self doGetData:MIGAPI_SEARCHBOOKTYPE tail:getData];
+    }
+}
+
+- (void)doGetChapterList:(NSString *)booktoken BookID:(NSString *)bookid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&booktoken=%@&bookid=%@", mUid, mToken, booktoken, bookid];
+        
+        [self doGetData:MIGAPI_GETCHAPTERLIST tail:getData];
+    }
+}
+
+- (void)doGetBookToken:(NSString *)bookid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&bookid=%@", mUid, mToken, bookid];
+        
+        [self doGetData:MIGAPI_GETBOOKTOKEN tail:getData];
+    }
+}
+
+- (void)doGetBookList {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@", mUid, mToken];
+        
+        [self doGetData:MIGAPI_GETBOOKLIST tail:getData];
     }
 }
 

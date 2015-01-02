@@ -25,6 +25,7 @@ enum {
 @property (nonatomic, retain) NSString *bookname;
 @property (nonatomic, retain) NSString *bookid;
 @property (nonatomic, retain) NSString *booktype;
+@property (nonatomic, retain) NSString *booktoken;
 @property (nonatomic, retain) NSString *imgURL;
 @property (nonatomic, retain) NSString *bookSummary;
 @property (nonatomic, retain) NSString *author;
@@ -79,7 +80,7 @@ enum {
 - (void)reloadView;
 
 - (IBAction)doGotoBookShell:(id)sender isSaveToShelf:(BOOL)issave;
-- (void)doGotoReadingView:(NSString *)filename FileURL:(NSString *)fileurl;
+- (void)doGotoReadingView:(NSString *)bookname BookID:(NSString *)bookid BookToken:(NSString *)booktoken;
 - (void)doShowShareView;
 
 - (void)reloadData;
@@ -87,5 +88,9 @@ enum {
 - (void)doGetBookSummary:(NSString *)bookid;
 - (void)doGetBookSummaryFailed:(NSNotification *)notification;
 - (void)doGetBookSummarySuccess:(NSNotification *)notification;
+
+- (void)doGetBookToken:(NSString *)bookid;
+- (void)doGetBookTokenFailed:(NSNotification *)notification;
+- (void)doGetBookTokenSuccess:(NSNotification *)notification;
 
 @end

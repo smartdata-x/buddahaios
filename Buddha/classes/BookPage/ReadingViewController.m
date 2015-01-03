@@ -56,9 +56,11 @@
 
 - (void)initialize:(NSString *)bookname BookId:(NSString *)bookid BookToken:(NSString *)booktoken{
     
+    fontSize = 30;
     isFullScreen = YES;
     curChapter = 0;
     curPage = 0;
+    pageHeight = self.view.frame.size.height - 30;
     
     mBookname = bookname;
     mBookid = bookid;
@@ -237,21 +239,21 @@
     }
     
 #if MIG_DEBUG_TEST
-#if 0
-    curContent = @"1<Title>三体</Title>\n2\n3<Author>刘慈欣</Author>\n4\n5\n6\n7\n8\n9<Chapter>第一部</Chapter>\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19<Content>\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70</Content>\n";
+#if 1
+    curContent = @"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n";
 #endif
 #endif
 
-    UIFont *textfont = [UIFont fontOfApp:26 / SCREEN_SCALAR];
+    UIFont *textfont = [UIFont fontOfApp:fontSize / SCREEN_SCALAR];
     CGRect maxRect = CGRectMake(0, 0, frame.size.width, MAXFLOAT);
     float textheight = [Utilities heightForString:curContent Font:textfont Frame:maxRect];
     
-    pageHeight = frame.size.height;
+    //pageHeight = frame.size.height;
     allPage = ceilf(textheight / pageHeight + 0.5);
     
     if (_textView == nil) {
         
-        CGRect textFrame = CGRectMake(0, 21, frame.size.width, frame.size.height - 21);
+        CGRect textFrame = CGRectMake(0, 31, frame.size.width, frame.size.height - 21);
         _textView = [[UITextView alloc] initWithFrame:textFrame];
         [viewWrapper addSubview:_textView];
     }
@@ -263,7 +265,19 @@
     [_textView setContentOffset:CGPointMake(0, 0)];
     [_textView setBackgroundColor:[UIColor clearColor]];
     _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    _textView.text = curContent;
+    
+    NSMutableParagraphStyle *parastyle = [[NSMutableParagraphStyle alloc] init];
+    parastyle.lineHeightMultiple = 20;
+    parastyle.maximumLineHeight = 25;
+    parastyle.minimumLineHeight = 15;
+    parastyle.firstLineHeadIndent = 20;
+    parastyle.alignment = NSTextAlignmentJustified;
+    
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont fontOfApp:fontSize / SCREEN_SCALAR], NSParagraphStyleAttributeName:parastyle, NSForegroundColorAttributeName:MIG_COLOR_111111};
+    
+    _textView.attributedText = [[NSAttributedString alloc] initWithString:curContent attributes:attributes];
+    
+    //_textView.text = curContent;
     
     [self initTopView:viewFrame];
 }

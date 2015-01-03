@@ -29,6 +29,8 @@
     BOOL isFullScreen;
     float pageHeight;
     
+    float fontSize;
+    
     int curPage;
     int allPage;
     int curChapter;

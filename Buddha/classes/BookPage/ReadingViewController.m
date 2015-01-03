@@ -167,7 +167,17 @@
     curChapter++;
     migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
     curChapterFilename = [NSString stringWithFormat:@"%@_%d.txt", mBookname, curChapter];
-    [SVProgressHUD showSuccessWithStatus:chapterinfo.chaptername];
+    
+    NSString *mension = nil;
+    if (curChapter == 0) {
+        
+        mension = [NSString stringWithFormat:@"第一章\n%@", chapterinfo.chaptername];
+    }
+    else {
+        
+        mension = [NSString stringWithFormat:@"下一章\n%@", chapterinfo.chaptername];
+    }
+    [SVProgressHUD showSuccessWithStatus:mension];
     
     if (!forceDownload && [_pfm isFileExistInBookDir:curChapterFilename]) {
         

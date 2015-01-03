@@ -42,7 +42,7 @@
 
 - (void)registerLogins {
     
-    [[SinaWeiboManager GetInstance] doRegister];
+    //[[SinaWeiboManager GetInstance] doRegister];
     [[TencentWeixinManager GetInstance] doRegister];
     [[TencentQQManager GetInstance] doRegister];
 }

@@ -285,10 +285,22 @@
     
     if (section == 0) {
         
-        return 2;
+        return MIN(2, [tableIntroInfo count]);
+    }
+    else if (section == 1) {
+        
+        return MIN(1, [tableBookFojingInfo count]);
+    }
+    else if (section == 2) {
+        
+        return MIN(1, [tableBookYiguiInfo count]);
+    }
+    else if (section == 3) {
+        
+        return MIN(1, [tableBookFolunInfo count]);
     }
     
-    return 1;
+    return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

@@ -104,6 +104,12 @@
     [self getFileContent:curChapterFilename];
     
     [self initView:viewFrame];
+    
+    if (!MIG_IS_EMPTY_STRING(curContent))
+    {
+        curPage = -1;
+        [self doNextPage:nil];
+    }
 }
 
 - (void)viewDidLoad {
@@ -146,7 +152,7 @@
     
     NSString *fullpath = [_pfm getFullPathFromBookDir:filename];
     
-    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
     NSData *strdata = [NSData dataWithContentsOfFile:fullpath];
     
     MIGDEBUG_PRINT(@"文件路径:%@", fullpath);
@@ -163,6 +169,10 @@
         MIGDEBUG_PRINT(@"最后一章");
         return;
     }
+    
+#if MIG_DEBUG_TEST
+    forceDownload = YES;
+#endif
     
     curChapter++;
     migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
@@ -183,15 +193,18 @@
         
         [self getFileContent:curChapterFilename];
         [self initView:viewFrame];
+        
+        if (!MIG_IS_EMPTY_STRING(curContent))
+        {
+            curPage = -1;
+            [self doNextPage:nil];
+        }
     }
     else {
         
         migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
         [self doDownloadBook:chapterinfo.chapterurl ToFile:curChapterFilename];
     }
-    
-    curPage = -1;
-    [self doNextPage:nil];
 }
 
 - (void)doGotoPreviousChapter {
@@ -241,16 +254,15 @@
         CGRect textFrame = CGRectMake(0, 21, frame.size.width, frame.size.height - 21);
         _textView = [[UITextView alloc] initWithFrame:textFrame];
         [viewWrapper addSubview:_textView];
-        _textView.font = textfont;
-        _textView.textColor = MIG_COLOR_111111;
-        _textView.editable = NO;
-        [_textView setUserInteractionEnabled:NO];
-        [_textView setContentOffset:CGPointMake(0, 0)];
-        [_textView setBackgroundColor:[UIColor clearColor]];
-        _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _textView.autoresizingMask = UIViewAutoresizingNone;
     }
     
+    _textView.font = textfont;
+    _textView.textColor = MIG_COLOR_111111;
+    _textView.editable = NO;
+    [_textView setUserInteractionEnabled:NO];
+    [_textView setContentOffset:CGPointMake(0, 0)];
+    [_textView setBackgroundColor:[UIColor clearColor]];
+    _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
     _textView.text = curContent;
     
     [self initTopView:viewFrame];

@@ -10,13 +10,45 @@
 
 @implementation Utilities
 
-+ (NSInteger)heightForString:(NSString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame {
++ (float)heightForString:(NSString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame {
     
     CGSize size = CGSizeMake(frame.size.width, MAXFLOAT);
     NSDictionary *attribute = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
     CGSize labelSize = [srcstr boundingRectWithSize:size options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:attribute context:nil].size;
     
     return labelSize.height;
+}
+
++ (float)MaxHeightForFontInRectWithNumber:(float *)fontsize Rect:(CGRect)rect Line:(NSInteger)lines {
+    
+    float maxHeight = 1;
+    float lastFontsize = 5;
+    CGRect maxRect = CGRectMake(0, 0, rect.size.width, MAXFLOAT);
+    
+    NSMutableString *testString = [[NSMutableString alloc] init];
+    [testString appendString:@"1"];
+    for (int i=0; i<lines-1; i++) {
+        
+        [testString appendString:@"\n1"];
+    }
+    
+    int i = 100;
+    while (i > 0) {
+        
+        if ([self heightForString:testString Font:[UIFont fontOfApp:lastFontsize] Frame:maxRect] >= rect.size.height) {
+            
+            break;
+        }
+        
+        lastFontsize += 1.0;
+        i--;
+    }
+    
+    lastFontsize -= 1.0;
+    maxHeight = [self heightForString:testString Font:[UIFont fontOfApp:lastFontsize] Frame:maxRect];
+    
+    *fontsize = lastFontsize * SCREEN_SCALAR;
+    return maxHeight;
 }
 
 + (NSString *)distanceFromFloat:(float)distance {

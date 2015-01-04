@@ -56,11 +56,10 @@
 
 - (void)initialize:(NSString *)bookname BookId:(NSString *)bookid BookToken:(NSString *)booktoken{
     
-    fontSize = 30;
+    fontSize = 36;
     isFullScreen = YES;
     curChapter = 0;
     curPage = 0;
-    pageHeight = self.view.frame.size.height - 30;
     
     mBookname = bookname;
     mBookid = bookid;
@@ -232,28 +231,39 @@
 
 - (void)initView:(CGRect)frame {
     
+#if MIG_DEBUG_TEST
+#if 0
+    curContent = @"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n";
+#endif
+#endif
+    
     if (MIG_IS_EMPTY_STRING(curContent)) {
         
         // 没有内容则返回
         return;
     }
     
-#if MIG_DEBUG_TEST
-#if 1
-    curContent = @"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n";
-#endif
-#endif
+    float ystart = 31; // 为了给顶部留出空间的默认值
+    float padding = 16; // UITextView的上下左右各有8个padding
+    
+    float maxViewHeight = frame.size.height - ystart - padding;
+    int linenumber = maxViewHeight / fontSize; // 行数取整
+    
+    float realViewHeight = linenumber * fontSize + padding;
+    ystart = frame.size.height - realViewHeight;
+    
+    float lineheight = fontSize; // 行间距和字体大小一样大
+    pageHeight = realViewHeight - padding; // 翻页大小和padding无关
 
     UIFont *textfont = [UIFont fontOfApp:fontSize / SCREEN_SCALAR];
     CGRect maxRect = CGRectMake(0, 0, frame.size.width, MAXFLOAT);
     float textheight = [Utilities heightForString:curContent Font:textfont Frame:maxRect];
     
-    //pageHeight = frame.size.height;
     allPage = ceilf(textheight / pageHeight + 0.5);
     
     if (_textView == nil) {
         
-        CGRect textFrame = CGRectMake(0, 31, frame.size.width, frame.size.height - 21);
+        CGRect textFrame = CGRectMake(0, ystart, frame.size.width, frame.size.height - ystart);
         _textView = [[UITextView alloc] initWithFrame:textFrame];
         [viewWrapper addSubview:_textView];
     }
@@ -268,16 +278,14 @@
     
     NSMutableParagraphStyle *parastyle = [[NSMutableParagraphStyle alloc] init];
     parastyle.lineHeightMultiple = 20;
-    parastyle.maximumLineHeight = 25;
-    parastyle.minimumLineHeight = 15;
+    parastyle.maximumLineHeight = lineheight;
+    parastyle.minimumLineHeight = lineheight;
     parastyle.firstLineHeadIndent = 20;
     parastyle.alignment = NSTextAlignmentJustified;
     
     NSDictionary *attributes = @{NSFontAttributeName:[UIFont fontOfApp:fontSize / SCREEN_SCALAR], NSParagraphStyleAttributeName:parastyle, NSForegroundColorAttributeName:MIG_COLOR_111111};
     
     _textView.attributedText = [[NSAttributedString alloc] initWithString:curContent attributes:attributes];
-    
-    //_textView.text = curContent;
     
     [self initTopView:viewFrame];
 }

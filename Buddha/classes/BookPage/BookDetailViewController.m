@@ -10,6 +10,7 @@
 #import "BookShellViewController.h"
 #import "ReadingViewController.h"
 #import "DatabaseManager.h"
+#import "LoginManager.h"
 
 @implementation migsBookDetailInformation
 
@@ -461,6 +462,28 @@
 - (void)didGeneralShareViewClicked:(NSInteger)index {
     
     MIGDEBUG_PRINT(@"第%d分享", index);
+    
+    if (index == 0) {
+        
+        [[LoginManager GetInstance] doTencentWeixinShare];
+    }
+    else if (index == 1) {
+        
+        [[LoginManager GetInstance] doTencentQQShare];
+    }
+    else if (index == 2) {
+        
+        [[LoginManager GetInstance] doSinaWeiboShare];
+    }
+    
+    // 点击分享之后隐藏分享页面
+    if (IS_OS_8_OR_LATER) {
+    
+        [_shareAlertController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+        [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    }
 }
 
 // GeneralSearchViewDelegate

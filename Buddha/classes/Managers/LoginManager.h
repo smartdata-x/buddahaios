@@ -33,6 +33,10 @@
 - (void)doTencentQQLogin;
 - (void)doLogOut;
 
+- (void)doSinaWeiboShare;
+- (void)doTencentQQShare;
+- (void)doTencentWeixinShare;
+
 - (void)doQuickLogin;
 
 - (void)LoginFromThirdPartSuccess:(NSNotification *)notification;

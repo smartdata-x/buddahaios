@@ -307,18 +307,19 @@
     if (_lblBookName == nil) {
         
         _lblBookName = [[UILabel alloc] initWithFrame:nameframe];
-        [_lblBookName setFont:[UIFont fontOfApp:20 / SCREEN_SCALAR]];
+        [_lblBookName setFont:[UIFont fontOfApp:25 / SCREEN_SCALAR]];
         [_lblBookName setTextColor:MIG_COLOR_111111];
         [_lblBookName setTextAlignment:NSTextAlignmentLeft];
         [viewWrapper addSubview:_lblBookName];
     }
     [_lblBookName setFrame:nameframe];
-    [_lblBookName setText:mBookname];
+    NSString *bookname = [NSString stringWithFormat:@"《%@》", mBookname];
+    [_lblBookName setText:bookname];
     
     if (_lblChapterName == nil) {
         
         _lblChapterName = [[UILabel alloc] initWithFrame:chapterframe];
-        [_lblChapterName setFont:[UIFont fontOfApp:20 / SCREEN_SCALAR]];
+        [_lblChapterName setFont:[UIFont fontOfApp:25 / SCREEN_SCALAR]];
         [_lblChapterName setTextColor:MIG_COLOR_111111];
         [_lblChapterName setTextAlignment:NSTextAlignmentRight];
         [viewWrapper addSubview:_lblChapterName];

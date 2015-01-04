@@ -42,7 +42,7 @@
 
 - (void)registerLogins {
     
-    //[[SinaWeiboManager GetInstance] doRegister];
+    [[SinaWeiboManager GetInstance] doRegister];
     [[TencentWeixinManager GetInstance] doRegister];
     [[TencentQQManager GetInstance] doRegister];
 }
@@ -60,6 +60,21 @@
 - (void)doTencentQQLogin {
     
     [[TencentQQManager GetInstance] doLoginRequest];
+}
+
+- (void)doSinaWeiboShare {
+    
+    MIGDEBUG_PRINT(@"新浪微博分享");
+}
+
+- (void)doTencentWeixinShare {
+    
+    MIGDEBUG_PRINT(@"微信分享");
+}
+
+- (void)doTencentQQShare {
+    
+    MIGDEBUG_PRINT(@"QQ分享");
 }
 
 - (void)doLogOut {

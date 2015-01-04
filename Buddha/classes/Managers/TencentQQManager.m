@@ -119,4 +119,16 @@
     }
 }
 
+// 分享到QQ空间的回调
+- (void)addShareResponse:(APIResponse *)response {
+    
+    MIGDEBUG_PRINT(@"QQ空间分享回调");
+}
+
+- (void)addTopicResponse:(APIResponse *)response {
+    
+    MIGDEBUG_PRINT(@"分享到说说回调");
+}
+
+
 @end

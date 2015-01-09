@@ -65,6 +65,12 @@
 		CBB6ED5F1A2B61B8005B0CF3 /* FeaturedBooksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB6ED581A2B61B8005B0CF3 /* FeaturedBooksCell.xib */; };
 		CBB6ED601A2B61B8005B0CF3 /* FeaturedNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB6ED5A1A2B61B8005B0CF3 /* FeaturedNewsCell.m */; };
 		CBB6ED611A2B61B8005B0CF3 /* FeaturedNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB6ED5B1A2B61B8005B0CF3 /* FeaturedNewsCell.xib */; };
+		CBCB6A991A5C0C330082E361 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6A981A5C0C330082E361 /* ActivityViewController.m */; };
+		CBCB6A9D1A5C13A30082E361 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6A9B1A5C13A30082E361 /* ActivityTableViewCell.m */; };
+		CBCB6A9E1A5C13A30082E361 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBCB6A9C1A5C13A30082E361 /* ActivityTableViewCell.xib */; };
+		CBCB6AA21A5C21D60082E361 /* ActivityDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AA01A5C21D60082E361 /* ActivityDetailTableViewCell.m */; };
+		CBCB6AA31A5C21D60082E361 /* ActivityDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBCB6AA11A5C21D60082E361 /* ActivityDetailTableViewCell.xib */; };
+		CBCB6AA61A603B040082E361 /* BaiduMapServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AA51A603B040082E361 /* BaiduMapServiceManager.m */; };
 		CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */; };
 		CBD333FB1A41B0290026AD71 /* MapBuidingInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD333F91A41B0290026AD71 /* MapBuidingInfoViewController.m */; };
 		CBD333FF1A41BDBD0026AD71 /* allow_choose.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD333FD1A41BDBD0026AD71 /* allow_choose.png */; };
@@ -293,6 +299,16 @@
 		CBB6ED591A2B61B8005B0CF3 /* FeaturedNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedNewsCell.h; sourceTree = "<group>"; };
 		CBB6ED5A1A2B61B8005B0CF3 /* FeaturedNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedNewsCell.m; sourceTree = "<group>"; };
 		CBB6ED5B1A2B61B8005B0CF3 /* FeaturedNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedNewsCell.xib; sourceTree = "<group>"; };
+		CBCB6A971A5C0C330082E361 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		CBCB6A981A5C0C330082E361 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		CBCB6A9A1A5C13A30082E361 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
+		CBCB6A9B1A5C13A30082E361 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
+		CBCB6A9C1A5C13A30082E361 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
+		CBCB6A9F1A5C21D60082E361 /* ActivityDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailTableViewCell.h; sourceTree = "<group>"; };
+		CBCB6AA01A5C21D60082E361 /* ActivityDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailTableViewCell.m; sourceTree = "<group>"; };
+		CBCB6AA11A5C21D60082E361 /* ActivityDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailTableViewCell.xib; sourceTree = "<group>"; };
+		CBCB6AA41A603B040082E361 /* BaiduMapServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMapServiceManager.h; sourceTree = "<group>"; };
+		CBCB6AA51A603B040082E361 /* BaiduMapServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduMapServiceManager.m; sourceTree = "<group>"; };
 		CBD333F21A41ADAD0026AD71 /* BaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavViewController.h; sourceTree = "<group>"; };
 		CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavViewController.m; sourceTree = "<group>"; };
 		CBD333F81A41B0290026AD71 /* MapBuidingInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBuidingInfoViewController.h; sourceTree = "<group>"; };
@@ -741,6 +757,21 @@
 			path = QQSDK;
 			sourceTree = "<group>";
 		};
+		CBCB6A961A5C0C010082E361 /* ActivityPage */ = {
+			isa = PBXGroup;
+			children = (
+				CBCB6A971A5C0C330082E361 /* ActivityViewController.h */,
+				CBCB6A981A5C0C330082E361 /* ActivityViewController.m */,
+				CBCB6A9A1A5C13A30082E361 /* ActivityTableViewCell.h */,
+				CBCB6A9B1A5C13A30082E361 /* ActivityTableViewCell.m */,
+				CBCB6A9C1A5C13A30082E361 /* ActivityTableViewCell.xib */,
+				CBCB6A9F1A5C21D60082E361 /* ActivityDetailTableViewCell.h */,
+				CBCB6AA01A5C21D60082E361 /* ActivityDetailTableViewCell.m */,
+				CBCB6AA11A5C21D60082E361 /* ActivityDetailTableViewCell.xib */,
+			);
+			path = ActivityPage;
+			sourceTree = "<group>";
+		};
 		CBD334461A499BF70026AD71 /* BookPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -850,6 +881,7 @@
 				CBEC69C81A29DD88007B2A00 /* CTMBase64 */,
 				CBEC69A71A28EE8D007B2A00 /* FMDatabase */,
 				CBEC69A31A28A9FD007B2A00 /* AskNetData */,
+				CBCB6A961A5C0C010082E361 /* ActivityPage */,
 				CBD334461A499BF70026AD71 /* BookPage */,
 				CBEC699C1A2753C6007B2A00 /* FeaturePage */,
 				CBEC699B1A275372007B2A00 /* MapPage */,
@@ -1196,6 +1228,8 @@
 				CB96996A1A308834009C35F8 /* MyLocationManager.m */,
 				CBD334501A4C3B730026AD71 /* PFileDownLoadManager.h */,
 				CBD334511A4C3B730026AD71 /* PFileDownLoadManager.m */,
+				CBCB6AA41A603B040082E361 /* BaiduMapServiceManager.h */,
+				CBCB6AA51A603B040082E361 /* BaiduMapServiceManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1426,6 +1460,7 @@
 				CBD334021A41BDDA0026AD71 /* disc_line.png in Resources */,
 				CBEC68E21A2202F0007B2A00 /* home_message.png in Resources */,
 				CB20DDCB1A3B20BB003410FA /* temple.png in Resources */,
+				CBCB6A9E1A5C13A30082E361 /* ActivityTableViewCell.xib in Resources */,
 				CBEC68E81A2360C5007B2A00 /* banner.jpg in Resources */,
 				C7E0C1F71A2C6EFF002683DE /* Default@2x.png in Resources */,
 				CB9699641A2F523B009C35F8 /* logo.png in Resources */,
@@ -1478,6 +1513,7 @@
 				CBD334061A41BDF00026AD71 /* next_ico.png in Resources */,
 				CBEC68EB1A24B008007B2A00 /* menu_normal.png in Resources */,
 				CB9699571A2F419E009C35F8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				CBCB6AA31A5C21D60082E361 /* ActivityDetailTableViewCell.xib in Resources */,
 				CB9699701A3095F9009C35F8 /* LoginTableViewCell.xib in Resources */,
 				CBEC68221A1A44E4007B2A00 /* Images.xcassets in Resources */,
 				CBD334721A4F11E30026AD71 /* title_line.png in Resources */,
@@ -1493,6 +1529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBCB6A9D1A5C13A30082E361 /* ActivityTableViewCell.m in Sources */,
 				CB96994F1A2F2B81009C35F8 /* LoginViewController.m in Sources */,
 				CBB6ED5C1A2B61B8005B0CF3 /* FeaturedActivitiesCell.m in Sources */,
 				CBEC68781A1B822B007B2A00 /* PCustomTabBarViewController.m in Sources */,
@@ -1526,6 +1563,7 @@
 				CBD3341D1A44BC120026AD71 /* MapSearchResultViewController.m in Sources */,
 				CBEC69F21A2ADF62007B2A00 /* TencentWeixinManager.m in Sources */,
 				CBEC68791A1B822B007B2A00 /* PCustomToolBarView.m in Sources */,
+				CBCB6AA61A603B040082E361 /* BaiduMapServiceManager.m in Sources */,
 				CBEC69671A2602A8007B2A00 /* AFJSONRequestOperation.m in Sources */,
 				CBEC685A1A1A4A81007B2A00 /* UserData.m in Sources */,
 				CBEC685C1A1A4A81007B2A00 /* EGOImageButton.m in Sources */,
@@ -1571,10 +1609,12 @@
 				CBEC68871A1B841B007B2A00 /* UIImage+ImageEffects.m in Sources */,
 				CBEC69661A2602A8007B2A00 /* AFImageRequestOperation.m in Sources */,
 				CBEC68771A1B822B007B2A00 /* PCustomTabBarView.m in Sources */,
+				CBCB6AA21A5C21D60082E361 /* ActivityDetailTableViewCell.m in Sources */,
 				CB9469801A33FAC100337164 /* JSONKit.m in Sources */,
 				CB94697C1A33FA7E00337164 /* Reachability.m in Sources */,
 				CB20DDD01A3B2A66003410FA /* MapFeatureTableViewCell.m in Sources */,
 				CBEC69651A2602A8007B2A00 /* AFHTTPRequestOperation.m in Sources */,
+				CBCB6A991A5C0C330082E361 /* ActivityViewController.m in Sources */,
 				CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */,
 				CBD3347A1A4FD9820026AD71 /* BookDetailViewController.m in Sources */,
 				CB9469781A33FA7E00337164 /* Base64.m in Sources */,

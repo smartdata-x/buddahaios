@@ -30,6 +30,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSummaryFailed:) name:MigNetNameGetSummaryFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSummarySuccess:) name:MigNetNameGetSummarySuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getActivitySummaryFailed:) name:MigNetNameGetActivitySummaryFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getActivitySummarySuccess:) name:MigNetNameGetActivitySummarySuccess object:nil];
     }
     
     return self;
@@ -39,6 +41,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetSummaryFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetSummarySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetActivitySummaryFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetActivitySummarySuccess object:nil];
 }
 
 - (void)viewDidLoad {
@@ -47,6 +51,11 @@
     
     [self initNav];
     [self initView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)initNav {
@@ -90,10 +99,19 @@
     [self.view addSubview:mMainTableView];
 }
 
-- (void)initialize:(migsBuildingInfo *)buildinfo {
+- (void)initialize:(migsBuildingInfo *)buildinfo PageType:(int)pageType {
     
     mBuildingInfo = buildinfo;
-    [self getSummary];
+    _pageType = pageType;
+    
+    if (pageType == PAGETYPE_MAPBUILD) {
+        
+        [self getSummary];
+    }
+    else if (pageType == PAGETYPE_ACTIVITY) {
+        
+        [self getActivitySummary];
+    }
     
     // 获取到值之后再更新一次
     [self reloadData];
@@ -117,6 +135,25 @@
 - (void)doSearchInMapView {
     
     MapViewController *mapview = (MapViewController *)self.mParentMapView;
+    
+    if (mapview == nil) {
+        
+        // 如果mapview是空，则是活动页面跳转过来
+        mapview = [[MapViewController alloc] init];
+        mapview.topViewController = nil;
+        
+        // 扩大高度
+        CGRect tmpRect = self.view.frame;;
+        tmpRect.size.height += BOTTOM_MENU_BUTTON_HEIGHT;
+        mapview.mFrame = tmpRect;
+        
+        // 隐藏navigation
+        mapview.isHideNavagation = YES;
+        mapview.fromWhichPage = FROMPAGE_ACTIVITY;
+        
+        [mapview viewDidLoad];
+    }
+    
     CLLocationCoordinate2D startLoc = [[MyLocationManager GetInstance] getLocation];
     CLLocationCoordinate2D endLoc = CLLocationCoordinate2DMake(mBuildingInfo.fLatitude, mBuildingInfo.fLongitude);
     
@@ -125,7 +162,10 @@
     mapview.mRouteSearchControl.mLastBuildingInfo = mBuildingInfo;
     
     // 主动调用地图显示
-    [mapview viewWillAppear:YES];
+    if (_pageType == PAGETYPE_MAPBUILD) {
+        
+        [mapview viewWillAppear:YES];
+    }
     
     // 切换地图的菜单模式
     mapview.isMainEntry = NO;
@@ -137,8 +177,16 @@
     // 隐藏地图的推荐页
     [mapview hideBuildMenu:NO];
     
-    // 返回地图页面
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    // 如果是地图页面则返回地图页面
+    // 如果是活动页面, TODO:
+    if (_pageType == PAGETYPE_MAPBUILD) {
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else if (_pageType == PAGETYPE_ACTIVITY) {
+        
+        [self.navigationController pushViewController:mapview animated:YES];
+    }
 }
 
 - (void)doCallPhoneNumber {
@@ -147,6 +195,43 @@
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:phone]]];
     [self.view addSubview:callWebview];
+}
+
+- (void)getActivitySummary {
+    
+    AskNetDataApi *api = [[AskNetDataApi alloc] init];
+    [api doGetActivitySummary:mBuildingInfo.buildId];
+}
+
+- (void)getActivitySummaryFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取活动详情失败");
+}
+
+- (void)getActivitySummarySuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取活动详情成功");
+    
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    
+    NSDictionary *summary = [result objectForKey:@"summary"];
+    mPhone = [summary objectForKey:@"phone"];
+    mDetailInfo = [summary objectForKey:@"summary"];
+    
+    NSDictionary *location = [result objectForKey:@"location"];
+    float fLatitude = [[location objectForKey:@"latitude"] floatValue];
+    float fLongitude = [[location objectForKey:@"longitude"] floatValue];
+    NSString *latitude = [NSString stringWithFormat:@"%f", fLatitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", fLongitude];
+    NSString *address = [location objectForKey:@"address"];
+    mBuildingInfo.address = address;
+    mBuildingInfo.latitude = latitude;
+    mBuildingInfo.longitude = longitude;
+    mBuildingInfo.fLatitude = fLatitude;
+    mBuildingInfo.fLongitude = fLongitude;
+    
+    [self reloadData];
 }
 
 - (void)getSummary {
@@ -204,7 +289,15 @@
         
         if (row == 0) {
             
-            return 67;
+            // 第一栏，如果是地图建筑，显示地图，如果是活动建筑，显示一张图
+            if (_pageType == PAGETYPE_MAPBUILD) {
+                
+                return 67;
+            }
+            else if (_pageType == PAGETYPE_ACTIVITY) {
+                
+                return 224 / SCREEN_SCALAR;
+            }
         }
         else {
          
@@ -212,8 +305,6 @@
         }
     }
     else if (section == 1) {
-        
-        //return [Utilities heightForString:mDetailInfo Font:[UIFont fontOfApp:22/SCREEN_SCALAR] Frame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
         
         return 200;
     }
@@ -229,26 +320,51 @@
     if (curSec == 0) {
         
         if (curRow == 0) {
-            
-            NSString *cellIdentifier = @"MapFeatureTableViewCell";
-            MapFeatureTableViewCell *cell = (MapFeatureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            
-            if (cell == nil) {
+        
+            if (_pageType == PAGETYPE_MAPBUILD) {
                 
-                NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-                cell = (MapFeatureTableViewCell *)[nibContents objectAtIndex:0];
-                cell.backgroundColor = [UIColor clearColor];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                NSString *cellIdentifier = @"MapFeatureTableViewCell";
+                MapFeatureTableViewCell *cell = (MapFeatureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
                 
-                if (!mBuildingInfo) {
+                if (cell == nil) {
                     
-                    return nil;
+                    NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
+                    cell = (MapFeatureTableViewCell *)[nibContents objectAtIndex:0];
+                    cell.backgroundColor = [UIColor clearColor];
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    
+                    if (!mBuildingInfo) {
+                        
+                        return nil;
+                    }
+                    
+                    [cell initCellWithData:mBuildingInfo];
                 }
                 
-                [cell initCellWithData:mBuildingInfo];
+                return cell;
             }
-            
-            return cell;
+            else if (_pageType == PAGETYPE_ACTIVITY) {
+                
+                NSString *cellIdentifier = @"ActivityDetailTableViewCell";
+                ActivityDetailTableViewCell *cell = (ActivityDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+                
+                if (cell == nil) {
+                    
+                    NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
+                    cell = (ActivityDetailTableViewCell *)[nibContents objectAtIndex:0];
+                    cell.backgroundColor = [UIColor clearColor];
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    
+                    if (!mBuildingInfo) {
+                        
+                        return nil;
+                    }
+                    
+                    [cell initialize:mBuildingInfo.headUrl];
+                }
+                
+                return cell;
+            }
         }
         else if (curRow == 1 || curRow == 2) {
             

@@ -40,23 +40,13 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetNearBuildFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetNearBuildSuccess object:nil];
+    mMapView.delegate = nil;
+    mLocationService.delegate = nil;
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    
-    // 初始化百度地图
-    if (mBDMapManager == nil) {
-        
-        mBDMapManager = [[BMKMapManager alloc] init];
-        BOOL ret = [mBDMapManager start:@"96IS38XTSvyMSLgpPbV0FjKq" generalDelegate:self];
-        if (!ret) {
-            
-            MIGDEBUG_PRINT(@"百度地图启动成功");
-        }
-    }
     
     CLLocationCoordinate2D curLocation = [[MyLocationManager GetInstance] getLocation];
     
@@ -78,6 +68,7 @@
     [self updateBottomMenu];
     
     mLocationService = [[BMKLocationService alloc] init];
+    mLocationService.delegate = self;
     _mPoiSearchControl = [[MapPoiSearchController alloc] initWithBMKMapView:mMapView];
     _mRouteSearchControl = [[MapRouteSearchController alloc] initWithBMKMapView:mMapView];
     
@@ -91,15 +82,23 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [mMapView viewWillAppear];
-    mMapView.delegate = self;
-    mLocationService.delegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    if (_isHideNavagation) {
+        
+        [self.navigationController setNavigationBarHidden:YES];
+    }
+    else {
+        
+        [self.navigationController setNavigationBarHidden:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     
     [mMapView viewWillDisappear];
-    mMapView.delegate = nil;
-    mLocationService.delegate = nil;
 }
 
 - (void)initBuildMenu {
@@ -266,19 +265,25 @@
 
 - (void)doBackToBuildingInfo {
     
-    // 跳转到建筑详情页面
-    //[self doBackToMainEntry];
-    
-    MapBuidingInfoViewController *mapInfo = [[MapBuidingInfoViewController alloc] init];
-    [mapInfo initialize:_mLastBuildingInfo];
-    
-    [self.topViewController.navigationController pushViewController:mapInfo animated:YES];
-    
-    // 进入详情之后,如果当前是路线界面，改为主界面
-    if (!_isMainEntry) {
+    if (_fromWhichPage == FROMPAGE_ROOTVIEW) {
         
-        _isMainEntry = YES;
-        [self updateIsMainEntry];
+        // 主页面逻辑，跳转到建筑详情页面
+        MapBuidingInfoViewController *mapInfo = [[MapBuidingInfoViewController alloc] init];
+        [mapInfo initialize:_mLastBuildingInfo PageType:PAGETYPE_MAPBUILD];
+        
+        [self.topViewController.navigationController pushViewController:mapInfo animated:YES];
+        
+        // 进入详情之后,如果当前是路线界面，改为主界面
+        if (!_isMainEntry) {
+            
+            _isMainEntry = YES;
+            [self updateIsMainEntry];
+        }
+    }
+    else if (_fromWhichPage == FROMPAGE_ACTIVITY) {
+        
+        // 活动页面逻辑，跳转到上一级页面
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -308,7 +313,7 @@
     
     // 调用建筑详情页面
     MapBuidingInfoViewController *buildView = [[MapBuidingInfoViewController alloc] init];
-    [buildView initialize:curBuilding];
+    [buildView initialize:curBuilding PageType:PAGETYPE_MAPBUILD];
     buildView.mParentMapView = self;
     [self.topViewController.navigationController pushViewController:buildView animated:YES];
 }
@@ -635,31 +640,6 @@
     
     NSString *name = [view.annotation title];
     [self doGotoBuildingInfo:name];
-}
-
-// BMKGeneral Delegate
--(void)onGetNetworkState:(int)iError
-{
-    if (iError == 0)
-    {
-        NSLog(@"网络连接正常");
-    }
-    else
-    {
-        NSLog(@"网络错误:%d",iError);
-    }
-}
-
--(void)onGetPermissionState:(int)iError
-{
-    if (iError == 0)
-    {
-        NSLog(@"授权成功");
-    }
-    else
-    {
-        NSLog(@"授权失败:%d",iError);
-    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,6 +12,13 @@
 #import "EGOImageButton.h"
 #import "HorizontalMenu.h"
 #import "MapFeatureTableViewCell.h"
+#import "ActivityDetailTableViewCell.h"
+
+enum {
+    
+    PAGETYPE_MAPBUILD = 0,
+    PAGETYPE_ACTIVITY,
+};
 
 @interface MapBuidingInfoViewController : BaseNavViewController<UITableViewDataSource, UITableViewDelegate>
 {
@@ -23,9 +30,9 @@
 
 @property (nonatomic, retain) UIViewController *mParentMapView;
 @property (nonatomic, retain) NSString *buildID;
+@property (nonatomic, assign) int pageType;
 
-
-- (void)initialize:(migsBuildingInfo *)buildinfo;
+- (void)initialize:(migsBuildingInfo *)buildinfo PageType:(int)pageType;
 
 - (void)initNav;
 - (void)reloadData;
@@ -36,6 +43,10 @@
 - (void)getSummary;
 - (void)getSummaryFailed:(NSNotification *)notification;
 - (void)getSummarySuccess:(NSNotification *)notification;
+
+- (void)getActivitySummary;
+- (void)getActivitySummaryFailed:(NSNotification *)notification;
+- (void)getActivitySummarySuccess:(NSNotification *)notification;
 
 - (void)doFav;
 - (void)doShare;

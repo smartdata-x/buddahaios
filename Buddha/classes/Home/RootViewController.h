@@ -12,6 +12,7 @@
 #import "FeaturedViewController.h"
 #import "MapViewController.h"
 #import "BookStoreViewController.h"
+#import "ActivityViewController.h"
 #import "HorizontalMenu.h"
 
 // 每个继承类的标志
@@ -43,6 +44,8 @@ enum {
 @property (nonatomic, assign) BOOL mLoadAd;
 @property (nonatomic, retain) NSMutableDictionary *dicViewControllerCache;
 @property (nonatomic, assign) NSInteger curShowViewTag;
+
+- (void)doUpdateView:(NSInteger)viewTag;
 
 - (void)getAdvertiseSuccess:(NSNotification *)notification;
 - (void)getAdvertiseFailed:(NSNotification *)notification;

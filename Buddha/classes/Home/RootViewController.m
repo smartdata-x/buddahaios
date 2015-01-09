@@ -184,6 +184,32 @@
             }
             break;
             
+        case ROOTVIEWTAG_ACTIVITY:
+            {
+                // 显示底部菜单
+                [_mBottomMenu setHidden:NO];
+                
+                if (controller) {
+                    
+                    ActivityViewController *activity = (ActivityViewController *)controller;
+                    [activity viewWillAppear:YES];
+                }
+                else {
+                    
+                    ActivityViewController *activity = [[ActivityViewController alloc] init];
+                    activity.topViewController = self;
+                    activity.mFrame = mContentFrame;
+                    [activity viewWillAppear:YES];
+                    [_dicViewControllerCache setObject:activity forKey:numIndex];
+                    controller = activity;
+                }
+                
+                // 请求活动信息
+                AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+                [askApi doGetActivity];
+            }
+            break;
+            
         default:
             break;
     }

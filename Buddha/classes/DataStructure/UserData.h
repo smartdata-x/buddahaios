@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserData : NSObject
+@interface migsImgWithTitleAndDetail : NSObject
+
+@property (nonatomic, retain) NSString *imgName;
+@property (nonatomic, retain) NSString *imgTitle;
+@property (nonatomic, retain) NSString *imgDetail;
+@property (nonatomic, retain) NSString *ID;
+@property (nonatomic, retain) NSString *type;
+
++ (migsImgWithTitleAndDetail *)initByDic:(NSDictionary *)dic;
 
 @end

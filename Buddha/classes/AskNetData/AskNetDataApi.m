@@ -59,6 +59,8 @@
     NSString *httpGetChapterList = [NSString stringWithFormat:@"%@/book/1/chapterlist.fcgi", MAIN_HTTP];
     NSString *httpGetBookToken = [NSString stringWithFormat:@"%@/book/1/wantgetbook.fcgi", MAIN_HTTP];
     NSString *httpGetBookList = [NSString stringWithFormat:@"%@/book/1/booklist.fcgi", MAIN_HTTP];
+    NSString *httpGetActivity = [NSString stringWithFormat:@"%@/activities/1/activities.fcgi", MAIN_HTTP];
+    NSString *httpGetActivitySummary = [NSString stringWithFormat:@"%@/activities/1/summary.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -120,6 +122,14 @@
                        @{KEY_NET_ADDRESS:httpGetBookList,
                          KEY_NET_FAILED:MigNetNameGetBookListFailed,
                          KEY_NET_SUCCESS:MigNetNameGetBookListSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetActivity,
+                         KEY_NET_FAILED:MigNetNameGetActivityFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetActivitySuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetActivitySummary,
+                         KEY_NET_FAILED:MigNetNameGetActivitySummaryFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetActivitySummarySuccess},
                        ];
 }
 
@@ -407,6 +417,26 @@
         NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@", mUid, mToken];
         
         [self doGetData:MIGAPI_GETBOOKLIST tail:getData];
+    }
+}
+
+- (void)doGetActivity {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETACTIVITY tail:getData];
+    }
+}
+
+- (void)doGetActivitySummary:(NSString *)aid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&aid=%@&latitude=%@&longitude=%@", mUid, mToken, aid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETACTIVITYSUMMARY tail:getData];
     }
 }
 

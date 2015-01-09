@@ -79,6 +79,14 @@
 #define MigNetNameGetBookListFailed                     @"MigNetNameGetBookListFailed"
 #define MigNetNameGetBookListSuccess                    @"MigNetNameGetBookListSuccess"
 
+// 获取活动
+#define MigNetNameGetActivityFailed                     @"MigNetNameGetActivityFailed"
+#define MigNetNameGetActivitySuccess                    @"MigNetNameGetActivitySuccess"
+
+// 获取活动详情
+#define MigNetNameGetActivitySummaryFailed              @"MigNetNameGetActivitySummaryFailed"
+#define MigNetNameGetActivitySummarySuccess             @"MigNetNameGetActivitySummarySuccess"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
@@ -96,6 +104,8 @@ enum {
     MIGAPI_GETCHAPTERLIST,
     MIGAPI_GETBOOKTOKEN,
     MIGAPI_GETBOOKLIST,
+    MIGAPI_GETACTIVITY,
+    MIGAPI_GETACTIVITYSUMMARY,
 };
 
 @interface AskNetDataApi : NSObject
@@ -126,5 +136,7 @@ enum {
 - (void)doGetChapterList:(NSString *)booktoken BookID:(NSString *)bookid;
 - (void)doGetBookToken:(NSString *)bookid;
 - (void)doGetBookList;
+- (void)doGetActivity;
+- (void)doGetActivitySummary:(NSString *)aid;
 
 @end

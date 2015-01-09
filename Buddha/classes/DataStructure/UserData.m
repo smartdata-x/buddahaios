@@ -8,6 +8,32 @@
 
 #import "UserData.h"
 
-@implementation UserData
+@implementation migsImgWithTitleAndDetail
+
++ (migsImgWithTitleAndDetail *)initByDic:(NSDictionary *)dic {
+    
+    if (dic == nil) {
+    
+        return nil;
+    }
+    
+    migsImgWithTitleAndDetail *ret = [[migsImgWithTitleAndDetail alloc] init];
+    
+    int nID = [[dic objectForKey:@"id"] intValue];
+    int nType = [[dic objectForKey:@"type"] intValue];
+    NSString *ID = [NSString stringWithFormat:@"%d", nID];
+    NSString *type = [NSString stringWithFormat:@"%d", nType];
+    NSString *img = [dic objectForKey:@"pic"];
+    NSString *name = [dic objectForKey:@"name"];
+    NSString *summary = [dic objectForKey:@"summary"];
+    
+    ret.ID = ID;
+    ret.type = type;
+    ret.imgName = img;
+    ret.imgTitle = name;
+    ret.imgDetail = summary;
+    
+    return ret;
+}
 
 @end

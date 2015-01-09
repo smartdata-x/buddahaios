@@ -16,9 +16,14 @@
 #import "MapBuildMenuView.h"
 #import "MapFeatureTableViewCell.h"
 
-@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, BMKGeneralDelegate, HorizontalMenuDelegate>
+enum {
+    
+    FROMPAGE_ROOTVIEW = 0,
+    FROMPAGE_ACTIVITY,
+};
+
+@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, HorizontalMenuDelegate>
 {
-    BMKMapManager *mBDMapManager;
     BMKLocationService *mLocationService;
     BMKMapView *mMapView;
     
@@ -42,10 +47,10 @@
 
 
 @property (nonatomic, assign) BOOL isMainEntry; // 是否为地图的主入口, 主入口显示底部周边菜单，非主入口则显示底部路线菜单和导航菜单
-
+@property (nonatomic, assign) BOOL isHideNavagation;
+@property (nonatomic, assign) int fromWhichPage;
 @property (nonatomic, retain) MapPoiSearchController *mPoiSearchControl; // 搜索
 @property (nonatomic, retain) MapRouteSearchController *mRouteSearchControl; // 路径规划
-
 @property (nonatomic, retain) migsBuildingInfo *mLastBuildingInfo;
 
 - (IBAction)startLocation:(id)sender;

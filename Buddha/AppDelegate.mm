@@ -13,6 +13,7 @@
 #import "AFNetworking.h"
 #import "LoginManager.h"
 #import "DatabaseManager.h"
+#import "BaiduMapServiceManager.h"
 
 @interface AppDelegate ()
 
@@ -92,6 +93,9 @@
     
     // 更新地理位置, 地理位置最先更新，确保能够最快的获取到地理坐标
     [[MyLocationManager GetInstance] updateLocation];
+    
+    // 注册百度地图
+    [[BaiduMapServiceManager GetInstance] registerBaiduMap];
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     

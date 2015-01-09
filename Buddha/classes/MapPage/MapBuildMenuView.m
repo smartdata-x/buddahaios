@@ -195,6 +195,11 @@
     NSDictionary *result = [userinfo objectForKey:@"result"];
     NSDictionary *nearbuild = [result objectForKey:@"nearbuild"];
     
+    if ([nearbuild count] > 0) {
+        
+        [mBuildTableInfo removeAllObjects];
+    }
+    
     for (NSDictionary *dic in nearbuild) {
         
         migsBuildingInfo *buildinfo = [migsBuildingInfo setupBuildingInfoFromDictionary:dic];
@@ -258,7 +263,7 @@
         
         // 跳转到建筑详情
         MapBuidingInfoViewController *buildView = [[MapBuidingInfoViewController alloc] init];
-        [buildView initialize:buildinfo];
+        [buildView initialize:buildinfo PageType:PAGETYPE_MAPBUILD];
         buildView.mParentMapView = self.mParentMapView;
         
         [_mTopViewController.navigationController pushViewController:buildView animated:YES];

@@ -26,7 +26,6 @@
 // 内部
 - (void)reloadData;
 
-- (void)initTopActivityView:(float)ystart;
 - (void)initClassicView:(float)ystart;
 - (void)initTableView:(float)ystart;
 

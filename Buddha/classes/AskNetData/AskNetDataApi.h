@@ -87,6 +87,22 @@
 #define MigNetNameGetActivitySummaryFailed              @"MigNetNameGetActivitySummaryFailed"
 #define MigNetNameGetActivitySummarySuccess             @"MigNetNameGetActivitySummarySuccess"
 
+// 获取介绍
+#define MigNetNameGetIntroFailed                        @"MigNetNameGetIntroFailed"
+#define MigNetNameGetIntroSuccess                       @"MigNetNameGetIntroSuccess"
+
+// 获取介绍搜索
+#define MigNetNameGetIntroSearchFailed                  @"MigNetNameGetIntroSearchFailed"
+#define MigNetNameGetIntroSearchSuccess                 @"MigNetNameGetIntroSearchSuccess"
+
+// 获取历史和思想详情
+#define MigNetNameGetHisAndThrFailed                    @"MigNetNameGetHisAndThrFailed"
+#define MigNetNameGetHisAndThrSuccess                   @"MigNetNameGetHisAndThrSuccess"
+
+// 获取艺术品详情
+#define MigNetNameGetArtFailed                          @"MigNetNameGetArtFailed"
+#define MigNetNameGetArtSuccess                         @"MigNetNameGetArtSuccess"
+
 enum {
     
     MIGAPI_QUICKLOGIN = 0,
@@ -106,6 +122,10 @@ enum {
     MIGAPI_GETBOOKLIST,
     MIGAPI_GETACTIVITY,
     MIGAPI_GETACTIVITYSUMMARY,
+    MIGAPI_GETINTRO,
+    MIGAPI_GETINTROSEARCH,
+    MIGAPI_GETHISANDTHR,
+    MIGAPI_GETART,
 };
 
 @interface AskNetDataApi : NSObject
@@ -138,5 +158,9 @@ enum {
 - (void)doGetBookList;
 - (void)doGetActivity;
 - (void)doGetActivitySummary:(NSString *)aid;
+- (void)doGetIntro;
+- (void)doGetIntroSearch:(NSString *)type;
+- (void)doGetHisAndThr:(NSString *)introid;
+- (void)doGetArt:(NSString *)introid;
 
 @end

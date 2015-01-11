@@ -55,6 +55,7 @@
     
     // 进度
     double progress = (double)self.curLength / self.sumLength;
+    MIGDEBUG_PRINT(@"当前下载进度: %f", progress);
     
     [self.writeHandle seekToEndOfFile];
     [self.writeHandle writeData:data];

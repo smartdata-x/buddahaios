@@ -61,6 +61,10 @@
     NSString *httpGetBookList = [NSString stringWithFormat:@"%@/book/1/booklist.fcgi", MAIN_HTTP];
     NSString *httpGetActivity = [NSString stringWithFormat:@"%@/activities/1/activities.fcgi", MAIN_HTTP];
     NSString *httpGetActivitySummary = [NSString stringWithFormat:@"%@/activities/1/summary.fcgi", MAIN_HTTP];
+    NSString *httpGetIntro = [NSString stringWithFormat:@"%@/find/1/intro.fcgi", MAIN_HTTP];
+    NSString *httpGetIntroSearch = [NSString stringWithFormat:@"%@/intro/1/introsearchtype.fcgi", MAIN_HTTP];
+    NSString *httpGetHisAndThr = [NSString stringWithFormat:@"%@/intro/1/hisathr.fcgi", MAIN_HTTP];
+    NSString *httpGetArt = [NSString stringWithFormat:@"%@/intro/1/art.fcgi", MAIN_HTTP];
     
     self.dataTable = @[
                        @{KEY_NET_ADDRESS:httpQuickLogin,
@@ -130,6 +134,22 @@
                        @{KEY_NET_ADDRESS:httpGetActivitySummary,
                          KEY_NET_FAILED:MigNetNameGetActivitySummaryFailed,
                          KEY_NET_SUCCESS:MigNetNameGetActivitySummarySuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetIntro,
+                         KEY_NET_FAILED:MigNetNameGetIntroFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetIntroSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetIntroSearch,
+                         KEY_NET_FAILED:MigNetNameGetIntroSearchFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetIntroSearchSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetHisAndThr,
+                         KEY_NET_FAILED:MigNetNameGetHisAndThrFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetHisAndThrSuccess},
+                       
+                       @{KEY_NET_ADDRESS:httpGetArt,
+                         KEY_NET_FAILED:MigNetNameGetArtFailed,
+                         KEY_NET_SUCCESS:MigNetNameGetArtSuccess},
                        ];
 }
 
@@ -437,6 +457,46 @@
         NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&aid=%@&latitude=%@&longitude=%@", mUid, mToken, aid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
         
         [self doGetData:MIGAPI_GETACTIVITYSUMMARY tail:getData];
+    }
+}
+
+- (void)doGetIntro {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&latitude=%@&longitude=%@", mUid, mToken, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETINTRO tail:getData];
+    }
+}
+
+- (void)doGetIntroSearch:(NSString *)type {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&btype=%@&latitude=%@&longitude=%@", mUid, mToken, type, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETINTROSEARCH tail:getData];
+    }
+}
+
+- (void)doGetHisAndThr:(NSString *)introid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&introid=%@&latitude=%@&longitude=%@", mUid, mToken, introid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETHISANDTHR tail:getData];
+    }
+}
+
+- (void)doGetArt:(NSString *)introid {
+    
+    if ([self isUserLogin]) {
+        
+        NSString *getData = [NSString stringWithFormat:@"uid=%@&token=%@&introid=%@&latitude=%@&longitude=%@", mUid, mToken, introid, [[MyLocationManager GetInstance] getLatitude], [[MyLocationManager GetInstance] getLongitude]];
+        
+        [self doGetData:MIGAPI_GETART tail:getData];
     }
 }
 

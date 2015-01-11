@@ -16,7 +16,7 @@
 
 @implementation BookCategoryViewController
 
-- (id)initWithTitle:(NSString *)title BookID:(NSString *)bookid {
+- (id)initWithTitle:(NSString *)title BookID:(NSString *)bookid From:(int)frompage {
     
     self = [super init];
     
@@ -25,11 +25,37 @@
         [self initNavView:title];
         BookId = bookid;
         listType = MIG_BOOK_LISTTYPE_NEW;
+        _fromPage = frompage;
+        isLoadingNetData = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookByIDFailed:) name:MigNetNameSearchBookTypeFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetBookByIDSuccess:) name:MigNetNameSearchBookTypeSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetIntroSearchFailed:) name:MigNetNameGetIntroSearchFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetIntroSearchSuccess:) name:MigNetNameGetIntroSearchSuccess object:nil];
         
-        [self doGetBookByID:BookId];
+        if (_fromPage == FROMPAGE_BOOK) {
+            
+            [self doGetBookByID:BookId];
+        }
+        else if (_fromPage == FROMPAGE_INTRODUCE) {
+            
+            int index = 0;
+            
+            // 模拟点击一次
+            if ([BookId isEqualToString:@"0"]) {
+                
+                // 佛教历史
+                index = 1;
+            }
+            else if ([BookId isEqualToString:@"1"]) {
+                
+                // 宗教思想
+                index = 0;
+            }
+            
+            // 重新载入一次
+            [self initTopMenuAndClick:index];
+        }
     }
     
     return self;
@@ -39,6 +65,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameSearchBookTypeFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameSearchBookTypeSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetIntroSearchFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetIntroSearchSuccess object:nil];
 }
 
 - (void)viewDidLoad {
@@ -72,32 +100,50 @@
     [viewWrapper addSubview:_searchView];
 }
 
-- (void)initTopMenu {
+- (void)initTopMenuAndClick:(int)index {
     
     float titleWidth = (self.view.frame.size.width - 38) / 2;
     float ystart = (80 + 32) / SCREEN_SCALAR + NAVIGATION_HEIGHT;
+    NSArray *titlearray = nil;
     
-    NSArray *topArray = @[@{KEY_NORMAL:IMG_HOME_NORMAL_BG,
-                                      KEY_HILIGHT:IMG_BOOK_SELECT_BG,
-                                      KEY_TITLE:@"最新上架",
-                                      KEY_TITLE_WIDTH:[NSNumber numberWithFloat:titleWidth]},
-                                    @{KEY_NORMAL:IMG_HOME_NORMAL_BG,
-                                      KEY_HILIGHT:IMG_BOOK_SELECT_BG,
-                                      KEY_TITLE:@"热点最高",
-                                      KEY_TITLE_WIDTH:[NSNumber numberWithFloat:titleWidth]}];
-    
-    // 初始化顶部菜单
-    if (_topMenuView == nil) {
+    if (_fromPage == FROMPAGE_BOOK) {
         
-        CGRect menuFrame = CGRectMake(38 / SCREEN_SCALAR, ystart, self.view.frame.size.width - 38, 80 / SCREEN_SCALAR);
-        CGSize btnImaSize = CGSizeMake(0, 0);
+        titlearray = [[NSArray alloc] initWithObjects:@"最新上架", @"热点最高", nil];
+    }
+    else if (_fromPage == FROMPAGE_INTRODUCE) {
         
-        _topMenuView = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:topArray buttonSize:btnImaSize ButtonType:HORIZONTALMENU_TYPE_BUTTON];
-        _topMenuView.delegate = self;
+        titlearray = [[NSArray alloc] initWithObjects:@"宗派思想", @"佛教历史", nil];
     }
     
-    [_topMenuView clickButtonAtIndex:0];
+    NSArray *topArray = @[@{KEY_NORMAL:IMG_HOME_NORMAL_BG,
+                            KEY_HILIGHT:IMG_BOOK_SELECT_BG,
+                            KEY_TITLE:[titlearray objectAtIndex:0],
+                            KEY_TITLE_WIDTH:[NSNumber numberWithFloat:titleWidth]},
+                          @{KEY_NORMAL:IMG_HOME_NORMAL_BG,
+                            KEY_HILIGHT:IMG_BOOK_SELECT_BG,
+                            KEY_TITLE:[titlearray objectAtIndex:1],
+                            KEY_TITLE_WIDTH:[NSNumber numberWithFloat:titleWidth]}];
+    
+    if (_topMenuView != nil) {
+        
+        [_topMenuView removeFromSuperview];
+    }
+    
+    // 初始化顶部菜单
+    CGRect menuFrame = CGRectMake(38 / SCREEN_SCALAR, ystart, self.view.frame.size.width - 38, 80 / SCREEN_SCALAR);
+    CGSize btnImaSize = CGSizeMake(0, 0);
+    
+    _topMenuView = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:topArray buttonSize:btnImaSize ButtonType:HORIZONTALMENU_TYPE_BUTTON];
+    _topMenuView.delegate = self;
+    
     [viewWrapper addSubview:_topMenuView];
+    
+    [_topMenuView clickButtonAtIndex:index];
+}
+
+- (void)initTopMenu {
+    
+    [self initTopMenuAndClick:0];
 }
 
 - (void)initContentView {
@@ -147,6 +193,47 @@
     
     listType = type;
     [self reloadData];
+}
+
+- (void)doGetIntroSearch:(NSString *)type {
+    
+    isLoadingNetData = YES;
+    AskNetDataApi *api = [[AskNetDataApi alloc] init];
+    [api doGetIntroSearch:type];
+}
+
+- (void)doGetIntroSearchFailed:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取思想和历史失败");
+    
+    isLoadingNetData = NO;
+}
+
+- (void)doGetIntroSearchSuccess:(NSNotification *)notification {
+    
+    MIGDEBUG_PRINT(@"获取思想和历史成功");
+    
+    // 更新数据, 因为每次都会重新获取数据，所以可以把两组设置成一样
+    NSDictionary *userinfo = notification.userInfo;
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    NSDictionary *list = [result objectForKey:@"list"];
+    
+    if ([list count] > 0) {
+        
+        [tableInfoHotArray removeAllObjects];
+        [tableInfoNewArray removeAllObjects];
+    }
+    
+    for (NSDictionary *dic in list) {
+        
+        migsBookIntroduce *bookintro = [migsBookIntroduce setupBookIntroduceByDictionary:dic];
+        [tableInfoHotArray addObject:bookintro];
+        [tableInfoNewArray addObject:bookintro];
+    }
+    
+    [self reloadData];
+    
+    isLoadingNetData = NO;
 }
 
 - (void)doGetBookByID:(NSString *)bookid {
@@ -218,16 +305,42 @@
     
     if (type == HORIZONTALMENU_TYPE_BUTTON) {
         
-        if (index == 0) {
+        if (_fromPage == FROMPAGE_BOOK) {
             
-            listType = MIG_BOOK_LISTTYPE_NEW;
-        }
-        else if (index == 1) {
+            if (index == 0) {
+                
+                listType = MIG_BOOK_LISTTYPE_NEW;
+            }
+            else if (index == 1) {
+                
+                listType = MIG_BOOK_LISTTYPE_HOT;
+            }
             
-            listType = MIG_BOOK_LISTTYPE_HOT;
+            [self reloadData];
         }
-        
-        [self reloadData];
+        else if (_fromPage == FROMPAGE_INTRODUCE) {
+            
+            // 介绍页面的东西，每次重新加载
+            
+            if (isLoadingNetData) {
+                
+                [SVProgressHUD showErrorWithStatus:@"正在加载"];
+                return;
+            }
+            
+            NSString *type = nil;
+            
+            if (index == 0) {
+                
+                type = [NSString stringWithFormat:@"%d", INTROTYPE_THOUGHT];
+            }
+            else if (index == 1) {
+                
+                type = [NSString stringWithFormat:@"%d", INTROTYPE_HISTORY];
+            }
+            
+            [self doGetIntroSearch:type];
+        }
     }
 }
 

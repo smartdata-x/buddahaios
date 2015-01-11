@@ -210,6 +210,32 @@
             }
             break;
             
+        case ROOTVIEWTAG_PREFER:
+            {
+                // 显示底部菜单
+                [_mBottomMenu setHidden:NO];
+                
+                if (controller) {
+                    
+                    IntroducePageViewController *activity = (IntroducePageViewController *)controller;
+                    [activity viewWillAppear:YES];
+                }
+                else {
+                    
+                    IntroducePageViewController *activity = [[IntroducePageViewController alloc] init];
+                    activity.topViewController = self;
+                    activity.mFrame = mContentFrame;
+                    [activity viewWillAppear:YES];
+                    [_dicViewControllerCache setObject:activity forKey:numIndex];
+                    controller = activity;
+                }
+                
+                // 请求活动信息
+                AskNetDataApi *askApi = [[AskNetDataApi alloc] init];
+                [askApi doGetIntro];
+            }
+            break;
+            
         default:
             break;
     }

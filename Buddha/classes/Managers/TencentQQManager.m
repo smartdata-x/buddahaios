@@ -130,5 +130,10 @@
     MIGDEBUG_PRINT(@"分享到说说回调");
 }
 
+- (void)tencentDidNotNetWork {
+    
+    MIGDEBUG_PRINT(@"没有网络");
+}
+
 
 @end

@@ -9,6 +9,7 @@
 #import "ReadingViewController.h"
 #import "PFileDownLoadManager.h"
 #import "BookDetailViewController.h"
+#import "IntroduceChapterTableViewCell.h"
 
 @implementation migsChapterInfo
 
@@ -79,6 +80,48 @@
     
     // 开始获取章节内容
     [self getChapterList:booktoken ID:mBookid];
+}
+
+- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters {
+    
+    fontSize = 36;
+    isFullScreen = YES;
+    curChapter = 0;
+    curPage = 0;
+    
+    mBookname = bookname;
+    
+    viewFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    if (_pfm == nil) {
+        
+        _pfm = [[PFileManager alloc] init];
+    }
+    
+    if (_chapterArray == nil) {
+        
+        _chapterArray = [[NSMutableArray alloc] init];
+    }
+    
+    // 初始化章节信息
+    for (int i=0; i<[chapters count]; i++) {
+        
+        migsIntroduceChapterInfo *curchapter = (migsIntroduceChapterInfo *)[chapters objectAtIndex:i];
+            
+        migsChapterInfo *chapterinfo = [[migsChapterInfo alloc] init];
+        chapterinfo.chaptername = curchapter.name;
+        chapterinfo.chapterurl = curchapter.url;
+        chapterinfo.chapterid = curchapter.index;
+        [_chapterArray addObject:chapterinfo];
+    }
+    
+    // 加载完成，开始第一章
+    if ([_chapterArray count] > 0) {
+        
+        curChapter = -1;
+        allChapter = [_chapterArray count];
+        [self doGotoNextChapter:NO];
+    }
 }
 
 - (void)doDownloadBook:(NSString *)url ToFile:(NSString *)tofile {

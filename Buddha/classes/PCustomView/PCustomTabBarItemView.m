@@ -42,7 +42,7 @@
         //文字标题
         UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, frame.size.height-23, frame.size.width, 20)];
         [tLabel setBackgroundColor:[UIColor clearColor]];
-        [tLabel setTextAlignment:UITextAlignmentCenter];
+        [tLabel setTextAlignment:NSTextAlignmentCenter];
         [tLabel setText:tTitle];
         [tLabel setNumberOfLines:0];
         [tLabel setFont:[UIFont systemFontOfSize:10]];

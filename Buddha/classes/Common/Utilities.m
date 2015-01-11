@@ -114,4 +114,19 @@
     [view.layer addAnimation:tr forKey:@"pageCurlAnimation"];
 }
 
++ (UIColor *)colorWithHex:(unsigned int)color {
+    
+    unsigned int Blue = color & 0xFF;
+    unsigned int Green = (color >> 8) & 0xFF;
+    unsigned int Red = (color >> 16) & 0xFF;
+    float fblue = Blue / 255.0;
+    float fgreen = Green / 255.0;
+    float fred = Red / 255.0;
+    float falpha = 1.0;
+    
+    UIColor *uicolor = [UIColor colorWithRed:fred green:fgreen blue:fblue alpha:falpha];
+    
+    return uicolor;
+}
+
 @end

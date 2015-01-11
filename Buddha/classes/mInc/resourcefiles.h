@@ -56,4 +56,10 @@
 #define IMG_SHARE_WEIBO                             @"weibo_icon.png"
 #define IMG_COLOR_BG_FBFBFB                         @"fbfbfb_bg.png"
 
+// introduce
+#define IMG_INTRO_HISTORY                           @"history.png"
+#define IMG_INTRO_THOUGHT                           @"thought.png"
+#define IMG_INTRO_ART                               @"art.png"
+#define IMG_INTRO_SHARE                             @"share_white.png"
+
 #endif

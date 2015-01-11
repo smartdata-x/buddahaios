@@ -38,7 +38,7 @@
             
             _lblSearchContent = [[UILabel alloc] initWithFrame:CGRectMake(xMid, yMid - 11, xMid, 21)];
             _lblSearchContent.text = content;
-            [_lblSearchContent setTextColor:[UIColor lightGrayColor]];
+            [_lblSearchContent setTextColor:MIG_COLOR_333333];
             [_lblSearchContent setTextAlignment:NSTextAlignmentLeft];
             [_lblSearchContent setFont:font];
         }

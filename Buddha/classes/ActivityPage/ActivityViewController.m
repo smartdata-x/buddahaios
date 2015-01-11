@@ -63,49 +63,6 @@
     [self initTableView:ystart];
 }
 
-#if 0
-- (void)initTopActivityView:(float)ystart {
-    
-    float actWidth = (self.mFrame.size.width - 24 - 5) / 2;
-    float actHeight = 196 / SCREEN_SCALAR;
-    
-    NSMutableArray *topActivityArray = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<[topActivityInfo count]; i++) {
-        
-        migsImgWithTitleAndDetail *infodata = (migsImgWithTitleAndDetail *)([topActivityInfo objectAtIndex:i]);
-        NSString *imgName = infodata.imgName;
-        NSString *titleName = infodata.imgTitle;
-        NSString *formatName = [NSString stringWithFormat:@"\n\n%@", titleName];
-        
-        NSArray *oneitem = @[@{KEY_NORMAL:imgName,
-                               KEY_HILIGHT:imgName,
-                               KEY_TITLE:formatName,
-                               KEY_TITLE_WIDTH:[NSNumber numberWithFloat:actWidth]}];
-        [topActivityArray addObjectsFromArray:oneitem];
-    }
-    
-    if ([topActivityArray count] <= 0) {
-        
-        return;
-    }
-    
-    // 初始化顶部菜单
-    if (topActivityView != nil) {
-        
-        [topActivityView removeFromSuperview];
-    }
-    
-    CGRect menuFrame = CGRectMake(24 / SCREEN_SCALAR, ystart + 32 / SCREEN_SCALAR, actWidth * 2, actHeight);
-    CGSize btnImaSize = CGSizeMake(0, 0);
-    
-    topActivityView = [[HorizontalMenu alloc] initWithFrame:menuFrame ButtonItems:topActivityArray buttonSize:btnImaSize ButtonType:HORIZONTALMENU_TYPE_BUTTON];
-    topActivityView.delegate = self;
-    
-    [self.view addSubview:topActivityView];
-}
-#endif
-
 - (void)initClassicView:(float)ystart {
     
     if (topActivityInfo == nil || [topActivityInfo count] <= 0) {

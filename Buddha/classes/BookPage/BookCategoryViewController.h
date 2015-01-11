@@ -15,8 +15,24 @@
 
 enum {
     
+    // frombook: 最新，热点
+    // fromintro: 历史，思想
     MIG_BOOK_LISTTYPE_NEW = 0,
     MIG_BOOK_LISTTYPE_HOT,
+};
+
+enum {
+    
+    FROMPAGE_BOOK = 0,
+    FROMPAGE_INTRODUCE,
+};
+
+enum {
+    
+    INTROTYPE_HISTORY = 1,
+    INTROTYPE_THOUGHT,
+    INTROTYPE_IMAGE,
+    INTROTYPE_ART,
 };
 
 @interface BookCategoryViewController : BaseNavViewController<GeneralSearchViewDelegate, HorizontalMenuDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -26,19 +42,22 @@ enum {
     NSMutableArray *tableInfoHotArray;
     NSString *BookId;
     int listType;
+    BOOL isLoadingNetData;
 }
 
 @property (nonatomic, retain) GeneralSearchView *searchView;
 @property (nonatomic, retain) HorizontalMenu *topMenuView;
 @property (nonatomic, retain) UITableView *contentTableView;
+@property (nonatomic, assign) int fromPage;
 
 // 外部
-- (id)initWithTitle:(NSString *)title BookID:(NSString *)bookid;
+- (id)initWithTitle:(NSString *)title BookID:(NSString *)bookid From:(int)frompage;
 
 // 内部
 - (void)initNavView:(NSString *)title;
 - (void)initSearchView;
 - (void)initTopMenu;
+- (void)initTopMenuAndClick:(int)index;
 - (void)initContentView;
 
 - (void)doGodoBookDetail:(migsBookIntroduce *)bookIntro;
@@ -50,4 +69,7 @@ enum {
 - (void)doGetBookByIDFailed:(NSNotification *)notification;
 - (void)doGetBookByIDSuccess:(NSNotification *)notification;
 
+- (void)doGetIntroSearch:(NSString *)type;
+- (void)doGetIntroSearchFailed:(NSNotification *)notification;
+- (void)doGetIntroSearchSuccess:(NSNotification *)notification;
 @end

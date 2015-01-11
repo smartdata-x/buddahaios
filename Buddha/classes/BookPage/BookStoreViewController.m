@@ -259,7 +259,7 @@
     NSString *name = [array objectForKey:KEY_TITLE];
     NSString *bookid = [NSString stringWithFormat:@"%d", btn.tag + 1];
     
-    BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid];
+    BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid From:FROMPAGE_BOOK];
     [self.topViewController.navigationController pushViewController:category animated:YES];
 }
 

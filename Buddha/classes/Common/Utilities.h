@@ -24,4 +24,7 @@
 + (void)curlLeft:(UIView *)view;
 + (void)curlRight:(UIView *)view;
 
+// 颜色
++ (UIColor *)colorWithHex:(unsigned int)color;
+
 @end

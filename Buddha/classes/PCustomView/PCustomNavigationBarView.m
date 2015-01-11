@@ -37,11 +37,11 @@
     
     //适配ios7
     int topdistance = 0;
-    UIImage *baseNavBg = [UIImage imageWithName:@"base_navigation_bg" type:@"png"];
+    UIImage *baseNavBg = [UIImage imageNamed:@"base_navigation_bg.png"];
     long losVersion = [[UIDevice currentDevice].systemVersion floatValue] * 10000;
     if (losVersion >= 70000) {
         topdistance = 20;
-        baseNavBg = [UIImage imageWithName:@"base_navigation_bg_ios7" type:@"png"];
+        baseNavBg = [UIImage imageNamed:@"base_navigation_bg_ios7.png"];
     }
     
     self = [super initWithFrame:CGRectMake(0, 0, 320, 44 + topdistance)];
@@ -54,7 +54,7 @@
         _titleLabel = [[UILabel alloc] init];
         [_titleLabel setFrame:CGRectMake(60, 12 + topdistance, 200, 21)];
         [_titleLabel setText:tTitle];
-        [_titleLabel setTextAlignment:UITextAlignmentCenter];
+        [_titleLabel setTextAlignment:NSTextAlignmentCenter];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
         [_titleLabel setFont:[UIFont fontOfApp:20.0f]];
         [_titleLabel setTextColor:[UIColor whiteColor]];
@@ -89,7 +89,7 @@
         _titleLabel = [[UILabel alloc] init];
         [_titleLabel setFrame:CGRectMake(60, 12, 200, 21)];
         [_titleLabel setText:tTitle];
-        [_titleLabel setTextAlignment:UITextAlignmentCenter];
+        [_titleLabel setTextAlignment:NSTextAlignmentCenter];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
         [_titleLabel setFont:[UIFont fontOfApp:20.0f]];
         [_titleLabel setTextColor:[UIColor whiteColor]];

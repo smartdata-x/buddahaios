@@ -436,8 +436,12 @@
     // 添加到书架
     [[DatabaseManager GetInstance] insertBookInfo:_bookDetailInfo];
     
+#if 0
     // 跳转到书架
-    [self doGotoBookShell:nil isSaveToShelf:NO];
+    //[self doGotoBookShell:nil isSaveToShelf:NO];
+#endif
+    // 跳转到阅读界面
+    [self doGotoReadingView:_bookDetailInfo.bookname BookID:_bookDetailInfo.bookid BookToken:_bookDetailInfo.booktoken];
 }
 
 // HorizontalMenuDelegate
@@ -448,6 +452,7 @@
         if (index == MIG_BOOK_DETAIL_FREEREAD) {
             
             // 这里进入的是免费阅读版本
+            // TODO: 构造一个只有一章的免费阅读版本，用另一个接口调用起来阅读界面
             [self doGotoReadingView:_bookDetailInfo.bookname BookID:_bookDetailInfo.bookid BookToken:_bookDetailInfo.booktoken];
         }
         else if (index == MIG_BOOK_DETAIL_SAVETOSHELF) {

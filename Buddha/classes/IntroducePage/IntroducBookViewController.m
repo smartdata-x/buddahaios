@@ -219,6 +219,14 @@
     
     MIGDEBUG_PRINT(@"分享");
     
+    if (_bookShareView == nil) {
+        
+        float height = 250 / SCREEN_SCALAR;
+        CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, height);
+        _bookShareView = [[GeneralShareView alloc] initWithFrame:frame];
+        _bookShareView.delegate = self;
+    }
+    
     if (IS_OS_8_OR_LATER) {
         
         _shareAlertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];

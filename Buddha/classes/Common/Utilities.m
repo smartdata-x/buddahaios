@@ -135,4 +135,14 @@
     [[UIApplication sharedApplication] setStatusBarHidden:full withAnimation:YES];
 }
 
++ (UIImage *)getPartOfImage:(UIImage *)img Rect:(CGRect)rect {
+    
+    CGImageRef imageRef = img.CGImage;
+    CGImageRef imagePartRef = CGImageCreateWithImageInRect(imageRef, rect);
+    UIImage *retImg = [UIImage imageWithCGImage:imagePartRef];
+    CGImageRelease(imagePartRef);
+    
+    return retImg;
+}
+
 @end

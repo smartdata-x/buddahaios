@@ -7,6 +7,7 @@
 //
 
 #import "ArtDisplayViewController.h"
+#import "UIImage+BlurredFrame.h"
 
 @interface ArtDisplayViewController ()
 
@@ -116,11 +117,11 @@
     
     if (infoView == nil) {
         
-        CGRect frame = CGRectMake(40 / SCREEN_SCALAR, yStart, self.view.frame.size.width - 40, height);
+        CGRect frame = CGRectMake(0, yStart, self.view.frame.size.width, height);
         infoView = [[UILabel alloc] initWithFrame:frame];
         
         [infoView setTextAlignment:NSTextAlignmentLeft];
-        [infoView setTextColor:[Utilities colorWithHex:0x111111]];
+        [infoView setTextColor:[UIColor whiteColor]];
         [infoView setFont:[UIFont fontOfApp:22 / SCREEN_SCALAR]];
         [infoView setNumberOfLines:0];
     }
@@ -186,6 +187,19 @@
     CGRect realframe = CGRectMake(orgframe.origin.x, newYStart, orgframe.size.width, stringheight + 16);
     infoView.frame = realframe;
     [infoView setHidden:isFullScreen];
+    
+    // 设置黑色透明背景色
+    [infoView setBackgroundColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
+    
+#if 0
+    // 设置模糊背景色
+    UIImage *bgImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageName]]];
+    CGRect bgFrame = CGRectMake(0, 0, realframe.size.width, realframe.size.height);
+    UIImage *partBgImg = [Utilities getPartOfImage:bgImg Rect:bgFrame];
+    CGRect imgFrame = CGRectMake(0, 0, partBgImg.size.width, partBgImg.size.height);
+    partBgImg = [partBgImg applyLightEffectAtFrame:imgFrame];
+    [infoView setBackgroundColor:[UIColor colorWithPatternImage:partBgImg]];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

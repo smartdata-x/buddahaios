@@ -29,4 +29,7 @@
 
 + (void)setFullScreen:(UINavigationController *)navcontroller FullScreen:(BOOL)full;
 
+// 获取一部分图
++ (UIImage *)getPartOfImage:(UIImage *)img Rect:(CGRect)rect;
+
 @end

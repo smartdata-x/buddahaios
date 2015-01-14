@@ -80,6 +80,8 @@
 		CBCB6ABA1A614CDB0082E361 /* IntroduceChapterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AB81A614CDB0082E361 /* IntroduceChapterTableViewCell.m */; };
 		CBCB6ABB1A614CDB0082E361 /* IntroduceChapterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBCB6AB91A614CDB0082E361 /* IntroduceChapterTableViewCell.xib */; };
 		CBCB6ABE1A61FA670082E361 /* ArtDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6ABD1A61FA670082E361 /* ArtDisplayViewController.m */; };
+		CBCB6AC31A66C6E00082E361 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AC01A66C6E00082E361 /* UIImage+BlurredFrame.m */; };
+		CBCB6AC41A66C6E00082E361 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AC21A66C6E00082E361 /* UIImage+ImageEffects.m */; };
 		CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */; };
 		CBD333FB1A41B0290026AD71 /* MapBuidingInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD333F91A41B0290026AD71 /* MapBuidingInfoViewController.m */; };
 		CBD333FF1A41BDBD0026AD71 /* allow_choose.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD333FD1A41BDBD0026AD71 /* allow_choose.png */; };
@@ -331,6 +333,10 @@
 		CBCB6AB91A614CDB0082E361 /* IntroduceChapterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceChapterTableViewCell.xib; sourceTree = "<group>"; };
 		CBCB6ABC1A61FA670082E361 /* ArtDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtDisplayViewController.h; sourceTree = "<group>"; };
 		CBCB6ABD1A61FA670082E361 /* ArtDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtDisplayViewController.m; sourceTree = "<group>"; };
+		CBCB6ABF1A66C6E00082E361 /* UIImage+BlurredFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BlurredFrame.h"; sourceTree = "<group>"; };
+		CBCB6AC01A66C6E00082E361 /* UIImage+BlurredFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BlurredFrame.m"; sourceTree = "<group>"; };
+		CBCB6AC11A66C6E00082E361 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		CBCB6AC21A66C6E00082E361 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		CBD333F21A41ADAD0026AD71 /* BaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavViewController.h; sourceTree = "<group>"; };
 		CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavViewController.m; sourceTree = "<group>"; };
 		CBD333F81A41B0290026AD71 /* MapBuidingInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBuidingInfoViewController.h; sourceTree = "<group>"; };
@@ -952,6 +958,10 @@
 		CBEC683E1A1A4A80007B2A00 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CBCB6ABF1A66C6E00082E361 /* UIImage+BlurredFrame.h */,
+				CBCB6AC01A66C6E00082E361 /* UIImage+BlurredFrame.m */,
+				CBCB6AC11A66C6E00082E361 /* UIImage+ImageEffects.h */,
+				CBCB6AC21A66C6E00082E361 /* UIImage+ImageEffects.m */,
 				CBEC69F91A2AE5A3007B2A00 /* UIFont+PFontCategory.h */,
 				CBEC69FA1A2AE5A3007B2A00 /* UIFont+PFontCategory.m */,
 				CBEC69C51A29DCBE007B2A00 /* PCommonUtil.h */,
@@ -1635,6 +1645,7 @@
 				CBEC69F81A2AE075007B2A00 /* SVProgressHUD.m in Sources */,
 				CBD333FB1A41B0290026AD71 /* MapBuidingInfoViewController.m in Sources */,
 				CBEC699F1A2753C6007B2A00 /* FeaturedViewController.m in Sources */,
+				CBCB6AC41A66C6E00082E361 /* UIImage+ImageEffects.m in Sources */,
 				CBEC69B71A28EE8D007B2A00 /* FMDatabasePool.m in Sources */,
 				CBD3342E1A45B34E0026AD71 /* MapIconInfoTableViewCell.m in Sources */,
 				CB96996F1A3095F9009C35F8 /* LoginTableViewCell.m in Sources */,
@@ -1684,6 +1695,7 @@
 				CBCB6ABA1A614CDB0082E361 /* IntroduceChapterTableViewCell.m in Sources */,
 				CBEC69D01A29DDA3007B2A00 /* NSData+AES256.m in Sources */,
 				CBEC69CC1A29DD88007B2A00 /* GTMBase64.m in Sources */,
+				CBCB6AC31A66C6E00082E361 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC69C71A29DCBE007B2A00 /* PCommonUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,6 +17,7 @@
     EGOImageView *imageDisplayView;
     NSString *imageName;
     
+    UIView *infoWrapper;
     UILabel *infoView;
     NSString *infoString;
     

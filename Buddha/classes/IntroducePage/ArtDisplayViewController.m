@@ -115,9 +115,14 @@
     float yStart = *originY;
     float height = 160;
     
+    if (infoWrapper == nil) {
+        
+        infoWrapper = [[UIView alloc] initWithFrame:CGRectMake(0, yStart, self.view.frame.size.width, height)];
+    }
+    
     if (infoView == nil) {
         
-        CGRect frame = CGRectMake(0, yStart, self.view.frame.size.width, height);
+        CGRect frame = CGRectMake(10, 0, self.view.frame.size.width - 20, height);
         infoView = [[UILabel alloc] initWithFrame:frame];
         
         [infoView setTextAlignment:NSTextAlignmentLeft];
@@ -126,8 +131,9 @@
         [infoView setNumberOfLines:0];
     }
     [infoView setText:infoString];
-    [infoView setHidden:isFullScreen];
-    [viewWrapper addSubview:infoView];
+    [infoWrapper addSubview:infoView];
+    [infoWrapper setHidden:isFullScreen];
+    [viewWrapper addSubview:infoWrapper];
 }
 
 - (void)doTap:(UITapGestureRecognizer *)tapGesture {
@@ -139,7 +145,7 @@
     
     isFullScreen = !isFullScreen;
     
-    [infoView setHidden:isFullScreen];
+    [infoWrapper setHidden:isFullScreen];
     [Utilities setFullScreen:self.navigationController FullScreen:isFullScreen];
 }
 
@@ -179,17 +185,18 @@
     CGRect orgframe = infoView.frame;
     CGRect maxframe = CGRectMake(0, 0, orgframe.size.width, maxheight);
     float stringheight = [Utilities heightForString:infoString Font:[UIFont fontOfApp:22/SCREEN_SCALAR] Frame:maxframe];
-    float newYStart = self.view.frame.origin.y + self.view.frame.size.height - stringheight - 16;
+    float newYStart = self.view.frame.origin.y + self.view.frame.size.height - stringheight;
     if (newYStart < 0) {
         
         newYStart = 0;
     }
-    CGRect realframe = CGRectMake(orgframe.origin.x, newYStart, orgframe.size.width, stringheight + 16);
-    infoView.frame = realframe;
-    [infoView setHidden:isFullScreen];
+    infoView.frame = CGRectMake(orgframe.origin.x, orgframe.origin.y, orgframe.size.width, stringheight);
+    infoWrapper.frame = CGRectMake(infoWrapper.frame.origin.x, newYStart, infoWrapper.frame.size.width, self.view.frame.size.height - newYStart);
+    [infoWrapper setHidden:isFullScreen];
     
     // 设置黑色透明背景色
-    [infoView setBackgroundColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
+    //[infoView setBackgroundColor:[UIColor clearColor]];
+    [infoWrapper setBackgroundColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
     
 #if 0
     // 设置模糊背景色

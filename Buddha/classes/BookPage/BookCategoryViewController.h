@@ -24,7 +24,8 @@ enum {
 enum {
     
     FROMPAGE_BOOK = 0,
-    FROMPAGE_INTRODUCE,
+    FROMPAGE_INTRODUCE_HISTHR,
+    FROMPAGE_INTRODUCE_ART,
 };
 
 enum {

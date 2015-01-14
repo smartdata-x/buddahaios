@@ -172,10 +172,22 @@
 
 - (IBAction)doGotoArt:(id)sender {
     
+#if 0
+    // 不直接跳到艺术品浏览界面
     ArtDisplayViewController *artview = [[ArtDisplayViewController alloc] init];
     [artview initialize:@"5" Title:@"艺术品"];
     
     [self.topViewController.navigationController pushViewController:artview animated:YES];
+#endif
+    
+    UIButton *btn = (UIButton *)sender;
+    NSDictionary *array = [classicInfo objectAtIndex:btn.tag];
+    NSString *name = [array objectForKey:KEY_TITLE];
+    NSString *bookid = [NSString stringWithFormat:@"%d", 0];
+    
+    // 0:工艺品， 1：书画，这里要和跳转到的界面保持对应
+    BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid From:FROMPAGE_INTRODUCE_ART];
+    [self.topViewController.navigationController pushViewController:category animated:YES];
 }
 
 - (IBAction)doGotoHistoryAndThought:(id)sender {
@@ -185,9 +197,9 @@
     NSString *name = [array objectForKey:KEY_TITLE];
     NSString *bookid = [NSString stringWithFormat:@"%d", btn.tag];
     
-    // 0:佛教历史， 1：宗教思想，2：艺术浏览，这里要和下面的界面保持对应
+    // 0:佛教历史， 1：宗教思想，这里要和跳转到的界面保持对应
     
-    BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid From:FROMPAGE_INTRODUCE];
+    BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid From:FROMPAGE_INTRODUCE_HISTHR];
     [self.topViewController.navigationController pushViewController:category animated:YES];
 }
 

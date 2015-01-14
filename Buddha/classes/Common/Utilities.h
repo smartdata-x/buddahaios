@@ -27,4 +27,6 @@
 // 颜色
 + (UIColor *)colorWithHex:(unsigned int)color;
 
++ (void)setFullScreen:(UINavigationController *)navcontroller FullScreen:(BOOL)full;
+
 @end

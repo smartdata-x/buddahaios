@@ -129,4 +129,10 @@
     return uicolor;
 }
 
++ (void)setFullScreen:(UINavigationController *)navcontroller FullScreen:(BOOL)full {
+    
+    [navcontroller setNavigationBarHidden:full animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:full withAnimation:YES];
+}
+
 @end

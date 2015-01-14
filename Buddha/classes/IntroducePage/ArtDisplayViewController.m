@@ -37,6 +37,7 @@
     
     introID = introid;
     titleName = title;
+    isFullScreen = YES;
     
     [self getArt:introID];
     
@@ -61,13 +62,23 @@
     [self.view addSubview:viewWrapper];
     
     [self initView];
+    
+    // 点击
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
+    tapGesture.delegate = self;
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [Utilities setFullScreen:self.navigationController FullScreen:isFullScreen];
 }
 
 - (void)initView {
     
     [self initNavView];
     
-    float originy = NAVIGATION_HEIGHT + 60 / SCREEN_SCALAR;
+    float originy = 0;
     [self initImageDisplayView:&originy];
     
     originy += 40 / SCREEN_SCALAR;
@@ -81,8 +92,9 @@
 
 - (void)initImageDisplayView:(float *)originY {
     
+    // 全屏
     float yStart = *originY;
-    float height = 200;
+    float height = self.view.frame.size.height - yStart;
     
     if (imageDisplayView == nil) {
         
@@ -98,6 +110,7 @@
 
 - (void)initInfoView:(float *)originY {
     
+    // 信息从底部向上延伸
     float yStart = *originY;
     float height = 160;
     
@@ -107,12 +120,26 @@
         infoView = [[UILabel alloc] initWithFrame:frame];
         
         [infoView setTextAlignment:NSTextAlignmentLeft];
-        [infoView setTextColor:[Utilities colorWithHex:0x5c5c5c]];
+        [infoView setTextColor:[Utilities colorWithHex:0x111111]];
         [infoView setFont:[UIFont fontOfApp:22 / SCREEN_SCALAR]];
         [infoView setNumberOfLines:0];
     }
     [infoView setText:infoString];
+    [infoView setHidden:isFullScreen];
     [viewWrapper addSubview:infoView];
+}
+
+- (void)doTap:(UITapGestureRecognizer *)tapGesture {
+    
+    [self changeFullScreen];
+}
+
+- (void)changeFullScreen {
+    
+    isFullScreen = !isFullScreen;
+    
+    [infoView setHidden:isFullScreen];
+    [Utilities setFullScreen:self.navigationController FullScreen:isFullScreen];
 }
 
 - (void)getArt:(NSString *)introid {
@@ -145,6 +172,20 @@
     [self initNavView];
     imageDisplayView.imageURL = [NSURL URLWithString:imageName];
     [infoView setText:infoString];
+    
+    // 重新计算infoview高度
+    float maxheight = self.view.frame.size.height;
+    CGRect orgframe = infoView.frame;
+    CGRect maxframe = CGRectMake(0, 0, orgframe.size.width, maxheight);
+    float stringheight = [Utilities heightForString:infoString Font:[UIFont fontOfApp:22/SCREEN_SCALAR] Frame:maxframe];
+    float newYStart = self.view.frame.origin.y + self.view.frame.size.height - stringheight - 16;
+    if (newYStart < 0) {
+        
+        newYStart = 0;
+    }
+    CGRect realframe = CGRectMake(orgframe.origin.x, newYStart, orgframe.size.width, stringheight + 16);
+    infoView.frame = realframe;
+    [infoView setHidden:isFullScreen];
 }
 
 - (void)didReceiveMemoryWarning {

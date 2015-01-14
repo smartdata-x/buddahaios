@@ -9,6 +9,7 @@
 #import "BookCategoryViewController.h"
 #import "GeneralSearchView.h"
 #import "BookDetailViewController.h"
+#import "ArtDisplayViewController.h"
 
 @interface BookCategoryViewController ()
 
@@ -37,11 +38,10 @@
             
             [self doGetBookByID:BookId];
         }
-        else if (_fromPage == FROMPAGE_INTRODUCE) {
+        else if (_fromPage == FROMPAGE_INTRODUCE_HISTHR) {
             
             int index = 0;
             
-            // 模拟点击一次
             if ([BookId isEqualToString:@"0"]) {
                 
                 // 佛教历史
@@ -54,6 +54,23 @@
             }
             
             // 重新载入一次
+            [self initTopMenuAndClick:index];
+        }
+        else if (_fromPage == FROMPAGE_INTRODUCE_ART) {
+            
+            int index = 0;
+            
+            if ([BookId isEqualToString:@"0"]) {
+                
+                // 工艺品
+                index = 0;
+            }
+            else if ([BookId isEqualToString:@"1"]) {
+                
+                // 书画
+                index = 1;
+            }
+            
             [self initTopMenuAndClick:index];
         }
     }
@@ -110,9 +127,13 @@
         
         titlearray = [[NSArray alloc] initWithObjects:@"最新上架", @"热点最高", nil];
     }
-    else if (_fromPage == FROMPAGE_INTRODUCE) {
+    else if (_fromPage == FROMPAGE_INTRODUCE_HISTHR) {
         
         titlearray = [[NSArray alloc] initWithObjects:@"宗派思想", @"佛教历史", nil];
+    }
+    else if (_fromPage == FROMPAGE_INTRODUCE_ART) {
+        
+        titlearray = [[NSArray alloc] initWithObjects:@"工艺品", @"书画", nil];
     }
     
     NSArray *topArray = @[@{KEY_NORMAL:IMG_HOME_NORMAL_BG,
@@ -318,7 +339,7 @@
             
             [self reloadData];
         }
-        else if (_fromPage == FROMPAGE_INTRODUCE) {
+        else if (_fromPage == FROMPAGE_INTRODUCE_HISTHR) {
             
             // 介绍页面的东西，每次重新加载
             
@@ -337,6 +358,26 @@
             else if (index == 1) {
                 
                 type = [NSString stringWithFormat:@"%d", INTROTYPE_HISTORY];
+            }
+            
+            [self doGetIntroSearch:type];
+        }
+        else if (_fromPage == FROMPAGE_INTRODUCE_ART) {
+            
+            if (isLoadingNetData) {
+                
+                [SVProgressHUD showErrorWithStatus:@"正在加载"];
+                return;
+            }
+            
+            NSString *type = nil;
+            if (index == 0) {
+                
+                type = [NSString stringWithFormat:@"%d", INTROTYPE_ART];
+            }
+            else if (index == 1) {
+                
+                type = [NSString stringWithFormat:@"%d", INTROTYPE_IMAGE];
             }
             
             [self doGetIntroSearch:type];
@@ -415,24 +456,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // 跳转到书籍详情
     migsBookIntroduce *bookintro = nil;
     int row = indexPath.row;
     
-    if (listType == MIG_BOOK_LISTTYPE_NEW) {
-        
-        bookintro = [tableInfoNewArray objectAtIndex:row];
-    }
-    else if (listType == MIG_BOOK_LISTTYPE_HOT) {
+    if (_fromPage == FROMPAGE_INTRODUCE_ART) {
         
         bookintro = [tableInfoHotArray objectAtIndex:row];
+        
+        ArtDisplayViewController *artview = [[ArtDisplayViewController alloc] init];
+        [artview initialize:bookintro.bookid Title:bookintro.name];
+        
+        [self.navigationController pushViewController:artview animated:YES];
     }
     else {
+        // 如果不是工艺品跳转到书籍详情
         
+        if (listType == MIG_BOOK_LISTTYPE_NEW) {
+            
+            bookintro = [tableInfoNewArray objectAtIndex:row];
+        }
+        else if (listType == MIG_BOOK_LISTTYPE_HOT) {
+            
+            bookintro = [tableInfoHotArray objectAtIndex:row];
+        }
+        else {
+            
+            
+        }
         
+        [self doGodoBookDetail:bookintro];
     }
-    
-    [self doGodoBookDetail:bookintro];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

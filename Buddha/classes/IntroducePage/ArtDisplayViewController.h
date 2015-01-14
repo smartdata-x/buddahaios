@@ -10,7 +10,7 @@
 #import "Stdinc.h"
 #import "BaseNavViewController.h"
 
-@interface ArtDisplayViewController : BaseNavViewController
+@interface ArtDisplayViewController : BaseNavViewController<UIGestureRecognizerDelegate>
 {
     UIView *viewWrapper;
 
@@ -22,6 +22,8 @@
     
     NSString *introID;
     NSString *titleName;
+    
+    BOOL isFullScreen;
 }
 
 - (void)initialize:(NSString *)introid Title:(NSString *)title;
@@ -36,5 +38,8 @@
 - (void)getArt:(NSString *)introid;
 - (void)getArtFailed:(NSNotification *)notification;
 - (void)getArtSuccess:(NSNotification *)notification;
+
+- (void)doTap:(UITapGestureRecognizer *)tapGesture;
+- (void)changeFullScreen;
 
 @end

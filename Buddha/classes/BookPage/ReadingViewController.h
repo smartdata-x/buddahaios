@@ -54,7 +54,7 @@
 
 // 外部
 - (void)initialize:(NSString *)bookname BookId:(NSString *)bookid BookToken:(NSString *)booktoken;
-- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters;
+- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters StartChapter:(int)startchapter;
 
 // 内部
 - (void)initView:(CGRect)frame;

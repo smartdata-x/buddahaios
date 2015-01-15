@@ -82,7 +82,7 @@
     [self getChapterList:booktoken ID:mBookid];
 }
 
-- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters {
+- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters StartChapter:(int)startchapter{
     
     fontSize = 36;
     isFullScreen = YES;
@@ -118,7 +118,7 @@
     // 加载完成，开始第一章
     if ([_chapterArray count] > 0) {
         
-        curChapter = -1;
+        curChapter = startchapter - 1;
         allChapter = [_chapterArray count];
         [self doGotoNextChapter:NO];
     }

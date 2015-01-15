@@ -210,8 +210,14 @@
     
     MIGDEBUG_PRINT(@"前往阅读");
     
+    // 有sender的话，则是阅读按钮
+    if (sender != nil) {
+        
+        startChapter = 0;
+    }
+    
     ReadingViewController *readingView = [[ReadingViewController alloc] init];
-    [readingView initWithChapterArray:_bookInfo.name Chapter:chapterTableInfo];
+    [readingView initWithChapterArray:_bookInfo.name Chapter:chapterTableInfo StartChapter:startChapter];
     [self.navigationController pushViewController:readingView animated:YES];
 }
 
@@ -380,11 +386,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    int row = indexPath.row;
+    
     if (tableView == headerTableView) {
         
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
     else {
+        
+        // 进入阅读界面
+        startChapter = row;
+        [self doGotoReadingView:nil];
     
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }

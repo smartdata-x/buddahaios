@@ -27,6 +27,8 @@
     
     UITableView *chapterTableView;
     NSMutableArray *chapterTableInfo;
+    
+    int startChapter;
 }
 
 @property (nonatomic, retain) migsBookIntroduce *bookInfo;

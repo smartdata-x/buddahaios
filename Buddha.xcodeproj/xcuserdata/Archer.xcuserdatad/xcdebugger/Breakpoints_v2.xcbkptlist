@@ -186,28 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Buddha/classes/BookPage/ReadingViewController.m"
-            timestampString = "443123865.617985"
+            timestampString = "443127878.759801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
             landmarkName = "-getChapterListSuccess:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Buddha/classes/BookPage/ReadingViewController.m"
-            timestampString = "443123194.197762"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-initWithChapterArray:Chapter:StartChapter:UseProcess:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -224,6 +208,38 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "-connection:didFailWithError:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Buddha/classes/BookPage/ReadingViewController.m"
+            timestampString = "443127878.759801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "625"
+            endingLineNumber = "625"
+            landmarkName = "-jumpToReadingProcess"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Buddha/classes/BookPage/ReadingViewController.m"
+            timestampString = "443127866.104758"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

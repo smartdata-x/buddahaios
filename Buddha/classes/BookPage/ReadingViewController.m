@@ -63,6 +63,7 @@
     curChapter = 0;
     curPage = 0;
     pageAnimate = YES;
+    needDoNextInAppear = NO;
     
     mBookname = bookname;
     mBookid = bookid;
@@ -92,6 +93,7 @@
     curPage = 0;
     pageAnimate = YES;
     useProcess = useprocess;
+    needDoNextInAppear = NO;
     
     mBookname = bookname;
     
@@ -145,6 +147,12 @@
 - (void)viewDidAppear:(BOOL)animated {
     
     [self setIsFullScreen];
+    
+    if (needDoNextInAppear) {
+        
+        [self doNextPage:nil];
+        needDoNextInAppear = NO;
+    }
 }
 
 - (void)doDownloadBook:(NSString *)url ToFile:(NSString *)tofile {
@@ -366,7 +374,7 @@
     [_textView setUserInteractionEnabled:NO];
     [_textView setContentOffset:CGPointMake(0, 0)];
     [_textView setBackgroundColor:[UIColor clearColor]];
-    //_textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     NSMutableParagraphStyle *parastyle = [[NSMutableParagraphStyle alloc] init];
     parastyle.lineHeightMultiple = 20;
@@ -562,7 +570,7 @@
     
     // 有阅读进度，则一定阅读了，所以本地存有文件，无需下载
     curChapter = [readingProcess.chapter intValue];
-    curPage = [readingProcess.page intValue];
+    curPage = [readingProcess.page intValue] - 1;
     int saveChapter = curChapter;
     int savePage = curPage;
     
@@ -582,9 +590,7 @@
     
     if ([_pfm isFileExistInBookDir:curChapterFilename]) {
         
-        //[self getFileContent:curChapterFilename];
-        //[self initView:viewFrame];
-        
+#if 0
         // 重置一次章节
         curChapter = saveChapter - 1;
         [self doGotoNextChapter:NO];
@@ -601,7 +607,11 @@
         readingProcess.chapter = [NSString stringWithFormat:@"%d", saveChapter];
         readingProcess.page = [NSString stringWithFormat:@"%d", savePage];
         [self recordReadingProcess];
-#if 0
+#else
+        
+        [self getFileContent:curChapterFilename];
+        [self initView:viewFrame];
+        
         if (!MIG_IS_EMPTY_STRING(curContent))
         {
             // TODO: 检查是否越界
@@ -610,13 +620,15 @@
                 
             }
             
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:0.1];
+            //[UIView beginAnimations:nil context:nil];
+            //[UIView setAnimationDuration:0.1];
             CGPoint offset = CGPointMake(0, curPage * pageHeight);
-            [_textView setContentOffset:offset animated:YES];
-            [UIView commitAnimations];
+            [_textView setContentOffset:offset animated:NO];
             
-            [Utilities curlLeft:self.view];
+            needDoNextInAppear = YES;
+            //[UIView commitAnimations];
+            
+            //[Utilities curlLeft:self.view];
         }
 #endif
     }

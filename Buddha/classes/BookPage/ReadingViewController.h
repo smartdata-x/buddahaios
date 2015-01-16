@@ -48,6 +48,7 @@
     migsReadingProcess *readingProcess;
     BOOL pageAnimate;
     BOOL useProcess;
+    BOOL needDoNextInAppear;
 }
 
 @property (nonatomic, retain) UITextView *textView;

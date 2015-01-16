@@ -61,6 +61,9 @@
         // 个人书架信息
         [_db executeUpdate:@"create table if not exists BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text, token text)"];
         
+        // 书本阅读进度信息
+        [_db executeUpdate:@"create table if not exists READINGPROCESS (name text, id text, chapter text, page text)"];
+        
         [_db close];
     }
     
@@ -264,6 +267,8 @@
         [retArray addObject:detailinfo];
     }
     
+    [_db close];
+    
     return retArray;
 }
 
@@ -278,6 +283,122 @@
     
     // 个人书架信息
     [_db executeUpdate:@"create table if not exists BOOKSHELFINFO (name text, id text, type text, imageurl text, freeurl text, fullurl text, token text)"];
+}
+
+- (void)insertReadingProcess:(migsReadingProcess *)process {
+    
+    // READINGPROCESS (name text, id text, chapter text, page text)
+    NSString *bookname = process.bookname;
+    NSString *bookid = process.bookid;
+    NSString *chapter = process.chapter;
+    NSString *page = process.page;
+    
+    NSString *sql = @"insert into READINGPROCESS (name, chapter, page, id) values (?, ?, ?, ?)";;
+    NSString *checksql = nil;
+    
+    if (!MIG_IS_EMPTY_STRING(bookid)) {
+        
+        checksql = [NSString stringWithFormat:@"select id from READINGPROCESS where id = '%@' ", bookid];
+    }
+    else if (!MIG_IS_EMPTY_STRING(bookname)) {
+        
+        checksql = [NSString stringWithFormat:@"select name from READINGPROCESS where name = '%@' ", bookname];
+    }
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        if (!MIG_IS_EMPTY_STRING(bookid)) {
+            
+            sql = @"update READINGPROCESS set name = ?, chapter = ?, page = ? where id = ?";
+        }
+        else if (!MIG_IS_EMPTY_STRING(bookname)) {
+            
+            sql = @"update READINGPROCESS set id = ?, chapter = ?, page = ? where name = ?";
+        }
+        break;
+    }
+    
+    if (!MIG_IS_EMPTY_STRING(bookid)) {
+        
+        if ([_db executeUpdate:sql, bookname, chapter, page, bookid]) {
+            
+            MIGDEBUG_PRINT(@"数据库记录书架信息 成功");
+        }
+        else {
+            
+            MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
+        }
+    }
+    else if (!MIG_IS_EMPTY_STRING(bookname)) {
+        
+        if ([_db executeUpdate:sql, bookid, chapter, page, bookname]) {
+            
+            MIGDEBUG_PRINT(@"数据库记录书架信息 成功");
+        }
+        else {
+            
+            MIGDEBUG_PRINT(@"%@", [_db lastErrorMessage]);
+        }
+    }
+    
+    
+    [_db close];
+}
+
+- (migsReadingProcess *)getReadingProcessByID:(NSString *)bookid {
+    
+    migsReadingProcess *process = nil;
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from READINGPROCESS where id = '%@' ", bookid];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        process = [[migsReadingProcess alloc] init];
+        
+        process.bookname = [rs stringForColumn:@"name"];
+        process.bookid = [rs stringForColumn:@"id"];
+        process.chapter = [rs stringForColumn:@"chapter"];
+        process.page = [rs stringForColumn:@"page"];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return process;
+}
+
+- (migsReadingProcess *)getReadingProcessByName:(NSString *)bookname {
+    
+    migsReadingProcess *process = nil;
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from READINGPROCESS where name = '%@' ", bookname];
+    MIGDEBUG_PRINT(@"查找%@的阅读进度", bookname);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        process = [[migsReadingProcess alloc] init];
+        
+        process.bookname = [rs stringForColumn:@"name"];
+        process.bookid = [rs stringForColumn:@"id"];
+        process.chapter = [rs stringForColumn:@"chapter"];
+        process.page = [rs stringForColumn:@"page"];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return process;
 }
 
 @end

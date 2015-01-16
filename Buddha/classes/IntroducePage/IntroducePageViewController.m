@@ -97,16 +97,17 @@
     [classicInfo addObjectsFromArray:bookarray];
     
     // 排列图标
-    float initGap = 32.0;
+    int itemOneRow = 3;
+    float initGap = 52.0;
     float xstart = initGap / SCREEN_SCALAR;
     float iconsize = 125.0 / SCREEN_SCALAR;
-    float hSeperatespace = (self.mFrame.size.width - initGap / SCREEN_SCALAR * 2 - iconsize * 4) / 3.0;
+    float hSeperatespace = (self.mFrame.size.width - initGap / SCREEN_SCALAR * 2 - iconsize * itemOneRow) / (itemOneRow - 1);
     float vSeperatespace = 32.0 / SCREEN_SCALAR;
     
     for (int i=0; i<[classicInfo count]; i++) {
         
-        int x = i % 3;
-        int y = i / 3;
+        int x = i % itemOneRow;
+        int y = i / itemOneRow;
         float tmpX = xstart + (hSeperatespace + iconsize) * x;
         float tmpY = ystart + (vSeperatespace + iconsize) * y;
         

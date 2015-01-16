@@ -10,6 +10,7 @@
 #import "PFileDownLoadManager.h"
 #import "BookDetailViewController.h"
 #import "IntroduceChapterTableViewCell.h"
+#import "DatabaseManager.h"
 
 @implementation migsChapterInfo
 
@@ -61,6 +62,7 @@
     isFullScreen = YES;
     curChapter = 0;
     curPage = 0;
+    pageAnimate = YES;
     
     mBookname = bookname;
     mBookid = bookid;
@@ -78,16 +80,18 @@
         _chapterArray = [[NSMutableArray alloc] init];
     }
     
-    // 开始获取章节内容
+    // 开始获取章节内容，获取完章节内容后检查阅读进度
     [self getChapterList:booktoken ID:mBookid];
 }
 
-- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters StartChapter:(int)startchapter{
+- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters StartChapter:(int)startchapter UseProcess:(BOOL)useprocess {
     
     fontSize = 36;
     isFullScreen = YES;
     curChapter = 0;
     curPage = 0;
+    pageAnimate = YES;
+    useProcess = useprocess;
     
     mBookname = bookname;
     
@@ -114,14 +118,33 @@
         chapterinfo.chapterid = curchapter.index;
         [_chapterArray addObject:chapterinfo];
     }
+    allChapter = [_chapterArray count];
     
-    // 加载完成，开始第一章
+    // 从章节进入，则认为不需要进度信息，即从该章节开始
+    if (useprocess) {
+        
+        // 获取阅读进度
+        readingProcess = [self getReadingProcessByName:mBookname];
+        if (readingProcess && readingProcess.chapter && readingProcess.page) {
+            
+            // 跳转到当前页面
+            [self jumpToReadingProcess];
+            
+            return;
+        }
+    }
+    
+    // 没有阅读进度，开始第一章
     if ([_chapterArray count] > 0) {
         
         curChapter = startchapter - 1;
-        allChapter = [_chapterArray count];
         [self doGotoNextChapter:NO];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [self setIsFullScreen];
 }
 
 - (void)doDownloadBook:(NSString *)url ToFile:(NSString *)tofile {
@@ -187,9 +210,10 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     
-    [self setIsFullScreen];
+    // 退出之前记录阅读信息
+    [self recordReadingProcess];
 }
 
 - (void)getFileContent:(NSString *)filename {
@@ -202,6 +226,25 @@
     MIGDEBUG_PRINT(@"文件路径:%@", fullpath);
     
     curContent = [[NSString alloc] initWithData:strdata encoding:encode];
+    
+    // 没有得到内容，采用其他编码
+    if (MIG_IS_EMPTY_STRING(curContent)) {
+        
+        encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        curContent = [[NSString alloc] initWithData:strdata encoding:encode];
+    }
+    
+    if (MIG_IS_EMPTY_STRING(curContent)) {
+        
+        encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_2312_80);
+        curContent = [[NSString alloc] initWithData:strdata encoding:encode];
+    }
+    
+    if (MIG_IS_EMPTY_STRING(curContent)) {
+        
+        encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGBK_95);
+        curContent = [[NSString alloc] initWithData:strdata encoding:encode];
+    }
 }
 
 - (void)doGotoNextChapter:(BOOL)forceDownload {
@@ -215,7 +258,7 @@
     }
     
 #if MIG_DEBUG_TEST
-    forceDownload = YES;
+    //forceDownload = YES;
 #endif
     
     curChapter++;
@@ -243,6 +286,9 @@
             curPage = -1;
             [self doNextPage:nil];
         }
+        
+        // 记录阅读进度
+        [self recordReadingProcess];
     }
     else {
         
@@ -270,6 +316,9 @@
     
     curPage = allPage;
     [self doPreviousPage:nil];
+    
+    // 记录阅读进度
+    [self recordReadingProcess];
 }
 
 - (void)initView:(CGRect)frame {
@@ -317,7 +366,7 @@
     [_textView setUserInteractionEnabled:NO];
     [_textView setContentOffset:CGPointMake(0, 0)];
     [_textView setBackgroundColor:[UIColor clearColor]];
-    _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    //_textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     NSMutableParagraphStyle *parastyle = [[NSMutableParagraphStyle alloc] init];
     parastyle.lineHeightMultiple = 20;
@@ -387,10 +436,13 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
     CGPoint offset = CGPointMake(0, curPage * pageHeight);
-    [_textView setContentOffset:offset animated:YES];
+    [_textView setContentOffset:offset animated:pageAnimate];
     [UIView commitAnimations];
     
-    [Utilities curlLeft:self.view];
+    if (pageAnimate) {
+        
+        [Utilities curlLeft:self.view];
+    }
 }
 
 - (void)doPreviousPage:(UISwipeGestureRecognizer *)swipGesture {
@@ -407,10 +459,13 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
     CGPoint offset = CGPointMake(0, curPage * pageHeight);
-    [_textView setContentOffset:offset animated:YES];
+    [_textView setContentOffset:offset animated:pageAnimate];
     [UIView commitAnimations];
     
-    [Utilities curlRight:self.view];
+    if (pageAnimate) {
+        
+        [Utilities curlRight:self.view];
+    }
 }
 
 - (void)getChapterList:(NSString *)booktoken ID:(NSString *)bookid {
@@ -438,13 +493,138 @@
         migsChapterInfo *chapterinfo = [migsChapterInfo setupChapterinfoByDictionay:dic];
         [_chapterArray addObject:chapterinfo];
     }
+    allChapter = [_chapterArray count];
     
-    // 加载完成，开始第一章
+    // 获取阅读进度
+    readingProcess = [self getReadingProcessByID:mBookid];
+    if (readingProcess && readingProcess.chapter && readingProcess.page) {
+        
+        // 跳转到当前页面
+        [self jumpToReadingProcess];
+        
+        return;
+    }
+    
+    // 没有进度，开始第一章
     if ([_chapterArray count] > 0) {
         
         curChapter = -1;
-        allChapter = [_chapterArray count];
         [self doGotoNextChapter:NO];
+    }
+}
+
+- (void)recordReadingProcess {
+    
+    if (readingProcess == nil) {
+        
+        readingProcess = [[migsReadingProcess alloc] init];
+    }
+    
+    if (curChapter < 0) {
+        
+        curChapter = 0;
+    }
+    
+    if (curPage > allPage - 1) {
+        
+        curPage = allPage - 1;
+    }
+    
+    if (curPage < 0) {
+        
+        curPage = 0;
+    }
+    
+    readingProcess.bookname = mBookname;
+    readingProcess.bookid = mBookid;
+    readingProcess.chapter = [NSString stringWithFormat:@"%d", curChapter];
+    readingProcess.page = [NSString stringWithFormat:@"%d", curPage];
+    
+    [[DatabaseManager GetInstance] insertReadingProcess:readingProcess];
+}
+
+- (migsReadingProcess *)getReadingProcessByID:(NSString *)bookid {
+    
+    return [[DatabaseManager GetInstance] getReadingProcessByID:bookid];
+}
+
+- (migsReadingProcess *)getReadingProcessByName:(NSString *)bookname {
+    
+    return [[DatabaseManager GetInstance] getReadingProcessByName:bookname];
+}
+
+- (void)jumpToReadingProcess {
+    
+    if (readingProcess == nil) {
+        
+        return;
+    }
+    
+    // 有阅读进度，则一定阅读了，所以本地存有文件，无需下载
+    curChapter = [readingProcess.chapter intValue];
+    curPage = [readingProcess.page intValue];
+    int saveChapter = curChapter;
+    int savePage = curPage;
+    
+    migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
+    curChapterFilename = [NSString stringWithFormat:@"%@_%d.txt", mBookname, curChapter];
+    
+    NSString *mension = nil;
+    if (curChapter == 0) {
+        
+        mension = [NSString stringWithFormat:@"第一章\n%@", chapterinfo.chaptername];
+    }
+    else {
+        
+        mension = [NSString stringWithFormat:@"开始\n%@", chapterinfo.chaptername];
+    }
+    [SVProgressHUD showSuccessWithStatus:mension];
+    
+    if ([_pfm isFileExistInBookDir:curChapterFilename]) {
+        
+        //[self getFileContent:curChapterFilename];
+        //[self initView:viewFrame];
+        
+        // 重置一次章节
+        curChapter = saveChapter - 1;
+        [self doGotoNextChapter:NO];
+        
+        // 重置一次页数
+        pageAnimate = NO;
+        for (int i=0; i<savePage; i++) {
+            
+            [self doNextPage:nil];
+        }
+        pageAnimate = YES;
+        
+        // 回存一次数据
+        readingProcess.chapter = [NSString stringWithFormat:@"%d", saveChapter];
+        readingProcess.page = [NSString stringWithFormat:@"%d", savePage];
+        [self recordReadingProcess];
+#if 0
+        if (!MIG_IS_EMPTY_STRING(curContent))
+        {
+            // TODO: 检查是否越界
+            if (curPage >= allPage - 1) {
+                
+                
+            }
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:0.1];
+            CGPoint offset = CGPointMake(0, curPage * pageHeight);
+            [_textView setContentOffset:offset animated:YES];
+            [UIView commitAnimations];
+            
+            [Utilities curlLeft:self.view];
+        }
+#endif
+    }
+    else {
+        
+        // 从进度获取到的信息，所以此处应该不会执行
+        migsChapterInfo *chapterinfo = [_chapterArray objectAtIndex:curChapter];
+        [self doDownloadBook:chapterinfo.chapterurl ToFile:curChapterFilename];
     }
 }
 

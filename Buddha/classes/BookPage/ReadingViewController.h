@@ -44,6 +44,10 @@
     NSString *curChapterFilename;
     
     CGRect viewFrame;
+    
+    migsReadingProcess *readingProcess;
+    BOOL pageAnimate;
+    BOOL useProcess;
 }
 
 @property (nonatomic, retain) UITextView *textView;
@@ -54,7 +58,7 @@
 
 // 外部
 - (void)initialize:(NSString *)bookname BookId:(NSString *)bookid BookToken:(NSString *)booktoken;
-- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters StartChapter:(int)startchapter;
+- (void)initWithChapterArray:(NSString *)bookname Chapter:(NSArray *)chapters StartChapter:(int)startchapter UseProcess:(BOOL)useprocess;
 
 // 内部
 - (void)initView:(CGRect)frame;
@@ -78,5 +82,10 @@
 
 - (void)doGotoPreviousChapter;
 - (void)doGotoNextChapter:(BOOL)forceDownload;
+
+- (void)recordReadingProcess;
+- (migsReadingProcess *)getReadingProcessByID:(NSString *)bookid;
+- (migsReadingProcess *)getReadingProcessByName:(NSString *)bookname;
+- (void)jumpToReadingProcess;
 
 @end

@@ -19,3 +19,12 @@
 + (migsImgWithTitleAndDetail *)initByDic:(NSDictionary *)dic;
 
 @end
+
+@interface migsReadingProcess : NSObject
+
+@property (nonatomic, retain) NSString *bookname;
+@property (nonatomic, retain) NSString *bookid;
+@property (nonatomic, retain) NSString *chapter;
+@property (nonatomic, retain) NSString *page;
+
+@end

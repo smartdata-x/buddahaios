@@ -37,3 +37,7 @@
 }
 
 @end
+
+@implementation migsReadingProcess
+
+@end

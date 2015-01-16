@@ -210,14 +210,18 @@
     
     MIGDEBUG_PRINT(@"前往阅读");
     
+    BOOL useprocess = NO;
+    
     // 有sender的话，则是阅读按钮
     if (sender != nil) {
         
         startChapter = 0;
+        // 阅读按钮需要进度
+        useprocess = YES;
     }
     
     ReadingViewController *readingView = [[ReadingViewController alloc] init];
-    [readingView initWithChapterArray:_bookInfo.name Chapter:chapterTableInfo StartChapter:startChapter];
+    [readingView initWithChapterArray:_bookInfo.name Chapter:chapterTableInfo StartChapter:startChapter UseProcess:useprocess];
     [self.navigationController pushViewController:readingView animated:YES];
 }
 

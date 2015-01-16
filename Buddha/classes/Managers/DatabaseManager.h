@@ -33,4 +33,9 @@
 - (void)insertBookInfo:(migsBookDetailInformation *)bookinfo;
 - (NSArray *)getAllBookInfo;
 
+// 记录阅读进度信息
+- (void)insertReadingProcess:(migsReadingProcess *)process;
+- (migsReadingProcess *)getReadingProcessByID:(NSString *)bookid;
+- (migsReadingProcess *)getReadingProcessByName:(NSString *)bookname;
+
 @end

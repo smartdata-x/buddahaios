@@ -45,4 +45,7 @@ enum {
 - (void)getRecomFailed:(NSNotification *)notification;
 - (void)getRecomSuccess:(NSNotification *)notification;
 
+- (void)doGotoBookPage;
+- (void)doGotoActivity;
+
 @end

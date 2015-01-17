@@ -195,7 +195,7 @@
     
     if (viewWrapper == nil) {
         
-        CGRect frame = CGRectMake(0, 0, 320, 480);
+        CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         viewWrapper = [[UIView alloc] initWithFrame:frame];
         [viewWrapper setBackgroundColor:MIG_COLOR_D4D4D4];
     }

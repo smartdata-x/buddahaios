@@ -90,6 +90,7 @@
     // remove
     UIView *oldShowView = [self.view viewWithTag:ROOTVIEWTAG_CURRENT];
     [oldShowView removeFromSuperview];
+    _curShowViewTag = viewTag;
     
     // show
     UIViewController *controller = [self getControllerByTag:_curShowViewTag];

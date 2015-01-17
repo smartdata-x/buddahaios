@@ -51,4 +51,8 @@ enum {
 - (void)getBookFailed:(NSNotification *)notification;
 - (void)getBookSuccess:(NSNotification *)notification;
 
+- (void)onClickFojingCell;
+- (void)onClickYiguiCell;
+- (void)onClickFolunCell;
+
 @end

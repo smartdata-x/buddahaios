@@ -263,6 +263,27 @@
     [self.topViewController.navigationController pushViewController:category animated:YES];
 }
 
+- (void)onClickFojingCell {
+    
+    UIButton *btntmp = [[UIButton alloc] init];
+    btntmp.tag = 0;
+    [self doGotoBookCategory:btntmp];
+}
+
+- (void)onClickYiguiCell {
+    
+    UIButton *btntmp = [[UIButton alloc] init];
+    btntmp.tag = 1;
+    [self doGotoBookCategory:btntmp];
+}
+
+- (void)onClickFolunCell {
+    
+    UIButton *btntmp = [[UIButton alloc] init];
+    btntmp.tag = 2;
+    [self doGotoBookCategory:btntmp];
+}
+
 // UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -377,6 +398,11 @@
             
             migsBookList *bookIntro = (migsBookList *)[tableBookFojingInfo objectAtIndex:0];
             [cell initialize:bookIntro];
+            
+            // item响应cell事件
+            [cell.avatarBook0 addTarget:self action:@selector(onClickFojingCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook1 addTarget:self action:@selector(onClickFojingCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook2 addTarget:self action:@selector(onClickFojingCell) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (section == 2) {
             
@@ -387,6 +413,11 @@
             
             migsBookList *bookIntro = (migsBookList *)[tableBookYiguiInfo objectAtIndex:0];
             [cell initialize:bookIntro];
+            
+            // item响应cell事件
+            [cell.avatarBook0 addTarget:self action:@selector(onClickYiguiCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook1 addTarget:self action:@selector(onClickYiguiCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook2 addTarget:self action:@selector(onClickYiguiCell) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (section == 3) {
             
@@ -397,6 +428,11 @@
             
             migsBookList *bookIntro = (migsBookList *)[tableBookFolunInfo objectAtIndex:0];
             [cell initialize:bookIntro];
+            
+            // item响应cell事件
+            [cell.avatarBook0 addTarget:self action:@selector(onClickFolunCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook1 addTarget:self action:@selector(onClickFolunCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook2 addTarget:self action:@selector(onClickFolunCell) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     
@@ -415,9 +451,17 @@
         migsBookIntroduce *bookintro = [tableIntroInfo objectAtIndex:row];
         [self doGodoBookDetail:bookintro];
     }
-    else {
+    else if (section == 1) {
         
-        // 响应按钮
+        [self onClickFojingCell];
+    }
+    else if (section == 2) {
+        
+        [self onClickYiguiCell];
+    }
+    else if (section == 3) {
+        
+        [self onClickFolunCell];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -8,6 +8,7 @@
 
 #import "FeaturedViewController.h"
 #import "AskNetDataApi.h"
+#import "RootViewController.h"
 
 @interface FeaturedViewController ()
 
@@ -118,6 +119,20 @@
                              KEY_TOTAL_HEIGHT:[NSNumber numberWithFloat:(320 / SCREEN_SCALAR)]}];
     
     [_tableInfoArray addObjectsFromArray:infoArray];
+}
+
+- (void)doGotoBookPage {
+    
+    RootViewController *rootView = (RootViewController *)self.topViewController;
+    [rootView doUpdateView:ROOTVIEWTAG_LIBRARY];
+    [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_LIBRARY];
+}
+
+- (void)doGotoActivity {
+    
+    RootViewController *rootView = (RootViewController *)self.topViewController;
+    [rootView doUpdateView:ROOTVIEWTAG_ACTIVITY];
+    [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_ACTIVITY];
 }
 
 - (void)getRecomFailed:(NSNotification *)notification {
@@ -250,6 +265,11 @@
                 cell.avatarBook0.imageURL = [NSURL URLWithString:[booksPic objectAtIndex:0]];
                 cell.avatarBook1.imageURL = [NSURL URLWithString:[booksPic objectAtIndex:1]];
                 cell.avatarBook2.imageURL = [NSURL URLWithString:[booksPic objectAtIndex:2]];
+                
+                // button响应cell单元事件
+                [cell.avatarBook0 addTarget:self action:@selector(doGotoBookPage) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarBook1 addTarget:self action:@selector(doGotoBookPage) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarBook2 addTarget:self action:@selector(doGotoBookPage) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         
@@ -286,6 +306,11 @@
                 cell.lblActivity2.textColor = [UIColor lightGrayColor];
                 cell.lblActivity2.textAlignment = NSTextAlignmentCenter;
                 cell.lblActivity2.font = [UIFont fontOfApp:20.0 / SCREEN_SCALAR];
+                
+                // button响应cell单元事件
+                [cell.avatarActivity0 addTarget:self action:@selector(doGotoActivity) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarActivity1 addTarget:self action:@selector(doGotoActivity) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarActivity2 addTarget:self action:@selector(doGotoActivity) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         
@@ -299,7 +324,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // TODO: 响应事件
+    // 响应事件
+    int section = indexPath.section;
+    if (section == SECTION_BOOKS) {
+        
+        [self doGotoBookPage];
+    }
+    else if (section == SECTION_ACTIVITIES) {
+        
+        [self doGotoActivity];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

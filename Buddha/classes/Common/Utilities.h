@@ -13,6 +13,7 @@
 
 // 计算文字高度
 + (float)heightForString:(NSString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame;
++ (float)heightForAttributedString:(NSAttributedString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame;
 + (float)MaxHeightForFontInRectWithNumber:(float *)fontsize Rect:(CGRect)rect Line:(NSInteger)lines;
 
 // 地图中返回字符串

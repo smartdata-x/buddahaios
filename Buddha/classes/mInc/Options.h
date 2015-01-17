@@ -14,4 +14,8 @@
 #define MIG_DEBUG_TEST               1
 #endif
 
+#ifndef MIG_NEW_READER
+#define MIG_NEW_READER               0
+#endif
+
 #endif

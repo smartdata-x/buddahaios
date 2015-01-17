@@ -1,45 +1,27 @@
 //
-//  ReadingView.m
+//  ReaderViewController.m
 //  Buddha
 //
-//  Created by Archer_LJ on 14/12/23.
-//  Copyright (c) 2014年 Archer_LJ. All rights reserved.
+//  Created by Archer_LJ on 15/1/17.
+//  Copyright (c) 2015年 Archer_LJ. All rights reserved.
 //
 
-#import "ReadingViewController.h"
+#import "ReaderViewController.h"
 #import "PFileDownLoadManager.h"
 #import "BookDetailViewController.h"
 #import "IntroduceChapterTableViewCell.h"
 #import "DatabaseManager.h"
+#import "ReadingViewController.h"
 
-@implementation migsChapterInfo
-
-+ (migsChapterInfo *)setupChapterinfoByDictionay:(NSDictionary *)dic {
-    
-    migsChapterInfo *ret = [[migsChapterInfo alloc] init];
-    
-    int nbookid = [[dic objectForKey:@"bookid"] intValue];
-    int nchapterid = [[dic objectForKey:@"id"] intValue];
-    NSString *bookid = [NSString stringWithFormat:@"%d", nbookid];
-    NSString *chapterid = [NSString stringWithFormat:@"%d", nchapterid];
-    NSString *chaptername = [dic objectForKey:@"name"];
-    NSString *chapterurl = [dic objectForKey:@"url"];
-    
-    ret.bookid = bookid;
-    ret.chapterid = chapterid;
-    ret.chaptername = chaptername;
-    ret.chapterurl = chapterurl;
-    
-    return ret;
-}
+@interface ReaderViewController ()
 
 @end
 
-@implementation ReadingViewController
+@implementation ReaderViewController
 
-- (id)init {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
-    self = [super init];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
         
@@ -113,7 +95,7 @@
     for (int i=0; i<[chapters count]; i++) {
         
         migsIntroduceChapterInfo *curchapter = (migsIntroduceChapterInfo *)[chapters objectAtIndex:i];
-            
+        
         migsChapterInfo *chapterinfo = [[migsChapterInfo alloc] init];
         chapterinfo.chaptername = curchapter.name;
         chapterinfo.chapterurl = curchapter.url;
@@ -191,17 +173,8 @@
     
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setTranslucent:YES];
-    
-    if (viewWrapper == nil) {
-        
-        CGRect frame = CGRectMake(0, 0, 320, 480);
-        viewWrapper = [[UIView alloc] initWithFrame:frame];
-        [viewWrapper setBackgroundColor:MIG_COLOR_D4D4D4];
-    }
-    [self.view addSubview:viewWrapper];
-    //[self.view.window addSubview:viewWrapper];
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     [self initView:viewFrame];
     
     // 左翻页
@@ -357,15 +330,22 @@
     ystart = frame.size.height - realViewHeight;
     
     float lineheight = fontSize; // 行间距和字体大小一样大
-    UIFont *textfont = [UIFont fontOfApp:fontSize / SCREEN_SCALAR];
+    pageHeight = realViewHeight - padding; // 翻页大小和padding无关
     
+    UIFont *textfont = [UIFont fontOfApp:fontSize / SCREEN_SCALAR];
+    CGRect maxRect = CGRectMake(0, 0, frame.size.width, MAXFLOAT);
+    float textheight = [Utilities heightForString:curContent Font:textfont Frame:maxRect];
+    
+    allPage = ceilf(textheight / pageHeight + 0.5);
+    
+#if 0
     if (_textView == nil) {
         
         CGRect textFrame = CGRectMake(0, ystart, frame.size.width, frame.size.height - ystart);
         _textView = [[UITextView alloc] initWithFrame:textFrame];
         [viewWrapper addSubview:_textView];
-        //[self.view.window addSubview:_textView];
     }
+#endif
     
     _textView.font = textfont;
     _textView.textColor = MIG_COLOR_111111;
@@ -385,15 +365,6 @@
     NSDictionary *attributes = @{NSFontAttributeName:[UIFont fontOfApp:fontSize / SCREEN_SCALAR], NSParagraphStyleAttributeName:parastyle, NSForegroundColorAttributeName:MIG_COLOR_111111};
     
     _textView.attributedText = [[NSAttributedString alloc] initWithString:curContent attributes:attributes];
-    
-    // 计算翻页大小和所有页数
-    pageHeight = realViewHeight - padding; // 翻页大小和padding无关
-    
-    CGRect maxRect = CGRectMake(0, 0, frame.size.width, MAXFLOAT);
-    float textheight = [Utilities heightForAttributedString:_textView.attributedText Font:textfont Frame:maxRect];
-    //float textheight = [Utilities heightForString:curContent Font:textfont Frame:maxRect];
-    
-    allPage = ceilf(textheight / pageHeight + 0.5);
     
     [self initTopView:viewFrame];
 }
@@ -418,7 +389,7 @@
         [_lblBookName setFont:[UIFont fontOfApp:25 / SCREEN_SCALAR]];
         [_lblBookName setTextColor:MIG_COLOR_111111];
         [_lblBookName setTextAlignment:NSTextAlignmentLeft];
-        [viewWrapper addSubview:_lblBookName];
+        [self.view addSubview:_lblBookName];
     }
     [_lblBookName setFrame:nameframe];
     NSString *bookname = [NSString stringWithFormat:@"《%@》", mBookname];
@@ -430,7 +401,7 @@
         [_lblChapterName setFont:[UIFont fontOfApp:25 / SCREEN_SCALAR]];
         [_lblChapterName setTextColor:MIG_COLOR_111111];
         [_lblChapterName setTextAlignment:NSTextAlignmentRight];
-        [viewWrapper addSubview:_lblChapterName];
+        [self.view addSubview:_lblChapterName];
     }
     [_lblChapterName setFrame:chapterframe];
     [_lblChapterName setText:chapterinfo.chaptername];
@@ -659,8 +630,6 @@
     
     [self.navigationController setNavigationBarHidden:isFullScreen animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:isFullScreen withAnimation:YES];
-    
-    MIGDEBUG_PRINT(@"wrapper y:%f, text y:%f", viewWrapper.frame.origin.y, _textView.frame.origin.y);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -669,10 +638,12 @@
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 */
 

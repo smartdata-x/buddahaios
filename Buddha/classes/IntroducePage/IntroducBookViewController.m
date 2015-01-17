@@ -9,7 +9,12 @@
 #import "IntroducBookViewController.h"
 #import "IntroduceChapterTableViewCell.h"
 #import "LoginManager.h"
+
+#if MIG_NEW_READER
+#import "ReaderViewController.h"
+#else
 #import "ReadingViewController.h"
+#endif
 
 @interface IntroducBookViewController ()
 
@@ -220,9 +225,15 @@
         useprocess = YES;
     }
     
+#if MIG_NEW_READER
+    ReaderViewController *readerView = [[ReaderViewController alloc] initWithNibName:@"ReaderViewController" bundle:nil];
+    [readerView initWithChapterArray:_bookInfo.name Chapter:chapterTableInfo StartChapter:startChapter UseProcess:useprocess];
+    [self.navigationController pushViewController:readerView animated:YES];
+#else
     ReadingViewController *readingView = [[ReadingViewController alloc] init];
     [readingView initWithChapterArray:_bookInfo.name Chapter:chapterTableInfo StartChapter:startChapter UseProcess:useprocess];
     [self.navigationController pushViewController:readingView animated:YES];
+#endif
 }
 
 - (void)doGotoShare:(UIGestureRecognizer *)gesture {

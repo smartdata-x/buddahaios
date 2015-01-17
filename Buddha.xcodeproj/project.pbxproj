@@ -82,6 +82,8 @@
 		CBCB6ABE1A61FA670082E361 /* ArtDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6ABD1A61FA670082E361 /* ArtDisplayViewController.m */; };
 		CBCB6AC31A66C6E00082E361 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AC01A66C6E00082E361 /* UIImage+BlurredFrame.m */; };
 		CBCB6AC41A66C6E00082E361 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AC21A66C6E00082E361 /* UIImage+ImageEffects.m */; };
+		CBCB6AC81A6A11B10082E361 /* ReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB6AC61A6A11B10082E361 /* ReaderViewController.m */; };
+		CBCB6AC91A6A11B10082E361 /* ReaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBCB6AC71A6A11B10082E361 /* ReaderViewController.xib */; };
 		CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */; };
 		CBD333FB1A41B0290026AD71 /* MapBuidingInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD333F91A41B0290026AD71 /* MapBuidingInfoViewController.m */; };
 		CBD333FF1A41BDBD0026AD71 /* allow_choose.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD333FD1A41BDBD0026AD71 /* allow_choose.png */; };
@@ -337,6 +339,9 @@
 		CBCB6AC01A66C6E00082E361 /* UIImage+BlurredFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BlurredFrame.m"; sourceTree = "<group>"; };
 		CBCB6AC11A66C6E00082E361 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CBCB6AC21A66C6E00082E361 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		CBCB6AC51A6A11B10082E361 /* ReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderViewController.h; sourceTree = "<group>"; };
+		CBCB6AC61A6A11B10082E361 /* ReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderViewController.m; sourceTree = "<group>"; };
+		CBCB6AC71A6A11B10082E361 /* ReaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController.xib; sourceTree = "<group>"; };
 		CBD333F21A41ADAD0026AD71 /* BaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavViewController.h; sourceTree = "<group>"; };
 		CBD333F31A41ADAD0026AD71 /* BaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavViewController.m; sourceTree = "<group>"; };
 		CBD333F81A41B0290026AD71 /* MapBuidingInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBuidingInfoViewController.h; sourceTree = "<group>"; };
@@ -851,6 +856,9 @@
 				CBD334751A4FBF090026AD71 /* BookCategoryInfoTableViewCell.xib */,
 				CBD334781A4FD9820026AD71 /* BookDetailViewController.h */,
 				CBD334791A4FD9820026AD71 /* BookDetailViewController.m */,
+				CBCB6AC51A6A11B10082E361 /* ReaderViewController.h */,
+				CBCB6AC61A6A11B10082E361 /* ReaderViewController.m */,
+				CBCB6AC71A6A11B10082E361 /* ReaderViewController.xib */,
 			);
 			path = BookPage;
 			sourceTree = "<group>";
@@ -1528,6 +1536,7 @@
 				CBEC68E81A2360C5007B2A00 /* banner.jpg in Resources */,
 				C7E0C1F71A2C6EFF002683DE /* Default@2x.png in Resources */,
 				CB9699641A2F523B009C35F8 /* logo.png in Resources */,
+				CBCB6AC91A6A11B10082E361 /* ReaderViewController.xib in Resources */,
 				C7E0C1F81A2C6EFF002683DE /* Default1024.png in Resources */,
 				CBD334291A45A8390026AD71 /* fozhu_id.png in Resources */,
 				CBD3345E1A4DB82C0026AD71 /* jindaifozhu.png in Resources */,
@@ -1697,6 +1706,7 @@
 				CBEC69CC1A29DD88007B2A00 /* GTMBase64.m in Sources */,
 				CBCB6AC31A66C6E00082E361 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC69C71A29DCBE007B2A00 /* PCommonUtil.m in Sources */,
+				CBCB6AC81A6A11B10082E361 /* ReaderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

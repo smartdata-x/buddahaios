@@ -19,6 +19,14 @@
     return labelSize.height;
 }
 
++ (float)heightForAttributedString:(NSAttributedString *)srcstr Font:(UIFont *)font Frame:(CGRect)frame {
+    
+    CGSize size = CGSizeMake(frame.size.width, MAXFLOAT);
+    CGRect labelSize = [srcstr boundingRectWithSize:size options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    return labelSize.size.height;
+}
+
 + (float)MaxHeightForFontInRectWithNumber:(float *)fontsize Rect:(CGRect)rect Line:(NSInteger)lines {
     
     float maxHeight = 1;

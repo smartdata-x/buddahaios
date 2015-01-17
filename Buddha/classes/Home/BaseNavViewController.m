@@ -16,7 +16,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
-    self = [super initWithNibName:nil bundle:nil];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
         
@@ -33,8 +33,8 @@
 
 - (void)initNavigationView {
     
-    [self.navigationController.navigationBar setBarTintColor:MIG_COLOR_53645E];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    //[self.navigationController.navigationBar setBarTintColor:MIG_COLOR_53645E];
+    //self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     

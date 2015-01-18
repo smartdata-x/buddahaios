@@ -19,6 +19,7 @@
     UITableView *introTableView;
     NSMutableArray *tableHistroyInfo;
     NSMutableArray *tableThoughtInfo;
+    NSMutableArray *tableArtInfo;
     NSMutableArray *tableSectionInfo;
 }
 

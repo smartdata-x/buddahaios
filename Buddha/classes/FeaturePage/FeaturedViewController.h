@@ -28,9 +28,6 @@ enum {
     NSString *newsSummary;
     NSString *newsPic;
     
-    NSMutableArray *booksName;
-    NSMutableArray *booksPic;
-    
     NSMutableArray *activityTitle;
     NSMutableArray *activityPic;
 }
@@ -38,6 +35,8 @@ enum {
 @property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, retain) UITableView *contentTableView;
 @property (nonatomic, retain) NSMutableArray *tableInfoArray;
+@property (nonatomic, retain) NSMutableArray *contentTableBookInfo; // migsBookIntroduce
+@property (nonatomic, retain) NSMutableArray *contentTableActivityInfo; // migsBuildingInfo
 
 - (void)reloadTableViewDataSource;
 - (void)forceRefreshData;
@@ -45,7 +44,7 @@ enum {
 - (void)getRecomFailed:(NSNotification *)notification;
 - (void)getRecomSuccess:(NSNotification *)notification;
 
-- (void)doGotoBookPage;
-- (void)doGotoActivity;
+- (IBAction)doGotoBookPage:(id)sender;
+- (IBAction)doGotoActivity:(id)sender;
 
 @end

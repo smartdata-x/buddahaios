@@ -49,6 +49,16 @@
     
     [super viewDidLoad];
     
+    if (_contentTableBookInfo == nil) {
+        
+        _contentTableBookInfo = [[NSMutableArray alloc] init];
+    }
+    
+    if (_contentTableActivityInfo == nil) {
+        
+        _contentTableActivityInfo = [[NSMutableArray alloc] init];
+    }
+    
     if (_tableInfoArray == nil) {
         
         _tableInfoArray = [[NSMutableArray alloc] init];
@@ -68,16 +78,6 @@
         UIImageView *mBannerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:IMG_HOME_BANNER]];
         mBannerImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, HOME_BANNER_HEIGHT);
         _contentTableView.tableHeaderView = mBannerImageView;
-    }
-    
-    if (booksName == nil) {
-        
-        booksName = [[NSMutableArray alloc] init];
-    }
-    
-    if (booksPic == nil) {
-        
-        booksPic = [[NSMutableArray alloc] init];
     }
     
     if (activityTitle == nil) {
@@ -121,18 +121,30 @@
     [_tableInfoArray addObjectsFromArray:infoArray];
 }
 
-- (void)doGotoBookPage {
+- (IBAction)doGotoBookPage:(id)sender {
     
-    RootViewController *rootView = (RootViewController *)self.topViewController;
-    [rootView doUpdateView:ROOTVIEWTAG_LIBRARY];
-    [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_LIBRARY];
+    if (sender == nil) {
+        
+        // 没有sender，则是cell点击事件
+        RootViewController *rootView = (RootViewController *)self.topViewController;
+        [rootView doUpdateView:ROOTVIEWTAG_LIBRARY];
+        [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_LIBRARY];
+    }
+    else {
+        
+        // 根据tag获取信息
+        int index = ((EGOImageButton *)sender).tag;
+    }
 }
 
-- (void)doGotoActivity {
+- (IBAction)doGotoActivity:(id)sender {
     
-    RootViewController *rootView = (RootViewController *)self.topViewController;
-    [rootView doUpdateView:ROOTVIEWTAG_ACTIVITY];
-    [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_ACTIVITY];
+    if (sender == nil) {
+        
+        RootViewController *rootView = (RootViewController *)self.topViewController;
+        [rootView doUpdateView:ROOTVIEWTAG_ACTIVITY];
+        [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_ACTIVITY];
+    }
 }
 
 - (void)getRecomFailed:(NSNotification *)notification {
@@ -151,19 +163,32 @@
     newsPic = [news objectForKey:@"pic"];
     
     // 获取成功，删除已有数据
-    [booksName removeAllObjects];
-    [booksPic removeAllObjects];
     [activityPic removeAllObjects];
     [activityTitle removeAllObjects];
     
     NSArray *books = [result objectForKey:@"books"];
-    for (NSDictionary *dicBook in books) {
+    if ([books count] > 0) {
         
-        [booksName addObject:[dicBook objectForKey:@"name"]];
-        [booksPic addObject:[dicBook objectForKey:@"pic"]];
+        [_contentTableBookInfo removeAllObjects];
+        
+        for (NSDictionary *dic in books) {
+            
+            migsBookIntroduce *bookintro = [migsBookIntroduce setupBookIntroduceByDictionary:dic];
+            [_contentTableBookInfo addObject:bookintro];
+        }
     }
     
     NSArray *activities = [result objectForKey:@"activities"];
+    if ([activities count] > 0) {
+        
+        [_contentTableActivityInfo removeAllObjects];
+        
+        for (NSDictionary *dic in activities) {
+            
+            migsBuildingInfo *buildinfo = [migsBuildingInfo setupBuildingInfoFromDictionary:dic];
+            [_contentTableActivityInfo addObject:buildinfo];
+        }
+    }
     for (NSDictionary *dicActivity in activities) {
         
         [activityTitle addObject:[dicActivity objectForKey:@"title"]];
@@ -260,16 +285,21 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.accessoryType = UITableViewCellAccessoryNone;
             
-            if ([booksPic count] >= 3) {
+            if ([_contentTableBookInfo count] >= 3) {
                 
-                cell.avatarBook0.imageURL = [NSURL URLWithString:[booksPic objectAtIndex:0]];
-                cell.avatarBook1.imageURL = [NSURL URLWithString:[booksPic objectAtIndex:1]];
-                cell.avatarBook2.imageURL = [NSURL URLWithString:[booksPic objectAtIndex:2]];
+                cell.avatarBook0.imageURL = [NSURL URLWithString:((migsBookIntroduce *)[_contentTableBookInfo objectAtIndex:0]).imgUrl];
+                cell.avatarBook1.imageURL = [NSURL URLWithString:((migsBookIntroduce *)[_contentTableBookInfo objectAtIndex:1]).imgUrl];
+                cell.avatarBook2.imageURL = [NSURL URLWithString:((migsBookIntroduce *)[_contentTableBookInfo objectAtIndex:2]).imgUrl];
+                
+                // 添加标识
+                cell.avatarBook0.tag = 0;
+                cell.avatarBook1.tag = 1;
+                cell.avatarBook2.tag = 2;
                 
                 // button响应cell单元事件
-                [cell.avatarBook0 addTarget:self action:@selector(doGotoBookPage) forControlEvents:UIControlEventTouchUpInside];
-                [cell.avatarBook1 addTarget:self action:@selector(doGotoBookPage) forControlEvents:UIControlEventTouchUpInside];
-                [cell.avatarBook2 addTarget:self action:@selector(doGotoBookPage) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarBook0 addTarget:self action:@selector(doGotoBookPage:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarBook1 addTarget:self action:@selector(doGotoBookPage:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarBook2 addTarget:self action:@selector(doGotoBookPage:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         
@@ -288,9 +318,25 @@
             
             if ([activityPic count] >= 3) {
                 
+                
+#if 1
                 cell.avatarActivity0.imageURL = [NSURL URLWithString:[activityPic objectAtIndex:0]];
                 cell.avatarActivity1.imageURL = [NSURL URLWithString:[activityPic objectAtIndex:1]];
                 cell.avatarActivity2.imageURL = [NSURL URLWithString:[activityPic objectAtIndex:2]];
+#else
+                migsBuildingInfo *buildinfo0 = [_contentTableActivityInfo objectAtIndex:0];
+                migsBuildingInfo *buildinfo1 = [_contentTableActivityInfo objectAtIndex:1];
+                migsBuildingInfo *buildinfo2 = [_contentTableActivityInfo objectAtIndex:2];
+                
+                cell.avatarActivity0.imageURL = [NSURL URLWithString:buildinfo0.headUrl];
+                cell.avatarActivity1.imageURL = [NSURL URLWithString:buildinfo1.headUrl];
+                cell.avatarActivity2.imageURL = [NSURL URLWithString:buildinfo2.headUrl];
+#endif
+                
+                // 添加tag以标识
+                cell.avatarActivity0.tag = 0;
+                cell.avatarActivity1.tag = 1;
+                cell.avatarActivity2.tag = 2;
                 
                 cell.lblActivity0.text = [activityTitle objectAtIndex:0];
                 cell.lblActivity0.textColor = [UIColor lightGrayColor];
@@ -308,9 +354,9 @@
                 cell.lblActivity2.font = [UIFont fontOfApp:20.0 / SCREEN_SCALAR];
                 
                 // button响应cell单元事件
-                [cell.avatarActivity0 addTarget:self action:@selector(doGotoActivity) forControlEvents:UIControlEventTouchUpInside];
-                [cell.avatarActivity1 addTarget:self action:@selector(doGotoActivity) forControlEvents:UIControlEventTouchUpInside];
-                [cell.avatarActivity2 addTarget:self action:@selector(doGotoActivity) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarActivity0 addTarget:self action:@selector(doGotoActivity:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarActivity1 addTarget:self action:@selector(doGotoActivity:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.avatarActivity2 addTarget:self action:@selector(doGotoActivity:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         
@@ -328,11 +374,11 @@
     int section = indexPath.section;
     if (section == SECTION_BOOKS) {
         
-        [self doGotoBookPage];
+        [self doGotoBookPage:nil];
     }
     else if (section == SECTION_ACTIVITIES) {
         
-        [self doGotoActivity];
+        [self doGotoActivity:nil];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

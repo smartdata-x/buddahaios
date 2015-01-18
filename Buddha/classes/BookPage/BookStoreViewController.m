@@ -263,25 +263,145 @@
     [self.topViewController.navigationController pushViewController:category animated:YES];
 }
 
-- (void)onClickFojingCell {
+- (IBAction)onClickFojingCell:(id)sender {
     
-    UIButton *btntmp = [[UIButton alloc] init];
-    btntmp.tag = 0;
-    [self doGotoBookCategory:btntmp];
+    if (sender == nil) {
+        
+        UIButton *btntmp = [[UIButton alloc] init];
+        btntmp.tag = 0;
+        [self doGotoBookCategory:btntmp];
+    }
+    else {
+        
+        EGOImageButton *btnsender = (EGOImageButton *)sender;
+        int index = btnsender.tag;
+        migsBookList *bookIntro = (migsBookList *)[tableBookFojingInfo objectAtIndex:0];
+        migsBookIntroduce *curintro = [[migsBookIntroduce alloc] init];
+        
+        if (index == 0) {
+            
+            curintro.bookid = bookIntro.bookid0;
+            curintro.booktype = bookIntro.booktype0;
+            curintro.name = bookIntro.name0;
+            curintro.imgUrl = bookIntro.imgURL0;
+            curintro.introduce = bookIntro.summary0;
+        }
+        else if (index == 1) {
+            
+            curintro.bookid = bookIntro.bookid1;
+            curintro.booktype = bookIntro.booktype1;
+            curintro.name = bookIntro.name1;
+            curintro.imgUrl = bookIntro.imgURL1;
+            curintro.introduce = bookIntro.summary1;
+        }
+        else if (index == 2) {
+            
+            curintro.bookid = bookIntro.bookid2;
+            curintro.booktype = bookIntro.booktype2;
+            curintro.name = bookIntro.name2;
+            curintro.imgUrl = bookIntro.imgURL2;
+            curintro.introduce = bookIntro.summary2;
+        }
+        
+        if (curintro.bookid != nil) {
+            
+            [self doGodoBookDetail:curintro];
+        }
+     }
 }
 
-- (void)onClickYiguiCell {
+- (IBAction)onClickYiguiCell:(id)sender {
     
-    UIButton *btntmp = [[UIButton alloc] init];
-    btntmp.tag = 1;
-    [self doGotoBookCategory:btntmp];
+    if (sender == nil) {
+        
+        UIButton *btntmp = [[UIButton alloc] init];
+        btntmp.tag = 1;
+        [self doGotoBookCategory:btntmp];
+    }
+    else {
+        
+        EGOImageButton *btnsender = (EGOImageButton *)sender;
+        int index = btnsender.tag;
+        migsBookList *bookIntro = (migsBookList *)[tableBookYiguiInfo objectAtIndex:0];
+        migsBookIntroduce *curintro = [[migsBookIntroduce alloc] init];
+        
+        if (index == 0) {
+            
+            curintro.bookid = bookIntro.bookid0;
+            curintro.booktype = bookIntro.booktype0;
+            curintro.name = bookIntro.name0;
+            curintro.imgUrl = bookIntro.imgURL0;
+            curintro.introduce = bookIntro.summary0;
+        }
+        else if (index == 1) {
+            
+            curintro.bookid = bookIntro.bookid1;
+            curintro.booktype = bookIntro.booktype1;
+            curintro.name = bookIntro.name1;
+            curintro.imgUrl = bookIntro.imgURL1;
+            curintro.introduce = bookIntro.summary1;
+        }
+        else if (index == 2) {
+            
+            curintro.bookid = bookIntro.bookid2;
+            curintro.booktype = bookIntro.booktype2;
+            curintro.name = bookIntro.name2;
+            curintro.imgUrl = bookIntro.imgURL2;
+            curintro.introduce = bookIntro.summary2;
+        }
+        
+        if (curintro.bookid != nil) {
+            
+            [self doGodoBookDetail:curintro];
+        }
+    }
 }
 
-- (void)onClickFolunCell {
+- (IBAction)onClickFolunCell:(id)sender {
     
-    UIButton *btntmp = [[UIButton alloc] init];
-    btntmp.tag = 2;
-    [self doGotoBookCategory:btntmp];
+    if (sender == nil) {
+        
+        UIButton *btntmp = [[UIButton alloc] init];
+        btntmp.tag = 2;
+        [self doGotoBookCategory:btntmp];
+    }
+    else {
+        
+        EGOImageButton *btnsender = (EGOImageButton *)sender;
+        int index = btnsender.tag;
+        migsBookList *bookIntro = (migsBookList *)[tableBookFolunInfo objectAtIndex:0];
+        migsBookIntroduce *curintro = [[migsBookIntroduce alloc] init];
+        
+        if (index == 0) {
+            
+            curintro.bookid = bookIntro.bookid0;
+            curintro.booktype = bookIntro.booktype0;
+            curintro.name = bookIntro.name0;
+            curintro.imgUrl = bookIntro.imgURL0;
+            curintro.introduce = bookIntro.summary0;
+        }
+        else if (index == 1) {
+            
+            curintro.bookid = bookIntro.bookid1;
+            curintro.booktype = bookIntro.booktype1;
+            curintro.name = bookIntro.name1;
+            curintro.imgUrl = bookIntro.imgURL1;
+            curintro.introduce = bookIntro.summary1;
+        }
+        else if (index == 2) {
+            
+            curintro.bookid = bookIntro.bookid2;
+            curintro.booktype = bookIntro.booktype2;
+            curintro.name = bookIntro.name2;
+            curintro.imgUrl = bookIntro.imgURL2;
+            curintro.introduce = bookIntro.summary2;
+        }
+        
+        if (curintro.bookid != nil) {
+            
+            [self doGodoBookDetail:curintro];
+        }
+    }
 }
 
 // UITableViewDelegate
@@ -400,9 +520,9 @@
             [cell initialize:bookIntro];
             
             // item响应cell事件
-            [cell.avatarBook0 addTarget:self action:@selector(onClickFojingCell) forControlEvents:UIControlEventTouchUpInside];
-            [cell.avatarBook1 addTarget:self action:@selector(onClickFojingCell) forControlEvents:UIControlEventTouchUpInside];
-            [cell.avatarBook2 addTarget:self action:@selector(onClickFojingCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook0 addTarget:self action:@selector(onClickFojingCell:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook1 addTarget:self action:@selector(onClickFojingCell:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook2 addTarget:self action:@selector(onClickFojingCell:) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (section == 2) {
             
@@ -415,9 +535,9 @@
             [cell initialize:bookIntro];
             
             // item响应cell事件
-            [cell.avatarBook0 addTarget:self action:@selector(onClickYiguiCell) forControlEvents:UIControlEventTouchUpInside];
-            [cell.avatarBook1 addTarget:self action:@selector(onClickYiguiCell) forControlEvents:UIControlEventTouchUpInside];
-            [cell.avatarBook2 addTarget:self action:@selector(onClickYiguiCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook0 addTarget:self action:@selector(onClickYiguiCell:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook1 addTarget:self action:@selector(onClickYiguiCell:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook2 addTarget:self action:@selector(onClickYiguiCell:) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (section == 3) {
             
@@ -430,9 +550,9 @@
             [cell initialize:bookIntro];
             
             // item响应cell事件
-            [cell.avatarBook0 addTarget:self action:@selector(onClickFolunCell) forControlEvents:UIControlEventTouchUpInside];
-            [cell.avatarBook1 addTarget:self action:@selector(onClickFolunCell) forControlEvents:UIControlEventTouchUpInside];
-            [cell.avatarBook2 addTarget:self action:@selector(onClickFolunCell) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook0 addTarget:self action:@selector(onClickFolunCell:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook1 addTarget:self action:@selector(onClickFolunCell:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.avatarBook2 addTarget:self action:@selector(onClickFolunCell:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     
@@ -453,15 +573,15 @@
     }
     else if (section == 1) {
         
-        [self onClickFojingCell];
+        [self onClickFojingCell:nil];
     }
     else if (section == 2) {
         
-        [self onClickYiguiCell];
+        [self onClickYiguiCell:nil];
     }
     else if (section == 3) {
         
-        [self onClickFolunCell];
+        [self onClickFolunCell:nil];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

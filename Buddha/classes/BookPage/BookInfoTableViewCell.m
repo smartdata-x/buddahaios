@@ -74,18 +74,21 @@
 - (void)initialize:(migsBookList *)bookinfo {
     
     _avatarBook0.imageURL = [NSURL URLWithString:bookinfo.imgURL0];
+    _avatarBook0.tag = 0;
     _lblBook0.text = bookinfo.name0;
     [_lblBook0 setTextColor:MIG_COLOR_808080];
     [_lblBook0 setTextAlignment:NSTextAlignmentCenter];
     [_lblBook0 setFont:[UIFont fontOfApp:28 / SCREEN_SCALAR]];
     
     _avatarBook1.imageURL = [NSURL URLWithString:bookinfo.imgURL1];
+    _avatarBook1.tag = 1;
     _lblBook1.text = bookinfo.name1;
     [_lblBook1 setTextColor:MIG_COLOR_808080];
     [_lblBook1 setTextAlignment:NSTextAlignmentCenter];
     [_lblBook1 setFont:[UIFont fontOfApp:28 / SCREEN_SCALAR]];
     
     _avatarBook2.imageURL = [NSURL URLWithString:bookinfo.imgURL2];
+    _avatarBook2.tag = 2;
     _lblBook2.text = bookinfo.name2;
     [_lblBook2 setTextColor:MIG_COLOR_808080];
     [_lblBook2 setTextAlignment:NSTextAlignmentCenter];

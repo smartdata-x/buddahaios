@@ -55,6 +55,11 @@
         tableThoughtInfo = [[NSMutableArray alloc] init];
     }
     
+    if (tableArtInfo == nil) {
+        
+        tableArtInfo = [[NSMutableArray alloc] init];
+    }
+    
     if (tableSectionInfo == nil) {
         
         tableSectionInfo = [[NSMutableArray alloc] init];
@@ -142,6 +147,7 @@
     // 初始化Section
     [tableSectionInfo addObject:@"佛教历史"];
     [tableSectionInfo addObject:@"宗派思想"];
+    [tableSectionInfo addObject:@"艺术浏览"];
 }
 
 - (void)reloadData {
@@ -173,22 +179,25 @@
 
 - (IBAction)doGotoArt:(id)sender {
     
-#if 0
-    // 不直接跳到艺术品浏览界面
-    ArtDisplayViewController *artview = [[ArtDisplayViewController alloc] init];
-    [artview initialize:@"5" Title:@"艺术品"];
-    
-    [self.topViewController.navigationController pushViewController:artview animated:YES];
-#endif
-    
-    UIButton *btn = (UIButton *)sender;
-    NSDictionary *array = [classicInfo objectAtIndex:btn.tag];
-    NSString *name = [array objectForKey:KEY_TITLE];
-    NSString *bookid = [NSString stringWithFormat:@"%d", 0];
-    
-    // 0:工艺品， 1：书画，这里要和跳转到的界面保持对应
-    BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid From:FROMPAGE_INTRODUCE_ART];
-    [self.topViewController.navigationController pushViewController:category animated:YES];
+    if (sender == nil) {
+        
+        // 直接跳到艺术品浏览界面
+        ArtDisplayViewController *artview = [[ArtDisplayViewController alloc] init];
+        [artview initialize:@"5" Title:@"艺术品"];
+        
+        [self.topViewController.navigationController pushViewController:artview animated:YES];
+    }
+    else {
+        
+        UIButton *btn = (UIButton *)sender;
+        NSDictionary *array = [classicInfo objectAtIndex:btn.tag];
+        NSString *name = [array objectForKey:KEY_TITLE];
+        NSString *bookid = [NSString stringWithFormat:@"%d", 0];
+        
+        // 0:工艺品， 1：书画，这里要和跳转到的界面保持对应
+        BookCategoryViewController *category = [[BookCategoryViewController alloc] initWithTitle:name BookID:bookid From:FROMPAGE_INTRODUCE_ART];
+        [self.topViewController.navigationController pushViewController:category animated:YES];
+    }
 }
 
 - (IBAction)doGotoHistoryAndThought:(id)sender {
@@ -238,6 +247,18 @@
         [tableThoughtInfo addObject:intro];
     }
     
+    NSDictionary *art = [result objectForKey:@"art"];
+    if ([art count] > 0) {
+        
+        [tableArtInfo removeAllObjects];
+        
+        for (NSDictionary *dic in art) {
+            
+            migsBookIntroduce *intro = [migsBookIntroduce setupBookIntroduceByDictionary:dic];
+            [tableArtInfo addObject:intro];
+        }
+    }
+    
     [self reloadData];
 }
 
@@ -261,6 +282,10 @@
     else if (section == 1) {
         
         return [tableThoughtInfo count];
+    }
+    else if (section == 2) {
+        
+        return [tableArtInfo count];
     }
     
     return 0;
@@ -324,6 +349,16 @@
             migsBookIntroduce *bookIntro = [tableThoughtInfo objectAtIndex:row];
             [cell initialize:bookIntro];
         }
+        else if (section == 2) {
+            
+            if ([tableArtInfo count] <= 0) {
+                
+                return nil;
+            }
+            
+            migsBookIntroduce *bookIntro = [tableArtInfo objectAtIndex:row];
+            [cell initialize:bookIntro];
+        }
     }
     
     return cell;
@@ -344,10 +379,18 @@
         
         bookintro = [tableThoughtInfo objectAtIndex:row];
     }
+    else if (section == 2) {
+        
+        bookintro = [tableArtInfo objectAtIndex:row];
+    }
     
-    if (bookintro) {
+    if (bookintro && (section == 0 || section == 1)) {
         
         [self doGotoIntroduceBookView:bookintro];
+    }
+    else if (bookintro && section == 2) {
+        
+        [self doGotoArt:nil];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

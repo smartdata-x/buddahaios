@@ -15,19 +15,19 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvP-rU-bGX" customClass="EGOImageButton">
                         <rect key="frame" x="10" y="10" width="93" height="120"/>
-                        <state key="normal" title="Button" image="book_0.jpg">
+                        <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtP-R5-Zgf" customClass="EGOImageButton">
                         <rect key="frame" x="113" y="10" width="93" height="120"/>
-                        <state key="normal" title="Button" image="book_1.jpg">
+                        <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJJ-YF-gVV" customClass="EGOImageButton">
                         <rect key="frame" x="216" y="10" width="93" height="120"/>
-                        <state key="normal" title="Button" image="book_2.jpg">
+                        <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -41,9 +41,4 @@
             <point key="canvasLocation" x="203" y="252"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="book_0.jpg" width="182" height="208"/>
-        <image name="book_1.jpg" width="182" height="208"/>
-        <image name="book_2.jpg" width="182" height="208"/>
-    </resources>
 </document>

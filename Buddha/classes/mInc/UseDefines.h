@@ -118,6 +118,8 @@
 #define MigLocalNameLoginFailed                     @"MigLocalNameLoginFailed"
 #define MigLocalNameDownloadFileFailed              @"MigLocalNameDownloadFileFailed"
 #define MigLocalNameDownloadFileSuccess             @"MigLocalNameDownloadFileSuccess"
+#define MigLocalNameLoginSuccessReturn              @"MigLocalNameLoginSuccessReturn"
+#define MigLocalNameLoginFailedReturn               @"MigLocalNameLoginFailedReturn"
 
 // 新浪微博
 //#define kAppKey                                     @"2045436852"

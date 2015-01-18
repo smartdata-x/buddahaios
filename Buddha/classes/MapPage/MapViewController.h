@@ -22,13 +22,15 @@ enum {
     FROMPAGE_ACTIVITY,
 };
 
-@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, HorizontalMenuDelegate>
+@interface MapViewController : BaseViewController<BMKMapViewDelegate, BMKLocationServiceDelegate, HorizontalMenuDelegate, BMKGeneralDelegate>
 {
     BMKLocationService *mLocationService;
     BMKMapView *mMapView;
     
     // 底部周边菜单栏
     HorizontalMenu *mNearbyMenu;
+    
+    BMKMapManager *mBDMapManager;
     
     // 底部路线菜单，返回菜单和导航菜单
     HorizontalMenu *mRouteMenu;

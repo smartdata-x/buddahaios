@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import <MapKit/MapKit.h>
 #import "MapBuidingInfoViewController.h"
+#import "BaiduMapServiceManager.h"
 
 @interface MapViewController ()
 
@@ -48,6 +49,18 @@
     
     [super viewDidLoad];
     
+#if !MIG_GLOBAL_BDMAP
+    mBDMapManager = [[BMKMapManager alloc] init];
+    
+    BOOL ret = [mBDMapManager start:@"96IS38XTSvyMSLgpPbV0FjKq" generalDelegate:nil];
+    if (!ret) {
+        
+        MIGDEBUG_PRINT(@"百度地图启动成功");
+    }
+#else
+    mBDMapManager = [BaiduMapServiceManager GetInstance].mBDMapManager;
+#endif
+    
     CLLocationCoordinate2D curLocation = [[MyLocationManager GetInstance] getLocation];
     
     mMapView = [[BMKMapView alloc] initWithFrame:self.mFrame];
@@ -82,6 +95,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [mMapView viewWillAppear];
+    mMapView.delegate = self;
+    mLocationService.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -516,19 +531,19 @@
 
 - (void)willStartLocatingUser {
     
-    MIGDEBUG_PRINT(@"%s", __FUNCTION__);
+    //MIGDEBUG_PRINT(@"%s", __FUNCTION__);
 }
 
 - (void)didUpdateUserHeading:(BMKUserLocation *)userLocation {
     
-    MIGDEBUG_PRINT(@"%s", __FUNCTION__);
+    //MIGDEBUG_PRINT(@"%s", __FUNCTION__);
     
     [mMapView updateLocationData:userLocation];
 }
 
 - (void)didUpdateUserLocation:(BMKUserLocation *)userLocation {
     
-    MIGDEBUG_PRINT(@"%s", __FUNCTION__);
+    //MIGDEBUG_PRINT(@"%s", __FUNCTION__);
     
     [mMapView updateLocationData:userLocation];
     
@@ -540,7 +555,7 @@
 
 - (void)didStopLocatingUser {
     
-    MIGDEBUG_PRINT(@"%s", __FUNCTION__);
+    //MIGDEBUG_PRINT(@"%s", __FUNCTION__);
 }
 
 - (void)didFailToLocateUserWithError:(NSError *)error {
@@ -641,6 +656,35 @@
     NSString *name = [view.annotation title];
     [self doGotoBuildingInfo:name];
 }
+
+#if !MIG_GLOBAL_BDMAP
+
+// BMKGeneral Delegate
+-(void)onGetNetworkState:(int)iError
+{
+    if (iError == 0)
+    {
+        NSLog(@"网络连接正常");
+    }
+    else
+    {
+        NSLog(@"网络错误:%d",iError);
+    }
+}
+
+-(void)onGetPermissionState:(int)iError
+{
+    if (iError == 0)
+    {
+        NSLog(@"授权成功");
+    }
+    else
+    {
+        NSLog(@"授权失败:%d",iError);
+    }
+}
+
+#endif
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

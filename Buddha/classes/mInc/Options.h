@@ -11,11 +11,15 @@
 
 // 所有测试代码必须包含在此宏内
 #ifndef MIG_DEBUG_TEST
-#define MIG_DEBUG_TEST               1
+#define MIG_DEBUG_TEST                  0
 #endif
 
 #ifndef MIG_NEW_READER
-#define MIG_NEW_READER               0
+#define MIG_NEW_READER                  0
+#endif
+
+#ifndef MIG_GLOBAL_BDMAP
+#define MIG_GLOBAL_BDMAP                1
 #endif
 
 #endif

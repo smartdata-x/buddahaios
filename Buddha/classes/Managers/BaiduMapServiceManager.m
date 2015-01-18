@@ -28,8 +28,8 @@
 - (void)registerBaiduMap {
     
     // 初始化百度地图
-    BMKMapManager *mBDMapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [mBDMapManager start:@"96IS38XTSvyMSLgpPbV0FjKq" generalDelegate:nil];
+    _mBDMapManager = [[BMKMapManager alloc] init];
+    BOOL ret = [_mBDMapManager start:@"96IS38XTSvyMSLgpPbV0FjKq" generalDelegate:nil];
     if (!ret) {
         
         MIGDEBUG_PRINT(@"百度地图启动成功");

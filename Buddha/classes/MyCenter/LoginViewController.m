@@ -107,6 +107,7 @@
     [self doGetBookList];
     
     [SVProgressHUD showSuccessWithStatus:MIGTIP_LOGIN_SUCCESS];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MigLocalNameLoginSuccessReturn object:nil userInfo:nil];
 }
 
 - (void)doLoginFailed {

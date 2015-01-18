@@ -41,6 +41,7 @@ enum {
 - (void)reloadTableViewDataSource;
 - (void)forceRefreshData;
 
+- (void)getRecom;
 - (void)getRecomFailed:(NSNotification *)notification;
 - (void)getRecomSuccess:(NSNotification *)notification;
 

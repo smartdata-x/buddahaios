@@ -94,8 +94,10 @@
     // 更新地理位置, 地理位置最先更新，确保能够最快的获取到地理坐标
     [[MyLocationManager GetInstance] updateLocation];
     
+#if MIG_GLOBAL_BDMAP
     // 注册百度地图
     [[BaiduMapServiceManager GetInstance] registerBaiduMap];
+#endif
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     

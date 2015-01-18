@@ -24,6 +24,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRecomFailed:) name:MigNetNameGetRecomFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRecomSuccess:) name:MigNetNameGetRecomSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRecom) name:MigLocalNameLoginSuccessReturn object:nil];
     }
     
     return self;
@@ -43,6 +44,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetRecomFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MigNetNameGetRecomSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MigLocalNameLoginSuccessReturn object:nil];
 }
 
 - (void)viewDidLoad {
@@ -145,6 +147,12 @@
         [rootView doUpdateView:ROOTVIEWTAG_ACTIVITY];
         [rootView.mTopMenu changeButtonStateAtIndex:ROOTVIEWTAG_ACTIVITY];
     }
+}
+
+- (void)getRecom {
+    
+    AskNetDataApi *api = [[AskNetDataApi alloc] init];
+    [api doGetRecom];
 }
 
 - (void)getRecomFailed:(NSNotification *)notification {

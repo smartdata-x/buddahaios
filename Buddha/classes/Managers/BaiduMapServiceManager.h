@@ -15,6 +15,8 @@
 
 }
 
+@property (nonatomic, retain) BMKMapManager *mBDMapManager;
+
 + (BaiduMapServiceManager *)GetInstance;
 
 - (void)registerBaiduMap;

@@ -123,7 +123,7 @@
 
 - (IBAction)doGotoBookPage:(id)sender {
     
-    if (sender == nil) {
+    if (1) {
         
         // 没有sender，则是cell点击事件
         RootViewController *rootView = (RootViewController *)self.topViewController;
@@ -139,7 +139,7 @@
 
 - (IBAction)doGotoActivity:(id)sender {
     
-    if (sender == nil) {
+    if (1) {
         
         RootViewController *rootView = (RootViewController *)self.topViewController;
         [rootView doUpdateView:ROOTVIEWTAG_ACTIVITY];

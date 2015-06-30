@@ -12,6 +12,7 @@
 
 @synthesize name = _name;
 @synthesize goimg = _goimg;
+@synthesize minorName = _minorName;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -25,6 +26,11 @@
 - (void)hideNavGo:(BOOL)hide {
 
     [_goimg setHidden:hide];
+}
+
+- (void)setMinorData:(id)data {
+    [_minorName setText:data];
+    [_minorName setHidden:NO];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

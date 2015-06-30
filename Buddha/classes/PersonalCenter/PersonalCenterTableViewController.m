@@ -132,6 +132,9 @@
             PersonalCenterStyle0TableViewCell *stylecell = (PersonalCenterStyle0TableViewCell *)cell;
             [stylecell setData:[nameArray objectAtIndex:indexPath.row]];
             [stylecell hideNavGo:YES];
+            if (indexPath.row == 3) {
+                [stylecell setMinorData:@"2.23"];
+            }
         }
     
         return cell;

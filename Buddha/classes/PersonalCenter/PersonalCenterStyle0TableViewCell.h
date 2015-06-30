@@ -12,8 +12,10 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *name;
 @property (nonatomic, retain) IBOutlet UIImageView *goimg;
+@property (nonatomic, retain) IBOutlet UILabel *minorName;
 
 - (void)setData:(id)data;
 - (void)hideNavGo:(BOOL)hide;
+- (void)setMinorData:(id)data;
 
 @end

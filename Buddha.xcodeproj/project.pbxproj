@@ -26,6 +26,13 @@
 		CB20DDD01A3B2A66003410FA /* MapFeatureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB20DDCE1A3B2A66003410FA /* MapFeatureTableViewCell.m */; };
 		CB20DDD11A3B2A66003410FA /* MapFeatureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB20DDCF1A3B2A66003410FA /* MapFeatureTableViewCell.xib */; };
 		CB20DDD41A3CA156003410FA /* MapBuildMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB20DDD31A3CA156003410FA /* MapBuildMenuView.m */; };
+		CB7E1E0F1B418A6500F62CC6 /* PersonalCenterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E1E0D1B418A6500F62CC6 /* PersonalCenterTableViewController.m */; };
+		CB7E1E101B418A6500F62CC6 /* PersonalCenterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7E1E0E1B418A6500F62CC6 /* PersonalCenterTableViewController.xib */; };
+		CB7E1E141B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E1E121B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m */; };
+		CB7E1E151B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7E1E131B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.xib */; };
+		CB7E1E191B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E1E171B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m */; };
+		CB7E1E1A1B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7E1E181B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib */; };
+		CB7E1E1D1B42E23A00F62CC6 /* go_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB7E1E1C1B42E23A00F62CC6 /* go_icon.png */; };
 		CB8458BD1A309B470020283E /* login_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8458B91A309B470020283E /* login_logo.png */; };
 		CB8458BE1A309B470020283E /* qq_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8458BA1A309B470020283E /* qq_ico.png */; };
 		CB8458BF1A309B470020283E /* weibo_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8458BB1A309B470020283E /* weibo_ico.png */; };
@@ -255,6 +262,16 @@
 		CB20DDCF1A3B2A66003410FA /* MapFeatureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapFeatureTableViewCell.xib; sourceTree = "<group>"; };
 		CB20DDD21A3CA156003410FA /* MapBuildMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBuildMenuView.h; sourceTree = "<group>"; };
 		CB20DDD31A3CA156003410FA /* MapBuildMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBuildMenuView.m; sourceTree = "<group>"; };
+		CB7E1E0C1B418A6500F62CC6 /* PersonalCenterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonalCenterTableViewController.h; path = PersonalCenter/PersonalCenterTableViewController.h; sourceTree = "<group>"; };
+		CB7E1E0D1B418A6500F62CC6 /* PersonalCenterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonalCenterTableViewController.m; path = PersonalCenter/PersonalCenterTableViewController.m; sourceTree = "<group>"; };
+		CB7E1E0E1B418A6500F62CC6 /* PersonalCenterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PersonalCenterTableViewController.xib; path = PersonalCenter/PersonalCenterTableViewController.xib; sourceTree = "<group>"; };
+		CB7E1E111B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonalCenterHeaderTableViewCell.h; path = PersonalCenter/PersonalCenterHeaderTableViewCell.h; sourceTree = "<group>"; };
+		CB7E1E121B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonalCenterHeaderTableViewCell.m; path = PersonalCenter/PersonalCenterHeaderTableViewCell.m; sourceTree = "<group>"; };
+		CB7E1E131B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PersonalCenterHeaderTableViewCell.xib; path = PersonalCenter/PersonalCenterHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		CB7E1E161B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonalCenterStyle0TableViewCell.h; path = PersonalCenter/PersonalCenterStyle0TableViewCell.h; sourceTree = "<group>"; };
+		CB7E1E171B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonalCenterStyle0TableViewCell.m; path = PersonalCenter/PersonalCenterStyle0TableViewCell.m; sourceTree = "<group>"; };
+		CB7E1E181B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PersonalCenterStyle0TableViewCell.xib; path = PersonalCenter/PersonalCenterStyle0TableViewCell.xib; sourceTree = "<group>"; };
+		CB7E1E1C1B42E23A00F62CC6 /* go_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = go_icon.png; path = personalcenter/go_icon.png; sourceTree = "<group>"; };
 		CB8458B91A309B470020283E /* login_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_logo.png; sourceTree = "<group>"; };
 		CB8458BA1A309B470020283E /* qq_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_ico.png; sourceTree = "<group>"; };
 		CB8458BB1A309B470020283E /* weibo_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_ico.png; sourceTree = "<group>"; };
@@ -709,6 +726,30 @@
 			path = map;
 			sourceTree = "<group>";
 		};
+		CB7E1E091B4189C000F62CC6 /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				CB7E1E0C1B418A6500F62CC6 /* PersonalCenterTableViewController.h */,
+				CB7E1E0D1B418A6500F62CC6 /* PersonalCenterTableViewController.m */,
+				CB7E1E0E1B418A6500F62CC6 /* PersonalCenterTableViewController.xib */,
+				CB7E1E111B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.h */,
+				CB7E1E121B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m */,
+				CB7E1E131B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.xib */,
+				CB7E1E161B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.h */,
+				CB7E1E171B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m */,
+				CB7E1E181B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib */,
+			);
+			name = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		CB7E1E1B1B42E21900F62CC6 /* personalcenter */ = {
+			isa = PBXGroup;
+			children = (
+				CB7E1E1C1B42E23A00F62CC6 /* go_icon.png */,
+			);
+			name = personalcenter;
+			sourceTree = "<group>";
+		};
 		CB9469681A33FA7E00337164 /* BPush */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +974,7 @@
 		CBEC683A1A1A4A80007B2A00 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				CB7E1E091B4189C000F62CC6 /* PersonalCenter */,
 				CB94697D1A33FAC100337164 /* JSONKit */,
 				CB9469681A33FA7E00337164 /* BPush */,
 				CB96994C1A2F2B63009C35F8 /* MyCenter */,
@@ -1074,6 +1116,7 @@
 		CBEC68611A1A4A86007B2A00 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CB7E1E1B1B42E21900F62CC6 /* personalcenter */,
 				CBCB6AAB1A61013F0082E361 /* introduce */,
 				CBD334561A4DB82C0026AD71 /* book */,
 				CB20DDB61A3B20BB003410FA /* map */,
@@ -1521,6 +1564,7 @@
 				CBEC69EF1A2ADF1B007B2A00 /* read_me.txt in Resources */,
 				CB20DDD11A3B2A66003410FA /* MapFeatureTableViewCell.xib in Resources */,
 				CBEC68C81A20E808007B2A00 /* my_fo.png in Resources */,
+				CB7E1E101B418A6500F62CC6 /* PersonalCenterTableViewController.xib in Resources */,
 				CBD3347E1A4FE0DD0026AD71 /* share_book.png in Resources */,
 				CB8458BD1A309B470020283E /* login_logo.png in Resources */,
 				CBD334271A45A8390026AD71 /* clothes_id.png in Resources */,
@@ -1530,6 +1574,7 @@
 				CBD334261A45A8390026AD71 /* book_id.png in Resources */,
 				CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */,
 				CBD334021A41BDDA0026AD71 /* disc_line.png in Resources */,
+				CB7E1E151B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.xib in Resources */,
 				CBEC68E21A2202F0007B2A00 /* home_message.png in Resources */,
 				CB20DDCB1A3B20BB003410FA /* temple.png in Resources */,
 				CBCB6A9E1A5C13A30082E361 /* ActivityTableViewCell.xib in Resources */,
@@ -1562,6 +1607,7 @@
 				CBD334281A45A8390026AD71 /* food_id.png in Resources */,
 				CBB6ED4C1A2B58C7005B0CF3 /* MSYH.ttf in Resources */,
 				CBD334631A4DBA080026AD71 /* BookInfoTableViewCell.xib in Resources */,
+				CB7E1E1A1B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib in Resources */,
 				CB20DDCC1A3B20BB003410FA /* walk_ico.png in Resources */,
 				CBD334001A41BDBD0026AD71 /* allow_up.png in Resources */,
 				CB8458BE1A309B470020283E /* qq_ico.png in Resources */,
@@ -1577,6 +1623,7 @@
 				CBD3343C1A46B7620026AD71 /* LeftMenuTableViewCell.xib in Resources */,
 				CBB6ED611A2B61B8005B0CF3 /* FeaturedNewsCell.xib in Resources */,
 				CBD333FF1A41BDBD0026AD71 /* allow_choose.png in Resources */,
+				CB7E1E1D1B42E23A00F62CC6 /* go_icon.png in Resources */,
 				CBEC69F71A2AE075007B2A00 /* SVProgressHUD.bundle in Resources */,
 				CB9699671A2F523B009C35F8 /* logo_@2x.png in Resources */,
 				CBCB6AB01A61013F0082E361 /* art.png in Resources */,
@@ -1617,11 +1664,13 @@
 				CBEC68851A1B841B007B2A00 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC685F1A1A4A81007B2A00 /* EGOImageView.m in Sources */,
 				CBD3344F1A499D990026AD71 /* ReadingViewController.m in Sources */,
+				CB7E1E191B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m in Sources */,
 				CBEC68761A1B822B007B2A00 /* PCustomTabBarItemView.m in Sources */,
 				CBEC69B61A28EE8D007B2A00 /* FMDatabaseAdditions.m in Sources */,
 				CBEC69641A2602A8007B2A00 /* AFHTTPClient.m in Sources */,
 				CBEC69E41A2A24C5007B2A00 /* OpenUrlManager.m in Sources */,
 				CBEC69B51A28EE8D007B2A00 /* FMDatabase.m in Sources */,
+				CB7E1E0F1B418A6500F62CC6 /* PersonalCenterTableViewController.m in Sources */,
 				CBD334621A4DBA080026AD71 /* BookInfoTableViewCell.m in Sources */,
 				CBEC69B91A28EE8D007B2A00 /* FMResultSet.m in Sources */,
 				CBEC685E1A1A4A81007B2A00 /* EGOImageLoader.m in Sources */,
@@ -1630,6 +1679,7 @@
 				CBB6ED211A2B3434005B0CF3 /* TencentQQManager.m in Sources */,
 				CB94697B1A33FA7E00337164 /* OpenUDID.m in Sources */,
 				CBD3346D1A4F0CFD0026AD71 /* BookCategoryViewController.m in Sources */,
+				CB7E1E141B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m in Sources */,
 				CBD334671A4DBD450026AD71 /* BookIntroduceTableViewCell.m in Sources */,
 				CBD3343B1A46B7620026AD71 /* LeftMenuTableViewCell.m in Sources */,
 				CBEC696C1A2602A8007B2A00 /* AFXMLRequestOperation.m in Sources */,

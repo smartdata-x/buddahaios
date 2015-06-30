@@ -18,6 +18,7 @@
 #import "LoginViewController.h"
 #import "MyLocationManager.h"
 #import "PFileDownLoadManager.h"
+#import "PersonalCenterTableViewController.h"
 
 @implementation RootViewController
 
@@ -480,7 +481,8 @@
             }
         }
         else if (2 == index) {
-            
+            PersonalCenterTableViewController *centerviewController = [[PersonalCenterTableViewController alloc] initWithNibName:@"PersonalCenterTableViewController" bundle:nil];
+            [self.navigationController pushViewController:centerviewController animated:YES];
         }
     }
 }

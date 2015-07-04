@@ -14,6 +14,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    float headerwidth = CGRectGetWidth([_avatar frame]);
+    [_avatar.layer setCornerRadius:headerwidth / 2.0];
+    [_avatar.layer setMasksToBounds:YES];
 }
 
 - (void)setData:(id)data {

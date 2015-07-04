@@ -35,6 +35,9 @@
 #define mainScreenWidth mainScreenFrame.size.width
 #define mainScreenHeight mainScreenFrame.size.height
 
+//app id
+#define APPLE_ID 862410865
+
 //判断系统版本
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)

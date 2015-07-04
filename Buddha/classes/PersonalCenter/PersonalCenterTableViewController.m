@@ -10,10 +10,14 @@
 #import "Stdinc.h"
 #import "PersonalCenterHeaderTableViewCell.h"
 #import "PersonalCenterStyle0TableViewCell.h"
+#import "UserLoginInfoManager.h"
 
 @interface PersonalCenterTableViewController ()
 
 @end
+
+UIView *gobackgroundView;
+UIImageView *qrImageView;
 
 @implementation PersonalCenterTableViewController
 
@@ -43,6 +47,8 @@
 
 - (IBAction)doAdvise:(id)sender {
     
+    NSString *str = @"http://www.zhihu.com/question/31771410";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
 - (IBAction)doVersionCheck:(id)sender {
@@ -51,14 +57,47 @@
 
 - (IBAction)doComment:(id)sender {
     
+    NSString *str = [NSString stringWithFormat:
+                     @"itms-apps://itunes.apple.com/cn/app/mi-you/id%d", APPLE_ID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+
+- (IBAction)dismissQRcode:(id)sender {
+    [UIView animateWithDuration:0.4 animations:^{
+        qrImageView.frame = CGRectMake(mainScreenWidth/2, mainScreenHeight/2, 1, 1);
+    } completion:^(BOOL finished) {
+        
+    }];
+    [gobackgroundView removeFromSuperview];
 }
 
 - (IBAction)doConcern:(id)sender {
     
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    gobackgroundView = [[UIView alloc] initWithFrame:mainScreenFrame];
+    gobackgroundView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    
+    qrImageView = [[UIImageView alloc] initWithFrame:CGRectMake(mainScreenWidth/2, mainScreenHeight/2, 1, 1)];
+    [qrImageView setImage:[UIImage imageNamed:@"code.png"]];
+    [gobackgroundView addSubview:qrImageView];
+    
+    UITapGestureRecognizer *singletab = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissQRcode:)];
+    singletab.numberOfTapsRequired = 1;
+    [gobackgroundView addGestureRecognizer:singletab];
+    
+    [window addSubview:gobackgroundView];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        qrImageView.frame = CGRectMake((mainScreenWidth - 100) / 2, (mainScreenHeight - 100) / 2, 100, 100);
+    } completion:^(BOOL finished) {
+    }];
 }
 
 - (IBAction)doAbout:(id)sender {
     
+    NSString *str = @"http://www.zhihu.com/question/31771410";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
      
 - (void)didReceiveMemoryWarning {
@@ -120,7 +159,10 @@
     
         if (indexPath.section == 0) {
             PersonalCenterHeaderTableViewCell *headercell = (PersonalCenterHeaderTableViewCell *)cell;
-            [headercell setData:@""];
+            if ([UserLoginInfoManager GetInstance].isLogin) {
+                
+                [headercell setData:[UserLoginInfoManager GetInstance].curLoginUser.headerUrl];
+            }
         }
         else if (indexPath.section == 1) {
             NSArray *nameArray = [NSArray arrayWithObjects:@"意见反馈", @"版本检查", nil];

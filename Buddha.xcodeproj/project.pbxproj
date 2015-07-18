@@ -26,6 +26,15 @@
 		CB20DDD01A3B2A66003410FA /* MapFeatureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB20DDCE1A3B2A66003410FA /* MapFeatureTableViewCell.m */; };
 		CB20DDD11A3B2A66003410FA /* MapFeatureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB20DDCF1A3B2A66003410FA /* MapFeatureTableViewCell.xib */; };
 		CB20DDD41A3CA156003410FA /* MapBuildMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB20DDD31A3CA156003410FA /* MapBuildMenuView.m */; };
+		CB670DB01B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB670DAE1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m */; };
+		CB670DB11B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB670DAF1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib */; };
+		CB670DB61B5A86AC002BF3CB /* MyHomeworkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB670DB41B5A86AC002BF3CB /* MyHomeworkTableViewController.m */; };
+		CB670DB71B5A86AC002BF3CB /* MyHomeworkTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB670DB51B5A86AC002BF3CB /* MyHomeworkTableViewController.xib */; };
+		CB67495C1B57FA4F00B44A3F /* MyDestinyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */; };
+		CB67495D1B57FA4F00B44A3F /* MyDestinyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */; };
+		CB6749611B57FD5300B44A3F /* MyBuddhaBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67495F1B57FD5300B44A3F /* MyBuddhaBookTableViewController.m */; };
+		CB6749621B57FD5300B44A3F /* MyBuddhaBookTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6749601B57FD5300B44A3F /* MyBuddhaBookTableViewController.xib */; };
+		CB6749651B57FF9E00B44A3F /* DestinyNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6749641B57FF9E00B44A3F /* DestinyNavView.m */; };
 		CB7E1E0F1B418A6500F62CC6 /* PersonalCenterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E1E0D1B418A6500F62CC6 /* PersonalCenterTableViewController.m */; };
 		CB7E1E101B418A6500F62CC6 /* PersonalCenterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7E1E0E1B418A6500F62CC6 /* PersonalCenterTableViewController.xib */; };
 		CB7E1E141B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E1E121B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m */; };
@@ -262,6 +271,20 @@
 		CB20DDCF1A3B2A66003410FA /* MapFeatureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapFeatureTableViewCell.xib; sourceTree = "<group>"; };
 		CB20DDD21A3CA156003410FA /* MapBuildMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBuildMenuView.h; sourceTree = "<group>"; };
 		CB20DDD31A3CA156003410FA /* MapBuildMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBuildMenuView.m; sourceTree = "<group>"; };
+		CB670DAD1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyBuddhaBookTableViewStyle0Cell.h; path = MyDestiny/MyBuddhaBookTableViewStyle0Cell.h; sourceTree = "<group>"; };
+		CB670DAE1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyBuddhaBookTableViewStyle0Cell.m; path = MyDestiny/MyBuddhaBookTableViewStyle0Cell.m; sourceTree = "<group>"; };
+		CB670DAF1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyBuddhaBookTableViewStyle0Cell.xib; path = MyDestiny/MyBuddhaBookTableViewStyle0Cell.xib; sourceTree = "<group>"; };
+		CB670DB31B5A86AC002BF3CB /* MyHomeworkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHomeworkTableViewController.h; path = MyDestiny/MyHomeworkTableViewController.h; sourceTree = "<group>"; };
+		CB670DB41B5A86AC002BF3CB /* MyHomeworkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHomeworkTableViewController.m; path = MyDestiny/MyHomeworkTableViewController.m; sourceTree = "<group>"; };
+		CB670DB51B5A86AC002BF3CB /* MyHomeworkTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyHomeworkTableViewController.xib; path = MyDestiny/MyHomeworkTableViewController.xib; sourceTree = "<group>"; };
+		CB6749591B57FA4F00B44A3F /* MyDestinyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDestinyViewController.h; path = MyDestiny/MyDestinyViewController.h; sourceTree = "<group>"; };
+		CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDestinyViewController.m; path = MyDestiny/MyDestinyViewController.m; sourceTree = "<group>"; };
+		CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyDestinyViewController.xib; path = MyDestiny/MyDestinyViewController.xib; sourceTree = "<group>"; };
+		CB67495E1B57FD5300B44A3F /* MyBuddhaBookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyBuddhaBookTableViewController.h; path = MyDestiny/MyBuddhaBookTableViewController.h; sourceTree = "<group>"; };
+		CB67495F1B57FD5300B44A3F /* MyBuddhaBookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyBuddhaBookTableViewController.m; path = MyDestiny/MyBuddhaBookTableViewController.m; sourceTree = "<group>"; };
+		CB6749601B57FD5300B44A3F /* MyBuddhaBookTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyBuddhaBookTableViewController.xib; path = MyDestiny/MyBuddhaBookTableViewController.xib; sourceTree = "<group>"; };
+		CB6749631B57FF9E00B44A3F /* DestinyNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DestinyNavView.h; path = MyDestiny/DestinyNavView.h; sourceTree = "<group>"; };
+		CB6749641B57FF9E00B44A3F /* DestinyNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DestinyNavView.m; path = MyDestiny/DestinyNavView.m; sourceTree = "<group>"; };
 		CB7E1E0C1B418A6500F62CC6 /* PersonalCenterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonalCenterTableViewController.h; path = PersonalCenter/PersonalCenterTableViewController.h; sourceTree = "<group>"; };
 		CB7E1E0D1B418A6500F62CC6 /* PersonalCenterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonalCenterTableViewController.m; path = PersonalCenter/PersonalCenterTableViewController.m; sourceTree = "<group>"; };
 		CB7E1E0E1B418A6500F62CC6 /* PersonalCenterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PersonalCenterTableViewController.xib; path = PersonalCenter/PersonalCenterTableViewController.xib; sourceTree = "<group>"; };
@@ -726,6 +749,34 @@
 			path = map;
 			sourceTree = "<group>";
 		};
+		CB670DB21B5A8063002BF3CB /* destiny */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = destiny;
+			sourceTree = "<group>";
+		};
+		CB6749581B57F60000B44A3F /* MyDestiny */ = {
+			isa = PBXGroup;
+			children = (
+				CB6749591B57FA4F00B44A3F /* MyDestinyViewController.h */,
+				CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */,
+				CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */,
+				CB6749631B57FF9E00B44A3F /* DestinyNavView.h */,
+				CB6749641B57FF9E00B44A3F /* DestinyNavView.m */,
+				CB67495E1B57FD5300B44A3F /* MyBuddhaBookTableViewController.h */,
+				CB67495F1B57FD5300B44A3F /* MyBuddhaBookTableViewController.m */,
+				CB6749601B57FD5300B44A3F /* MyBuddhaBookTableViewController.xib */,
+				CB670DAD1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.h */,
+				CB670DAE1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m */,
+				CB670DAF1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib */,
+				CB670DB31B5A86AC002BF3CB /* MyHomeworkTableViewController.h */,
+				CB670DB41B5A86AC002BF3CB /* MyHomeworkTableViewController.m */,
+				CB670DB51B5A86AC002BF3CB /* MyHomeworkTableViewController.xib */,
+			);
+			name = MyDestiny;
+			sourceTree = "<group>";
+		};
 		CB7E1E091B4189C000F62CC6 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,6 +1025,7 @@
 		CBEC683A1A1A4A80007B2A00 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				CB6749581B57F60000B44A3F /* MyDestiny */,
 				CB7E1E091B4189C000F62CC6 /* PersonalCenter */,
 				CB94697D1A33FAC100337164 /* JSONKit */,
 				CB9469681A33FA7E00337164 /* BPush */,
@@ -1116,6 +1168,7 @@
 		CBEC68611A1A4A86007B2A00 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CB670DB21B5A8063002BF3CB /* destiny */,
 				CB7E1E1B1B42E21900F62CC6 /* personalcenter */,
 				CBCB6AAB1A61013F0082E361 /* introduce */,
 				CBD334561A4DB82C0026AD71 /* book */,
@@ -1589,6 +1642,7 @@
 				CBCB6AB11A61013F0082E361 /* history.png in Resources */,
 				CBEC68E31A2202F0007B2A00 /* home_search.png in Resources */,
 				CB8458BF1A309B470020283E /* weibo_ico.png in Resources */,
+				CB6749621B57FD5300B44A3F /* MyBuddhaBookTableViewController.xib in Resources */,
 				CBD334841A4FECCD0026AD71 /* weixin_icon.png in Resources */,
 				CB20DDC31A3B20BB003410FA /* around_ico.png in Resources */,
 				CBD334081A41BDF00026AD71 /* place_ico.png in Resources */,
@@ -1596,6 +1650,7 @@
 				CB9699681A2F523B009C35F8 /* mycenter_back.png in Resources */,
 				CBEC68CA1A20E808007B2A00 /* user_center.png in Resources */,
 				CBD3345D1A4DB82C0026AD71 /* folv.png in Resources */,
+				CB670DB11B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib in Resources */,
 				CB20DDC51A3B20BB003410FA /* bus_ico.png in Resources */,
 				CB9699661A2F523B009C35F8 /* logo_120.png in Resources */,
 				CB20DDC91A3B20BB003410FA /* food.png in Resources */,
@@ -1608,11 +1663,13 @@
 				CBB6ED4C1A2B58C7005B0CF3 /* MSYH.ttf in Resources */,
 				CBD334631A4DBA080026AD71 /* BookInfoTableViewCell.xib in Resources */,
 				CB7E1E1A1B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib in Resources */,
+				CB670DB71B5A86AC002BF3CB /* MyHomeworkTableViewController.xib in Resources */,
 				CB20DDCC1A3B20BB003410FA /* walk_ico.png in Resources */,
 				CBD334001A41BDBD0026AD71 /* allow_up.png in Resources */,
 				CB8458BE1A309B470020283E /* qq_ico.png in Resources */,
 				CBEC68EC1A24B008007B2A00 /* menu_select.png in Resources */,
 				CB20DDC81A3B20BB003410FA /* fojv.png in Resources */,
+				CB67495D1B57FA4F00B44A3F /* MyDestinyViewController.xib in Resources */,
 				CBD3347D1A4FE0DD0026AD71 /* bookmark.png in Resources */,
 				CB20DDC41A3B20BB003410FA /* book.png in Resources */,
 				CBEC68E41A2202F0007B2A00 /* page_logo.png in Resources */,
@@ -1660,6 +1717,7 @@
 				CBD334521A4C3B730026AD71 /* PFileDownLoadManager.m in Sources */,
 				CB9469791A33FA7E00337164 /* BPushClass.m in Sources */,
 				CBEC68741A1B822B007B2A00 /* PCustomNavigationBarView.m in Sources */,
+				CB6749651B57FF9E00B44A3F /* DestinyNavView.m in Sources */,
 				CBEC696A1A2602A8007B2A00 /* AFPropertyListRequestOperation.m in Sources */,
 				CBEC68851A1B841B007B2A00 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC685F1A1A4A81007B2A00 /* EGOImageView.m in Sources */,
@@ -1667,6 +1725,8 @@
 				CB7E1E191B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m in Sources */,
 				CBEC68761A1B822B007B2A00 /* PCustomTabBarItemView.m in Sources */,
 				CBEC69B61A28EE8D007B2A00 /* FMDatabaseAdditions.m in Sources */,
+				CB6749611B57FD5300B44A3F /* MyBuddhaBookTableViewController.m in Sources */,
+				CB670DB61B5A86AC002BF3CB /* MyHomeworkTableViewController.m in Sources */,
 				CBEC69641A2602A8007B2A00 /* AFHTTPClient.m in Sources */,
 				CBEC69E41A2A24C5007B2A00 /* OpenUrlManager.m in Sources */,
 				CBEC69B51A28EE8D007B2A00 /* FMDatabase.m in Sources */,
@@ -1682,6 +1742,7 @@
 				CB7E1E141B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m in Sources */,
 				CBD334671A4DBD450026AD71 /* BookIntroduceTableViewCell.m in Sources */,
 				CBD3343B1A46B7620026AD71 /* LeftMenuTableViewCell.m in Sources */,
+				CB670DB01B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m in Sources */,
 				CBEC696C1A2602A8007B2A00 /* AFXMLRequestOperation.m in Sources */,
 				CBEC69A61A28AA50007B2A00 /* AskNetDataApi.m in Sources */,
 				CBEC698E1A260B36007B2A00 /* DatabaseManager.m in Sources */,
@@ -1701,6 +1762,7 @@
 				CBEC69B41A28EE8D007B2A00 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				CBEC68881A1B841B007B2A00 /* UIImage+PImageCategory.m in Sources */,
 				CBEC69E11A2A21EC007B2A00 /* SinaWeiboManager.m in Sources */,
+				CB67495C1B57FA4F00B44A3F /* MyDestinyViewController.m in Sources */,
 				CBEC69F81A2AE075007B2A00 /* SVProgressHUD.m in Sources */,
 				CBD333FB1A41B0290026AD71 /* MapBuidingInfoViewController.m in Sources */,
 				CBEC699F1A2753C6007B2A00 /* FeaturedViewController.m in Sources */,

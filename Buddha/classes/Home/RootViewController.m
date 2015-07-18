@@ -19,6 +19,7 @@
 #import "MyLocationManager.h"
 #import "PFileDownLoadManager.h"
 #import "PersonalCenterTableViewController.h"
+#import "MyDestinyViewController.h"
 
 @implementation RootViewController
 
@@ -473,11 +474,14 @@
         else if (1 == index) {
             
             // test comment
-            //if (![UserLoginInfoManager GetInstance].isLogin) {
-            
+            if (![UserLoginInfoManager GetInstance].isLogin)
             {
                 LoginViewController *loginviewcontroller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
                 [self.navigationController pushViewController:loginviewcontroller animated:YES];
+            }
+            else {
+                MyDestinyViewController *destinyViewController = [[MyDestinyViewController alloc] initWithNibName:@"MyDestinyViewController" bundle:nil];
+                [self.navigationController pushViewController:destinyViewController animated:YES];
             }
         }
         else if (2 == index) {

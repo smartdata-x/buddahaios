@@ -30,6 +30,11 @@
 		CB670DB11B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB670DAF1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib */; };
 		CB670DB61B5A86AC002BF3CB /* MyHomeworkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB670DB41B5A86AC002BF3CB /* MyHomeworkTableViewController.m */; };
 		CB670DB71B5A86AC002BF3CB /* MyHomeworkTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB670DB51B5A86AC002BF3CB /* MyHomeworkTableViewController.xib */; };
+		CB670DBB1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB670DB91B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.m */; };
+		CB670DBC1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB670DBA1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.xib */; };
+		CB670DC01B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB670DBE1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.m */; };
+		CB670DC11B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB670DBF1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.xib */; };
+		CB670DC61B5B2FF6002BF3CB /* HomeworkView1.m in Sources */ = {isa = PBXBuildFile; fileRef = CB670DC51B5B2FF6002BF3CB /* HomeworkView1.m */; };
 		CB67495C1B57FA4F00B44A3F /* MyDestinyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */; };
 		CB67495D1B57FA4F00B44A3F /* MyDestinyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */; };
 		CB6749611B57FD5300B44A3F /* MyBuddhaBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67495F1B57FD5300B44A3F /* MyBuddhaBookTableViewController.m */; };
@@ -277,6 +282,14 @@
 		CB670DB31B5A86AC002BF3CB /* MyHomeworkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHomeworkTableViewController.h; path = MyDestiny/MyHomeworkTableViewController.h; sourceTree = "<group>"; };
 		CB670DB41B5A86AC002BF3CB /* MyHomeworkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHomeworkTableViewController.m; path = MyDestiny/MyHomeworkTableViewController.m; sourceTree = "<group>"; };
 		CB670DB51B5A86AC002BF3CB /* MyHomeworkTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyHomeworkTableViewController.xib; path = MyDestiny/MyHomeworkTableViewController.xib; sourceTree = "<group>"; };
+		CB670DB81B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHomeworkTableViewStyle0Cell.h; path = MyDestiny/MyHomeworkTableViewStyle0Cell.h; sourceTree = "<group>"; };
+		CB670DB91B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHomeworkTableViewStyle0Cell.m; path = MyDestiny/MyHomeworkTableViewStyle0Cell.m; sourceTree = "<group>"; };
+		CB670DBA1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyHomeworkTableViewStyle0Cell.xib; path = MyDestiny/MyHomeworkTableViewStyle0Cell.xib; sourceTree = "<group>"; };
+		CB670DBD1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHomeworkTableViewStyle1Cell.h; path = MyDestiny/MyHomeworkTableViewStyle1Cell.h; sourceTree = "<group>"; };
+		CB670DBE1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHomeworkTableViewStyle1Cell.m; path = MyDestiny/MyHomeworkTableViewStyle1Cell.m; sourceTree = "<group>"; };
+		CB670DBF1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyHomeworkTableViewStyle1Cell.xib; path = MyDestiny/MyHomeworkTableViewStyle1Cell.xib; sourceTree = "<group>"; };
+		CB670DC41B5B2FF6002BF3CB /* HomeworkView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeworkView1.h; path = MyDestiny/HomeworkView1.h; sourceTree = "<group>"; };
+		CB670DC51B5B2FF6002BF3CB /* HomeworkView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeworkView1.m; path = MyDestiny/HomeworkView1.m; sourceTree = "<group>"; };
 		CB6749591B57FA4F00B44A3F /* MyDestinyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDestinyViewController.h; path = MyDestiny/MyDestinyViewController.h; sourceTree = "<group>"; };
 		CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDestinyViewController.m; path = MyDestiny/MyDestinyViewController.m; sourceTree = "<group>"; };
 		CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyDestinyViewController.xib; path = MyDestiny/MyDestinyViewController.xib; sourceTree = "<group>"; };
@@ -756,23 +769,47 @@
 			name = destiny;
 			sourceTree = "<group>";
 		};
-		CB6749581B57F60000B44A3F /* MyDestiny */ = {
+		CB670DC21B5A8F5A002BF3CB /* BuddhaBook */ = {
 			isa = PBXGroup;
 			children = (
-				CB6749591B57FA4F00B44A3F /* MyDestinyViewController.h */,
-				CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */,
-				CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */,
-				CB6749631B57FF9E00B44A3F /* DestinyNavView.h */,
-				CB6749641B57FF9E00B44A3F /* DestinyNavView.m */,
 				CB67495E1B57FD5300B44A3F /* MyBuddhaBookTableViewController.h */,
 				CB67495F1B57FD5300B44A3F /* MyBuddhaBookTableViewController.m */,
 				CB6749601B57FD5300B44A3F /* MyBuddhaBookTableViewController.xib */,
 				CB670DAD1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.h */,
 				CB670DAE1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m */,
 				CB670DAF1B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.xib */,
+			);
+			name = BuddhaBook;
+			sourceTree = "<group>";
+		};
+		CB670DC31B5A8F6B002BF3CB /* Homework */ = {
+			isa = PBXGroup;
+			children = (
 				CB670DB31B5A86AC002BF3CB /* MyHomeworkTableViewController.h */,
 				CB670DB41B5A86AC002BF3CB /* MyHomeworkTableViewController.m */,
 				CB670DB51B5A86AC002BF3CB /* MyHomeworkTableViewController.xib */,
+				CB670DB81B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.h */,
+				CB670DB91B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.m */,
+				CB670DBA1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.xib */,
+				CB670DBD1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.h */,
+				CB670DBE1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.m */,
+				CB670DBF1B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.xib */,
+				CB670DC41B5B2FF6002BF3CB /* HomeworkView1.h */,
+				CB670DC51B5B2FF6002BF3CB /* HomeworkView1.m */,
+			);
+			name = Homework;
+			sourceTree = "<group>";
+		};
+		CB6749581B57F60000B44A3F /* MyDestiny */ = {
+			isa = PBXGroup;
+			children = (
+				CB670DC31B5A8F6B002BF3CB /* Homework */,
+				CB670DC21B5A8F5A002BF3CB /* BuddhaBook */,
+				CB6749591B57FA4F00B44A3F /* MyDestinyViewController.h */,
+				CB67495A1B57FA4F00B44A3F /* MyDestinyViewController.m */,
+				CB67495B1B57FA4F00B44A3F /* MyDestinyViewController.xib */,
+				CB6749631B57FF9E00B44A3F /* DestinyNavView.h */,
+				CB6749641B57FF9E00B44A3F /* DestinyNavView.m */,
 			);
 			name = MyDestiny;
 			sourceTree = "<group>";
@@ -1601,6 +1638,7 @@
 				CBEC69421A24C3F6007B2A00 /* mapapi.bundle in Resources */,
 				CBD334681A4DBD450026AD71 /* BookIntroduceTableViewCell.xib in Resources */,
 				CBEC68B91A20CEE8007B2A00 /* book_1.jpg in Resources */,
+				CB670DC11B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.xib in Resources */,
 				C7E0C1F61A2C6EFF002683DE /* Default.png in Resources */,
 				CB9D3F4A1A5579DE00FC2C7D /* fbfbfb_bg.png in Resources */,
 				CB20DDC21A3B20BB003410FA /* another_ico.png in Resources */,
@@ -1627,6 +1665,7 @@
 				CBD334261A45A8390026AD71 /* book_id.png in Resources */,
 				CBD334411A46B77A0026AD71 /* RightMenuTableViewCell.xib in Resources */,
 				CBD334021A41BDDA0026AD71 /* disc_line.png in Resources */,
+				CB670DBC1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.xib in Resources */,
 				CB7E1E151B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.xib in Resources */,
 				CBEC68E21A2202F0007B2A00 /* home_message.png in Resources */,
 				CB20DDCB1A3B20BB003410FA /* temple.png in Resources */,
@@ -1739,6 +1778,7 @@
 				CBB6ED211A2B3434005B0CF3 /* TencentQQManager.m in Sources */,
 				CB94697B1A33FA7E00337164 /* OpenUDID.m in Sources */,
 				CBD3346D1A4F0CFD0026AD71 /* BookCategoryViewController.m in Sources */,
+				CB670DC01B5A8F33002BF3CB /* MyHomeworkTableViewStyle1Cell.m in Sources */,
 				CB7E1E141B42E04B00F62CC6 /* PersonalCenterHeaderTableViewCell.m in Sources */,
 				CBD334671A4DBD450026AD71 /* BookIntroduceTableViewCell.m in Sources */,
 				CBD3343B1A46B7620026AD71 /* LeftMenuTableViewCell.m in Sources */,
@@ -1756,6 +1796,7 @@
 				CBEC685A1A1A4A81007B2A00 /* UserData.m in Sources */,
 				CBEC685C1A1A4A81007B2A00 /* EGOImageButton.m in Sources */,
 				CBD334701A4F0DBD0026AD71 /* GeneralSearchView.m in Sources */,
+				CB670DBB1B5A8F15002BF3CB /* MyHomeworkTableViewStyle0Cell.m in Sources */,
 				CBCB6ABE1A61FA670082E361 /* ArtDisplayViewController.m in Sources */,
 				CBEC69BE1A28F1B9007B2A00 /* PFileManager.m in Sources */,
 				CBB6ED521A2B6132005B0CF3 /* HorizontalMenu.m in Sources */,
@@ -1808,6 +1849,7 @@
 				CBCB6A991A5C0C330082E361 /* ActivityViewController.m in Sources */,
 				CBD333F41A41ADAD0026AD71 /* BaseNavViewController.m in Sources */,
 				CBD3347A1A4FD9820026AD71 /* BookDetailViewController.m in Sources */,
+				CB670DC61B5B2FF6002BF3CB /* HomeworkView1.m in Sources */,
 				CB9469781A33FA7E00337164 /* Base64.m in Sources */,
 				CBD334401A46B77A0026AD71 /* RightMenuTableViewCell.m in Sources */,
 				CB96995C1A2F4C12009C35F8 /* CenterBaseViewController.m in Sources */,

@@ -158,6 +158,17 @@
 		CBD334831A4FECCD0026AD71 /* weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334801A4FECCD0026AD71 /* weibo_icon.png */; };
 		CBD334841A4FECCD0026AD71 /* weixin_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD334811A4FECCD0026AD71 /* weixin_icon.png */; };
 		CBD334871A4FECFA0026AD71 /* GeneralShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD334861A4FECFA0026AD71 /* GeneralShareView.m */; };
+		CBEA07241B5D348900654D0E /* NSDate+WQCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07131B5D348900654D0E /* NSDate+WQCalendarLogic.m */; };
+		CBEA07251B5D348900654D0E /* WQCalendarDay.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07151B5D348900654D0E /* WQCalendarDay.m */; };
+		CBEA07261B5D348900654D0E /* WQCalendarGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07171B5D348900654D0E /* WQCalendarGridView.m */; };
+		CBEA07271B5D348900654D0E /* WQCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07191B5D348900654D0E /* WQCalendarLogic.m */; };
+		CBEA07281B5D348900654D0E /* WQCalendarTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA071B1B5D348900654D0E /* WQCalendarTileView.m */; };
+		CBEA07291B5D348900654D0E /* WQCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA071D1B5D348900654D0E /* WQCalendarView.m */; };
+		CBEA072A1B5D348900654D0E /* WQDraggableCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA071F1B5D348900654D0E /* WQDraggableCalendarView.m */; };
+		CBEA072B1B5D348900654D0E /* WQScrollCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07211B5D348900654D0E /* WQScrollCalendarView.m */; };
+		CBEA072C1B5D348900654D0E /* WQScrollCalendarWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07231B5D348900654D0E /* WQScrollCalendarWrapperView.m */; };
+		CBEA07301B5D350E00654D0E /* MyCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA072E1B5D350E00654D0E /* MyCalendarViewController.m */; };
+		CBEA07311B5D350E00654D0E /* MyCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBEA072F1B5D350E00654D0E /* MyCalendarViewController.xib */; };
 		CBEC68171A1A44E4007B2A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68161A1A44E4007B2A00 /* main.m */; };
 		CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68191A1A44E4007B2A00 /* AppDelegate.mm */; };
 		CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEC681E1A1A44E4007B2A00 /* Main.storyboard */; };
@@ -470,6 +481,27 @@
 		CBD334811A4FECCD0026AD71 /* weixin_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixin_icon.png; sourceTree = "<group>"; };
 		CBD334851A4FECFA0026AD71 /* GeneralShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralShareView.h; sourceTree = "<group>"; };
 		CBD334861A4FECFA0026AD71 /* GeneralShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralShareView.m; sourceTree = "<group>"; };
+		CBEA07121B5D348900654D0E /* NSDate+WQCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+WQCalendarLogic.h"; path = "ThirdCalendar/NSDate+WQCalendarLogic.h"; sourceTree = "<group>"; };
+		CBEA07131B5D348900654D0E /* NSDate+WQCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+WQCalendarLogic.m"; path = "ThirdCalendar/NSDate+WQCalendarLogic.m"; sourceTree = "<group>"; };
+		CBEA07141B5D348900654D0E /* WQCalendarDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQCalendarDay.h; path = ThirdCalendar/WQCalendarDay.h; sourceTree = "<group>"; };
+		CBEA07151B5D348900654D0E /* WQCalendarDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQCalendarDay.m; path = ThirdCalendar/WQCalendarDay.m; sourceTree = "<group>"; };
+		CBEA07161B5D348900654D0E /* WQCalendarGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQCalendarGridView.h; path = ThirdCalendar/WQCalendarGridView.h; sourceTree = "<group>"; };
+		CBEA07171B5D348900654D0E /* WQCalendarGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQCalendarGridView.m; path = ThirdCalendar/WQCalendarGridView.m; sourceTree = "<group>"; };
+		CBEA07181B5D348900654D0E /* WQCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQCalendarLogic.h; path = ThirdCalendar/WQCalendarLogic.h; sourceTree = "<group>"; };
+		CBEA07191B5D348900654D0E /* WQCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQCalendarLogic.m; path = ThirdCalendar/WQCalendarLogic.m; sourceTree = "<group>"; };
+		CBEA071A1B5D348900654D0E /* WQCalendarTileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQCalendarTileView.h; path = ThirdCalendar/WQCalendarTileView.h; sourceTree = "<group>"; };
+		CBEA071B1B5D348900654D0E /* WQCalendarTileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQCalendarTileView.m; path = ThirdCalendar/WQCalendarTileView.m; sourceTree = "<group>"; };
+		CBEA071C1B5D348900654D0E /* WQCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQCalendarView.h; path = ThirdCalendar/WQCalendarView.h; sourceTree = "<group>"; };
+		CBEA071D1B5D348900654D0E /* WQCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQCalendarView.m; path = ThirdCalendar/WQCalendarView.m; sourceTree = "<group>"; };
+		CBEA071E1B5D348900654D0E /* WQDraggableCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQDraggableCalendarView.h; path = ThirdCalendar/WQDraggableCalendarView.h; sourceTree = "<group>"; };
+		CBEA071F1B5D348900654D0E /* WQDraggableCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQDraggableCalendarView.m; path = ThirdCalendar/WQDraggableCalendarView.m; sourceTree = "<group>"; };
+		CBEA07201B5D348900654D0E /* WQScrollCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQScrollCalendarView.h; path = ThirdCalendar/WQScrollCalendarView.h; sourceTree = "<group>"; };
+		CBEA07211B5D348900654D0E /* WQScrollCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQScrollCalendarView.m; path = ThirdCalendar/WQScrollCalendarView.m; sourceTree = "<group>"; };
+		CBEA07221B5D348900654D0E /* WQScrollCalendarWrapperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WQScrollCalendarWrapperView.h; path = ThirdCalendar/WQScrollCalendarWrapperView.h; sourceTree = "<group>"; };
+		CBEA07231B5D348900654D0E /* WQScrollCalendarWrapperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WQScrollCalendarWrapperView.m; path = ThirdCalendar/WQScrollCalendarWrapperView.m; sourceTree = "<group>"; };
+		CBEA072D1B5D350E00654D0E /* MyCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCalendarViewController.h; path = MyDestiny/MyCalendarViewController.h; sourceTree = "<group>"; };
+		CBEA072E1B5D350E00654D0E /* MyCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCalendarViewController.m; path = MyDestiny/MyCalendarViewController.m; sourceTree = "<group>"; };
+		CBEA072F1B5D350E00654D0E /* MyCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyCalendarViewController.xib; path = MyDestiny/MyCalendarViewController.xib; sourceTree = "<group>"; };
 		CBEC68111A1A44E4007B2A00 /* Buddha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buddha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBEC68151A1A44E4007B2A00 /* Buddha-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Buddha-Info.plist"; sourceTree = "<group>"; };
 		CBEC68161A1A44E4007B2A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -800,9 +832,20 @@
 			name = Homework;
 			sourceTree = "<group>";
 		};
+		CB670DC71B5B4106002BF3CB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				CBEA072D1B5D350E00654D0E /* MyCalendarViewController.h */,
+				CBEA072E1B5D350E00654D0E /* MyCalendarViewController.m */,
+				CBEA072F1B5D350E00654D0E /* MyCalendarViewController.xib */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		CB6749581B57F60000B44A3F /* MyDestiny */ = {
 			isa = PBXGroup;
 			children = (
+				CB670DC71B5B4106002BF3CB /* Calendar */,
 				CB670DC31B5A8F6B002BF3CB /* Homework */,
 				CB670DC21B5A8F5A002BF3CB /* BuddhaBook */,
 				CB6749591B57FA4F00B44A3F /* MyDestinyViewController.h */,
@@ -1011,6 +1054,31 @@
 			path = book;
 			sourceTree = "<group>";
 		};
+		CBEA07111B5D347600654D0E /* ThirdCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				CBEA07121B5D348900654D0E /* NSDate+WQCalendarLogic.h */,
+				CBEA07131B5D348900654D0E /* NSDate+WQCalendarLogic.m */,
+				CBEA07141B5D348900654D0E /* WQCalendarDay.h */,
+				CBEA07151B5D348900654D0E /* WQCalendarDay.m */,
+				CBEA07161B5D348900654D0E /* WQCalendarGridView.h */,
+				CBEA07171B5D348900654D0E /* WQCalendarGridView.m */,
+				CBEA07181B5D348900654D0E /* WQCalendarLogic.h */,
+				CBEA07191B5D348900654D0E /* WQCalendarLogic.m */,
+				CBEA071A1B5D348900654D0E /* WQCalendarTileView.h */,
+				CBEA071B1B5D348900654D0E /* WQCalendarTileView.m */,
+				CBEA071C1B5D348900654D0E /* WQCalendarView.h */,
+				CBEA071D1B5D348900654D0E /* WQCalendarView.m */,
+				CBEA071E1B5D348900654D0E /* WQDraggableCalendarView.h */,
+				CBEA071F1B5D348900654D0E /* WQDraggableCalendarView.m */,
+				CBEA07201B5D348900654D0E /* WQScrollCalendarView.h */,
+				CBEA07211B5D348900654D0E /* WQScrollCalendarView.m */,
+				CBEA07221B5D348900654D0E /* WQScrollCalendarWrapperView.h */,
+				CBEA07231B5D348900654D0E /* WQScrollCalendarWrapperView.m */,
+			);
+			name = ThirdCalendar;
+			sourceTree = "<group>";
+		};
 		CBEC68081A1A44E4007B2A00 = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1130,7 @@
 		CBEC683A1A1A4A80007B2A00 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				CBEA07111B5D347600654D0E /* ThirdCalendar */,
 				CB6749581B57F60000B44A3F /* MyDestiny */,
 				CB7E1E091B4189C000F62CC6 /* PersonalCenter */,
 				CB94697D1A33FAC100337164 /* JSONKit */,
@@ -1726,6 +1795,7 @@
 				CBEC68CD1A20E810007B2A00 /* found_fo_on.png in Resources */,
 				CB9699651A2F523B009C35F8 /* logo_1024.png in Resources */,
 				CBD334441A4841C90026AD71 /* fav.png in Resources */,
+				CBEA07311B5D350E00654D0E /* MyCalendarViewController.xib in Resources */,
 				CBD3342A1A45A8390026AD71 /* simiao_id.png in Resources */,
 				CBD334831A4FECCD0026AD71 /* weibo_icon.png in Resources */,
 				CBD334061A41BDF00026AD71 /* next_ico.png in Resources */,
@@ -1751,8 +1821,10 @@
 				CB96994F1A2F2B81009C35F8 /* LoginViewController.m in Sources */,
 				CBB6ED5C1A2B61B8005B0CF3 /* FeaturedActivitiesCell.m in Sources */,
 				CBCB6AAA1A60FF1F0082E361 /* IntroducePageViewController.m in Sources */,
+				CBEA07281B5D348900654D0E /* WQCalendarTileView.m in Sources */,
 				CBEC68781A1B822B007B2A00 /* PCustomTabBarViewController.m in Sources */,
 				CBEC696D1A2602A8007B2A00 /* UIImageView+AFNetworking.m in Sources */,
+				CBEA07241B5D348900654D0E /* NSDate+WQCalendarLogic.m in Sources */,
 				CBD334521A4C3B730026AD71 /* PFileDownLoadManager.m in Sources */,
 				CB9469791A33FA7E00337164 /* BPushClass.m in Sources */,
 				CBEC68741A1B822B007B2A00 /* PCustomNavigationBarView.m in Sources */,
@@ -1785,11 +1857,13 @@
 				CB670DB01B5A456E002BF3CB /* MyBuddhaBookTableViewStyle0Cell.m in Sources */,
 				CBEC696C1A2602A8007B2A00 /* AFXMLRequestOperation.m in Sources */,
 				CBEC69A61A28AA50007B2A00 /* AskNetDataApi.m in Sources */,
+				CBEA07301B5D350E00654D0E /* MyCalendarViewController.m in Sources */,
 				CBEC698E1A260B36007B2A00 /* DatabaseManager.m in Sources */,
 				CB20DDAF1A38792C003410FA /* MapPoiSearchController.m in Sources */,
 				CBD3341D1A44BC120026AD71 /* MapSearchResultViewController.m in Sources */,
 				CBCB6AB61A6130470082E361 /* IntroducBookViewController.m in Sources */,
 				CBEC69F21A2ADF62007B2A00 /* TencentWeixinManager.m in Sources */,
+				CBEA072B1B5D348900654D0E /* WQScrollCalendarView.m in Sources */,
 				CBEC68791A1B822B007B2A00 /* PCustomToolBarView.m in Sources */,
 				CBCB6AA61A603B040082E361 /* BaiduMapServiceManager.m in Sources */,
 				CBEC69671A2602A8007B2A00 /* AFJSONRequestOperation.m in Sources */,
@@ -1819,17 +1893,21 @@
 				CBEC69C41A29CFA6007B2A00 /* UserLoginData.m in Sources */,
 				CB20DDD41A3CA156003410FA /* MapBuildMenuView.m in Sources */,
 				CBEC69E71A2A2B85007B2A00 /* UserLoginInfoManager.m in Sources */,
+				CBEA07261B5D348900654D0E /* WQCalendarGridView.m in Sources */,
 				CBB6ED601A2B61B8005B0CF3 /* FeaturedNewsCell.m in Sources */,
 				CBEC698A1A260AF8007B2A00 /* LoginManager.m in Sources */,
+				CBEA07271B5D348900654D0E /* WQCalendarLogic.m in Sources */,
 				CBD334761A4FBF090026AD71 /* BookCategoryInfoTableViewCell.m in Sources */,
 				CBEC696B1A2602A8007B2A00 /* AFURLConnectionOperation.m in Sources */,
 				CBEC68751A1B822B007B2A00 /* PCustomPageControl.m in Sources */,
+				CBEA07251B5D348900654D0E /* WQCalendarDay.m in Sources */,
 				CBD334871A4FECFA0026AD71 /* GeneralShareView.m in Sources */,
 				CBD3344C1A499D000026AD71 /* BookImageView.m in Sources */,
 				CBEC68951A1F943F007B2A00 /* RootViewController.m in Sources */,
 				CBEC69A21A275446007B2A00 /* MapViewController.m in Sources */,
 				CBD334491A499CA00026AD71 /* BookShellViewController.m in Sources */,
 				CBEC685D1A1A4A81007B2A00 /* EGOImageLoadConnection.m in Sources */,
+				CBEA07291B5D348900654D0E /* WQCalendarView.m in Sources */,
 				CBEC69FB1A2AE5A3007B2A00 /* UIFont+PFontCategory.m in Sources */,
 				CBEC68171A1A44E4007B2A00 /* main.m in Sources */,
 				CB94697A1A33FA7E00337164 /* GzipCompressor.m in Sources */,
@@ -1856,7 +1934,9 @@
 				CBD334371A46B5BD0026AD71 /* TwoPageMenuVIew.m in Sources */,
 				CBEC685B1A1A4A81007B2A00 /* EGOCache.m in Sources */,
 				CBCB6ABA1A614CDB0082E361 /* IntroduceChapterTableViewCell.m in Sources */,
+				CBEA072C1B5D348900654D0E /* WQScrollCalendarWrapperView.m in Sources */,
 				CBEC69D01A29DDA3007B2A00 /* NSData+AES256.m in Sources */,
+				CBEA072A1B5D348900654D0E /* WQDraggableCalendarView.m in Sources */,
 				CBEC69CC1A29DD88007B2A00 /* GTMBase64.m in Sources */,
 				CBCB6AC31A66C6E00082E361 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC69C71A29DCBE007B2A00 /* PCommonUtil.m in Sources */,

@@ -10,6 +10,7 @@
 #import "Stdinc.h"
 #import "MyBuddhaBookTableViewController.h"
 #import "MyHomeworkTableViewController.h"
+#import "MyCalendarViewController.h"
 
 @interface MyDestinyViewController ()
 
@@ -72,6 +73,22 @@
                 [homework viewWillAppear:YES];
                 [_dicViewCache setObject:homework forKey:numIndex];
                 controller = homework;
+            }
+        }
+        break;
+            
+        case DESTINYNAV_CALENDAR:
+        {
+            if (controller) {
+                MyCalendarViewController *calendar = (MyCalendarViewController *)controller;
+                [calendar viewWillAppear:YES];
+            }
+            else {
+                MyCalendarViewController *calendar = [[MyCalendarViewController alloc] initWithNibName:@"MyCalendarViewController" bundle:nil];
+                [calendar.view setFrame:CGRectMake(0, NAV_BAR_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - NAV_BAR_HEIGHT)];
+                [calendar viewWillAppear:YES];
+                [_dicViewCache setObject:calendar forKey:numIndex];
+                controller = calendar;
             }
         }
         break;

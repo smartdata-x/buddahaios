@@ -12,11 +12,12 @@
 #import "WQScrollCalendarWrapperView.h"
 #import "Stdinc.h"
 
-@interface MyCalendarViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, WQScrollCalendarWrapperViewDelegate>
+@interface MyCalendarViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, WQScrollCalendarWrapperViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UILabel *monthLabel;
 @property (nonatomic, strong) WQDraggableCalendarView *calendarView;
 @property (nonatomic, strong) WQCalendarLogic *calendarLogic;
 @property (nonatomic, strong) WQScrollCalendarWrapperView *scrollCalendarView;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end

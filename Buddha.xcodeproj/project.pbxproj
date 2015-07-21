@@ -169,6 +169,10 @@
 		CBEA072C1B5D348900654D0E /* WQScrollCalendarWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07231B5D348900654D0E /* WQScrollCalendarWrapperView.m */; };
 		CBEA07301B5D350E00654D0E /* MyCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA072E1B5D350E00654D0E /* MyCalendarViewController.m */; };
 		CBEA07311B5D350E00654D0E /* MyCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBEA072F1B5D350E00654D0E /* MyCalendarViewController.xib */; };
+		CBEA07351B5E985500654D0E /* MyCalendarTableViewStyle0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA07331B5E985500654D0E /* MyCalendarTableViewStyle0Cell.m */; };
+		CBEA07361B5E985500654D0E /* MyCalendarTableViewStyle0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBEA07341B5E985500654D0E /* MyCalendarTableViewStyle0Cell.xib */; };
+		CBEA073F1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEA073D1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.m */; };
+		CBEA07401B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBEA073E1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.xib */; };
 		CBEC68171A1A44E4007B2A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68161A1A44E4007B2A00 /* main.m */; };
 		CBEC681A1A1A44E4007B2A00 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBEC68191A1A44E4007B2A00 /* AppDelegate.mm */; };
 		CBEC68201A1A44E4007B2A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEC681E1A1A44E4007B2A00 /* Main.storyboard */; };
@@ -502,6 +506,12 @@
 		CBEA072D1B5D350E00654D0E /* MyCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCalendarViewController.h; path = MyDestiny/MyCalendarViewController.h; sourceTree = "<group>"; };
 		CBEA072E1B5D350E00654D0E /* MyCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCalendarViewController.m; path = MyDestiny/MyCalendarViewController.m; sourceTree = "<group>"; };
 		CBEA072F1B5D350E00654D0E /* MyCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyCalendarViewController.xib; path = MyDestiny/MyCalendarViewController.xib; sourceTree = "<group>"; };
+		CBEA07321B5E985500654D0E /* MyCalendarTableViewStyle0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCalendarTableViewStyle0Cell.h; path = MyDestiny/MyCalendarTableViewStyle0Cell.h; sourceTree = "<group>"; };
+		CBEA07331B5E985500654D0E /* MyCalendarTableViewStyle0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCalendarTableViewStyle0Cell.m; path = MyDestiny/MyCalendarTableViewStyle0Cell.m; sourceTree = "<group>"; };
+		CBEA07341B5E985500654D0E /* MyCalendarTableViewStyle0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyCalendarTableViewStyle0Cell.xib; path = MyDestiny/MyCalendarTableViewStyle0Cell.xib; sourceTree = "<group>"; };
+		CBEA073C1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCalendarTableViewStyle1Cell.h; path = MyDestiny/MyCalendarTableViewStyle1Cell.h; sourceTree = "<group>"; };
+		CBEA073D1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCalendarTableViewStyle1Cell.m; path = MyDestiny/MyCalendarTableViewStyle1Cell.m; sourceTree = "<group>"; };
+		CBEA073E1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyCalendarTableViewStyle1Cell.xib; path = MyDestiny/MyCalendarTableViewStyle1Cell.xib; sourceTree = "<group>"; };
 		CBEC68111A1A44E4007B2A00 /* Buddha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buddha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBEC68151A1A44E4007B2A00 /* Buddha-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Buddha-Info.plist"; sourceTree = "<group>"; };
 		CBEC68161A1A44E4007B2A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -838,6 +848,12 @@
 				CBEA072D1B5D350E00654D0E /* MyCalendarViewController.h */,
 				CBEA072E1B5D350E00654D0E /* MyCalendarViewController.m */,
 				CBEA072F1B5D350E00654D0E /* MyCalendarViewController.xib */,
+				CBEA07321B5E985500654D0E /* MyCalendarTableViewStyle0Cell.h */,
+				CBEA07331B5E985500654D0E /* MyCalendarTableViewStyle0Cell.m */,
+				CBEA07341B5E985500654D0E /* MyCalendarTableViewStyle0Cell.xib */,
+				CBEA073C1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.h */,
+				CBEA073D1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.m */,
+				CBEA073E1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.xib */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -1768,6 +1784,7 @@
 				CBEC68B81A20CEE8007B2A00 /* book_0.jpg in Resources */,
 				CBEC68BA1A20CEE8007B2A00 /* book_2.jpg in Resources */,
 				CBD334281A45A8390026AD71 /* food_id.png in Resources */,
+				CBEA07361B5E985500654D0E /* MyCalendarTableViewStyle0Cell.xib in Resources */,
 				CBB6ED4C1A2B58C7005B0CF3 /* MSYH.ttf in Resources */,
 				CBD334631A4DBA080026AD71 /* BookInfoTableViewCell.xib in Resources */,
 				CB7E1E1A1B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.xib in Resources */,
@@ -1779,6 +1796,7 @@
 				CB20DDC81A3B20BB003410FA /* fojv.png in Resources */,
 				CB67495D1B57FA4F00B44A3F /* MyDestinyViewController.xib in Resources */,
 				CBD3347D1A4FE0DD0026AD71 /* bookmark.png in Resources */,
+				CBEA07401B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.xib in Resources */,
 				CB20DDC41A3B20BB003410FA /* book.png in Resources */,
 				CBEC68E41A2202F0007B2A00 /* page_logo.png in Resources */,
 				CBEC68CE1A20E810007B2A00 /* found_fo.png in Resources */,
@@ -1832,6 +1850,7 @@
 				CBEC696A1A2602A8007B2A00 /* AFPropertyListRequestOperation.m in Sources */,
 				CBEC68851A1B841B007B2A00 /* UIImage+BlurredFrame.m in Sources */,
 				CBEC685F1A1A4A81007B2A00 /* EGOImageView.m in Sources */,
+				CBEA073F1B5E98E400654D0E /* MyCalendarTableViewStyle1Cell.m in Sources */,
 				CBD3344F1A499D990026AD71 /* ReadingViewController.m in Sources */,
 				CB7E1E191B42E0C400F62CC6 /* PersonalCenterStyle0TableViewCell.m in Sources */,
 				CBEC68761A1B822B007B2A00 /* PCustomTabBarItemView.m in Sources */,
@@ -1908,6 +1927,7 @@
 				CBD334491A499CA00026AD71 /* BookShellViewController.m in Sources */,
 				CBEC685D1A1A4A81007B2A00 /* EGOImageLoadConnection.m in Sources */,
 				CBEA07291B5D348900654D0E /* WQCalendarView.m in Sources */,
+				CBEA07351B5E985500654D0E /* MyCalendarTableViewStyle0Cell.m in Sources */,
 				CBEC69FB1A2AE5A3007B2A00 /* UIFont+PFontCategory.m in Sources */,
 				CBEC68171A1A44E4007B2A00 /* main.m in Sources */,
 				CB94697A1A33FA7E00337164 /* GzipCompressor.m in Sources */,

@@ -7,6 +7,8 @@
 //
 
 #import "MyCalendarViewController.h"
+#import "MyCalendarTableViewStyle0Cell.h"
+#import "MyCalendarTableViewStyle1Cell.h"
 
 @interface MyCalendarViewController ()
 
@@ -16,10 +18,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[Utilities colorWithHex:0xFFF5F5F5]];
     
     _calendarLogic = [[WQCalendarLogic alloc] init];
     
+    UILabel *lblYearMonth = [[UILabel alloc] initWithFrame:CGRectMake(15, NAV_BAR_HEIGHT - 24, mainScreenWidth - 30, 36)];
+    [lblYearMonth setFont:[UIFont fontOfApp:17]];
+    [self.view addSubview:lblYearMonth];
+    
     [self showCalendar];
+    
+    [lblYearMonth setText:[NSString stringWithFormat:@"%lu年%lu月", (unsigned long)(_calendarLogic.selectedCalendarDay.year), (unsigned long)(_calendarLogic.selectedCalendarDay.month)]];
+    
+    float ystart = NAV_BAR_HEIGHT + 12 + 300;
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ystart, mainScreenWidth, 300)];
+    [_tableView setDelegate:self];
+    [_tableView setDataSource:self];
+    [self.view addSubview:_tableView];
+    [_tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,9 +44,7 @@
 }
 
 - (void)showCalendar {
-    CGRect calendarRect = CGRectMake(0, 0, mainScreenWidth, 350);
-    calendarRect.origin.y += 52;
-    calendarRect.size.height -= 52;
+    CGRect calendarRect = CGRectMake(0, NAV_BAR_HEIGHT + 12, mainScreenWidth, 300);
     
     _calendarView = [[WQDraggableCalendarView alloc] initWithFrame:calendarRect];
     _calendarView.draggble = NO;
@@ -38,9 +52,7 @@
     _calendarView.backgroundColor = [Utilities colorWithHex:0xFFF5F5F5];
     [_calendarLogic reloadCalendarView:_calendarView];
     
-    CGRect scrollRect = self.view.frame;
-    scrollRect.origin.y = 400;
-    scrollRect.size.height = 40;
+    CGRect scrollRect = CGRectMake(0, 350 + 50, mainScreenWidth, 40);
     _scrollCalendarView = [[WQScrollCalendarWrapperView alloc] initWithFrame:scrollRect];
     _scrollCalendarView.backgroundColor = [UIColor greenColor];
     _scrollCalendarView.delegate = self;
@@ -150,6 +162,65 @@
     }
     
     return rows;
+}
+
+// tableview
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellname = nil;
+    NSArray *namearr = [[NSArray alloc] initWithObjects:@"MyCalendarTableViewStyle0Cell", @"MyCalendarTableViewStyle1Cell", nil];
+    
+    if (indexPath.row == 2 || indexPath.row == 3) {
+        cellname = [namearr objectAtIndex:1];
+    }
+    else {
+        cellname = [namearr objectAtIndex:0];
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellname];
+    
+    if (cell == nil) {
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:cellname owner:self options:nil];
+        cell = [nibContents objectAtIndex:0];
+    }
+    
+    if (indexPath.row == 0) {
+        MyCalendarTableViewStyle0Cell *stylecell = (MyCalendarTableViewStyle0Cell *)cell;
+        [stylecell setData:@"农历五月二十一"];
+    }
+    else if (indexPath.row == 1) {
+        MyCalendarTableViewStyle0Cell *stylecell = (MyCalendarTableViewStyle0Cell *)cell;
+        [stylecell setData:@"乙未年 [羊年]"];
+    }
+    else if (indexPath.row == 2) {
+        MyCalendarTableViewStyle1Cell *stylecell = (MyCalendarTableViewStyle1Cell *)cell;
+        [stylecell setData:@"祭祀、祈福、开光、伐木" cando:YES];
+    }
+    else if (indexPath.row == 3) {
+        MyCalendarTableViewStyle1Cell *stylecell = (MyCalendarTableViewStyle1Cell *)cell;
+        [stylecell setData:@"祭祀、祈福、开光、伐木" cando:NO];
+    }
+    else if (indexPath.row == 4) {
+        MyCalendarTableViewStyle0Cell *stylecell = (MyCalendarTableViewStyle0Cell *)cell;
+        [stylecell setData:@"冲: 祭祀、祈福、开光、伐木"];
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

@@ -19,12 +19,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        UIImage *weeklyHeaderImage = [UIImage imageNamed:@"weeklyTitle.png"];
+        UIImage *weeklyHeaderImage = [UIImage imageNamed:@"week_title.png"];
         self.weeklyHeader = [[UIImageView alloc] initWithImage:weeklyHeaderImage];
-        self.weeklyHeader.frame = (CGRect){0, 0, self.bounds.size.width, weeklyHeaderImage.size.height};
+        self.weeklyHeader.frame = (CGRect){0, 0, self.bounds.size.width, 42};
         [self addSubview:self.weeklyHeader];
         
-        CGFloat headerHeight = self.weeklyHeader.frame.size.height;
+        CGFloat headerHeight = 42;
         CGRect gridRect = (CGRect){0, headerHeight, self.bounds.size.width, WQ_CALENDAR_ROW_HEIGHT * 6};
         self.gridView = [[WQCalendarGridView alloc] initWithFrame:gridRect];
         [self addSubview:self.gridView];

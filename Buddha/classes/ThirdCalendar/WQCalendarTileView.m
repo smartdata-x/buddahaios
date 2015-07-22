@@ -57,9 +57,15 @@
     
     self.label = [[UILabel alloc] init];
     [self addSubview:self.label];
-    
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.backgroundColor = self.backgroundColor;
+    
+    self.lunarLabel = [[UILabel alloc] init];
+    [self addSubview:self.lunarLabel];
+    self.lunarLabel.textAlignment = NSTextAlignmentCenter;
+    self.lunarLabel.backgroundColor = self.backgroundColor;
+    [self.lunarLabel setFont:[UIFont fontOfApp:11]];
+    [self.lunarLabel setTextColor:[UIColor lightGrayColor]];
 }
 
 #pragma mark -
@@ -73,8 +79,10 @@
     
     if (selected) {
         self.label.backgroundColor = selectedColor;
+        self.lunarLabel.backgroundColor = selectedColor;
     } else {
         self.label.backgroundColor = [UIColor clearColor];
+        self.lunarLabel.backgroundColor = [UIColor clearColor];
     }
     
     _selected = selected;

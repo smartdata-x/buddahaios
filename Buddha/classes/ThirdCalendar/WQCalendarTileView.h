@@ -21,6 +21,7 @@ typedef enum _WQCalendarTileStyle WQCalendarTileStyle;
 @property (nonatomic, assign) BOOL selected;
 
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UILabel *lunarLabel;
 
 - (id)initWithStyle:(WQCalendarTileStyle)style;
 

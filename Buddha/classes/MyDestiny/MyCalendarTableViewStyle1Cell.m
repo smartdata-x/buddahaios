@@ -16,6 +16,7 @@
 
 - (void)setData:(NSString *)name cando:(BOOL)canDo {
     [_lblName setText:name];
+    [_lblName setFont:[UIFont fontOfApp:14]];
     if (canDo) {
         [_lblName setTextColor:[UIColor greenColor]];
         [_imgHead setImage:[UIImage imageNamed:@"can_ico.png"]];

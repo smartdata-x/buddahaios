@@ -7,6 +7,7 @@
 //
 
 #import "WQCalendarLogic.h"
+#import "ChineseDate.h"
 
 @interface WQCalendarLogic () <WQCalendarGridViewDataSource, WQCalendarGridViewDelegate, WQScrollCalendarViewDataSource, WQScrollCalendarViewDelegate>
 
@@ -198,6 +199,9 @@
 - (void)configureTileView:(WQCalendarTileView *)tileView withCalendarDay:(WQCalendarDay *)calendarDay
 {
     tileView.label.text = [NSString stringWithFormat:@"%lu", (unsigned long)calendarDay.day];
+    
+    LunarCalendar *lunar = [ChineseDate GetLunarCalendar:calendarDay.year month:calendarDay.month day:calendarDay.day];
+    tileView.lunarLabel.text = lunar.DayLunar;
     
     if (calendarDay.month != self.selectedCalendarDay.month) {
         tileView.label.backgroundColor = [UIColor colorWithRed:241/255.0f green:241/255.0f blue:241/255.0f alpha:0.8f];

@@ -79,7 +79,14 @@
             
             WQCalendarTileView *tileView = [self.dataSource gridView:self tileViewForRow:i column:j];
             tileView.frame = (CGRect){x, y, self.columnWidth, self.rowHeight};
-            tileView.label.frame = tileView.bounds;
+            
+            CGRect caleRect = tileView.bounds;
+            caleRect.size.height = caleRect.size.height / 2;
+            tileView.label.frame = caleRect;
+            
+            caleRect.origin.y = caleRect.origin.y + caleRect.size.height;
+            tileView.lunarLabel.frame = caleRect;
+            
             [tileView.layer setCornerRadius:self.columnWidth/1.95];
             [tileView.layer setMasksToBounds:YES];
             [self addSubview:tileView];

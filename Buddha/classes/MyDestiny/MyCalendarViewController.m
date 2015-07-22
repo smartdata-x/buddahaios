@@ -7,7 +7,7 @@
 //
 
 #import "MyCalendarViewController.h"
-#import "MyCalendarTableViewStyle0Cell.h"
+#import "MyCalendarTableViewStyle2Cell.h"
 #import "MyCalendarTableViewStyle1Cell.h"
 
 @interface MyCalendarViewController ()
@@ -30,8 +30,8 @@
     
     [lblYearMonth setText:[NSString stringWithFormat:@"%lu年%lu月", (unsigned long)(_calendarLogic.selectedCalendarDay.year), (unsigned long)(_calendarLogic.selectedCalendarDay.month)]];
     
-    float ystart = NAV_BAR_HEIGHT + 12 + 300;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ystart, mainScreenWidth, 300)];
+    float ystart = NAV_BAR_HEIGHT + 12 + _calendarView.frame.size.height + 36 + 42;
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ystart, mainScreenWidth, mainScreenHeight - ystart)];
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
     [self.view addSubview:_tableView];
@@ -44,7 +44,7 @@
 }
 
 - (void)showCalendar {
-    CGRect calendarRect = CGRectMake(0, NAV_BAR_HEIGHT + 12, mainScreenWidth, 300);
+    CGRect calendarRect = CGRectMake(0, NAV_BAR_HEIGHT + 12, mainScreenWidth, 200);
     
     _calendarView = [[WQDraggableCalendarView alloc] initWithFrame:calendarRect];
     _calendarView.draggble = NO;
@@ -179,7 +179,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellname = nil;
-    NSArray *namearr = [[NSArray alloc] initWithObjects:@"MyCalendarTableViewStyle0Cell", @"MyCalendarTableViewStyle1Cell", nil];
+    NSArray *namearr = [[NSArray alloc] initWithObjects:@"MyCalendarTableViewStyle2Cell", @"MyCalendarTableViewStyle1Cell", nil];
     
     if (indexPath.row == 2 || indexPath.row == 3) {
         cellname = [namearr objectAtIndex:1];
@@ -191,17 +191,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellname];
     
     if (cell == nil) {
-        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:cellname owner:self options:nil];
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:cellname owner:nil options:nil];
         cell = [nibContents objectAtIndex:0];
     }
     
     if (indexPath.row == 0) {
-        MyCalendarTableViewStyle0Cell *stylecell = (MyCalendarTableViewStyle0Cell *)cell;
-        [stylecell setData:@"农历五月二十一"];
+        MyCalendarTableViewStyle2Cell *stylecell = (MyCalendarTableViewStyle2Cell *)cell;
+        [stylecell setData:@"农历五月二十一" bigversion:YES];
     }
     else if (indexPath.row == 1) {
-        MyCalendarTableViewStyle0Cell *stylecell = (MyCalendarTableViewStyle0Cell *)cell;
-        [stylecell setData:@"乙未年 [羊年]"];
+        MyCalendarTableViewStyle2Cell *stylecell = (MyCalendarTableViewStyle2Cell *)cell;
+        [stylecell setData:@"乙未年 [羊年]" bigversion:NO];
     }
     else if (indexPath.row == 2) {
         MyCalendarTableViewStyle1Cell *stylecell = (MyCalendarTableViewStyle1Cell *)cell;
@@ -212,8 +212,8 @@
         [stylecell setData:@"祭祀、祈福、开光、伐木" cando:NO];
     }
     else if (indexPath.row == 4) {
-        MyCalendarTableViewStyle0Cell *stylecell = (MyCalendarTableViewStyle0Cell *)cell;
-        [stylecell setData:@"冲: 祭祀、祈福、开光、伐木"];
+        MyCalendarTableViewStyle2Cell *stylecell = (MyCalendarTableViewStyle2Cell *)cell;
+        [stylecell setData:@"冲: 祭祀、祈福、开光、伐木" bigversion:NO];
     }
     
     return cell;

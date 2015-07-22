@@ -185,29 +185,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Buddha/classes/MyDestiny/MyCalendarViewController.m"
-            timestampString = "459185634.448786"
+            filePath = "Buddha/classes/ThirdCalendar/WQCalendarLogic.m"
+            timestampString = "459268741.854438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Buddha/classes/MyDestiny/MyCalendarViewController.m"
-            timestampString = "459185676.495099"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "-scrollCalendarView:tileViewForRow:column:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

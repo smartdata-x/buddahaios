@@ -79,7 +79,18 @@
             
             WQCalendarTileView *tileView = [self.dataSource scrollCalendarView:self tileViewForRow:i column:j];
             tileView.frame = (CGRect){x, 0, columnWidth, rowHeight};
-            tileView.label.frame = tileView.bounds;
+            
+            
+            CGRect caleRect = tileView.bounds;
+            caleRect.size.height = caleRect.size.height / 2;
+            tileView.label.frame = caleRect;
+            
+            caleRect.origin.y = caleRect.origin.y + caleRect.size.height;
+            tileView.lunarLabel.frame = caleRect;
+            
+            [tileView.layer setCornerRadius:columnWidth/1.95];
+            [tileView.layer setMasksToBounds:YES];
+            
             [weekView addSubview:tileView];
             [self.tiles addObject:tileView];
             

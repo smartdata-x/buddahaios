@@ -33,5 +33,6 @@
 +(NSString*)GetLunarDateTime;
 
 +(LunarCalendar *)GetLunarCalendar:(int)year month:(int)month day:(int)day;
++(LunarCalendar *)GetTodayLunarCalendar;
 
 @end

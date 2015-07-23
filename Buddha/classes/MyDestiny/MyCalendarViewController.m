@@ -9,6 +9,7 @@
 #import "MyCalendarViewController.h"
 #import "MyCalendarTableViewStyle2Cell.h"
 #import "MyCalendarTableViewStyle1Cell.h"
+#import "ChineseDate.h"
 
 @interface MyCalendarViewController ()
 
@@ -44,7 +45,7 @@
 }
 
 - (void)showCalendar {
-    CGRect calendarRect = CGRectMake(0, NAV_BAR_HEIGHT + 12, mainScreenWidth, 200);
+    CGRect calendarRect = CGRectMake(0, NAV_BAR_HEIGHT + 12, mainScreenWidth, 250);
     
     _calendarView = [[WQDraggableCalendarView alloc] initWithFrame:calendarRect];
     _calendarView.draggble = NO;
@@ -196,12 +197,19 @@
     }
     
     if (indexPath.row == 0) {
+        LunarCalendar *lunar = [ChineseDate GetTodayLunarCalendar];
+        NSString *month = lunar.MonthLunar;
+        NSString *day = lunar.DayLunar;
         MyCalendarTableViewStyle2Cell *stylecell = (MyCalendarTableViewStyle2Cell *)cell;
-        [stylecell setData:@"农历五月二十一" bigversion:YES];
+        [stylecell setData:[NSString stringWithFormat:@"农历%@%@", month, day] bigversion:YES];
     }
     else if (indexPath.row == 1) {
+        LunarCalendar *lunar = [ChineseDate GetTodayLunarCalendar];
+        NSString *heaven = lunar.YearHeavenlyStem;
+        NSString *earth = lunar.YearEarthlyBranch;
+        NSString *animal = lunar.ZodiacLunar;
         MyCalendarTableViewStyle2Cell *stylecell = (MyCalendarTableViewStyle2Cell *)cell;
-        [stylecell setData:@"乙未年 [羊年]" bigversion:NO];
+        [stylecell setData:[NSString stringWithFormat:@"%@%@年 [%@年]", heaven, earth, animal] bigversion:NO];
     }
     else if (indexPath.row == 2) {
         MyCalendarTableViewStyle1Cell *stylecell = (MyCalendarTableViewStyle1Cell *)cell;

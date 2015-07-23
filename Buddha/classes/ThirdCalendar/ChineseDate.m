@@ -43,6 +43,13 @@
     return lunarCalendar;
 }
 
++(LunarCalendar *)GetTodayLunarCalendar {
+    JBCalendar* date = [[JBCalendar alloc]init];
+    date.year = [[self GetYear] intValue],date.month =[[self GetMonth] intValue],date.day = [[self GetDay] intValue];
+    LunarCalendar *lunarCalendar = [[date nsDate] chineseCalendarDate];
+    return lunarCalendar;
+}
+
 
 //获取指定年份指定月份的星期排列表(农历)
 +(NSArray *)GetLunarDayArrayByYear:(int) year andMonth:(int) month{

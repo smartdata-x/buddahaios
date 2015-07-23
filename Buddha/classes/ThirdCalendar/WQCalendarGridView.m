@@ -81,10 +81,12 @@
             tileView.frame = (CGRect){x, y, self.columnWidth, self.rowHeight};
             
             CGRect caleRect = tileView.bounds;
-            caleRect.size.height = caleRect.size.height / 2;
+            float orgheight = caleRect.size.height;
+            caleRect.size.height = orgheight / 2 + 5;
             tileView.label.frame = caleRect;
             
             caleRect.origin.y = caleRect.origin.y + caleRect.size.height;
+            caleRect.size.height = orgheight / 2 - 5;
             tileView.lunarLabel.frame = caleRect;
             
             [tileView.layer setCornerRadius:self.columnWidth/1.95];
